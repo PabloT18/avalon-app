@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:alumni_app/features/shared/functions/fun_logic.dart';
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart'
     show TextEditingController, GlobalKey, FormState, FocusNode;
@@ -10,7 +11,7 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(const LoginInitial()) {
+  LoginBloc(this._authenticationRepository) : super(const LoginInitial()) {
     on<LogIn>(_onLogIn);
 
     _txtControllerContrasena = TextEditingController();
@@ -19,6 +20,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     _focusNodeContrasena = FocusNode();
     _focusNodeCorreo = FocusNode();
   }
+
+  final AuthenticationRepository _authenticationRepository;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController _txtControllerContrasena;
@@ -36,38 +39,29 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   FutureOr<void> _onLogIn(LogIn event, Emitter<LoginState> emit) async {
     emit(const LoginLoading());
-    // if (formKey.currentState!.validate()) {
-    ///TODO: validate fix
+
     if (formKey.currentState!.validate()) {
-      print(_txtControllerCorreo.text);
-      print(_txtControllerContrasena.text);
+      try {
+        await _authenticationRepository.logInWithEmailAndPassword(
+          usuario: _txtControllerCorreo.text,
+          password: _txtControllerContrasena.text,
+        );
 
-      // int randomChoice = Random().nextInt(2);
-      int randomChoice = 1;
-
-      await Future.delayed(const Duration(milliseconds: 2500));
-      if (randomChoice == 0) {
+        emit(const LoginSucces('Inicio Correcto'));
+      } on LogInWithEmailAndPasswordFailure catch (e) {
+        emit(LoginError(e.message));
+      } catch (_) {
         emit(const LoginError('Error al iniciar sesión'));
-      } else {
-        emit(LoginSucces(_txtControllerCorreo.text));
-        // _txtControllerCorreo.clear();
-        // _txtControllerContrasena.clear();
-        // _txtControllerNombre.text = nombre ?? '';
-        // _txtControllerCorreo.text = correo ?? '';
-
-        // _txtControllerMensaje.clear();
+        _txtControllerContrasena.clear();
       }
     } else {
       emit(const LoginInitial());
-
-      print("Existe error");
     }
   }
 
   String? validateContrasena(String? nombre) =>
-      UtilsFunctionsLogic.validateDataNull(nombre, "Contraseña no ser vacia");
+      UtilsFunctionsLogic.validateDataNull(nombre, "Password can not be empty");
 
   String? validateCorreo(String? correo) =>
-      UtilsFunctionsLogic.validateCorreo(correo, "Correo no ser vacio",
-          correoInsMsg: "Correo Invalido");
+      UtilsFunctionsLogic.validateDataNull(correo, "UserName can not be empty");
 }

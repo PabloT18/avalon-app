@@ -1,6 +1,8 @@
-import 'package:alumni_app/core/config/router/app_router.dart';
+import 'package:alumni_app/core/config/responsive/responsive_layouts.dart';
+
+import 'package:alumni_app/core/config/theme/app_colors.dart';
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -19,8 +21,8 @@ class UtilsFunctionsViews {
     //     },
     //   ),
     // );\
-    final route = parent + PAGES.welcome.pagePath;
-    context.push(route, extra: url);
+    // final route = parent + PAGES.welcome.pagePath;
+    // context.push(route, extra: url);
     // MaterialPageRoute(
     //   builder: (context) {
     //     return WebViewPage(
@@ -43,26 +45,24 @@ class UtilsFunctionsViews {
     }
   }
 
-  /// TODO: ERROR: manage muti press OK
-  // static Flushbar<dynamic> showFlushBar({
-  //   required String mensajeError,
-  //   bool isError = true,
-  // }) {
-  //   return Flushbar(
-  //     message: mensajeError,
-  //     duration: const Duration(seconds: 2),
-  //     backgroundColor: Colors.black.withOpacity(0.5),
-  //     barBlur: 10,
-  //     margin: const EdgeInsets.all(AppLayoutConst.marginM)
-  //         .copyWith(bottom: AppLayoutConst.marginL),
-  //     borderRadius: BorderRadius.circular(8),
+  static Flushbar<dynamic> showFlushBar({
+    required String message,
+    bool isError = true,
+    double positionOffset = 0.0,
+  }) {
+    return Flushbar(
+      message: message,
+      duration: const Duration(seconds: 2),
+      backgroundColor: Colors.black.withOpacity(0.5),
+      positionOffset: positionOffset,
+      barBlur: 10,
+      margin: const EdgeInsets.all(AppLayoutConst.marginM)
+          .copyWith(bottom: AppLayoutConst.marginL),
+      borderRadius: BorderRadius.circular(8),
+      leftBarIndicatorColor: isError ? Colors.red : AppColors.primaryBlue,
+    );
+  }
 
-  //     leftBarIndicatorColor: isError ? Colors.red : AppColors.primaryBlue,
-  //     // dismissDirection: ,
-  //   );
-  // }
-
-  // }
   static void showUpdateDialog({
     required BuildContext context,
     required String currentVersion,

@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:alumni_app/core/config/responsive/responsive.dart';
 import 'package:alumni_app/app/app.dart';
 
-import 'package:alumni_app/core/config/router/app_router.dart';
 import 'package:alumni_app/core/config/router/app_routes_assets.dart';
 
 class LoadingPage extends StatelessWidget {
@@ -18,23 +17,7 @@ class LoadingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<AppBloc>().add(const AppValidate());
 
-    return BlocListener<AppBloc, AppState>(
-      listener: (context, state) async {
-        switch (state) {
-          case AppAuthenticated():
-            // AppRouter.router.go(PAGES.home.pagePath);
-
-            break;
-          case AppUnauthenticated():
-            await Future.delayed(const Duration(seconds: 8));
-            AppRouter.router.go(PAGES.login.pagePath);
-
-            break;
-          default:
-        }
-      },
-      child: const _LoadingPageView(),
-    );
+    return const _LoadingPageView();
   }
 }
 

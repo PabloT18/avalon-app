@@ -1,0 +1,1 @@
+export 'seguros_page.dart';

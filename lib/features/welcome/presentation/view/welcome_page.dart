@@ -32,11 +32,11 @@ class _WelcomePageView extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image(
-                image: const AssetImage(AppAssets.welcome),
-                height: responsive.dp(75),
-                fit: BoxFit.cover,
-              ),
+              // Image(
+              //   image: const AssetImage(AppAssets.welcome),
+              //   height: responsive.dp(75),
+              //   fit: BoxFit.cover,
+              // ),
               Positioned(
                 bottom: responsive.dp(12),
                 left: responsive.dp(3),

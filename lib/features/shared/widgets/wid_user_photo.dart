@@ -36,7 +36,7 @@ class UserPhoto extends StatelessWidget {
       height: responsive.dp(18),
       child: ClipOval(
         child: Image.asset(
-          AppAssets.iconUserfoto,
+          AppAssets.isotipo1,
           fit: BoxFit.fill,
         ),
       ),

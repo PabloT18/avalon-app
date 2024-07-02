@@ -1,0 +1,1 @@
+export 'comunicados_page.dart';

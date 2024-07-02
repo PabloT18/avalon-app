@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:alumni_app/features/shared/widgets/app_widgets.dart';
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 
 import 'package:alumni_app/core/config/router/app_router.dart';
@@ -23,7 +24,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginBloc(),
+      create: (context) => LoginBloc(context.read<AuthenticationRepository>()),
       child: const _LoginPageView(),
     );
   }
@@ -76,11 +77,19 @@ class _LoginFormComponents extends StatelessWidget {
 
     return BlocConsumer<LoginBloc, LoginState>(listener: (context, state) {
       if (state is LoginSucces) {
-        if (state.message.contains('cliente')) {
-          AppRouter.router.go(PAGES.home.pagePath);
-        } else if (state.message.contains('asesor')) {
-          AppRouter.router.go(PAGES.home.pagePath);
-        }
+        AppRouter.router.go(PAGES.home.pagePath);
+        // if (state.message.contains('cliente')) {
+        // AppRouter.router.go(PAGES.home.pagePath);
+
+        // } else if (state.message.contains('asesor')) {
+        //   AppRouter.router.go(PAGES.home.pagePath);
+        // }
+      }
+      if (state is LoginError) {
+        UtilsFunctionsViews.showFlushBar(
+          message: state.errorMessage,
+          positionOffset: responsive.hp(8),
+        ).show(context);
       }
     }, builder: (context, state) {
       return Column(
@@ -101,8 +110,8 @@ class _LoginFormComponents extends StatelessWidget {
                     validator: loginBloc.validateCorreo,
                     textCapitalization: TextCapitalization.none,
                     decoration: UtilsFunctionsViews.buildInputDecoration(
-                      label: 'Ingrese su correo',
-                      hint: 'jperez@hotmail.com',
+                      label: 'Enter your username',
+                      hint: 'jperez',
                       icon: Icons.mail,
                     ),
                     onChanged: (_) {},
@@ -119,45 +128,14 @@ class _LoginFormComponents extends StatelessWidget {
               ),
             ),
           ),
-          // Container(
-          //   padding:
-          //       const EdgeInsets.symmetric(horizontal: AppLayoutConst.spaceL),
-          //   alignment: Alignment.centerRight,
-          //   child: TextButton(
-          //     style: TextButton.styleFrom(
-          //       padding: EdgeInsets.zero,
-          //       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          //     ),
-          //     onPressed: () {
-          //       // Aquí implementas lo que debería pasar cuando el usuario toque "Olvidaste la contraseña"
-          //     },
-          //     child: Container(
-          //       decoration: const BoxDecoration(
-          //         border: Border(
-          //           bottom: BorderSide(
-          //             color: Colors.white,
-          //             width: 1,
-          //           ),
-          //         ),
-          //       ),
-          //       child: const Text(
-          //         '¿Olvidaste la contraseña?',
-          //         style: TextStyle(
-          //           color: Colors.white,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           SizedBox(height: responsive.hp(5)),
           if (state is LoginLoading) const CircularProgressIndicatorCustom(),
           if (state is! LoginLoading)
             CustomButton(
               onPressed: () {
                 loginBloc.add(const LogIn());
-                // context.go(PAGES.home.pagePath);
               },
-              title: 'INICIAR SESIÓN',
+              title: 'LOGIN',
               backgroundColor: Colors.transparent,
               onPrimary: Colors.white,
             ),
@@ -224,7 +202,7 @@ class _PasswordFieldState extends State<PasswordField> {
       focusNode: widget.loginBloc.focusNodeContrasena,
       validator: widget.loginBloc.validateContrasena,
       decoration: UtilsFunctionsViews.buildInputDecoration(
-        label: 'Contraseña',
+        label: 'Password',
         hint: '****',
         icon: Icons.lock,
         suffixIcon: IconButton(

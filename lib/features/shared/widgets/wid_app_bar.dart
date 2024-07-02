@@ -47,12 +47,12 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
             onTap: isHome
                 ? null
                 : () {
-                    AppRouter.router.go(route ?? PAGES.menu.pagePath);
+                    // AppRouter.router.go(route ?? PAGES.menu.pagePath);
                   },
             child: Center(
                 child: icon ??
                     Image.asset(
-                      AppAssets.iconHouse,
+                      AppAssets.isotipo1,
                       height: 16,
                     )),
           ),
