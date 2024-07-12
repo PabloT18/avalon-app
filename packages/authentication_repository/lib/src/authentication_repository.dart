@@ -1,77 +1,58 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:cache/cache.dart';
+import 'package:dio/dio.dart';
 // import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 // import 'package:flutter/foundation.dart' show kIsWeb;
 // import 'package:google_sign_in/google_sign_in.dart';
 
-import 'exceptions/authentication_repo_exceptions.dart';
+import 'models/user_response.dart';
 
 /// {@template authentication_repository}
 /// Repository which manages user authentication.
 /// {@endtemplate}
 class AuthenticationRepository {
-  /// {@macro authentication_repository}
+  final _controller = StreamController<User>();
+
   AuthenticationRepository({
     CacheClient? cache,
-    // firebase_auth.FirebaseAuth? firebaseAuth,
-    // GoogleSignIn? googleSignIn,
-  }) : _cache = cache ?? CacheClient();
-  // _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
-  // _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
+  }) : _cache = cache ?? CacheClient() {
+    _userController.add(User.empty);
+  }
 
   final CacheClient _cache;
-  // final firebase_auth.FirebaseAuth _firebaseAuth;
-  // final GoogleSignIn _googleSignIn;
-
-  /// User cache key.
-  /// Should only be used for testing purposes.
 
   static const userCacheKey = '__user_cache_key__';
 
-  /// Stream of [User] which will emit the current user when
-  /// the authentication state changes.
-  ///
-  /// Emits [User.empty] if the user is not authenticated.
+  Stream<User> get status async* {
+    // await Future<void>.delayed(const Duration(seconds: 1));
+    yield currentUser;
+    yield* _controller.stream;
+  }
+
+  void dispose() => _controller.close();
+
+  final StreamController<User> _userController =
+      StreamController<User>.broadcast();
+
+  Stream<User> get user2 => _userController.stream;
+
   Stream<User> get user {
-    // return _firebaseAuth.authStateChanges().map((firebaseUser) {
-    //   final user = firebaseUser == null ? User.empty : firebaseUser.toUser;
-    //   _cache.write(key: userCacheKey, value: user);
-    //   return user;
-    // });
     return Stream.value(User.empty);
-
-    // return Stream<User>.multi((controller) {
-    //   // Emitir inmediatamente el usuario vacío
-    //   controller.add(User.empty);
-
-    //   // Después de un retraso, emitir un usuario con datos
-    //   // Future.delayed(const Duration(seconds: 3), () {
-    //   //   controller.add(const User(
-    //   //     id: 'fadsfads',
-    //   //     email: 'pabloa_ec@hotmail.com',
-    //   //     name: 'Pablo Torres',
-    //   //     photo: 'asdfadsf',
-    //   //   ));
-    //   //   // controller
-    //   //   //     .close(); // Opcionalmente, puedes cerrar el stream después de emitir el segundo usuario
-    //   // });
-    // });
   }
 
   Future<User> validateAccount() async {
     try {
       // Lógica para validar la cuenta. Puede involucrar llamadas a APIs, etc.
       // Simulando una validación:
-      bool isValid =
-          true; // Esta línea debe reemplazarse con la lógica real de validación
+      bool isValid = currentUser != User.empty;
 
       if (isValid) {
         // Suponiendo que se pueda obtener el usuario actual después de la validación
-        await Future.delayed(const Duration(milliseconds: 200));
-        // final currentUser2 = currentUser;
-        return User.empty; // Retornar usuario actual si sigue autenticado
+
+        return currentUser; // Retornar usuario actual si sigue autenticado
       } else {
         return User.empty;
       }
@@ -85,7 +66,17 @@ class AuthenticationRepository {
   /// Returns the current cached user.
   /// Defaults to [User.empty] if there is no cached user.
   User get currentUser {
-    return _cache.read<User>(key: userCacheKey) ?? User.empty;
+    // _cache.clear();
+
+    final cacheUser = _cache.read(key: userCacheKey);
+    if (cacheUser == null) {
+      return User.empty;
+    }
+    final Map<String, dynamic> userMap = (cacheUser as Map)
+        .map<String, dynamic>((key, value) => MapEntry(key as String, value));
+    final user = User.fromJson(userMap);
+
+    return user;
   }
 
   /// Creates a new user with the provided [email] and [password].
@@ -105,45 +96,79 @@ class AuthenticationRepository {
     }
   }
 
-  /// Starts the Sign In with Google Flow.
-  ///
-  /// Throws a [LogInWithGoogleFailure] if an exception occurs.
-  Future<void> logInWithGoogle() async {
-    // try {
-    //   late final firebase_auth.AuthCredential credential;
-
-    //   final googleUser = await _googleSignIn.signIn();
-    //   final googleAuth = await googleUser!.authentication;
-    //   credential = firebase_auth.GoogleAuthProvider.credential(
-    //     accessToken: googleAuth.accessToken,
-    //     idToken: googleAuth.idToken,
-    //   );
-
-    //   await _firebaseAuth.signInWithCredential(credential);
-    // } on firebase_auth.FirebaseAuthException catch (e) {
-    //   throw LogInWithGoogleFailure.fromCode(e.code);
-    // } catch (_) {
-    //   throw const LogInWithGoogleFailure();
-    // }
-  }
+  final Dio dio = Dio(BaseOptions(
+    baseUrl: 'http://149.56.110.32:8086',
+  ));
 
   /// Signs in with the provided [email] and [password].
   ///
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
   Future<void> logInWithEmailAndPassword({
-    required String email,
+    required String usuario,
     required String password,
   }) async {
-    // try {
-    //   await _firebaseAuth.signInWithEmailAndPassword(
-    //     email: email,
-    //     password: password,
-    //   );
-    // } on firebase_auth.FirebaseAuthException catch (e) {
-    //   throw LogInWithEmailAndPasswordFailure.fromCode(e.code);
-    // } catch (_) {
-    //   throw const LogInWithEmailAndPasswordFailure();
-    // }
+    try {
+      const urlLogin = '/login';
+      final data = {'usuario': usuario, 'contrasenia': password};
+      final loginResponse = await dio.post(
+        urlLogin,
+        data: data,
+      );
+
+      if (loginResponse.statusCode != 200) {
+        final responseData = loginResponse.data;
+
+        throw LogInWithEmailAndPasswordFailure(
+            message:
+                responseData['message'] ?? "Error durante la autenticación");
+      }
+
+      final loginData = loginResponse.data;
+      if (loginData is! Map<String, dynamic> ||
+          !loginData.containsKey('token')) {
+        throw const LogInWithEmailAndPasswordFailure(
+            message: "Datos de autenticación no válidos");
+      }
+
+      final String token = loginData['token'];
+      final int userId = loginData['id'];
+
+      // Segunda solicitud para obtener los datos del usuario con el token
+      final urlUserDetails = '/usuarios/$userId';
+      final userResponse = await dio.get(
+        urlUserDetails,
+        options: Options(
+          headers: {'Authorization': token},
+        ),
+      );
+
+      if (userResponse.statusCode != 200) {
+        throw const LogInWithEmailAndPasswordFailure(
+            message: "Error al obtener datos del usuario");
+      }
+
+      final userData = userResponse.data;
+
+      final UserResponse userResponseData = UserResponse.fromJson(userData);
+      final User user = User.fromUsuarioResponse(userResponseData, token);
+
+      await _cache.write(key: userCacheKey, value: user.toJson());
+      _controller.add(user);
+    } on DioException catch (dioError) {
+      if (dioError.response!.statusCode == 404 ||
+          dioError.response!.statusCode == 400) {
+        final String? message = dioError.response!.data['message'];
+        throw LogInWithEmailAndPasswordFailure(
+            message: message ?? "Error en la red o del servidor");
+      } else {
+        throw throw LogInWithEmailAndPasswordFailure(
+            message: dioError.response?.statusMessage ??
+                "Error en la red o del servidor");
+      }
+    } catch (e) {
+      throw const LogInWithEmailAndPasswordFailure(
+          message: "Error desconocido durante el inicio de sesión");
+    }
   }
 
   /// Signs out the current user which will emit
@@ -151,6 +176,8 @@ class AuthenticationRepository {
   ///
   /// Throws a [LogOutFailure] if an exception occurs.
   Future<void> logOut() async {
+    _cache.clear();
+    _controller.add(User.empty);
     //   try {
     //     await Future.wait([
     //       _firebaseAuth.signOut(),
@@ -162,10 +189,3 @@ class AuthenticationRepository {
     // }
   }
 }
-// extension on firebase_auth.User {
-//   /// Maps a [firebase_auth.User] into a [User].
-//   User get toUser {
-//     return User(id: uid, email: email, name: displayName, photo: photoURL);
-//   }
-// }
-//

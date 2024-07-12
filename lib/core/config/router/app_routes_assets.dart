@@ -1,24 +1,24 @@
 class AppAssets {
   /// [/icons]
-  static const String iconArrow = 'assets/icons/icon-arrow.png';
-  static const String iconBeneficiarios = 'assets/icons/icon-beneficiarios.png';
-  static const String iconBeneficios = 'assets/icons/icon-beneficios.png';
-  static const String iconCalendario = 'assets/icons/icon-calendario.png';
-  static const String iconContacto = 'assets/icons/icon-contacto.png';
-  static const String iconLogo = 'assets/icons/icon-logo.png';
-  static const String iconNoticias = 'assets/icons/icon-noticias.png';
-  static const String iconrRservas = 'assets/icons/icon-reservas.png';
-  static const String iconUserfoto = 'assets/icons/icon-user-foto.png';
-  static const String iconUser = 'assets/icons/icon-user.png';
-  static const String iconHouse = 'assets/icons/icon-house.png';
+  // static const String iconArrow = 'assets/icons/icon-arrow.png';
+  // static const String iconBeneficiarios = 'assets/icons/icon-beneficiarios.png';
+  // static const String iconBeneficios = 'assets/icons/icon-beneficios.png';
+  // static const String iconCalendario = 'assets/icons/icon-calendario.png';
+  // static const String iconContacto = 'assets/icons/icon-contacto.png';
+  // static const String iconLogo = 'assets/icons/icon-logo.png';
+  // static const String iconNoticias = 'assets/icons/icon-noticias.png';
+  // static const String iconrRservas = 'assets/icons/icon-reservas.png';
+  // static const String iconUserfoto = 'assets/icons/icon-user-foto.png';
+  // static const String iconUser = 'assets/icons/icon-user.png';
+  // static const String iconHouse = 'assets/icons/icon-house.png';
 
-  static const String iconRbasket = 'assets/icons/icon-res-basket.png';
-  static const String iconRcoliseo = 'assets/icons/icon-res-coliseo.png';
-  static const String iconRestadio = 'assets/icons/icon-res-estadio.png';
-  static const String iconRfutbol = 'assets/icons/icon-res-futbol.png';
-  static const String iconRgym = 'assets/icons/icon-res-gym.png';
-  static const String iconRtenis = 'assets/icons/icon-res-tenis.png';
-  static const String iconRvolley = 'assets/icons/icon-res-volley.png';
+  // static const String iconRbasket = 'assets/icons/icon-res-basket.png';
+  // static const String iconRcoliseo = 'assets/icons/icon-res-coliseo.png';
+  // static const String iconRestadio = 'assets/icons/icon-res-estadio.png';
+  // static const String iconRfutbol = 'assets/icons/icon-res-futbol.png';
+  // static const String iconRgym = 'assets/icons/icon-res-gym.png';
+  // static const String iconRtenis = 'assets/icons/icon-res-tenis.png';
+  // static const String iconRvolley = 'assets/icons/icon-res-volley.png';
 
   /// [/logos]
 
@@ -35,8 +35,6 @@ class AppAssets {
 
   /// [/images]
   static const String backgorund = 'assets/images/background.jpg';
-  static const String welcome = 'assets/images/welcome.png';
-  static const String welcomeText = 'assets/images/welcome-txt.png';
 }
 
 class AppAssetsSVG {

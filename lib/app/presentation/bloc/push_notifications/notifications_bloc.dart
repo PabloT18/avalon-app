@@ -1,0 +1,119 @@
+import 'dart:async';
+import 'dart:convert';
+// import 'dart:convert';
+import 'dart:developer';
+
+// import 'package:alumni_app/core/config/router/app_router.dart';
+import 'package:alumni_app/app/data/sources/local_notifications.dart';
+import 'package:alumni_app/core/config/router/app_router.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart'
+    show AuthorizationStatus;
+
+import '../../../data/sources/remoteFB/puhs_notifications_fb.dart';
+import '../../../domain/entity/push_notifications/push_message.dart';
+import '../../../domain/usecases/push_notifications/push_notifications_use_cases.dart';
+
+part 'notifications_event.dart';
+part 'notifications_state.dart';
+
+class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
+  NotificationsBloc({
+    required GetStatusCheckUseCase getStatusCheckUseCase,
+    required ToggleNotificationStateUseCase toogleNotificationStateUC,
+    required SubscribeTopicsUseCase subscribeTopicsUseCase,
+  })  : _getStatusCheckUC = getStatusCheckUseCase,
+        _toogleNotificationStateUC = toogleNotificationStateUC,
+        _subscribeTopicsUseCase = subscribeTopicsUseCase,
+        super(const NotificationsInitial()) {
+    on<InitiNotifications>(_onInitiNotificationson);
+    on<_NotificationSetStatus>(_onNotificationSetStatus);
+    on<NotificationToggleStatus>(_onNotificationTooglePermision);
+    on<SubscribeTopics>(_onSubscribeTopics);
+    // Verificar estado de las notificaciones
+    // _initialStatusCheck();
+    _localNotificationCount = 0;
+  }
+
+  final GetStatusCheckUseCase _getStatusCheckUC;
+  final ToggleNotificationStateUseCase _toogleNotificationStateUC;
+  final SubscribeTopicsUseCase _subscribeTopicsUseCase;
+
+  late int _localNotificationCount;
+
+  /// Metodo inicial que validad el estado de las notificaiones y emite un
+  /// state segun los permisno de las notificaiones que tenga el telefono.
+  /// Si no esta determinado internamente el repositortio pide permisos.
+  // void _initialStatusCheck() async {
+
+  /// Manejo los tipos de notifcaciones
+  /// 1 - Flutter LocalNotifications - Local
+  /// 2 - FIrebaseCloudMessgain - Remote
+  FutureOr<void> _onInitiNotificationson(
+      InitiNotifications event, Emitter<NotificationsState> emit) async {
+    final authorizationStatus = await _getStatusCheckUC.call();
+    add(_NotificationSetStatus(authorizationStatus));
+
+    /// Listener para notificaiones en Foreground sin importat el estado de
+    /// autorizacion de perimisos para las notificacioenes (Objeto estatico)
+    PushNotificationSourceFCM.messagesStream.listen((message) {
+      // if (message.data['panel'] != null) {
+      //   // add(OnNotificationInToOpenApp(message));
+      // } else {
+      //   // add(OnNotificationIn(message));
+      // }
+
+      switch (message.notificationMessageType) {
+        case NotificationMessageType.onOpenApp:
+          LocalNotifications.showLocalNotification(++_localNotificationCount,
+              message.title, message.body, json.encode(message.data));
+          log("NotificationsBloc -> NotificationMessageType.onOpenApp");
+          break;
+        case NotificationMessageType.onSuspendApp:
+          if (message.hasRoute) {
+            AppRouter.navigateFromPushMessage(message);
+          }
+          break;
+
+        case NotificationMessageType.onTerminateApp:
+
+          //TODO: fix navigate after load home
+          // if (message.hasRoute) {
+          //   AppRouter.navigateFromPushMessage(message);
+          // }
+          break;
+        default:
+      }
+    });
+  }
+
+  /// Emitir un estado segun el cambion a la autorizacion de un usario par las
+  /// notificaciones
+  FutureOr<void> _onNotificationSetStatus(
+      _NotificationSetStatus event, Emitter<NotificationsState> emit) {
+    switch (event.status) {
+      case AuthorizationStatus.authorized:
+        add(const SubscribeTopics(['todos']));
+        emit(const NotificationsAuthorized());
+        break;
+      case AuthorizationStatus.denied:
+        emit(const NotificationsDenied());
+        break;
+      default:
+        emit(const NotificationsInitial());
+    }
+  }
+
+  FutureOr<void> _onNotificationTooglePermision(
+      NotificationToggleStatus event, Emitter<NotificationsState> emit) async {
+    final request = state is! NotificationsAuthorized;
+    final authorizationStatus = await _toogleNotificationStateUC.call(request);
+    add(_NotificationSetStatus(authorizationStatus));
+  }
+
+  FutureOr<void> _onSubscribeTopics(
+      SubscribeTopics event, Emitter<NotificationsState> emit) async {
+    await _subscribeTopicsUseCase.call(event.tipics);
+  }
+}

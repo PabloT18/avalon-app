@@ -97,22 +97,23 @@ class AppTheme {
       // dividerColor: ThemeData().dividerColor,
       // expansionTileTheme: const ExpansionTileThemeData()
       //     .copyWith(collapsedIconColor: AppColors.primaryBlue),
-      // textTheme: const TextTheme(
-      //   titleLarge: TextStyle(
-      //     fontSize: 24,
-      //     color: AppColors.primaryBlue,
-      //     fontWeight: FontWeight.bold,
-      //   ),
-      //   titleMedium: TextStyle(
-      //     fontSize: 22,
-      //     color: AppColors.primaryBlue,
-      //     fontWeight: FontWeight.bold,
-      //   ),
-      //   titleSmall: TextStyle(
-      //     fontSize: 20,
-      //     color: AppColors.primaryBlue,
-      //     fontWeight: FontWeight.bold,
-      //   ),
+      textTheme: const TextTheme(
+        titleLarge: TextStyle(
+          // fontSize: 24,
+          color: AppColors.primaryBlue,
+          // fontWeight: FontWeight.bold,
+        ),
+        titleMedium: TextStyle(
+          fontSize: 22,
+          color: AppColors.primaryBlue,
+          fontWeight: FontWeight.bold,
+        ),
+        titleSmall: TextStyle(
+          fontSize: 20,
+          color: AppColors.primaryBlue,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       //   bodyLarge: TextStyle(fontSize: 18, color: Colors.black),
       //   bodyMedium: TextStyle(fontSize: 16),
       //   bodySmall: TextStyle(fontSize: 14),
@@ -136,20 +137,20 @@ class AppTheme {
         fillColor: Colors.white.withOpacity(0.3),
         filled: true,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.5)),
-          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide(color: AppColors.primaryBlue.withOpacity(0.8)),
+          borderRadius: BorderRadius.circular(15),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
-          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide(color: AppColors.primaryBlue.withOpacity(0.3)),
+          borderRadius: BorderRadius.circular(15),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 1),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(15),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 1),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(15),
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         helperStyle: const TextStyle(

@@ -12,10 +12,7 @@ dependencies:
   cache:
     path: ../cache
   equatable: ^2.0.5
-  # firebase_auth: ^4.14.1
-  # firebase_core: ^2.23.0
-  # google_sign_in: ^6.1.0
-  # meta: ^1.8.0
+  dio: ^5.4.3+1
 
 dev_dependencies:
   flutter_test:

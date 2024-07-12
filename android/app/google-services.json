@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "818850134277",
+    "project_id": "avalon-2e905",
+    "storage_bucket": "avalon-2e905.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818850134277:android:18499bb6a6c3f38fb55f6c",
+        "android_client_info": {
+          "package_name": "com.avalon.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5ipWNbg-SB3RXWv-jps9zsmdvurktQDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
