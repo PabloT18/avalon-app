@@ -14,6 +14,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
 
   final String title;
   final bool isHome;
+  // final bool isHome;
 
   final String? route;
 
