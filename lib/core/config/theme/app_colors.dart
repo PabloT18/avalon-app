@@ -34,7 +34,7 @@ class AppColors {
     },
   );
   // static const _primaryBlueValue = 0xff1e367c;
-  static const _primaryBlueValue = 0x00023e7d;
+  static const _primaryBlueValue = 0x00023D7D;
 
   // static const primaryBlue = Color(0xff1e367c);
   static const primaryBlue = Color(0xFF023e7d);

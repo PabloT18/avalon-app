@@ -14,7 +14,8 @@ class EditPerfilBloc extends Bloc<EditPerfilEvent, EditPerfilState> {
     _emailController = TextEditingController(text: user.correoElectronico);
     _usernameController = TextEditingController(text: user.nombreUsuario);
     _phoneNumberController = TextEditingController(text: user.numeroTelefono);
-    _birthDateController = TextEditingController(text: user.fechaNacimiento);
+    _birthDateController =
+        TextEditingController(text: user.formattedFechaNacimiento);
     _birthPlaceController = TextEditingController(text: user.lugarNacimiento);
     _residenceController = TextEditingController(text: user.lugarResidencia);
     _statusController = TextEditingController(text: user.estado);

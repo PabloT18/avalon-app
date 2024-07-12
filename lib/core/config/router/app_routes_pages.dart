@@ -6,12 +6,17 @@ enum PAGES {
 
   home,
   editPerfil,
+  editPerfilDatPer,
+  editPerfilDir,
   preferencias,
+  preguntas,
+
   reclamaciones,
   seguros,
   familiares,
   addFamiliar,
   membresias,
+  segu,
 }
 
 extension AppPageExtension on PAGES {
@@ -28,8 +33,15 @@ extension AppPageExtension on PAGES {
         return "/home";
       case PAGES.editPerfil:
         return "/editPerfil";
+      case PAGES.editPerfilDatPer:
+        return "/editPerfilDatPer";
+      case PAGES.editPerfilDir:
+        return "/editPerfilDir";
+
       case PAGES.preferencias:
         return "/preferencias";
+      case PAGES.preguntas:
+        return "/preguntas";
       case PAGES.reclamaciones:
         return "/reclamaciones";
       case PAGES.seguros:
@@ -60,8 +72,15 @@ extension AppPageExtension on PAGES {
         return "home";
       case PAGES.editPerfil:
         return "editPerfil";
+      case PAGES.editPerfilDatPer:
+        return "editPerfilDatPer";
+      case PAGES.editPerfilDir:
+        return "editPerfilDir";
+
       case PAGES.preferencias:
         return "preferencias";
+      case PAGES.preguntas:
+        return "preguntas";
       case PAGES.reclamaciones:
         return "reclamaciones";
       case PAGES.seguros:

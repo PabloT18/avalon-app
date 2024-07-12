@@ -4,3 +4,4 @@ export 'reclamaciones/reclamaciones.dart';
 
 export 'seguros/seguros.dart';
 export 'membresias/membresias.dart';
+export 'preguntas/preguntas.dart';

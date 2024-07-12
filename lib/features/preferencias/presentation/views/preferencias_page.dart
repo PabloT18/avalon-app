@@ -1,5 +1,6 @@
 import 'package:alumni_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
 import 'package:alumni_app/core/config/responsive/responsive_layouts.dart';
+import 'package:alumni_app/core/config/router/app_routes_pages.dart';
 import 'package:alumni_app/core/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,10 +15,10 @@ class PreferenciasPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Preferencias'),
-        elevation: 6,
+        elevation: 4,
       ),
-      drawer: const DrawerCustom(
-        indexInitial: 4,
+      drawer: DrawerCustom(
+        indexInitial: getDrawerOptionIndex(PAGES.preferencias.pageName),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppLayoutConst.paddingL)

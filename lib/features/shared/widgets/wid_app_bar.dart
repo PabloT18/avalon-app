@@ -1,4 +1,3 @@
-import 'package:alumni_app/core/config/router/app_router.dart';
 import 'package:alumni_app/core/config/router/app_routes_assets.dart';
 import 'package:alumni_app/core/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';

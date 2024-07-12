@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'package:authentication_repository/src/models/user_response.dart';
 import 'package:equatable/equatable.dart';
 
@@ -8,18 +10,21 @@ class User extends Equatable {
   final DateTime? lastModifiedDate;
   final int? id;
   final String? nombres;
+  final String? nombresDos;
   final String? apellidos;
-  final dynamic fechaNacimiento;
-  final dynamic lugarNacimiento;
-  final String? lugarResidencia;
+  final String? apellidosDos;
   final String? correoElectronico;
   final String? numeroTelefono;
   final String? nombreUsuario;
   final String? contrasenia;
   final String? urlImagen;
+  final Direccion? direccion;
   final String? estado;
   final Rol? rol;
   final String? token;
+  final DateTime? fechaNacimiento;
+  final String? lugarNacimiento;
+  final String? lugarResidencia;
 
   const User({
     this.createdBy,
@@ -28,20 +33,23 @@ class User extends Equatable {
     this.lastModifiedDate,
     this.id,
     this.nombres,
+    this.nombresDos,
     this.apellidos,
-    this.fechaNacimiento,
-    this.lugarNacimiento,
-    this.lugarResidencia,
+    this.apellidosDos,
     this.correoElectronico,
     this.numeroTelefono,
     this.nombreUsuario,
     this.contrasenia,
     this.urlImagen,
+    this.direccion,
     this.estado,
     this.rol,
     this.token,
+    this.fechaNacimiento,
+    this.lugarNacimiento,
+    this.lugarResidencia,
   });
-// Factory constructor que toma UsuarioResponse y un token
+  // Factory constructor que toma UsuarioResponse y un token
   factory User.fromUsuarioResponse(UserResponse response, String token) {
     return User(
       createdBy: response.createdBy,
@@ -50,21 +58,28 @@ class User extends Equatable {
       lastModifiedDate: response.lastModifiedDate,
       id: response.id,
       nombres: response.nombres,
+      nombresDos: response.nombresDos,
       apellidos: response.apellidos,
-      fechaNacimiento: response.fechaNacimiento,
-      lugarNacimiento: response.lugarNacimiento,
-      lugarResidencia: response.lugarResidencia,
+      apellidosDos: response.apellidosDos,
       correoElectronico: response.correoElectronico,
       numeroTelefono: response.numeroTelefono,
       nombreUsuario: response.nombreUsuario,
       contrasenia: response.contrasenia,
       urlImagen: response.urlImagen,
+      direccion: response.direccion != null
+          ? Direccion.fromJson(response.direccion!.toJson())
+          : null,
       estado: response.estado,
       token: token,
       rol: response.rol != null ? Rol.fromJson(response.rol!.toJson()) : null,
+      fechaNacimiento: response.fechaNacimiento,
+      lugarNacimiento: response.lugarNacimiento,
+      lugarResidencia: response.lugarResidencia,
     );
   }
-  Map<String, dynamic> toJson() {
+
+  // Método para convertir el objeto User a JSON
+  Map toJson() {
     return {
       'createdBy': createdBy,
       'createdDate': createdDate?.toIso8601String(),
@@ -72,21 +87,25 @@ class User extends Equatable {
       'lastModifiedDate': lastModifiedDate?.toIso8601String(),
       'id': id,
       'nombres': nombres,
+      'nombresDos': nombresDos,
       'apellidos': apellidos,
-      'fechaNacimiento': fechaNacimiento,
-      'luygarNacimiento': lugarNacimiento,
-      'lugarResidencia': lugarResidencia,
+      'apellidosDos': apellidosDos,
       'correoElectronico': correoElectronico,
       'numeroTelefono': numeroTelefono,
       'nombreUsuario': nombreUsuario,
       'contrasenia': contrasenia,
       'urlImagen': urlImagen,
+      'direccion': direccion?.toJson(),
       'estado': estado,
       'rol': rol?.toJson(),
       'token': token,
+      'fechaNacimiento': fechaNacimiento,
+      'lugarNacimiento': lugarNacimiento,
+      'lugarResidencia': lugarResidencia,
     };
   }
 
+  // Factory constructor para crear un User desde JSON
   factory User.fromJson(Map json) {
     return User(
       createdBy: json['createdBy'] as String?,
@@ -99,20 +118,23 @@ class User extends Equatable {
           : null,
       id: json['id'] as int?,
       nombres: json['nombres'] as String?,
+      nombresDos: json['nombresDos'] as String?,
       apellidos: json['apellidos'] as String?,
-      fechaNacimiento: json['fechaNacimiento'] != null
-          ? DateTime.parse(json['fechaNacimiento'] as String)
-          : null,
-      lugarNacimiento: json['lugarNacimiento'] as String?,
-      lugarResidencia: json['lugarResidencia'] as String?,
+      apellidosDos: json['apellidosDos'] as String?,
       correoElectronico: json['correoElectronico'] as String?,
       numeroTelefono: json['numeroTelefono'] as String?,
       nombreUsuario: json['nombreUsuario'] as String?,
       contrasenia: json['contrasenia'] as String?,
       urlImagen: json['urlImagen'] as String?,
+      direccion: json['direccion'] != null
+          ? Direccion.fromJson(json['direccion'] as Map)
+          : null,
       estado: json['estado'] as String?,
       rol: json['rol'] != null ? Rol.fromJson(json['rol'] as Map) : null,
       token: json['token'] as String?,
+      fechaNacimiento: json['fechaNacimiento'],
+      lugarNacimiento: json['lugarNacimiento'],
+      lugarResidencia: json['lugarResidencia'],
     );
   }
 
@@ -129,6 +151,33 @@ class User extends Equatable {
 
   String get fullNameUpperCase => '$nombres $apellidos'.toUpperCase();
 
+  String formatFecha(DateTime? fecha) {
+    if (fecha == null) {
+      return '-';
+    } else {
+      final DateFormat formatter =
+          DateFormat('dd \'de\' MMMM \'del\' yyyy', 'es_ES');
+      return formatter.format(fecha);
+    }
+  }
+
+  // Ejemplo de uso:
+  String get formattedFechaNacimiento => formatFecha(fechaNacimiento);
+  String get formattedCreatedDate => formatFecha(createdDate);
+  String get formattedLastModifiedDate => formatFecha(lastModifiedDate);
+
+  bool get isAddressComplete => direccion?.isComplete ?? false;
+
+  /// Getter para verificar que todos los campos relevantes no sean null
+  bool get hasAllRequiredFields =>
+      nombres != null &&
+      apellidos != null &&
+      correoElectronico != null &&
+      nombreUsuario != null &&
+      numeroTelefono != null &&
+      fechaNacimiento != null &&
+      lugarNacimiento != null &&
+      lugarResidencia != null;
   @override
   List<Object?> get props => [
         createdBy,
@@ -137,18 +186,116 @@ class User extends Equatable {
         lastModifiedDate,
         id,
         nombres,
+        nombresDos,
         apellidos,
-        fechaNacimiento,
-        lugarNacimiento,
-        lugarResidencia,
+        apellidosDos,
         correoElectronico,
         numeroTelefono,
         nombreUsuario,
         contrasenia,
         urlImagen,
+        direccion,
         estado,
         rol,
+        token,
+        fechaNacimiento,
+        lugarNacimiento,
+        lugarResidencia,
       ];
+}
+
+class Direccion {
+  final String? direccionUno;
+  final String? direccionDos;
+  final String? ciudad;
+  final String? codigoPostal;
+  final Pais? pais;
+  final Estado? state;
+
+  Direccion({
+    this.direccionUno,
+    this.direccionDos,
+    this.ciudad,
+    this.codigoPostal,
+    this.pais,
+    this.state,
+  });
+
+  factory Direccion.fromJson(Map json) => Direccion(
+        direccionUno: json["direccionUno"] as String?,
+        direccionDos: json["direccionDos"] as String?,
+        ciudad: json["ciudad"] as String?,
+        codigoPostal: json["codigoPostal"] as String?,
+        pais: json["pais"] != null ? Pais.fromJson(json["pais"] as Map) : null,
+        state: json["state"] != null
+            ? Estado.fromJson(json["state"] as Map)
+            : null,
+      );
+
+  Map toJson() => {
+        "direccionUno": direccionUno,
+        "direccionDos": direccionDos,
+        "ciudad": ciudad,
+        "codigoPostal": codigoPostal,
+        "pais": pais?.toJson(),
+        "state": state?.toJson(),
+      };
+
+  bool get isComplete {
+    return direccionUno != null &&
+        ciudad != null &&
+        codigoPostal != null &&
+        state != null &&
+        state!.nombre != null &&
+        state!.pais != null &&
+        state!.pais!.nombre != null;
+  }
+}
+
+class Pais {
+  final int? id;
+  final String? nombre;
+
+  Pais({
+    this.id,
+    this.nombre,
+  });
+
+  factory Pais.fromJson(Map json) => Pais(
+        id: json["id"] as int?,
+        nombre: json["nombre"] as String?,
+      );
+
+  Map toJson() => {
+        "id": id,
+        "nombre": nombre,
+      };
+}
+
+class Estado {
+  final int? id;
+  final String? nombre;
+  final Pais? pais;
+
+  Estado({
+    this.id,
+    this.nombre,
+    this.pais,
+  });
+
+  factory Estado.fromJson(Map json) => Estado(
+        id: json["id"] as int?,
+        nombre: json["nombre"] as String?,
+        pais: json["pais"] != null ? Pais.fromJson(json["pais"] as Map) : null,
+      );
+
+  Map toJson() => {
+        "id": id,
+        "nombre": nombre,
+        "pais": pais?.toJson(),
+      };
+
+  String? get estadoNombreCompleto => '$nombre, ${pais?.nombre}';
 }
 
 class Rol {
@@ -163,12 +310,12 @@ class Rol {
   });
 
   factory Rol.fromJson(Map json) => Rol(
-        id: json["id"],
-        nombre: json["nombre"],
-        codigo: json["codigo"],
+        id: json["id"] as int?,
+        nombre: json["nombre"] as String?,
+        codigo: json["codigo"] as String?,
       );
 
-  Map<String, dynamic> toJson() => {
+  Map toJson() => {
         "id": id,
         "nombre": nombre,
         "codigo": codigo,

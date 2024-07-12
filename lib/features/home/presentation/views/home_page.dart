@@ -87,12 +87,9 @@ class _HomePageViewState extends State<HomePageView> {
           ),
         ),
         elevation: 6,
-        // backgroundColor: AppColors.primaryBlue,
-        // foregroundColor: Colors.red,
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
-            // color: Colors.white,
             onPressed: () {
               context.pushNamed(PAGES.preferencias.pageName);
             },

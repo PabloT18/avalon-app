@@ -61,14 +61,24 @@ class AppRouter {
               ),
           routes: [
             GoRoute(
-              path: PAGES.editPerfil.pageName,
-              name: PAGES.editPerfil.pageName,
-              pageBuilder: (context, state) => pageBuilderByPlatform(
-                context,
-                state,
-                const EditPerfilPage(),
-              ),
-            ),
+                path: PAGES.editPerfil.pageName,
+                name: PAGES.editPerfil.pageName,
+                pageBuilder: (context, state) => pageBuilderByPlatform(
+                      context,
+                      state,
+                      const EditPerfilOptionsPage(),
+                    ),
+                routes: [
+                  GoRoute(
+                    path: PAGES.editPerfilDatPer.pageName,
+                    name: PAGES.editPerfilDatPer.pageName,
+                    pageBuilder: (context, state) => pageBuilderByPlatform(
+                      context,
+                      state,
+                      const EditPerfilPage(),
+                    ),
+                  ),
+                ]),
             GoRoute(
               path: PAGES.preferencias.pageName,
               name: PAGES.preferencias.pageName,
@@ -76,6 +86,15 @@ class AppRouter {
                 context,
                 state,
                 const PreferenciasPage(),
+              ),
+            ),
+            GoRoute(
+              path: PAGES.preguntas.pageName,
+              name: PAGES.preguntas.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                const PreguntasPage(),
               ),
             ),
             GoRoute(

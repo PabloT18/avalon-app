@@ -1,4 +1,5 @@
 import 'package:alumni_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:alumni_app/core/config/router/app_routes_pages.dart';
 import 'package:alumni_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -129,8 +130,8 @@ class _SegurosPageState extends State<SegurosPage> {
         title: const Text('Seguros'),
         elevation: 6,
       ),
-      drawer: const DrawerCustom(
-        indexInitial: 2,
+      drawer: DrawerCustom(
+        indexInitial: getDrawerOptionIndex(PAGES.seguros.pageName),
       ),
       body: FutureBuilder<List<dynamic>>(
         future: _futurePolizas,
