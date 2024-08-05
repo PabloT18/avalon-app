@@ -33,6 +33,11 @@ final List<DrawerOption> drawerOptions = [
       isUserOption: false,
       routeName: PAGES.preferencias.pageName),
   DrawerOption(
+      label: 'Formas de Pago',
+      icon: Icons.question_answer,
+      isUserOption: false,
+      routeName: PAGES.formasPago.pageName),
+  DrawerOption(
       label: 'Preguntas y respuestas',
       icon: Icons.question_answer,
       isUserOption: false,

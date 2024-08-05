@@ -89,15 +89,6 @@ class AppRouter {
               ),
             ),
             GoRoute(
-              path: PAGES.preguntas.pageName,
-              name: PAGES.preguntas.pageName,
-              pageBuilder: (context, state) => pageBuilderByPlatform(
-                context,
-                state,
-                const PreguntasPage(),
-              ),
-            ),
-            GoRoute(
               path: PAGES.reclamaciones.pageName,
               name: PAGES.reclamaciones.pageName,
               pageBuilder: (context, state) => pageBuilderByPlatform(
@@ -140,107 +131,34 @@ class AppRouter {
                   return pageBuilderByPlatform(
                       context, state, const MembresiasPage());
                 }),
+            GoRoute(
+              path: PAGES.formasPago.pageName,
+              name: PAGES.formasPago.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                const FormasPagoPage(),
+              ),
+            ),
+            GoRoute(
+              path: PAGES.centrosMedicos.pageName,
+              name: PAGES.centrosMedicos.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                const CentrosMedicosPage(),
+              ),
+            ),
+            GoRoute(
+              path: PAGES.medicos.pageName,
+              name: PAGES.medicos.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                const MedicosPage(),
+              ),
+            ),
           ]),
-
-      // GoRoute(
-      //   path: PAGES.menu.pagePath,
-      //   name: PAGES.menu.pageName,
-      //   pageBuilder: (context, state) => pageBuilderByPlatform(
-      //     context,
-      //     state,
-      //     const MenuPage(),
-      //   ),
-      //   routes: [
-      //     GoRoute(
-      //       path: PAGES.perfil.pagePath.substring(1),
-      //       name: PAGES.perfil.pageName,
-      //       pageBuilder: (context, state) => pageBuilderByPlatform(
-      //         context,
-      //         state,
-      //         PerfilPage(
-      //           title: state.extra as String,
-      //         ),
-      //       ),
-      //     ),
-      //     GoRoute(
-      //       path: PAGES.beneficios.pagePath.substring(1),
-      //       name: PAGES.beneficios.pageName,
-      //       pageBuilder: (context, state) => pageBuilderByPlatform(
-      //         context,
-      //         state,
-      //         BeneficiosPage(
-      //           title: state.extra as String,
-      //         ),
-      //       ),
-      //     ),
-      //     GoRoute(
-      //       path: PAGES.reservas.pagePath.substring(1),
-      //       name: PAGES.reservas.pageName,
-      //       pageBuilder: (context, state) => pageBuilderByPlatform(
-      //         context,
-      //         state,
-      //         ReservasPage(
-      //           title: state.extra as String,
-      //         ),
-      //       ),
-      //     ),
-      //     GoRoute(
-      //       path: PAGES.beneficiarios.pagePath.substring(1),
-      //       name: PAGES.beneficiarios.pageName,
-      //       pageBuilder: (context, state) => pageBuilderByPlatform(
-      //         context,
-      //         state,
-      //         BeneficiariosPage(
-      //           title: state.extra as String,
-      //         ),
-      //       ),
-      //     ),
-      //     GoRoute(
-      //       path: PAGES.noticias.pagePath.substring(1),
-      //       name: PAGES.noticias.pageName,
-      //       pageBuilder: (context, state) => pageBuilderByPlatform(
-      //         context,
-      //         state,
-      //         NoticiasPage(
-      //           title: state.extra as String,
-      //         ),
-      //       ),
-      //     ),
-      //     GoRoute(
-      //       path: PAGES.calendario.pagePath.substring(1),
-      //       name: PAGES.calendario.pageName,
-      //       pageBuilder: (context, state) => pageBuilderByPlatform(
-      //         context,
-      //         state,
-      //         CalendarioPage(
-      //           title: state.extra as String,
-      //         ),
-      //       ),
-      //     ),
-      //     GoRoute(
-      //       path: PAGES.contacto.pagePath.substring(1),
-      //       name: PAGES.contacto.pageName,
-      //       pageBuilder: (context, state) => pageBuilderByPlatform(
-      //         context,
-      //         state,
-      //         ContactoPage(
-      //           title: state.extra as String,
-      //         ),
-      //       ),
-      //     ),
-      //     GoRoute(
-      //       path: PAGES.colegio.pagePath.substring(1),
-      //       name: PAGES.colegio.pageName,
-      //       pageBuilder: (context, state) => pageBuilderByPlatform(
-      //         context,
-      //         state,
-      //         ColegioPage(
-      //           title: state.extra as String,
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      // ),
     ],
   );
 

@@ -1,5 +1,6 @@
 import 'package:alumni_app/app/data/repository/notifications_repository_impl.dart';
 import 'package:alumni_app/app/data/sources/remoteFB/puhs_notifications_fb.dart';
+import 'package:alumni_app/features/user_features.dart';
 // import 'package:flutter/material.dart' show GlobalKey, ScaffoldMessengerState;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,6 +34,16 @@ class AppDependencies {
     RepositoryProvider<ToggleNotificationStateUseCase>(
       create: (ctxtUC) => ToggleNotificationStateUseCase(
           repository: ctxtUC.read<NotficationRepositoryImpl>()),
+    ),
+
+    /// Preguntas y respuestas
+    RepositoryProvider<PreguntasRepository>(
+      create: (context) => PreguntasRepositoryImpl(),
+    ),
+    RepositoryProvider<PreguntasBloc>(
+      create: (context) => PreguntasBloc(
+        repository: context.read<PreguntasRepository>(),
+      ),
     ),
   ];
 }

@@ -1,3 +1,4 @@
+import 'package:alumni_app/core/config/router/app_router.dart';
 import 'package:flutter/material.dart';
 
 import '../../../shared/widgets/wid_drawer.dart';
@@ -12,8 +13,8 @@ class ReclamacionesPage extends StatelessWidget {
         title: const Text('Reclamaciones Page'),
         elevation: 6,
       ),
-      drawer: const DrawerCustom(
-        indexInitial: 1,
+      drawer: DrawerCustom(
+        indexInitial: getDrawerOptionIndex(PAGES.formasPago.pageName),
       ),
       body: const Column(
         mainAxisAlignment: MainAxisAlignment.center,

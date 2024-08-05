@@ -1,0 +1,1 @@
+export 'medicos_page.dart';

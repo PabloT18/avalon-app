@@ -6,17 +6,12 @@ import 'package:alumni_app/features/perfil/perfil.dart';
 import 'package:alumni_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 import 'package:flutter/material.dart';
 
-import 'package:alumni_app/core/config/responsive/responsive_class.dart';
-
-import 'package:alumni_app/core/config/router/app_routes_assets.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../comunicados/comunicados.dart';
-import '../../../shared/widgets/app_widgets.dart';
+
 import '../../../shared/widgets/wid_drawer.dart';
 
 class HomePage extends StatelessWidget {

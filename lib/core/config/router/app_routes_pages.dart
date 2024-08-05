@@ -9,14 +9,17 @@ enum PAGES {
   editPerfilDatPer,
   editPerfilDir,
   preferencias,
-  preguntas,
 
   reclamaciones,
   seguros,
   familiares,
   addFamiliar,
   membresias,
-  segu,
+
+  preguntas,
+  formasPago,
+  medicos,
+  centrosMedicos,
 }
 
 extension AppPageExtension on PAGES {
@@ -40,8 +43,6 @@ extension AppPageExtension on PAGES {
 
       case PAGES.preferencias:
         return "/preferencias";
-      case PAGES.preguntas:
-        return "/preguntas";
       case PAGES.reclamaciones:
         return "/reclamaciones";
       case PAGES.seguros:
@@ -52,6 +53,14 @@ extension AppPageExtension on PAGES {
         return "/addFamiliar";
       case PAGES.membresias:
         return "/membresias";
+      case PAGES.preguntas:
+        return "/preguntas";
+      case PAGES.formasPago:
+        return "/formasPago";
+      case PAGES.medicos:
+        return "/medicos";
+      case PAGES.centrosMedicos:
+        return "/centrosMedicos";
 
       default:
         return "/";
@@ -79,8 +88,6 @@ extension AppPageExtension on PAGES {
 
       case PAGES.preferencias:
         return "preferencias";
-      case PAGES.preguntas:
-        return "preguntas";
       case PAGES.reclamaciones:
         return "reclamaciones";
       case PAGES.seguros:
@@ -92,6 +99,14 @@ extension AppPageExtension on PAGES {
 
       case PAGES.membresias:
         return "membresias";
+      case PAGES.preguntas:
+        return "preguntas";
+      case PAGES.formasPago:
+        return "formasPago";
+      case PAGES.medicos:
+        return "medicos";
+      case PAGES.centrosMedicos:
+        return "centrosMedicos";
 
       default:
         return 'loading';

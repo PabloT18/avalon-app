@@ -1,3 +1,4 @@
+import 'package:alumni_app/core/config/router/app_routes_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:alumni_app/core/config/responsive/responsive_layouts.dart';
@@ -21,8 +22,8 @@ class MembresiasPage extends StatelessWidget {
         title: const Text('Membresias'),
         elevation: 6,
       ),
-      drawer: const DrawerCustom(
-        indexInitial: 4,
+      drawer: DrawerCustom(
+        indexInitial: getDrawerOptionIndex(PAGES.formasPago.pageName),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppLayoutConst.paddingL),
