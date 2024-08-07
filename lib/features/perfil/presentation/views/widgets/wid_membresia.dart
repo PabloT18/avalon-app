@@ -1,6 +1,6 @@
-import 'package:alumni_app/app/presentation/bloc/app/app_bloc.dart';
-import 'package:alumni_app/core/config/router/app_routes_assets.dart';
-import 'package:alumni_app/core/config/theme/app_colors.dart';
+import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/core/config/router/app_routes_assets.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

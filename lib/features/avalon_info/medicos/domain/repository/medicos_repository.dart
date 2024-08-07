@@ -1,3 +1,5 @@
+import '../models/medico_entity.dart';
 
-abstract class MedicosRepository{
+abstract class MedicosRepository {
+  Future<List<Medico>> getMedicos();
 }

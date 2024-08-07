@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:alumni_app/features/preguntas/preguntas.dart';
+import 'package:avalon_app/features/preguntas/preguntas.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

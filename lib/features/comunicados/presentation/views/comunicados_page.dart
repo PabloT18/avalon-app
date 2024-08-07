@@ -1,7 +1,7 @@
-// import 'package:alumni_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
+// import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 // import 'package:flutter/material.dart';
 
-// import 'package:alumni_app/features/shared/widgets/wid_drawer.dart';
+// import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 // import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 // class ComunicadosPage extends StatelessWidget {
@@ -65,11 +65,11 @@
 //   }
 // }
 
-import 'package:alumni_app/core/config/router/app_routes_assets.dart';
-import 'package:alumni_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
+import 'package:avalon_app/core/config/router/app_routes_assets.dart';
+import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:alumni_app/features/shared/widgets/wid_drawer.dart';
+
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ComunicadosPage extends StatefulWidget {

@@ -1,7 +1,7 @@
-import 'package:alumni_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
-import 'package:alumni_app/core/config/responsive/responsive_layouts.dart';
-import 'package:alumni_app/core/config/router/app_routes_pages.dart';
-import 'package:alumni_app/core/config/theme/app_colors.dart';
+import 'package:avalon_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
+import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
+import 'package:avalon_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,6 +1,6 @@
-import 'package:alumni_app/core/config/responsive/responsive_layouts.dart';
+import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 
-import 'package:alumni_app/core/config/theme/app_colors.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 

@@ -1,20 +1,20 @@
 import 'dart:developer';
 
-import 'package:alumni_app/app/domain/entity/push_notifications/push_message.dart';
-import 'package:alumni_app/features/familiares/familiares.dart';
+import 'package:avalon_app/app/domain/entity/push_notifications/push_message.dart';
+import 'package:avalon_app/features/familiares/familiares.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:go_router/go_router.dart';
 
-import 'package:alumni_app/features/login/login.dart';
-import 'package:alumni_app/features/home/home.dart';
-import 'package:alumni_app/features/loading/loading.dart';
+import 'package:avalon_app/features/login/login.dart';
+import 'package:avalon_app/features/home/home.dart';
+import 'package:avalon_app/features/loading/loading.dart';
 
-import 'package:alumni_app/features/shared/widgets/wid_skeleton_page.dart';
+import 'package:avalon_app/features/shared/widgets/wid_skeleton_page.dart';
 
-import 'package:alumni_app/features/user_features.dart';
+import 'package:avalon_app/features/user_features.dart';
 
 import 'app_routes_pages.dart';
 export 'app_routes_pages.dart';
@@ -131,6 +131,15 @@ class AppRouter {
                   return pageBuilderByPlatform(
                       context, state, const MembresiasPage());
                 }),
+            GoRoute(
+              path: PAGES.preguntas.pageName,
+              name: PAGES.preguntas.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                const PreguntasPage(),
+              ),
+            ),
             GoRoute(
               path: PAGES.formasPago.pageName,
               name: PAGES.formasPago.pageName,

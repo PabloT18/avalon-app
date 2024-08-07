@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:alumni_app/features/shared/functions/fun_logic.dart';
+import 'package:avalon_app/features/shared/functions/fun_logic.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart'

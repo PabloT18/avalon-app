@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:alumni_app/app/data/models/push_notifications/push_message_model.dart';
-import 'package:alumni_app/core/config/router/app_router.dart';
+import 'package:avalon_app/app/data/models/push_notifications/push_message_model.dart';
+import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNotifications {

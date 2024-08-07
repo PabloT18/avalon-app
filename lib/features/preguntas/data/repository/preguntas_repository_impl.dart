@@ -1,4 +1,4 @@
-import 'package:alumni_app/features/preguntas/data/models/preguntas_resonse.dart';
+import 'package:avalon_app/features/preguntas/data/models/preguntas_resonse.dart';
 import 'package:dio/dio.dart';
 
 import '../../domain/repository/preguntas_repository.dart';

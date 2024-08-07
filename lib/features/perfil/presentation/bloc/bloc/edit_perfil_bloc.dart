@@ -1,4 +1,4 @@
-import 'package:alumni_app/app/app.dart';
+import 'package:avalon_app/app/app.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart'
     show TextEditingController, GlobalKey, FormState;

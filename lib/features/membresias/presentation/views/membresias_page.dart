@@ -1,13 +1,13 @@
-import 'package:alumni_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:alumni_app/app/presentation/bloc/app/app_bloc.dart';
-import 'package:alumni_app/core/config/responsive/responsive_layouts.dart';
-import 'package:alumni_app/core/config/router/app_routes_assets.dart';
-import 'package:alumni_app/core/config/theme/app_colors.dart';
+import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
+import 'package:avalon_app/core/config/router/app_routes_assets.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:dio/dio.dart';
 
-import 'package:alumni_app/features/shared/widgets/wid_drawer.dart';
+import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MembresiasPage extends StatelessWidget {
@@ -132,8 +132,6 @@ class _MembresiaCardState extends State<MembresiaCard3> {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<AppBloc>().state.user;
-
     return FutureBuilder<List<dynamic>>(
       // future: fetchMembresia(user.id!.toString()),
       future: _futureMembresia,

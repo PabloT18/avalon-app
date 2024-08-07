@@ -72,10 +72,14 @@ class AuthenticationRepository {
     if (cacheUser == null) {
       return User.empty;
     }
-    final Map<String, dynamic> userMap = (cacheUser as Map)
-        .map<String, dynamic>((key, value) => MapEntry(key as String, value));
-    final user = User.fromJson(userMap);
+    // final Map<String, dynamic> userMap = (cacheUser as Map<String, dynamic>)
+    //     .map<String, dynamic>((key, value) => MapEntry(key, value));
 
+    // final user = User.fromJson(userMap);
+// Decodifica el JSON almacenado en cacheUser
+    final Map<String, dynamic> userMap = json.decode(cacheUser);
+
+    final user = User.fromJson(userMap);
     return user;
   }
 

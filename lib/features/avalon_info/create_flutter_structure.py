@@ -33,7 +33,7 @@ export 'views/{feature_name_lower}_views.dart';
 
         f"{base_dir}/presentation/views/{feature_name_lower}_page.dart": f"""import 'package:flutter/material.dart';
 
-import 'package:alumni_app/features/shared/widgets/wid_drawer.dart';
+import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 
 class {feature_name.capitalize()}Page extends StatelessWidget {{
     const {feature_name.capitalize()}Page({{super.key}});

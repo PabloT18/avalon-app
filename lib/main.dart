@@ -1,4 +1,4 @@
-import 'package:alumni_app/firebase_options.dart';
+import 'package:avalon_app/firebase_options.dart';
 import 'package:cache/cache.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

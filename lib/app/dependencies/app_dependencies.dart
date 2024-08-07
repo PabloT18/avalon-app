@@ -1,7 +1,6 @@
-import 'package:alumni_app/app/data/repository/notifications_repository_impl.dart';
-import 'package:alumni_app/app/data/sources/remoteFB/puhs_notifications_fb.dart';
-import 'package:alumni_app/features/user_features.dart';
-// import 'package:flutter/material.dart' show GlobalKey, ScaffoldMessengerState;
+import 'package:avalon_app/app/data/repository/notifications_repository_impl.dart';
+import 'package:avalon_app/app/data/sources/remoteFB/puhs_notifications_fb.dart';
+import 'package:avalon_app/features/user_features.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,6 +42,26 @@ class AppDependencies {
     RepositoryProvider<PreguntasBloc>(
       create: (context) => PreguntasBloc(
         repository: context.read<PreguntasRepository>(),
+      ),
+    ),
+
+    /// Formas de pago
+    RepositoryProvider<FormasPagoRepository>(
+      create: (context) => FormasPagoRepositoryImpl(),
+    ),
+    RepositoryProvider<FormasPagoBloc>(
+      create: (context) => FormasPagoBloc(
+        repository: context.read<FormasPagoRepository>(),
+      ),
+    ),
+
+    /// Medicos
+    RepositoryProvider<MedicosRepository>(
+      create: (context) => MedicosRepositoryImpl(),
+    ),
+    RepositoryProvider<MedicosBloc>(
+      create: (context) => MedicosBloc(
+        repository: context.read<MedicosRepository>(),
       ),
     ),
   ];

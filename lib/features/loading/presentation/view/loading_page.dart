@@ -5,10 +5,10 @@ import 'package:flutter/services.dart';
 //
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:alumni_app/core/config/responsive/responsive.dart';
-import 'package:alumni_app/app/app.dart';
+import 'package:avalon_app/core/config/responsive/responsive.dart';
+import 'package:avalon_app/app/app.dart';
 
-import 'package:alumni_app/core/config/router/app_routes_assets.dart';
+import 'package:avalon_app/core/config/router/app_routes_assets.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({super.key});

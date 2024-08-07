@@ -3,20 +3,20 @@ import 'dart:async';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 
-import 'package:alumni_app/features/shared/widgets/app_widgets.dart';
+import 'package:avalon_app/features/shared/widgets/app_widgets.dart';
 // import 'package:authentication_repository/authentication_repository.dart';
 
-import 'package:alumni_app/core/config/router/app_router.dart';
+import 'package:avalon_app/core/config/router/app_router.dart';
 
-import 'package:alumni_app/features/shared/functions/fun_views.dart';
-import 'package:alumni_app/features/shared/widgets/buttons/buttons_custom.dart';
-import 'package:alumni_app/features/shared/widgets/loaders/loaders_widgets.dart';
+import 'package:avalon_app/features/shared/functions/fun_views.dart';
+import 'package:avalon_app/features/shared/widgets/buttons/buttons_custom.dart';
+import 'package:avalon_app/features/shared/widgets/loaders/loaders_widgets.dart';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:alumni_app/core/config/responsive/responsive_class.dart';
-import 'package:alumni_app/core/config/router/app_routes_assets.dart';
+import 'package:avalon_app/core/config/responsive/responsive_class.dart';
+import 'package:avalon_app/core/config/router/app_routes_assets.dart';
 
 import '../bloc/login/login_bloc.dart';
 

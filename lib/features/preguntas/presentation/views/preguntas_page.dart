@@ -1,13 +1,13 @@
-import 'package:alumni_app/core/config/responsive/responsive_class.dart';
-import 'package:alumni_app/core/config/router/app_routes_pages.dart';
-import 'package:alumni_app/core/config/theme/app_colors.dart';
-import 'package:alumni_app/features/preguntas/preguntas.dart';
-import 'package:alumni_app/features/preguntas/presentation/bloc/preguntas_bloc.dart';
-import 'package:alumni_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
+import 'package:avalon_app/core/config/responsive/responsive_class.dart';
+import 'package:avalon_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
+import 'package:avalon_app/features/preguntas/preguntas.dart';
+import 'package:avalon_app/features/preguntas/presentation/bloc/preguntas_bloc.dart';
+import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
-import 'package:alumni_app/features/shared/widgets/wid_drawer.dart';
+import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../shared/widgets/alerts/alert_message_error.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:alumni_app/app/app.dart';
-import 'package:alumni_app/core/config/responsive/responsive_class.dart';
-import 'package:alumni_app/core/config/router/app_router.dart';
+import 'package:avalon_app/app/app.dart';
+import 'package:avalon_app/core/config/responsive/responsive_class.dart';
+import 'package:avalon_app/core/config/router/app_router.dart';
 
 import 'package:animate_do/animate_do.dart';
 

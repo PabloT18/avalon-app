@@ -1,7 +1,7 @@
-import 'package:alumni_app/core/config/responsive/responsive_class.dart';
-import 'package:alumni_app/core/config/router/app_router.dart';
-import 'package:alumni_app/core/config/router/app_routes_assets.dart';
-import 'package:alumni_app/core/config/theme/app_colors.dart';
+import 'package:avalon_app/core/config/responsive/responsive_class.dart';
+import 'package:avalon_app/core/config/router/app_router.dart';
+import 'package:avalon_app/core/config/router/app_routes_assets.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 
 import 'package:flutter/material.dart';
@@ -37,6 +37,16 @@ final List<DrawerOption> drawerOptions = [
       icon: Icons.question_answer,
       isUserOption: false,
       routeName: PAGES.formasPago.pageName),
+  DrawerOption(
+      label: 'Médicos',
+      icon: Icons.medication_sharp,
+      isUserOption: false,
+      routeName: PAGES.medicos.pageName),
+  DrawerOption(
+      label: 'Centros Médicos',
+      icon: Icons.local_hospital_rounded,
+      isUserOption: false,
+      routeName: PAGES.centrosMedicos.pageName),
   DrawerOption(
       label: 'Preguntas y respuestas',
       icon: Icons.question_answer,

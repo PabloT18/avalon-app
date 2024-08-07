@@ -1,4 +1,4 @@
-import 'package:alumni_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

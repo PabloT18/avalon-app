@@ -1,4 +1,4 @@
-import 'package:alumni_app/core/config/router/app_router.dart';
+import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:flutter/material.dart';
 
 import '../../../shared/widgets/wid_drawer.dart';

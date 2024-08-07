@@ -1,5 +1,5 @@
-import 'package:alumni_app/core/config/responsive/responsive_class.dart';
-import 'package:alumni_app/core/config/router/app_routes_assets.dart';
+import 'package:avalon_app/core/config/responsive/responsive_class.dart';
+import 'package:avalon_app/core/config/router/app_routes_assets.dart';
 import 'package:flutter/material.dart';
 
 class UserPhoto extends StatelessWidget {

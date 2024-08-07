@@ -1,8 +1,8 @@
-import 'package:alumni_app/app/app.dart';
+import 'package:avalon_app/app/app.dart';
 
-import 'package:alumni_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
-import 'package:alumni_app/core/config/router/app_router.dart';
-import 'package:alumni_app/core/config/theme/app_theme.dart';
+import 'package:avalon_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
+import 'package:avalon_app/core/config/router/app_router.dart';
+import 'package:avalon_app/core/config/theme/app_theme.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

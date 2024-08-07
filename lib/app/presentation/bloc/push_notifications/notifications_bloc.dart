@@ -3,9 +3,9 @@ import 'dart:convert';
 // import 'dart:convert';
 import 'dart:developer';
 
-// import 'package:alumni_app/core/config/router/app_router.dart';
-import 'package:alumni_app/app/data/sources/local_notifications.dart';
-import 'package:alumni_app/core/config/router/app_router.dart';
+// import 'package:avalon_app/core/config/router/app_router.dart';
+import 'package:avalon_app/app/data/sources/local_notifications.dart';
+import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart'

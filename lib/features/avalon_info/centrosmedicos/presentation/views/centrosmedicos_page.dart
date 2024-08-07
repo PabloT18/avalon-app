@@ -1,7 +1,7 @@
-import 'package:alumni_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:flutter/material.dart';
 
-import 'package:alumni_app/features/shared/widgets/wid_drawer.dart';
+import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 
 class CentrosMedicosPage extends StatelessWidget {
   const CentrosMedicosPage({super.key});
