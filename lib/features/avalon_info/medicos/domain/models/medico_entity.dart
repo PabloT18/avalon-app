@@ -1,4 +1,4 @@
-import 'package:avalon_app/app/domain/entity/app_entities.dart';
+import 'package:avalon_app/app/domain/entity/general_entities.dart';
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 

@@ -64,5 +64,15 @@ class AppDependencies {
         repository: context.read<MedicosRepository>(),
       ),
     ),
+
+    /// Centros Medicos
+    RepositoryProvider<CentrosmedicosRepository>(
+      create: (context) => CentrosmedicosRepositoryImpl(),
+    ),
+    RepositoryProvider<CentrosMedicosBloc>(
+      create: (context) => CentrosMedicosBloc(
+        repository: context.read<CentrosmedicosRepository>(),
+      ),
+    ),
   ];
 }

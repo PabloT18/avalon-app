@@ -2,29 +2,29 @@ import 'dart:convert';
 
 import 'package:avalon_app/app/domain/entity/general_entities.dart';
 
-import '../../domain/models/medico_models.dart';
+import '../../domain/models/centro_medico_entity.dart';
 
-MedicosResponse medicosResponseFromJson(String str) =>
-    MedicosResponse.fromJson(json.decode(str));
+CentrosMedicosDataResponse centroMedicoResponseFromJson(String str) =>
+    CentrosMedicosDataResponse.fromJson(json.decode(str));
 
-String medicosResponseToJson(MedicosResponse data) =>
+String centroMedicoResponseToJson(CentrosMedicosDataResponse data) =>
     json.encode(data.toJson());
 
-class MedicosResponse {
-  final List<MedicoResponse>? data;
+class CentrosMedicosDataResponse {
+  final List<CentroMedicoResponse>? data;
   final int? totalRecords;
 
-  MedicosResponse({
+  CentrosMedicosDataResponse({
     this.data,
     this.totalRecords,
   });
 
-  factory MedicosResponse.fromJson(Map<String, dynamic> json) =>
-      MedicosResponse(
+  factory CentrosMedicosDataResponse.fromJson(Map<String, dynamic> json) =>
+      CentrosMedicosDataResponse(
         data: json["data"] == null
             ? []
-            : List<MedicoResponse>.from(
-                json["data"]!.map((x) => MedicoResponse.fromJson(x))),
+            : List<CentroMedicoResponse>.from(
+                json["data"]!.map((x) => CentroMedicoResponse.fromJson(x))),
         totalRecords: json["totalRecords"],
       );
 
@@ -36,27 +36,21 @@ class MedicosResponse {
       };
 }
 
-class MedicoResponse extends Medico {
-  const MedicoResponse({
+class CentroMedicoResponse extends CentroMedico {
+  const CentroMedicoResponse({
     super.createdBy,
     super.createdDate,
     super.lastModifiedBy,
     super.lastModifiedDate,
     super.id,
-    super.nombres,
-    super.nombresDos,
-    super.apellidos,
-    super.apellidosDos,
+    super.nombre,
+    super.descripcion,
     super.correoElectronico,
-    super.numeroTelefono,
     super.direccion,
-    super.estado,
-    super.urlImagen,
-    super.especialidad,
-    super.nombreCompleto,
   });
 
-  factory MedicoResponse.fromJson(Map<String, dynamic> json) => MedicoResponse(
+  factory CentroMedicoResponse.fromJson(Map<String, dynamic> json) =>
+      CentroMedicoResponse(
         createdBy: json["createdBy"],
         createdDate: json["createdDate"] == null
             ? null
@@ -66,21 +60,12 @@ class MedicoResponse extends Medico {
             ? null
             : DateTime.parse(json["lastModifiedDate"]),
         id: json["id"],
-        nombres: json["nombres"],
-        nombresDos: json["nombresDos"],
-        apellidos: json["apellidos"],
-        apellidosDos: json["apellidosDos"],
+        nombre: json["nombre"],
+        descripcion: json["descripcion"],
         correoElectronico: json["correoElectronico"],
-        numeroTelefono: json["numeroTelefono"],
         direccion: json["direccion"] == null
             ? null
             : DireccionResponse.fromJson(json["direccion"]),
-        estado: json["estado"],
-        urlImagen: json["urlImagen"],
-        especialidad: json["especialidad"] == null
-            ? null
-            : EspecialidadResponse.fromJson(json["especialidad"]),
-        nombreCompleto: json["nombreCompleto"],
       );
 
   @override
@@ -90,17 +75,10 @@ class MedicoResponse extends Medico {
         "lastModifiedBy": lastModifiedBy,
         "lastModifiedDate": lastModifiedDate?.toIso8601String(),
         "id": id,
-        "nombres": nombres,
-        "nombresDos": nombresDos,
-        "apellidos": apellidos,
-        "apellidosDos": apellidosDos,
+        "nombre": nombre,
+        "descripcion": descripcion,
         "correoElectronico": correoElectronico,
-        "numeroTelefono": numeroTelefono,
         "direccion": direccion?.toJson(),
-        "estado": estado,
-        "urlImagen": urlImagen,
-        "especialidad": especialidad?.toJson(),
-        "nombreCompleto": nombreCompleto,
       };
 }
 
@@ -173,39 +151,5 @@ class EstadoResponse extends Estado {
         "id": id,
         "nombre": nombre,
         "pais": pais?.toJson(),
-      };
-}
-
-class EspecialidadResponse extends Especialidad {
-  const EspecialidadResponse({
-    super.createdBy,
-    super.createdDate,
-    super.lastModifiedBy,
-    super.lastModifiedDate,
-    super.id,
-    super.nombre,
-    super.descripcion,
-  });
-
-  factory EspecialidadResponse.fromJson(Map<String, dynamic> json) =>
-      EspecialidadResponse(
-        createdBy: json["createdBy"],
-        createdDate: json["createdDate"],
-        lastModifiedBy: json["lastModifiedBy"],
-        lastModifiedDate: json["lastModifiedDate"],
-        id: json["id"],
-        nombre: json["nombre"],
-        descripcion: json["descripcion"],
-      );
-
-  @override
-  Map<String, dynamic> toJson() => {
-        "createdBy": createdBy,
-        "createdDate": createdDate,
-        "lastModifiedBy": lastModifiedBy,
-        "lastModifiedDate": lastModifiedDate,
-        "id": id,
-        "nombre": nombre,
-        "descripcion": descripcion,
       };
 }
