@@ -46,14 +46,13 @@ class MedicosPageView extends StatelessWidget {
                 medicosBloc.add(const GetMedicos());
               },
               refreshController: medicosBloc.refreshController,
-              child: getChildByState(state, context, medicosBloc));
+              child: getChildByState(state, medicosBloc));
         },
       ),
     );
   }
 
-  Widget getChildByState(
-      MedicosState state, BuildContext context, medicosBloc) {
+  Widget getChildByState(MedicosState state, medicosBloc) {
     return switch (state) {
       MedicosLoading() => const Center(child: CircularProgressIndicator()),
       MedicosError() => MessageError(

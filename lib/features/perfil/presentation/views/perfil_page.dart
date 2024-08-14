@@ -1,3 +1,4 @@
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:avalon_app/app/app.dart';
 import 'package:avalon_app/core/config/responsive/responsive_class.dart';
@@ -42,10 +43,10 @@ class PerfilPage extends StatelessWidget {
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'Datos del Usuario',
-                        style: TextStyle(
+                        apptexts.perfilPage.userData,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),

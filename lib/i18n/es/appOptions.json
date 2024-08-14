@@ -1,0 +1,13 @@
+{
+    "filtro": "Filtro",
+    "filtro_de": "Filtro de {{option}}",
+    "error_servers": "Servidores en mantenimiento. Por favor intente mas tarde.",
+    "error_access_internet": "Problemas en su conexion de red. Por favor intente mas tarde.",
+    "siguiente": "Siguiente",
+    "continuar": "Continuar",
+    "opt_yes": "Si",
+    "observaciones": "Observaciones",
+    "cancelar": "Cancelar",
+    "envio_exitoso": "Se ha enviado exitosamente.",
+    "follow": "Seguir"
+}

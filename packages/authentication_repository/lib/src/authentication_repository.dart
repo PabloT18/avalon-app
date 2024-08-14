@@ -1,12 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:cache/cache.dart';
 import 'package:dio/dio.dart';
-// import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-// import 'package:flutter/foundation.dart' show kIsWeb;
-// import 'package:google_sign_in/google_sign_in.dart';
 
 import 'models/user_response.dart';
 
@@ -66,7 +62,7 @@ class AuthenticationRepository {
   /// Returns the current cached user.
   /// Defaults to [User.empty] if there is no cached user.
   User get currentUser {
-    // _cache.clear();
+    _cache.clear();
 
     final cacheUser = _cache.read(key: userCacheKey);
     if (cacheUser == null) {
@@ -77,7 +73,8 @@ class AuthenticationRepository {
 
     // final user = User.fromJson(userMap);
 // Decodifica el JSON almacenado en cacheUser
-    final Map<String, dynamic> userMap = json.decode(cacheUser);
+    // final Map<String, dynamic> userMap = json.decode(cacheUser);
+    final Map<String, dynamic> userMap = Map<String, dynamic>.from(cacheUser);
 
     final user = User.fromJson(userMap);
     return user;

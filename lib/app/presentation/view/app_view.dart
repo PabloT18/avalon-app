@@ -4,10 +4,13 @@ import 'package:avalon_app/app/presentation/bloc/push_notifications/notification
 import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/core/config/theme/app_theme.dart';
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../../domain/usecases/push_notifications/push_notifications_use_cases.dart';
+import '../bloc/settings_cubit/app_settings_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -23,6 +26,11 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
+            // Set up the AppSettingsCubit, which will glue user settings to multiple
+            // Flutter Widgets.
+            create: (_) => RepositoryProvider.of<AppSettingsCubit>(context),
+          ),
+          BlocProvider(
             create: (_) => AppBloc(
               authenticationRepository: _authenticationRepository,
             ),
@@ -36,9 +44,22 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ],
-        child: const AppView(),
+        child: const _BuildApp(),
       ),
     );
+  }
+}
+
+/// [TranslationProvider] for Slang package to Localizations generate a
+///  `ingereted` widget para
+///
+/// BlocBuilder to rebuild by change only `themeMode` from [AppSettingsCubit]
+class _BuildApp extends StatelessWidget {
+  const _BuildApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return TranslationProvider(child: const AppView());
   }
 }
 
@@ -54,7 +75,13 @@ class AppView extends StatelessWidget {
       debugShowCheckedModeBanner: true,
       title: 'AvalonPlus',
       routerConfig: AppRouter.router,
-
+      locale: TranslationProvider.of(context).flutterLocale,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocaleUtils.supportedLocales,
       theme: AppTheme.light,
       builder: (context, child) {
         return BlocListener<AppBloc, AppState>(

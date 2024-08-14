@@ -1,11 +1,13 @@
 import 'package:avalon_app/firebase_options.dart';
 import 'package:cache/cache.dart';
+import 'package:cache/constant_keys_cahce.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:authentication_repository/authentication_repository.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app/app.dart';
 import 'app/dependencies/app_dependencies.dart';
@@ -22,6 +24,12 @@ Future<void> main() async {
   final authenticationRepository = AuthenticationRepository();
   await authenticationRepository.user.first;
 
+  /// SharedPreferences Instance
+  await Hive.initFlutter();
+
+  ///
+  await Hive.openBox(ConstHiveBox.kHiveBoxName);
+
   // / Inizializar [Firebase]
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -33,6 +41,5 @@ Future<void> main() async {
         authenticationRepository: authenticationRepository,
       )));
 }
-
 
 /// TODO CAMBIAR PACKAGE ID EN IOS

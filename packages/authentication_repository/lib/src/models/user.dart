@@ -79,7 +79,7 @@ class User extends Equatable {
   }
 
   // Método para convertir el objeto User a JSON
-  Map toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'createdBy': createdBy,
       'createdDate': createdDate?.toIso8601String(),

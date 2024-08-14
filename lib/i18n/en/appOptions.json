@@ -1,0 +1,13 @@
+{
+    "filtro": "Filter",
+    "filtro_de": "{{option}} Filter",
+    "error_servers": "Servers under maintenance. Please try later",
+    "error_access_internet": "Problems with your network connection. Please try again later.",
+    "siguiente": "Next",
+    "continuar": "Continue",
+    "opt_yes": "Continue",
+    "observaciones": "Comments",
+    "cancelar": "Cancel",
+    "envio_exitoso": "Sent successfully.",
+    "follow": "Follow"
+}
