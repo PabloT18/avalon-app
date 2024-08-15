@@ -18,30 +18,34 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       : _authenticationRepository = authenticationRepository,
         _getMembresias = getMembresias,
         super(
-          authenticationRepository.currentUser.isNotEmpty
-              ? AppAuthenticated(user: authenticationRepository.currentUser)
-              : const AppUnauthenticated(),
+          // authenticationRepository.currentUser.isNotEmpty
+          //     ? AppAuthenticated(user: authenticationRepository.currentUser)
+          //     : const AppUnauthenticated(),
+          const AppValidating(user: User.empty),
         ) {
-    on<_AppUserChanged>(_onUserChanged);
     on<AppValidate>(_onAppValidate);
+    on<AppUpdateUser>(_onUpdateUser);
+    on<_AppUserChanged>(_onUserChanged);
     on<AppLogoutRequested>(_onLogoutRequested);
     on<AppGetMembresias>(_onAppGetMembresias);
-    _userSubscription = _authenticationRepository.status.listen(
-      (user) => add(_AppUserChanged(user)),
-    );
 
-    validateFirst = false;
+    _userSubscription = _authenticationRepository.status.listen((user) {
+      add(_AppUserChanged(user));
+    });
   }
 
   final GetMembresiasUC _getMembresias;
 
   final AuthenticationRepository _authenticationRepository;
   late final StreamSubscription<User> _userSubscription;
-  late bool validateFirst;
 
   void _onUserChanged(_AppUserChanged event, Emitter<AppState> emit) {
     if (event.user.isNotEmpty) {
-      emit(AppAuthenticated(user: event.user));
+      if (state is AppAuthenticated) {
+        emit((state as AppAuthenticated).copyWith(user: event.user));
+      } else {
+        emit(AppAuthenticated(user: event.user));
+      }
       add(AppGetMembresias(event.user));
     } else {
       // emit(const AppValidating(user: User.empty));
@@ -62,12 +66,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   FutureOr<void> _onAppValidate(
       AppValidate event, Emitter<AppState> emit) async {
-    // if (validateFirst) {
-    // _authenticationRepository.logOut();
     final validatedUser = await _authenticationRepository.validateAccount();
     add(_AppUserChanged(validatedUser));
-    // }
-    // validateFirst = true;
   }
 
   FutureOr<void> _onAppGetMembresias(
@@ -84,5 +84,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     } catch (e) {
       emit(currentState.copyWith(membresias: []));
     }
+  }
+
+  FutureOr<void> _onUpdateUser(
+      AppUpdateUser event, Emitter<AppState> emit) async {
+    final validatedUser = await _authenticationRepository.validateAccount();
+    emit((state as AppAuthenticated).copyWith(user: validatedUser));
   }
 }

@@ -66,6 +66,9 @@ class EditAddressBloc extends Bloc<EditAddressEvent, EditAddressState> {
 
   FutureOr<void> _onValidateAndSubmit(
       EditAddressEvent event, Emitter<EditAddressState> emit) async {
+    emit(state.copyWith(
+      isUpdating: true,
+    ));
     if (formKey.currentState!.validate()) {
       try {
         final updatedUser = user.copyWith(
@@ -86,12 +89,12 @@ class EditAddressBloc extends Bloc<EditAddressEvent, EditAddressState> {
 
         emit(state.copyWith(
           updateSuccess: response,
-          errorMessage: null,
+          isUpdating: false,
         ));
       } catch (e) {
         emit(state.copyWith(
           updateSuccess: false,
-          errorMessage: e.toString(),
+          isUpdating: false,
         ));
       }
     }

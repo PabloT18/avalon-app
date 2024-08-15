@@ -1,12 +1,9 @@
-import 'package:avalon_app/app/app.dart';
-
 import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:avalon_app/features/perfil/perfil.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -63,9 +60,6 @@ class _HomePageViewState extends State<HomePageView> {
   // late RefreshController refreshController;
   @override
   Widget build(BuildContext context) {
-    final user = context.read<AppBloc>().state.user;
-    final userName = user.nombreUsuario?.toLowerCase() ?? '';
-    final rol = user.rol?.nombre?.toLowerCase() ?? '';
     // context.read<NotificationsBloc>().add(SubscribeTopics([
     //       'todos',
     //       'Todos',

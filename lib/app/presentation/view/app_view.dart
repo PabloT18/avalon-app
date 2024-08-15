@@ -89,6 +89,10 @@ class AppView extends StatelessWidget {
       theme: AppTheme.light,
       builder: (context, child) {
         return BlocListener<AppBloc, AppState>(
+          listenWhen: (previous, current) {
+            return !(previous is AppAuthenticated &&
+                current is AppAuthenticated);
+          },
           listener: (context, state) {
             switch (state) {
               case AppAuthenticated():
@@ -97,6 +101,7 @@ class AppView extends StatelessWidget {
               case AppUnauthenticated():
                 AppRouter.router.go(PAGES.login.pagePath);
                 break;
+              default:
             }
           },
           child: child,

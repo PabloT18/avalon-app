@@ -30,9 +30,12 @@ class AppAuthenticated extends AppState {
   }
 
   @override
-  List<Object> get props => [user, membresias];
+  List<Object> get props => [
+        user,
+        membresias,
+      ];
 }
 
-// class AppValidating extends AppState {
-//   const AppValidating({required super.user});
-// }
+class AppValidating extends AppState {
+  const AppValidating({required super.user});
+}

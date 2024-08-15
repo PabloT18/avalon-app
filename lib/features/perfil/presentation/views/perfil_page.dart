@@ -5,7 +5,6 @@ import 'package:avalon_app/app/app.dart';
 import 'package:avalon_app/core/config/responsive/responsive_class.dart';
 import 'package:avalon_app/core/config/router/app_router.dart';
 
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_models/shared_models.dart';
@@ -21,8 +20,6 @@ class PerfilPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<AppBloc>().state.user;
-
     return SingleChildScrollView(
       padding: const EdgeInsets.all(AppLayoutConst.paddingL)
           .copyWith(top: AppLayoutConst.paddingXL),
@@ -31,27 +28,14 @@ class PerfilPage extends StatelessWidget {
         children: <Widget>[
           const UserMembershipSecction(),
           const SizedBox(height: AppLayoutConst.spaceXL),
-          UserDataSecction(user: user),
-          if (!user.hasAllRequiredFields) ...[
-            const SizedBox(height: 20),
-            Align(
-              alignment: Alignment.center,
-              child: TextButton(
-                child: Text(
-                  apptexts.perfilPage.completeInformation,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onPressed: () {
-                  context.goNamed(PAGES.editPerfil.pageName);
-                },
-              ),
-            ),
-            const SizedBox(height: 20),
-          ],
+          BlocBuilder<AppBloc, AppState>(
+            buildWhen: (previous, current) {
+              return previous.user != current.user;
+            },
+            builder: (context, state) {
+              return UserDataSecction(user: state.user);
+            },
+          ),
           const SizedBox(height: 20),
         ],
       ),
@@ -125,24 +109,24 @@ class UserDataSecction extends StatelessWidget {
           height: 1,
           color: AppColors.secondaryBlue.withOpacity(0.5),
         ),
-        Center(
-          child: Container(
-            width: 100,
-            margin:
-                const EdgeInsets.symmetric(vertical: AppLayoutConst.marginL),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-            clipBehavior: Clip.hardEdge,
-            child: FadeIn(
-              child: Image.network(
-                user.urlImagen ?? 'https://via.placeholder.com/150',
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
+        // Center(
+        //   child: Container(
+        //     width: 100,
+        //     margin:
+        //         const EdgeInsets.symmetric(vertical: AppLayoutConst.marginL),
+        //     alignment: Alignment.center,
+        //     decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+        //     clipBehavior: Clip.hardEdge,
+        //     child: FadeIn(
+        //       child: Image.network(
+        //         user.urlImagen ?? 'https://via.placeholder.com/150',
+        //         width: 100,
+        //         height: 100,
+        //         fit: BoxFit.cover,
+        //       ),
+        //     ),
+        //   ),
+        // ),
         Padding(
           padding:
               const EdgeInsets.symmetric(horizontal: AppLayoutConst.spaceZero),
@@ -155,6 +139,26 @@ class UserDataSecction extends StatelessWidget {
             ],
           ),
         ),
+        if (!user.hasAllRequiredFields) ...[
+          const SizedBox(height: 20),
+          Align(
+            alignment: Alignment.center,
+            child: TextButton(
+              child: Text(
+                apptexts.perfilPage.completeInformation,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                context.goNamed(PAGES.editPerfil.pageName);
+              },
+            ),
+          ),
+          const SizedBox(height: 20),
+        ],
       ],
     );
   }

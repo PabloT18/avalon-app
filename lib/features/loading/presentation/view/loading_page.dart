@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/services.dart';
-//
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:avalon_app/core/config/responsive/responsive.dart';
-import 'package:avalon_app/app/app.dart';
 
 import 'package:avalon_app/core/config/router/app_routes_assets.dart';
 
@@ -15,7 +12,7 @@ class LoadingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AppBloc>().add(const AppValidate());
+    // context.read<AppBloc>().add(const AppValidate());
 
     return const _LoadingPageView();
   }

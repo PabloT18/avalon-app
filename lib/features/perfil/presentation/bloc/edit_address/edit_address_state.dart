@@ -7,7 +7,7 @@ class EditAddressState extends Equatable {
     this.estados = const [],
     this.selectedEstadoId,
     this.updateSuccess,
-    this.errorMessage,
+    this.isUpdating = false,
   });
 
   final List<Pais> paises;
@@ -16,7 +16,7 @@ class EditAddressState extends Equatable {
   final int? selectedEstadoId; // ID del estado seleccionado
 
   final bool? updateSuccess;
-  final String? errorMessage;
+  final bool isUpdating;
 
   EditAddressState copyWith({
     List<Pais>? paises,
@@ -24,7 +24,7 @@ class EditAddressState extends Equatable {
     List<Estado>? estados,
     int? selectedEstadoId,
     bool? updateSuccess,
-    String? errorMessage,
+    bool? isUpdating,
   }) {
     return EditAddressState(
       paises: paises ?? this.paises,
@@ -32,7 +32,7 @@ class EditAddressState extends Equatable {
       estados: estados ?? this.estados,
       selectedEstadoId: selectedEstadoId ?? this.selectedEstadoId,
       updateSuccess: updateSuccess ?? this.updateSuccess,
-      errorMessage: errorMessage ?? this.errorMessage,
+      isUpdating: isUpdating ?? this.isUpdating,
     );
   }
 
@@ -43,6 +43,6 @@ class EditAddressState extends Equatable {
         estados,
         selectedEstadoId,
         updateSuccess,
-        errorMessage,
+        isUpdating,
       ];
 }

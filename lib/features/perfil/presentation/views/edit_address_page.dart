@@ -9,7 +9,6 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 
-import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:shared_models/shared_models.dart';
 
@@ -49,18 +48,21 @@ class EditAddressPageBody extends StatelessWidget {
     return BlocListener<EditAddressBloc, EditAddressState>(
       listener: (context, state) {
         if (state.updateSuccess != null) {
-          if (state.updateSuccess!) {
+          if (state.updateSuccess! && !state.isUpdating) {
             // context.read<AppBloc>().add();
             // Navigator.of(context).pop();
             UtilsFunctionsViews.showFlushBar(
               message: apptexts.perfilPage.successUpdateUserAddress,
               positionOffset: responsive.hp(8),
+              isError: false,
             ).show(context);
-          } else {
+            context.read<AppBloc>().add(const AppUpdateUser());
+          } else if (!state.isUpdating) {
             UtilsFunctionsViews.showFlushBar(
-              message: apptexts.perfilPage.errorUpdateUserAddress,
-              positionOffset: responsive.hp(8),
-            ).show(context);
+                    message: apptexts.perfilPage.errorUpdateUserAddress,
+                    positionOffset: responsive.hp(8),
+                    isError: true)
+                .show(context);
           }
         }
       },
@@ -99,11 +101,18 @@ class EditAddressPageBody extends StatelessWidget {
                   apptexts.perfilPage.zipCode, editAddressBloc.zipCode),
               const SizedBox(height: 20),
               Center(
-                child: CustomButton(
-                  title: apptexts.appOptions.save,
-                  onPressed: () {
-                    // if (editAddressBloc.formKey.currentState!.validate()) {}
-                    editAddressBloc.add(const ValidateAndSubmitEvent());
+                child: BlocBuilder<EditAddressBloc, EditAddressState>(
+                  builder: (context, state) {
+                    return CustomButton(
+                      title: apptexts.appOptions.save,
+                      onPressed: !state.isUpdating
+                          ? () {
+                              // if (editAddressBloc.formKey.currentState!.validate()) {}
+                              editAddressBloc
+                                  .add(const ValidateAndSubmitEvent());
+                            }
+                          : null,
+                    );
                   },
                 ),
               ),

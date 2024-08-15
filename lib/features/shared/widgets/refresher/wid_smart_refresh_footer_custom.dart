@@ -2,9 +2,9 @@ part of 'smart_refresh_custom.dart';
 
 class CustomFooterSmartRefrsh extends StatelessWidget {
   const CustomFooterSmartRefrsh({
-    Key? key,
+    super.key,
     this.moreelements = true,
-  }) : super(key: key);
+  });
   final bool moreelements;
   @override
   Widget build(BuildContext context) {
