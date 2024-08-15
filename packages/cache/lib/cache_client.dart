@@ -25,6 +25,15 @@ class CacheClient {
     return _box.get(key);
   }
 
+  Map<String, dynamic>? readMap({required String key}) {
+    final data = _box.get(key);
+    if (data != null && data is Map) {
+      return (data).cast<String, dynamic>();
+    }
+    return null;
+    // return data;
+  }
+
   /// Clears all data stored in the box.
   Future<void> clear() async {
     await _box.clear();

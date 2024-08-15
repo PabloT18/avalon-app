@@ -1,5 +1,5 @@
-import 'package:avalon_app/app/domain/entity/general_entities.dart';
 import 'package:equatable/equatable.dart';
+import 'package:shared_models/shared_models.dart';
 
 class CentroMedico extends Equatable {
   final String? createdBy;

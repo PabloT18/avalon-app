@@ -1,3 +1,4 @@
+import 'package:avalon_app/app/data/sources/local/enviroment.dart';
 import 'package:avalon_app/features/avalon_info/medicos/domain/models/medico_entity.dart';
 import 'package:dio/dio.dart';
 
@@ -5,7 +6,7 @@ import '../../domain/repository/medicos_repository.dart';
 import '../models/medicos_response.dart';
 
 class MedicosRepositoryImpl implements MedicosRepository {
-  final String baseUrl = 'http://149.56.110.32:8086';
+  final String baseUrl = Environment.avalonApi;
   late Dio dio;
 
   MedicosRepositoryImpl() {

@@ -1,10 +1,11 @@
+import 'package:avalon_app/app/data/sources/local/enviroment.dart';
 import 'package:avalon_app/features/avalon_info/formaspago/data/models/metodo_pago_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../domain/repository/formaspago_repository.dart';
 
 class FormasPagoRepositoryImpl implements FormasPagoRepository {
-  final String baseUrl = 'http://149.56.110.32:8086';
+  final String baseUrl = Environment.avalonApi;
   late Dio dio;
 
   FormasPagoRepositoryImpl() {

@@ -17,3 +17,8 @@ final class _AppUserChanged extends AppEvent {
 
   final User user;
 }
+
+final class AppGetMembresias extends AppEvent {
+  const AppGetMembresias(this.user);
+  final User user;
+}

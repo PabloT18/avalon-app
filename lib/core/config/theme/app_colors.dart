@@ -38,6 +38,7 @@ class AppColors {
 
   // static const primaryBlue = Color(0xff1e367c);
   static const primaryBlue = Color(0xFF023e7d);
+  static const cardBlue = Color(0xFF01203D); // Color de fondo de la tarjeta
   static const secondaryBlue = Color(0xFF6B8DC8);
   static const threeBlue = Color(0xFFBCD8F2);
 

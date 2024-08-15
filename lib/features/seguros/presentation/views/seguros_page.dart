@@ -131,7 +131,7 @@ class _SegurosPageState extends State<SegurosPage> {
         elevation: 6,
       ),
       drawer: DrawerCustom(
-        indexInitial: getDrawerOptionIndex(PAGES.seguros.pageName),
+        indexInitialName: PAGES.seguros.pageName,
       ),
       body: FutureBuilder<List<dynamic>>(
         future: _futurePolizas,

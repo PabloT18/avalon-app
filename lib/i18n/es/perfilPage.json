@@ -1,3 +1,22 @@
 {
-    "userData": "Datos del Usuario"
+    "userData": "Datos del Usuario",
+    "userPersonalData": "Datos Personales",
+    "username": "Nombre de Usuario",
+    "correo": "Correo Electrónico",
+    "fullName": "Nombre Completo",
+    "phone": "Teléfono",
+    "editProfile": "Editar Perfil",
+    "editData": "Editar Datos Personales",
+    "editAddress": "Editar Dirección",
+    "dob": "Fecha de Nacimiento",
+    "placeOfBirth": "Lugar de Nacimiento",
+    "placeOfResidence": "Lugar de Residencia",
+    "completeInformation": "Por favor, completa tu información personal",
+    "address": "Dirección",
+    "addressMain": "Nombre de la calle",
+    "addressSecondary": "Departamento, piso, unidad, edificion (opcional)",
+    "city": "Ciudad",
+    "state": "Estado",
+    "zipCode": "Código Postal",
+    "country": "País"
 }

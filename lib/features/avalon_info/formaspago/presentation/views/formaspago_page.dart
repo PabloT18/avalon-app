@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/formaspago_domain.dart';
 import '../bloc/bloc/formas_pago_bloc.dart';
 
 class FormasPagoPage extends StatelessWidget {
@@ -14,8 +15,9 @@ class FormasPagoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          context.read<FormasPagoBloc>()..add(const GetMetodosPagoEvent()),
+      create: (context) => FormasPagoBloc(
+        repository: context.read<FormasPagoRepository>(),
+      )..add(const GetMetodosPagoEvent()),
       child: const FormasPagoPageView(),
     );
   }
@@ -35,9 +37,7 @@ class FormasPagoPageView extends StatelessWidget {
         title: const Text('Formaspago'),
         elevation: 6,
       ),
-      drawer: DrawerCustom(
-        indexInitial: getDrawerOptionIndex(PAGES.formasPago.pageName),
-      ),
+      drawer: DrawerCustom(indexInitialName: PAGES.formasPago.pageName),
       body: BlocBuilder<FormasPagoBloc, FormasPagoState>(
         builder: (context, state) {
           return SmartRefrehsCustom(

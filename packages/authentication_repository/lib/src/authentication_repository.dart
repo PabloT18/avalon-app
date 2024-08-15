@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:cache/cache.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_models/shared_models.dart';
 
-import 'models/user_response.dart';
+// import 'models/user_response.dart';
 
 /// {@template authentication_repository}
 /// Repository which manages user authentication.
@@ -62,21 +63,18 @@ class AuthenticationRepository {
   /// Returns the current cached user.
   /// Defaults to [User.empty] if there is no cached user.
   User get currentUser {
-    _cache.clear();
+    // _cache.clear();
 
-    final cacheUser = _cache.read(key: userCacheKey);
+    final cacheUser = _cache.readMap(key: userCacheKey);
     if (cacheUser == null) {
       return User.empty;
     }
-    // final Map<String, dynamic> userMap = (cacheUser as Map<String, dynamic>)
-    //     .map<String, dynamic>((key, value) => MapEntry(key, value));
 
-    // final user = User.fromJson(userMap);
-// Decodifica el JSON almacenado en cacheUser
-    // final Map<String, dynamic> userMap = json.decode(cacheUser);
-    final Map<String, dynamic> userMap = Map<String, dynamic>.from(cacheUser);
+    // final Map<String, dynamic> userMap = Map<String, dynamic>.from(cacheUser);
+    // final Map<String, dynamic> userMap =
+    //     Map<String, dynamic>.from(cacheUser as Map<dynamic, dynamic>);
 
-    final user = User.fromJson(userMap);
+    final user = User.fromJson(cacheUser);
     return user;
   }
 

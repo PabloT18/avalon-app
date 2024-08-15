@@ -1,7 +1,6 @@
 import 'package:avalon_app/core/error/erros.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart' show ThemeMode;
 
 import '../../domain/repository/settings_repository.dart';
 import '../sources/local/settings_local_source.dart';

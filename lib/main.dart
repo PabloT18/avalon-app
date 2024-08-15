@@ -1,3 +1,4 @@
+import 'package:avalon_app/app/data/sources/local/enviroment.dart';
 import 'package:avalon_app/firebase_options.dart';
 import 'package:cache/cache.dart';
 import 'package:cache/constant_keys_cahce.dart';
@@ -14,8 +15,9 @@ import 'app/dependencies/app_dependencies.dart';
 import 'core/app_bloc_observer.dart';
 
 Future<void> main() async {
+  await Environment.initEnvironment();
+
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = const AppBlocObserver();
 
   await CacheInitializer.initialize();
 
@@ -29,6 +31,7 @@ Future<void> main() async {
 
   ///
   await Hive.openBox(ConstHiveBox.kHiveBoxName);
+  Bloc.observer = const AppBlocObserver();
 
   // / Inizializar [Firebase]
   await Firebase.initializeApp(

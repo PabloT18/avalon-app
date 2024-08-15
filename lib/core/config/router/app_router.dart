@@ -78,6 +78,15 @@ class AppRouter {
                       const EditPerfilPage(),
                     ),
                   ),
+                  GoRoute(
+                    path: PAGES.editPerfilDir.pageName,
+                    name: PAGES.editPerfilDir.pageName,
+                    pageBuilder: (context, state) => pageBuilderByPlatform(
+                      context,
+                      state,
+                      const EditAddressPage(),
+                    ),
+                  ),
                 ]),
             GoRoute(
               path: PAGES.preferencias.pageName,

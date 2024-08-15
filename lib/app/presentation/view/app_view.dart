@@ -4,6 +4,7 @@ import 'package:avalon_app/app/presentation/bloc/push_notifications/notification
 import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/core/config/theme/app_theme.dart';
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:avalon_app/features/user_features.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,13 +27,12 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            // Set up the AppSettingsCubit, which will glue user settings to multiple
-            // Flutter Widgets.
             create: (_) => RepositoryProvider.of<AppSettingsCubit>(context),
           ),
           BlocProvider(
             create: (_) => AppBloc(
               authenticationRepository: _authenticationRepository,
+              getMembresias: RepositoryProvider.of<GetMembresiasUC>(context),
             ),
           ),
           BlocProvider(
@@ -59,7 +59,11 @@ class _BuildApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TranslationProvider(child: const AppView());
+    return BlocBuilder<AppSettingsCubit, AppSettingsState>(
+      builder: (context, state) {
+        return TranslationProvider(child: const AppView());
+      },
+    );
   }
 }
 
@@ -93,14 +97,11 @@ class AppView extends StatelessWidget {
               case AppUnauthenticated():
                 AppRouter.router.go(PAGES.login.pagePath);
                 break;
-              default:
             }
           },
           child: child,
         );
       },
-      //      // darkTheme: AppTheme.dark,
-      // themeMode: themeMode,
     );
   }
 }

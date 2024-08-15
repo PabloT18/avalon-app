@@ -1,12 +1,13 @@
-import 'package:avalon_app/app/data/repository/notifications_repository_impl.dart';
-import 'package:avalon_app/app/data/sources/remoteFB/puhs_notifications_fb.dart';
-import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
-import 'package:avalon_app/features/user_features.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../data/repository/settings_repository_impl.dart';
-import '../domain/repository/settings_repository.dart';
+import 'package:avalon_app/features/user_features.dart';
+
+import 'package:avalon_app/app/data/sources/remoteFB/puhs_notifications_fb.dart';
+import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
+
+import '../data/repository/app_repositories_impl.dart';
+import '../domain/repository/app_repositories.dart';
+import '../domain/usecases/general_uc/app_general_uses_cases.dart';
 import '../domain/usecases/get_language_use_case.dart';
 import '../domain/usecases/push_notifications/push_notifications_use_cases.dart';
 import '../domain/usecases/togle_language_case.dart';
@@ -20,6 +21,12 @@ class AppDependencies {
 
         /// [Home Dependencies]
         ..._notficationsependencies,
+
+        /// [General Data Dependencies]
+        ..._generalDataDependencies,
+
+        /// [Membresias Dependcies]
+        ..._membresiasDependencies,
       ];
 
   /// Set up the AppSettingsCubit, which will glue user settings to multiple
@@ -76,40 +83,42 @@ class AppDependencies {
     RepositoryProvider<PreguntasRepository>(
       create: (context) => PreguntasRepositoryImpl(),
     ),
-    RepositoryProvider<PreguntasBloc>(
-      create: (context) => PreguntasBloc(
-        repository: context.read<PreguntasRepository>(),
-      ),
-    ),
 
     /// Formas de pago
     RepositoryProvider<FormasPagoRepository>(
       create: (context) => FormasPagoRepositoryImpl(),
-    ),
-    RepositoryProvider<FormasPagoBloc>(
-      create: (context) => FormasPagoBloc(
-        repository: context.read<FormasPagoRepository>(),
-      ),
     ),
 
     /// Medicos
     RepositoryProvider<MedicosRepository>(
       create: (context) => MedicosRepositoryImpl(),
     ),
-    RepositoryProvider<MedicosBloc>(
-      create: (context) => MedicosBloc(
-        repository: context.read<MedicosRepository>(),
-      ),
-    ),
 
     /// Centros Medicos
     RepositoryProvider<CentrosmedicosRepository>(
       create: (context) => CentrosmedicosRepositoryImpl(),
     ),
-    RepositoryProvider<CentrosMedicosBloc>(
-      create: (context) => CentrosMedicosBloc(
-        repository: context.read<CentrosmedicosRepository>(),
+  ];
+
+  static final List<RepositoryProvider<dynamic>> _generalDataDependencies = [
+    RepositoryProvider<GeneralDataRepository>(
+      create: (context) => const GeneralDataRepositoryImpl(),
+    ),
+    RepositoryProvider<GetPaisesUseCase>(
+      create: (contextPUC) => GetPaisesUseCase(
+          generalDataRepository: contextPUC.read<GeneralDataRepository>()),
+    ),
+    RepositoryProvider<GetEstadosUseCase>(
+      create: (contextPUC) =>
+          GetEstadosUseCase(contextPUC.read<GeneralDataRepository>()),
+    ),
+  ];
+  static final List<RepositoryProvider<dynamic>> _membresiasDependencies = [
+    RepositoryProvider<GetMembresiasUC>(
+      create: (context) => const GetMembresiasUC(
+        MembresiasRepositoryImpl(),
       ),
     ),
   ];
+  // static final List<RepositoryProvider<dynamic>> _membresiasDependencies = [];
 }

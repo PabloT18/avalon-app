@@ -1,11 +1,13 @@
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/centrosmedicos_domain.dart';
 import '../bloc/centros_medicos_bloc.dart';
 
 class CentrosMedicosPage extends StatelessWidget {
@@ -14,7 +16,9 @@ class CentrosMedicosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => context.read<CentrosMedicosBloc>(),
+      create: (context) => CentrosMedicosBloc(
+        repository: context.read<CentrosmedicosRepository>(),
+      )..add(const GetCentrosMedicos()),
       child: const CentrosMedicosPageView(),
     );
   }
@@ -31,16 +35,13 @@ class CentrosMedicosPageView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Centrosm Medicos'),
+        title: Text(apptexts.centrosMedicos.title(n: 2)),
         elevation: 6,
       ),
-      drawer: DrawerCustom(
-        indexInitial: getDrawerOptionIndex(PAGES.centrosMedicos.pageName),
-      ),
+      drawer: DrawerCustom(indexInitialName: PAGES.centrosMedicos.pageName),
       body: BlocBuilder<CentrosMedicosBloc, CentrosMedicosState>(
         builder: (context, state) {
           return SmartRefrehsCustom(
-              key: const Key('__centrosMedicos_list_key__'),
               onRefresh: () async {
                 centrosMedicosBloc.add(const GetCentrosMedicos());
               },

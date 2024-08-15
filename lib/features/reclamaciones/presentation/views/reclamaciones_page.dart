@@ -13,9 +13,7 @@ class ReclamacionesPage extends StatelessWidget {
         title: const Text('Reclamaciones Page'),
         elevation: 6,
       ),
-      drawer: DrawerCustom(
-        indexInitial: getDrawerOptionIndex(PAGES.formasPago.pageName),
-      ),
+      drawer: DrawerCustom(indexInitialName: PAGES.reclamaciones.pageName),
       body: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

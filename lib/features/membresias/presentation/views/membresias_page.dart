@@ -22,9 +22,7 @@ class MembresiasPage extends StatelessWidget {
         title: const Text('Membresias'),
         elevation: 6,
       ),
-      drawer: DrawerCustom(
-        indexInitial: getDrawerOptionIndex(PAGES.formasPago.pageName),
-      ),
+      drawer: DrawerCustom(indexInitialName: PAGES.membresias.pageName),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(AppLayoutConst.paddingL),
         child: Column(

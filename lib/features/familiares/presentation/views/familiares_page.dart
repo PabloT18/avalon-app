@@ -359,9 +359,7 @@ class _FamiliaresPageState extends State<FamiliaresPage> {
         title: const Text('Familiares'),
         elevation: 6,
       ),
-      drawer: DrawerCustom(
-        indexInitial: getDrawerOptionIndex(PAGES.formasPago.pageName),
-      ),
+      drawer: DrawerCustom(indexInitialName: PAGES.familiares.pageName),
       body: FutureBuilder<List<dynamic>>(
         future: _futurePolizas,
         builder: (context, snapshot) {

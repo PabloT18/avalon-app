@@ -2,7 +2,7 @@ import 'package:avalon_app/core/config/responsive/responsive_class.dart';
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:avalon_app/features/preguntas/preguntas.dart';
-import 'package:avalon_app/features/preguntas/presentation/bloc/preguntas_bloc.dart';
+
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +18,9 @@ class PreguntasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          context.read<PreguntasBloc>()..add(const GetPreguntasEvent(0)),
+      create: (context) => PreguntasBloc(
+        repository: context.read<PreguntasRepository>(),
+      )..add(const GetPreguntasEvent(0)),
       child: const PreguntasPageView(),
     );
   }
@@ -38,9 +39,7 @@ class PreguntasPageView extends StatelessWidget {
         title: const Text('Preguntas'),
         elevation: 6,
       ),
-      drawer: DrawerCustom(
-        indexInitial: getDrawerOptionIndex(PAGES.preguntas.pageName),
-      ),
+      drawer: DrawerCustom(indexInitialName: PAGES.preguntas.pageName),
       body: BlocBuilder<PreguntasBloc, PreguntasState>(
         builder: (context, state) {
           return SmartRefrehsCustom(

@@ -1,5 +1,6 @@
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 
+import '../../domain/medicos_domain.dart';
 import '../bloc/medicos_bloc.dart';
 
 class MedicosPage extends StatelessWidget {
@@ -15,7 +17,9 @@ class MedicosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => context.read<MedicosBloc>()..add(const GetMedicos()),
+      create: (context) => MedicosBloc(
+        repository: context.read<MedicosRepository>(),
+      )..add(const GetMedicos()),
       child: const MedicosPageView(),
     );
   }
@@ -32,12 +36,10 @@ class MedicosPageView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Medicos'),
+        title: Text(apptexts.medicosPage.title(n: 2)),
         elevation: 6,
       ),
-      drawer: DrawerCustom(
-        indexInitial: getDrawerOptionIndex(PAGES.medicos.pageName),
-      ),
+      drawer: DrawerCustom(indexInitialName: PAGES.medicos.pageName),
       body: BlocBuilder<MedicosBloc, MedicosState>(
         builder: (context, state) {
           return SmartRefrehsCustom(

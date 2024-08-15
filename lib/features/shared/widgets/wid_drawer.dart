@@ -3,89 +3,90 @@ import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/core/config/router/app_routes_assets.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:authentication_repository/authentication_repository.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-final List<DrawerOption> drawerOptions = [
-  DrawerOption(
-      label: 'Home', icon: Icons.house, routeName: PAGES.home.pagePath),
-  DrawerOption(
-      label: 'Reclamaciones',
-      icon: Icons.border_all,
-      routeName: PAGES.reclamaciones.pageName),
-  DrawerOption(
-      label: 'Seguros',
-      icon: Icons.security_rounded,
-      routeName: PAGES.seguros.pageName),
-  DrawerOption(
-      label: 'Familiares',
-      icon: Icons.family_restroom,
-      routeName: PAGES.familiares.pageName),
-  DrawerOption(
-      label: 'Membresias',
-      icon: Icons.badge_outlined,
-      routeName: PAGES.membresias.pageName),
-  DrawerOption(
-      label: 'Preferencias de usuario',
-      icon: Icons.person,
-      isUserOption: false,
-      routeName: PAGES.preferencias.pageName),
-  DrawerOption(
-      label: 'Formas de Pago',
-      icon: Icons.question_answer,
-      isUserOption: false,
-      routeName: PAGES.formasPago.pageName),
-  DrawerOption(
-      label: 'Médicos',
-      icon: Icons.medication_sharp,
-      isUserOption: false,
-      routeName: PAGES.medicos.pageName),
-  DrawerOption(
-      label: 'Centros Médicos',
-      icon: Icons.local_hospital_rounded,
-      isUserOption: false,
-      routeName: PAGES.centrosMedicos.pageName),
-  DrawerOption(
-      label: 'Preguntas y respuestas',
-      icon: Icons.question_answer,
-      isUserOption: false,
-      routeName: PAGES.preguntas.pageName),
-  DrawerOption(
-      label: 'Cerrar sesión',
-      icon: Icons.logout,
-      isUserOption: false,
-      routeName: PAGES.login.pagePath),
-];
-
-int getDrawerOptionIndex(String routeName) {
-  for (int i = 0; i < drawerOptions.length; i++) {
-    if (drawerOptions[i].routeName == routeName) {
-      return i;
-    }
-  }
-  return -1; // Retorna -1 si no se encuentra
-}
-
 class DrawerCustom extends StatelessWidget {
   const DrawerCustom({
     super.key,
-    required this.indexInitial,
+    required this.indexInitialName,
+    this.isInHome = false,
   });
 
-  final int indexInitial;
+  final String indexInitialName;
+  final bool isInHome;
 
   @override
   Widget build(BuildContext context) {
     final responsive = ResponsiveCustom.of(context);
-    int index = indexInitial;
+    // int index = indexInitial;
 
-    final List<DrawerOption> generalOptions =
-        drawerOptions.where((option) => option.isUserOption).toList();
-    final List<DrawerOption> userOptions =
-        drawerOptions.where((option) => !option.isUserOption).toList();
+    final List<DrawerOption> generalOptions = [
+      DrawerOption(
+          label: apptexts.medicosPage.title(n: 2),
+          icon: Icons.medication_sharp,
+          isUserOption: false,
+          routeName: PAGES.medicos.pageName),
+      DrawerOption(
+          label: apptexts.centrosMedicos.title(n: 2),
+          icon: Icons.local_hospital_rounded,
+          isUserOption: false,
+          routeName: PAGES.centrosMedicos.pageName),
+      DrawerOption(
+          label: apptexts.metodosPagoPage.title(n: 2),
+          icon: Icons.question_answer,
+          isUserOption: false,
+          routeName: PAGES.formasPago.pageName),
+      DrawerOption(
+          label: apptexts.preferenciasPage.preferenciasUser,
+          icon: Icons.person,
+          isUserOption: false,
+          routeName: PAGES.preferencias.pageName),
+      DrawerOption(
+          label: apptexts.faqsPAge.title(n: 2),
+          icon: Icons.question_answer,
+          isUserOption: false,
+          routeName: PAGES.preguntas.pageName),
+      DrawerOption(
+          label: apptexts.appOptions.logout,
+          icon: Icons.logout,
+          isUserOption: false,
+          routeName: PAGES.login.pagePath),
+    ].where((option) => !option.isUserOption).toList();
 
+    final List<DrawerOption> userOptions = [
+      DrawerOption(
+          label: 'Home', icon: Icons.house, routeName: PAGES.home.pagePath),
+      DrawerOption(
+          label: apptexts.reclamacionesPage.title(n: 2),
+          icon: Icons.border_all,
+          routeName: PAGES.reclamaciones.pageName),
+      DrawerOption(
+          label: apptexts.segurosPage.title(n: 2),
+          icon: Icons.security_rounded,
+          routeName: PAGES.seguros.pageName),
+      DrawerOption(
+          label: apptexts.familiaresPage.title(n: 2),
+          icon: Icons.family_restroom,
+          routeName: PAGES.familiares.pageName),
+      DrawerOption(
+          label: apptexts.membresiasPage.membresia(n: 2),
+          icon: Icons.badge_outlined,
+          routeName: PAGES.membresias.pageName),
+    ].where((option) => option.isUserOption).toList();
+
+    // final List<DrawerOption> generalOptions =
+    //     drawerOptions.where((option) => option.isUserOption).toList();
+    // final List<DrawerOption> userOptions =
+    //     drawerOptions.where((option) => !option.isUserOption).toList();
+    final List<DrawerOption> drawerOptions = [
+      ...userOptions,
+      ...generalOptions
+    ];
+    int index = getDrawerOptionIndex(drawerOptions, indexInitialName);
     return NavigationDrawer(
       indicatorColor: AppColors.secondaryBlue.withOpacity(0.2),
       backgroundColor: AppColors.white,
@@ -112,11 +113,11 @@ class DrawerCustom extends StatelessWidget {
           child: Image.asset(
             AppAssets.logotipo4,
             // color: Colors.white,
-            // height: responsive.dp(7),
+            height: responsive.dp(8),
           ),
         ),
-        SizedBox(height: responsive.hp(4)),
-        ...generalOptions.map((option) {
+        SizedBox(height: responsive.hp(2)),
+        ...userOptions.map((option) {
           return NavigationDrawerDestination(
             label: Text(option.label),
             icon: Icon(
@@ -126,7 +127,7 @@ class DrawerCustom extends StatelessWidget {
           );
         }),
         const Divider(),
-        ...userOptions.map((option) {
+        ...generalOptions.map((option) {
           return NavigationDrawerDestination(
             label: Text(option.label),
             icon: Icon(
@@ -137,6 +138,15 @@ class DrawerCustom extends StatelessWidget {
         }),
       ],
     );
+  }
+
+  int getDrawerOptionIndex(List drawerOptions, String routeName) {
+    for (int i = 0; i < drawerOptions.length; i++) {
+      if (drawerOptions[i].routeName == routeName) {
+        return i;
+      }
+    }
+    return -1; // Retorna -1 si no se encuentra
   }
 }
 

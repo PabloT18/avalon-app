@@ -1,5 +1,5 @@
 import 'package:avalon_app/app/app.dart';
-import 'package:avalon_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
+
 import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:avalon_app/features/perfil/perfil.dart';
@@ -66,12 +66,12 @@ class _HomePageViewState extends State<HomePageView> {
     final user = context.read<AppBloc>().state.user;
     final userName = user.nombreUsuario?.toLowerCase() ?? '';
     final rol = user.rol?.nombre?.toLowerCase() ?? '';
-    context.read<NotificationsBloc>().add(SubscribeTopics([
-          'todos',
-          'Todos',
-          userName,
-          rol,
-        ]));
+    // context.read<NotificationsBloc>().add(SubscribeTopics([
+    //       'todos',
+    //       'Todos',
+    //       userName,
+    //       rol,
+    //     ]));
 
     return Scaffold(
       appBar: AppBar(
@@ -91,8 +91,9 @@ class _HomePageViewState extends State<HomePageView> {
           ),
         ],
       ),
-      drawer: const DrawerCustom(
-        indexInitial: 0,
+      drawer: DrawerCustom(
+        indexInitialName: PAGES.home.pageName,
+        isInHome: true,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -116,9 +117,7 @@ class _HomePageViewState extends State<HomePageView> {
         controller: _pageController,
         onPageChanged: onPageChanged,
         children: const <Widget>[
-          // NoticiasPanel(),
           ComunicadosPage(),
-
           CitasPanel(),
           PerfilPage(),
         ],

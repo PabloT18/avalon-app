@@ -1,3 +1,4 @@
+import 'package:avalon_app/app/data/sources/local/enviroment.dart';
 import 'package:avalon_app/features/avalon_info/centrosmedicos/domain/models/centro_medico_entity.dart';
 import 'package:dio/dio.dart';
 
@@ -5,7 +6,7 @@ import '../../domain/repository/centrosmedicos_repository.dart';
 import '../models/centros_medicos_response.dart';
 
 class CentrosmedicosRepositoryImpl implements CentrosmedicosRepository {
-  final String baseUrl = 'http://149.56.110.32:8086';
+  final String baseUrl = Environment.avalonApi;
   late Dio dio;
 
   CentrosmedicosRepositoryImpl() {

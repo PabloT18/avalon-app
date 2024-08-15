@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../bloc/bloc/edit_perfil_bloc.dart';
+import '../bloc/editPerfil/edit_perfil_bloc.dart';
 
 class EditPerfilPage extends StatelessWidget {
   const EditPerfilPage({super.key});
@@ -44,7 +44,7 @@ class EditPerfilPageBody extends StatelessWidget {
             const Text(
               'Editar Datos Personales',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -94,7 +94,7 @@ class EditPerfilPageBody extends StatelessWidget {
           Text(
             label,
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.bold,
             ),
           ),
