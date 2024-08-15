@@ -55,7 +55,7 @@ class AppSettingsCubit extends Cubit<AppSettingsState> {
   void toggleLanguage(AppLocale appLocale) async {
     if (appLocale != state.appLocale) {
       // Persis Language change
-      // await _toggleLanguageUseCase.call(param: appLocale);
+      await _toggleLanguageUseCase.call(param: appLocale);
       // Emit state copied
       emit(state.copyWith(appLocale: appLocale));
 

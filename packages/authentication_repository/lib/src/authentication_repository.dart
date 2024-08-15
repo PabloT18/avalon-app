@@ -70,10 +70,6 @@ class AuthenticationRepository {
       return User.empty;
     }
 
-    // final Map<String, dynamic> userMap = Map<String, dynamic>.from(cacheUser);
-    // final Map<String, dynamic> userMap =
-    //     Map<String, dynamic>.from(cacheUser as Map<dynamic, dynamic>);
-
     final user = User.fromJson(cacheUser);
     return user;
   }
