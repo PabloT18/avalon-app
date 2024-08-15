@@ -49,6 +49,37 @@ class APPRemoteConfig {
     }
   }
 
+  static Future<Response> httpPut({
+    required String url,
+    required Map<String, dynamic> data,
+    required String token,
+  }) async {
+    Options? options =
+        Options(headers: <String, String>{'authorization': token});
+
+    try {
+      final response = await dioApp.put(url, data: data, options: options);
+      return response;
+    } on DioException catch (e) {
+      if (e.error is SocketException) {
+        throw InternetAccessException();
+      }
+
+      if (e.response == null) {
+        throw Exception('Failed to update data');
+      }
+
+      if (e.response!.statusCode == 404 || e.response!.statusCode == 401) {
+        return e.response!;
+      } else {
+        throw Exception('Failed to update data');
+      }
+    } catch (e) {
+      log('APP Services PUT error: $e');
+      throw Exception('Failed to update data');
+    }
+  }
+
   // static Future<Response> httpPost({
   //   required String url,
   //   required Map<String, dynamic> body,

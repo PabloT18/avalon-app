@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:equatable/equatable.dart';
 
 import 'package:shared_models/shared_models.dart';
@@ -11,6 +9,8 @@ class Direccion extends Equatable {
   final String? codigoPostal;
   final Pais? pais;
   final Estado? estado;
+  final int? paisId;
+  final int? estadoId;
 
   const Direccion({
     this.direccionUno,
@@ -19,6 +19,8 @@ class Direccion extends Equatable {
     this.codigoPostal,
     this.pais,
     this.estado,
+    this.paisId,
+    this.estadoId,
   });
 
   factory Direccion.fromJson(Map json) => Direccion(
@@ -30,6 +32,8 @@ class Direccion extends Equatable {
         estado: json["state"] != null
             ? Estado.fromJson(json["state"] as Map)
             : null,
+        paisId: json["paisId"],
+        estadoId: json["estadoId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,6 +43,8 @@ class Direccion extends Equatable {
         "codigoPostal": codigoPostal,
         "pais": pais?.toJson(),
         "state": estado?.toJson(),
+        "paisId": paisId,
+        "estadoId": estadoId,
       };
 
   String get direccionCompleta {
@@ -77,5 +83,7 @@ class Direccion extends Equatable {
         codigoPostal,
         pais,
         estado,
+        paisId,
+        estadoId,
       ];
 }

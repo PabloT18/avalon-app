@@ -3,22 +3,23 @@ import 'dart:async';
 import 'package:flutter/widgets.dart'
     show TextEditingController, GlobalKey, FormState;
 
-import 'package:avalon_app/app/app.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_models/shared_models.dart';
 
 import '../../../../../app/domain/usecases/general_uc/app_general_uses_cases.dart';
+import '../../../domain/use_cases/update_user_data_uc.dart';
 
 part 'edit_address_event.dart';
 part 'edit_address_state.dart';
 
 class EditAddressBloc extends Bloc<EditAddressEvent, EditAddressState> {
-  EditAddressBloc(
-      {required this.user,
-      required this.getPaisesUseCase,
-      required this.getEstadosUseCase})
-      : super(EditAddressState(
+  EditAddressBloc({
+    required this.user,
+    required this.getPaisesUseCase,
+    required this.getEstadosUseCase,
+    required this.updateUserAddressUseCase,
+  }) : super(EditAddressState(
           paises: [
             if (user.direccion?.pais != null)
               Pais(
@@ -29,7 +30,7 @@ class EditAddressBloc extends Bloc<EditAddressEvent, EditAddressState> {
           selectedEstadoId: user.direccion?.estado?.id,
           estados: const [],
         )) {
-    on<EditAddressEvent>(_onEditAddressEvent);
+    on<ValidateAndSubmitEvent>(_onValidateAndSubmit);
     on<LoadPaisesEvent>(_onLoadPaises);
     on<LoadEstadosEvent>(_onLoadEstados); // Manejar la carga de estados
     on<UpdateSelectedCountryEvent>(_onUpdateSelectedCountry);
@@ -50,6 +51,7 @@ class EditAddressBloc extends Bloc<EditAddressEvent, EditAddressState> {
   final User user;
   final GetPaisesUseCase getPaisesUseCase;
   final GetEstadosUseCase getEstadosUseCase;
+  final UpdateUserAddressUseCase updateUserAddressUseCase;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;
@@ -62,18 +64,45 @@ class EditAddressBloc extends Bloc<EditAddressEvent, EditAddressState> {
   late TextEditingController ciudad;
   late TextEditingController zipCode;
 
-  FutureOr<void> _onEditAddressEvent(
-      EditAddressEvent event, Emitter<EditAddressState> emit) async {}
+  FutureOr<void> _onValidateAndSubmit(
+      EditAddressEvent event, Emitter<EditAddressState> emit) async {
+    if (formKey.currentState!.validate()) {
+      try {
+        final updatedUser = user.copyWith(
+          rolId: user.rol?.id,
+          direccion: Direccion(
+            direccionUno: _addressMain.text,
+            direccionDos: addressSecondary.text,
+            ciudad: ciudad.text,
+            codigoPostal: zipCode.text,
+            paisId: state.selectedCountryId,
+            estadoId: state.selectedEstadoId,
+          ),
+        );
 
-  List<Pais> _paises = [];
-  List<Pais> get paises => _paises;
+        final response =
+            await updateUserAddressUseCase.call(updatedUser, user.token!);
+        print(response);
+
+        emit(state.copyWith(
+          updateSuccess: response,
+          errorMessage: null,
+        ));
+      } catch (e) {
+        emit(state.copyWith(
+          updateSuccess: false,
+          errorMessage: e.toString(),
+        ));
+      }
+    }
+  }
 
   FutureOr<void> _onLoadPaises(
       LoadPaisesEvent event, Emitter<EditAddressState> emit) async {
     try {
-      _paises = await getPaisesUseCase.call(user.token!);
+      List<Pais> paises = await getPaisesUseCase.call(user.token!);
 
-      emit(state.copyWith(paises: _paises));
+      emit(state.copyWith(paises: paises));
     } catch (e) {
       print('Error al cargar países: $e');
     }
@@ -92,11 +121,8 @@ class EditAddressBloc extends Bloc<EditAddressEvent, EditAddressState> {
           await getEstadosUseCase(paisId: event.paisId, token: user.token!);
       int? selectedEstadoId = state.selectedEstadoId;
 
-      // Verificar si el selectedEstadoId está en la nueva lista de estados
-      if (selectedEstadoId != null &&
-          !estados.any((estado) => estado.id == selectedEstadoId)) {
-        selectedEstadoId = estados.first
-            .id; // Restablecer si el estado seleccionado no está en la lista
+      if (!estados.any((estado) => estado.id == selectedEstadoId)) {
+        selectedEstadoId = estados.first.id;
       }
 
       emit(state.copyWith(

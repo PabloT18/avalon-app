@@ -20,6 +20,7 @@ class User extends Equatable {
   final Direccion? direccion;
   final String? estado;
   final Rol? rol;
+  final int? rolId; // para actualizar solo el ID del rol
   final String? token;
   final DateTime? fechaNacimiento;
   final String? lugarNacimiento;
@@ -43,11 +44,64 @@ class User extends Equatable {
     this.direccion,
     this.estado,
     this.rol,
+    this.rolId,
     this.token,
     this.fechaNacimiento,
     this.lugarNacimiento,
     this.lugarResidencia,
   });
+
+  User copyWith({
+    String? createdBy,
+    DateTime? createdDate,
+    String? lastModifiedBy,
+    DateTime? lastModifiedDate,
+    int? id,
+    String? nombres,
+    String? nombresDos,
+    String? apellidos,
+    String? apellidosDos,
+    String? correoElectronico,
+    String? numeroTelefono,
+    String? nombreUsuario,
+    String? contrasenia,
+    String? urlImagen,
+    Direccion? direccion,
+    String? estado,
+    Rol? rol,
+    int? rolId, // para actualizar solo el ID del rol
+    String? token,
+    DateTime? fechaNacimiento,
+    String? lugarNacimiento,
+    String? lugarResidencia,
+  }) {
+    return User(
+      createdBy: createdBy ?? this.createdBy,
+      createdDate: createdDate ?? this.createdDate,
+      lastModifiedBy: lastModifiedBy ?? this.lastModifiedBy,
+      lastModifiedDate: lastModifiedDate ?? this.lastModifiedDate,
+      id: id ?? this.id,
+      nombres: nombres ?? this.nombres,
+      nombresDos: nombresDos ?? this.nombresDos,
+      apellidos: apellidos ?? this.apellidos,
+      apellidosDos: apellidosDos ?? this.apellidosDos,
+      correoElectronico: correoElectronico ?? this.correoElectronico,
+      numeroTelefono: numeroTelefono ?? this.numeroTelefono,
+      nombreUsuario: nombreUsuario ?? this.nombreUsuario,
+      contrasenia: contrasenia ?? this.contrasenia,
+      urlImagen: urlImagen ?? this.urlImagen,
+      direccion: direccion ?? this.direccion,
+      estado: estado ?? this.estado,
+      rol: rol ?? this.rol,
+      rolId: rolId ?? this.rolId,
+      token: token ?? this.token,
+      fechaNacimiento: fechaNacimiento ?? this.fechaNacimiento,
+      lugarNacimiento: lugarNacimiento ?? this.lugarNacimiento,
+      lugarResidencia: lugarResidencia ?? this.lugarResidencia,
+// Nuevo campo
+    );
+  }
+
   // Factory constructor que toma UsuarioResponse y un token
   factory User.fromUsuarioResponse(UserResponse response, String token) {
     return User(
@@ -71,6 +125,7 @@ class User extends Equatable {
       estado: response.estado,
       token: token,
       rol: response.rol != null ? Rol.fromJson(response.rol!.toJson()) : null,
+      rolId: response.rol?.id,
       fechaNacimiento: response.fechaNacimiento,
       lugarNacimiento: response.lugarNacimiento,
       lugarResidencia: response.lugarResidencia,
@@ -97,8 +152,9 @@ class User extends Equatable {
       'direccion': direccion?.toJson(),
       'estado': estado,
       'rol': rol?.toJson(),
+      'rolId': rolId,
       'token': token,
-      'fechaNacimiento': fechaNacimiento,
+      'fechaNacimiento': fechaNacimiento?.toIso8601String(),
       'lugarNacimiento': lugarNacimiento,
       'lugarResidencia': lugarResidencia,
     };
@@ -131,7 +187,9 @@ class User extends Equatable {
       estado: json['estado'] as String?,
       rol: json['rol'] != null ? Rol.fromJson(json['rol']) : null,
       token: json['token'] as String?,
-      fechaNacimiento: json['fechaNacimiento'],
+      fechaNacimiento: json['fechaNacimiento'] != null
+          ? DateTime.parse(json['fechaNacimiento'] as String)
+          : null,
       lugarNacimiento: json['lugarNacimiento'],
       lugarResidencia: json['lugarResidencia'],
     );
@@ -196,6 +254,7 @@ class User extends Equatable {
         direccion,
         estado,
         rol,
+        rolId,
         token,
         fechaNacimiento,
         lugarNacimiento,

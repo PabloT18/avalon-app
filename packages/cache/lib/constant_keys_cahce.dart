@@ -5,6 +5,8 @@ class ConstHiveBox {
   static const kSettingsThemeData = 'kSettingsThemeData';
   static const kSettingsLanguage = 'kSettingsLanguage';
 
+  static const kuserCacheKey = '__user_cache_key__';
+
   // static const kSettingsDrawerOptions = 'kSettingsDrawerOptions';
 
   static const kHomeMainPanelIndex = 'kHomeMainPanelIndex';

@@ -44,14 +44,43 @@ class AuthenticationRepository {
     try {
       // Lógica para validar la cuenta. Puede involucrar llamadas a APIs, etc.
       // Simulando una validación:
-      bool isValid = currentUser != User.empty;
+      // bool isValid = currentUser != User.empty;
+      // Obtener el usuario actual del caché
+      final currentUserValidate = currentUser;
 
-      if (isValid) {
-        // Suponiendo que se pueda obtener el usuario actual después de la validación
+      // Verificar si el token del usuario es válido (esto es opcional y depende de tu lógica)
+      // Aquí podrías hacer una llamada a un endpoint que valide el token TODO; validae token
 
-        return currentUser; // Retornar usuario actual si sigue autenticado
-      } else {
-        return User.empty;
+      // Verificar si hay un usuario autenticado en caché
+      if (currentUser.isEmpty) {
+        return User.empty; // No hay usuario autenticado
+      }
+
+      try {
+        final urlUserDetails = '/usuarios/${currentUserValidate.id}';
+        final userResponse = await dio.get(
+          urlUserDetails,
+          options: Options(
+            headers: {'Authorization': currentUserValidate.token},
+          ),
+        );
+
+        if (userResponse.statusCode != 200) {
+          throw const LogInWithEmailAndPasswordFailure(
+              message: "Error al obtener datos del usuario");
+        }
+
+        final userData = userResponse.data;
+
+        final UserResponse userResponseData = UserResponse.fromJson(userData);
+        final User updatedUser = User.fromUsuarioResponse(
+            userResponseData, currentUserValidate.token!);
+        // Guardar el usuario actualizado en caché
+        await _cache.write(key: userCacheKey, value: updatedUser.toJson());
+        return updatedUser; // Retornar el usuario actualizado
+      } catch (e) {
+        // Si hay un error al obtener los datos actualizados, retornar el usuario en caché
+        return currentUser;
       }
     } catch (e) {
       // Manejar excepciones si algo falla durante la validación
@@ -173,14 +202,5 @@ class AuthenticationRepository {
   Future<void> logOut() async {
     _cache.clear();
     _controller.add(User.empty);
-    //   try {
-    //     await Future.wait([
-    //       _firebaseAuth.signOut(),
-    //       _googleSignIn.signOut(),
-    //     ]);
-    //   } catch (_) {
-    //     throw LogOutFailure();
-    //   }
-    // }
   }
 }

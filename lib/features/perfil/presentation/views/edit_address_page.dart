@@ -1,6 +1,9 @@
+import 'package:avalon_app/core/config/responsive/responsive_class.dart';
+import 'package:avalon_app/features/shared/functions/fun_views.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:avalon_app/features/perfil/perfil.dart';
 import 'package:avalon_app/features/shared/widgets/buttons/buttons_custom.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 
@@ -23,6 +26,8 @@ class EditAddressPage extends StatelessWidget {
         user: context.read<AppBloc>().state.user,
         getPaisesUseCase: RepositoryProvider.of<GetPaisesUseCase>(context),
         getEstadosUseCase: RepositoryProvider.of<GetEstadosUseCase>(context),
+        updateUserAddressUseCase:
+            RepositoryProvider.of<UpdateUserAddressUseCase>(context),
       )..add(LoadPaisesEvent()),
       child: Scaffold(
           appBar: AppBar(
@@ -40,46 +45,71 @@ class EditAddressPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final editAddressBloc = context.read<EditAddressBloc>();
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
-      child: Form(
-        key: editAddressBloc.formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              apptexts.perfilPage.editAddress,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+    final responsive = ResponsiveCustom.of(context);
+    return BlocListener<EditAddressBloc, EditAddressState>(
+      listener: (context, state) {
+        if (state.updateSuccess != null) {
+          if (state.updateSuccess!) {
+            // context.read<AppBloc>().add();
+            // Navigator.of(context).pop();
+            UtilsFunctionsViews.showFlushBar(
+              message: apptexts.perfilPage.successUpdateUserAddress,
+              positionOffset: responsive.hp(8),
+            ).show(context);
+          } else {
+            UtilsFunctionsViews.showFlushBar(
+              message: apptexts.perfilPage.errorUpdateUserAddress,
+              positionOffset: responsive.hp(8),
+            ).show(context);
+          }
+        }
+      },
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Form(
+          key: editAddressBloc.formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                apptexts.perfilPage.editAddress,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
-            ),
-            const Divider(
-              color: AppColors.secondaryBlue,
-            ),
-            _buildEditableProfileInfoRow(
-                apptexts.perfilPage.addressMain, editAddressBloc.addressMain),
-            _buildEditableProfileInfoRow(apptexts.perfilPage.addressSecondary,
-                editAddressBloc.addressSecondary),
-            _buildDropdownCountryField(editAddressBloc),
-            _buildDropdownStateField(editAddressBloc),
-            // _buildEditableProfileInfoRow(
-            //     apptexts.perfilPage.state, editAddressBloc.estado),
-            _buildEditableProfileInfoRow(
-                apptexts.perfilPage.city, editAddressBloc.ciudad),
-            _buildEditableProfileInfoRow(
-                apptexts.perfilPage.zipCode, editAddressBloc.zipCode),
-            const SizedBox(height: 20),
-            Center(
-              child: CustomButton(
-                title: apptexts.appOptions.save,
-                onPressed: () {
-                  if (editAddressBloc.formKey.currentState!.validate()) {}
-                },
+
+              Container(
+                margin: const EdgeInsets.symmetric(
+                  vertical: AppLayoutConst.marginM,
+                ),
+                height: 1,
+                color: AppColors.secondaryBlue.withOpacity(0.5),
               ),
-            ),
-            const SizedBox(height: AppLayoutConst.spaceXL),
-          ],
+              _buildEditableProfileInfoRow(
+                  apptexts.perfilPage.addressMain, editAddressBloc.addressMain),
+              _buildEditableProfileInfoRow(apptexts.perfilPage.addressSecondary,
+                  editAddressBloc.addressSecondary),
+              _buildDropdownCountryField(editAddressBloc),
+              _buildDropdownStateField(editAddressBloc),
+              // _buildEditableProfileInfoRow(
+              //     apptexts.perfilPage.state, editAddressBloc.estado),
+              _buildEditableProfileInfoRow(
+                  apptexts.perfilPage.city, editAddressBloc.ciudad),
+              _buildEditableProfileInfoRow(
+                  apptexts.perfilPage.zipCode, editAddressBloc.zipCode),
+              const SizedBox(height: 20),
+              Center(
+                child: CustomButton(
+                  title: apptexts.appOptions.save,
+                  onPressed: () {
+                    // if (editAddressBloc.formKey.currentState!.validate()) {}
+                    editAddressBloc.add(const ValidateAndSubmitEvent());
+                  },
+                ),
+              ),
+              const SizedBox(height: AppLayoutConst.spaceXL),
+            ],
+          ),
         ),
       ),
     );
@@ -151,7 +181,7 @@ class EditAddressPageBody extends StatelessWidget {
                   color: Colors.black,
                 ),
                 value: state.selectedCountryId,
-                items: bloc.paises
+                items: bloc.state.paises
                     .map((Pais pais) => DropdownMenuItem<int>(
                           value: pais.id!,
                           child: Text(pais.nombre ?? '-'),

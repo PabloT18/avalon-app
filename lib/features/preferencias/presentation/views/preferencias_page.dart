@@ -53,7 +53,9 @@ class NotificationsPreferences extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             apptexts.preferenciasPage.notificaciones,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
           ),
         ),
         Container(
@@ -97,7 +99,9 @@ class LenguagePreferences extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             apptexts.preferenciasPage.idioma,
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
           ),
         ),
         Container(

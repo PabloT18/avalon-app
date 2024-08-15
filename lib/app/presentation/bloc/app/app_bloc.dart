@@ -41,11 +41,11 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   void _onUserChanged(_AppUserChanged event, Emitter<AppState> emit) {
     if (event.user.isNotEmpty) {
+      emit(AppAuthenticated(user: event.user));
       add(AppGetMembresias(event.user));
-      // emit(AppAuthenticated(user: event.user));
     } else {
       // emit(const AppValidating(user: User.empty));
-
+      // _authenticationRepository.logOut();
       emit(const AppUnauthenticated(user: User.empty));
     }
   }
@@ -62,12 +62,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   FutureOr<void> _onAppValidate(
       AppValidate event, Emitter<AppState> emit) async {
-    if (validateFirst) {
-      _authenticationRepository.logOut();
-      final validatedUser = await _authenticationRepository.validateAccount();
-      add(_AppUserChanged(validatedUser));
-    }
-    validateFirst = true;
+    // if (validateFirst) {
+    // _authenticationRepository.logOut();
+    final validatedUser = await _authenticationRepository.validateAccount();
+    add(_AppUserChanged(validatedUser));
+    // }
+    // validateFirst = true;
   }
 
   FutureOr<void> _onAppGetMembresias(

@@ -1,4 +1,3 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:shared_models/shared_models.dart';
 
 abstract class UserClientRepository {
@@ -9,13 +8,13 @@ abstract class UserClientRepository {
   });
 
   /// Actualiza los datos del usuario autenticado.
-  Future<void> getAuthenticatedUserData({
+  Future<User> getAuthenticatedUserData({
     required User user,
     required String token,
   });
 
   /// Actualiza los datos de un cliente (otro usuario).
-  Future<void> updateClientData({
+  Future<bool> updateClientData({
     required User user,
     required String token,
   });

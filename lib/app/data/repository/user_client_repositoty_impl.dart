@@ -1,18 +1,61 @@
+import 'package:avalon_app/core/config/remote/app_remote_config.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
+import 'package:cache/cache.dart';
 import 'package:shared_models/shared_models.dart';
 
 import '../../domain/repository/user_client_repositoty.dart';
 
 class UserClientRepositoryImpl extends UserClientRepository {
+  final CacheClient _cache = CacheClient();
+  static const String _userCacheKey = ConstHiveBox.kSettingsLanguage;
+
   @override
-  Future<void> updateClientData({required User user, required String token}) {
-    throw UnimplementedError();
+  Future<bool> updateClientData(
+      {required User user, required String token}) async {
+    final String url = '/clientes/${user.id}'; // Ajusta la URL según tu API
+    final Map<String, dynamic> data = user.toJson();
+
+    try {
+      final response = await APPRemoteConfig.httpPut(
+        url: url,
+        data: data,
+        token: token,
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception(apptexts.perfilPage.errorUpdateUserData);
+      }
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   @override
-  Future<void> getAuthenticatedUserData(
-      {required User user, required String token}) {
-    // TODO: implement getAuthenticatedUserData
-    throw UnimplementedError();
+  Future<User> getAuthenticatedUserData(
+      {required User user, required String token}) async {
+    try {
+      final response = await APPRemoteConfig.httpGet(
+        url: '/usuarios/authenticated',
+        token: token,
+        exception: Exception('Failed to update user data'),
+      );
+
+      if (response.statusCode == 200) {
+        final userData = response.data as Map<String, dynamic>;
+        final user = UserResponse.fromJson(userData);
+
+        // Actualizar el cache con los datos más recientes del usuario.
+        await _cache.write(key: _userCacheKey, value: user.toJson());
+
+        return user;
+      } else {
+        throw Exception('Failed to fetch authenticated user data');
+      }
+    } catch (e) {
+      print(e);
+      throw Exception('Error al obtener datos del usuario autenticado');
+    }
   }
 
   @override

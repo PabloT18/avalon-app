@@ -25,8 +25,14 @@ class AppDependencies {
         /// [General Data Dependencies]
         ..._generalDataDependencies,
 
+        /// [User Dependcies]
+        ..._userDependencies,
+
         /// [Membresias Dependcies]
         ..._membresiasDependencies,
+
+        /// [User Edit Dependcies]
+        ..._userEditDependencies,
       ];
 
   /// Set up the AppSettingsCubit, which will glue user settings to multiple
@@ -100,6 +106,12 @@ class AppDependencies {
     ),
   ];
 
+  static final List<RepositoryProvider<dynamic>> _userDependencies = [
+    RepositoryProvider<UserClientRepository>(
+      create: (context) => UserClientRepositoryImpl(),
+    ),
+  ];
+
   static final List<RepositoryProvider<dynamic>> _generalDataDependencies = [
     RepositoryProvider<GeneralDataRepository>(
       create: (context) => const GeneralDataRepositoryImpl(),
@@ -117,6 +129,13 @@ class AppDependencies {
     RepositoryProvider<GetMembresiasUC>(
       create: (context) => const GetMembresiasUC(
         MembresiasRepositoryImpl(),
+      ),
+    ),
+  ];
+  static final List<RepositoryProvider<dynamic>> _userEditDependencies = [
+    RepositoryProvider<UpdateUserAddressUseCase>(
+      create: (context) => UpdateUserAddressUseCase(
+        userClientRepository: context.read<UserClientRepository>(),
       ),
     ),
   ];

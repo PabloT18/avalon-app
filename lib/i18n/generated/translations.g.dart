@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 186 (93 per locale)
+/// Strings: 194 (97 per locale)
 ///
-/// Built on 2024-08-15 at 14:29 UTC
+/// Built on 2024-08-15 at 16:43 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -315,6 +315,10 @@ class _TranslationsPerfilPageEs {
 	String get state => 'Estado';
 	String get zipCode => 'Código Postal';
 	String get country => 'País';
+	String get errorUpdateUserData => 'Error al actualizar los datos del usuario';
+	String get errorUpdateUserAddress => 'Error al actualizar la dirección del usuario';
+	String get successUpdateUserData => 'Datos del usuario actualizados correctamente';
+	String get successUpdateUserAddress => 'Dirección del usuario actualizada correctamente';
 }
 
 // Path: preferenciasPage
@@ -590,6 +594,10 @@ class _TranslationsPerfilPageEn implements _TranslationsPerfilPageEs {
 	@override String get state => 'State';
 	@override String get zipCode => 'Zip Code';
 	@override String get country => 'Country';
+	@override String get errorUpdateUserData => 'Error updating user data';
+	@override String get errorUpdateUserAddress => 'Error updating user address';
+	@override String get successUpdateUserData => 'User data updated successfully';
+	@override String get successUpdateUserAddress => 'User address updated successfully';
 }
 
 // Path: preferenciasPage
@@ -771,6 +779,10 @@ extension on Translations {
 			case 'perfilPage.state': return 'Estado';
 			case 'perfilPage.zipCode': return 'Código Postal';
 			case 'perfilPage.country': return 'País';
+			case 'perfilPage.errorUpdateUserData': return 'Error al actualizar los datos del usuario';
+			case 'perfilPage.errorUpdateUserAddress': return 'Error al actualizar la dirección del usuario';
+			case 'perfilPage.successUpdateUserData': return 'Datos del usuario actualizados correctamente';
+			case 'perfilPage.successUpdateUserAddress': return 'Dirección del usuario actualizada correctamente';
 			case 'preferenciasPage.preferenciasTitle': return 'Preferencias';
 			case 'preferenciasPage.preferenciasUser': return 'Preferencias de usuario';
 			case 'preferenciasPage.notificaciones': return 'Notificaciones';
@@ -888,6 +900,10 @@ extension on _TranslationsEn {
 			case 'perfilPage.state': return 'State';
 			case 'perfilPage.zipCode': return 'Zip Code';
 			case 'perfilPage.country': return 'Country';
+			case 'perfilPage.errorUpdateUserData': return 'Error updating user data';
+			case 'perfilPage.errorUpdateUserAddress': return 'Error updating user address';
+			case 'perfilPage.successUpdateUserData': return 'User data updated successfully';
+			case 'perfilPage.successUpdateUserAddress': return 'User address updated successfully';
 			case 'preferenciasPage.preferenciasTitle': return 'Preferences';
 			case 'preferenciasPage.preferenciasUser': return 'User Preferences';
 			case 'preferenciasPage.notificaciones': return 'Notifications';

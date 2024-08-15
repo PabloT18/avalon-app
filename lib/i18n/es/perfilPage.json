@@ -18,5 +18,9 @@
     "city": "Ciudad",
     "state": "Estado",
     "zipCode": "Código Postal",
-    "country": "País"
+    "country": "País",
+    "errorUpdateUserData": "Error al actualizar los datos del usuario",
+    "errorUpdateUserAddress": "Error al actualizar la dirección del usuario",
+    "successUpdateUserData": "Datos del usuario actualizados correctamente",
+    "successUpdateUserAddress": "Dirección del usuario actualizada correctamente"
 }

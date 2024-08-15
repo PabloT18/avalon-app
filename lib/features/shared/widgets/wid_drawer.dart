@@ -104,9 +104,9 @@ class DrawerCustom extends StatelessWidget {
         }
         if (destination == drawerOptions.length - 1) {
           context.read<AuthenticationRepository>().logOut();
+        } else {
+          context.goNamed(drawerOptions[destination].routeName);
         }
-
-        context.goNamed(drawerOptions[destination].routeName);
       },
       children: [
         Center(

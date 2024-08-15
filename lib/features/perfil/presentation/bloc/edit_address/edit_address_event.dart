@@ -7,6 +7,10 @@ sealed class EditAddressEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class ValidateAndSubmitEvent extends EditAddressEvent {
+  const ValidateAndSubmitEvent();
+}
+
 class LoadPaisesEvent extends EditAddressEvent {}
 
 class UpdateSelectedCountryEvent extends EditAddressEvent {
