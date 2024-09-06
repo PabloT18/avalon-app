@@ -176,6 +176,15 @@ class AppRouter {
                 const MedicosPage(),
               ),
             ),
+            GoRoute(
+              path: PAGES.aboutus.pageName,
+              name: PAGES.aboutus.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                const AboutusPage(),
+              ),
+            ),
           ]),
     ],
   );

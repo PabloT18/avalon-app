@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 194 (97 per locale)
 ///
-/// Built on 2024-08-15 at 16:43 UTC
+/// Built on 2024-08-15 at 23:03 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -201,7 +201,7 @@ class _TranslationsAvalonInfoEs {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get aboutUs => 'Sobre Nosotros.';
+	String get aboutUs => 'Sobre Nosotros';
 	String get aboutDescription => 'AVALON PLUS es una empresa líder en el conserjería médica integral internacional, fundada en Texas, formada por profesionales con más de 25 años de experiencia en las áreas de administración de cuentas hospitalarias, servicios médicos y seguros internacionales.\nEl Know-How de nuestro equipo de profesionales nos permite comprender las necesidades de nuestros clientes.';
 	String get services => 'Servicios.';
 	String get servicesDescription => 'Contamos con un equipo de profesionales, multilingüe y multicultural, con una basta experiencia en la administración y solución integral de casos médicos complejos alrededor del mundo.';
@@ -480,7 +480,7 @@ class _TranslationsAvalonInfoEn implements _TranslationsAvalonInfoEs {
 	@override final _TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get aboutUs => 'About Us.';
+	@override String get aboutUs => 'About Us';
 	@override String get aboutDescription => 'AVALON PLUS is a leading international comprehensive medical concierge company, founded in Texas, made up of professionals with more than 25 years of experience in the areas of hospital account management, medical services and international insurance.\nThe Know-How of our team of professionals allows us to understand the needs of our clients.';
 	@override String get services => 'Services.';
 	@override String get servicesDescription => 'We have a multilingual and multicultural team of professionals, with extensive experience in the administration and comprehensive solution of complex medical cases around the world.';
@@ -725,7 +725,7 @@ extension on Translations {
 			case 'appOptions.validators.passwordConfirm': return 'La confirmación de la contraseña es requerida';
 			case 'appOptions.validators.passwordChanged': return 'Contraseña cambiada con éxito';
 			case 'appOptions.validators.passwordNotMatch': return 'Las contraseñas no coinciden';
-			case 'avalonInfo.aboutUs': return 'Sobre Nosotros.';
+			case 'avalonInfo.aboutUs': return 'Sobre Nosotros';
 			case 'avalonInfo.aboutDescription': return 'AVALON PLUS es una empresa líder en el conserjería médica integral internacional, fundada en Texas, formada por profesionales con más de 25 años de experiencia en las áreas de administración de cuentas hospitalarias, servicios médicos y seguros internacionales.\nEl Know-How de nuestro equipo de profesionales nos permite comprender las necesidades de nuestros clientes.';
 			case 'avalonInfo.services': return 'Servicios.';
 			case 'avalonInfo.servicesDescription': return 'Contamos con un equipo de profesionales, multilingüe y multicultural, con una basta experiencia en la administración y solución integral de casos médicos complejos alrededor del mundo.';
@@ -846,7 +846,7 @@ extension on _TranslationsEn {
 			case 'appOptions.validators.passwordConfirm': return 'Password confirmation is required';
 			case 'appOptions.validators.passwordChanged': return 'Password changed successfully';
 			case 'appOptions.validators.passwordNotMatch': return 'Passwords do not match';
-			case 'avalonInfo.aboutUs': return 'About Us.';
+			case 'avalonInfo.aboutUs': return 'About Us';
 			case 'avalonInfo.aboutDescription': return 'AVALON PLUS is a leading international comprehensive medical concierge company, founded in Texas, made up of professionals with more than 25 years of experience in the areas of hospital account management, medical services and international insurance.\nThe Know-How of our team of professionals allows us to understand the needs of our clients.';
 			case 'avalonInfo.services': return 'Services.';
 			case 'avalonInfo.servicesDescription': return 'We have a multilingual and multicultural team of professionals, with extensive experience in the administration and comprehensive solution of complex medical cases around the world.';

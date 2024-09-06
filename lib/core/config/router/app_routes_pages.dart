@@ -20,6 +20,7 @@ enum PAGES {
   formasPago,
   medicos,
   centrosMedicos,
+  aboutus
 }
 
 extension AppPageExtension on PAGES {
@@ -61,7 +62,8 @@ extension AppPageExtension on PAGES {
         return "/medicos";
       case PAGES.centrosMedicos:
         return "/centrosMedicos";
-
+      case PAGES.aboutus:
+        return "/aboutus";
       default:
         return "/";
     }
@@ -107,7 +109,8 @@ extension AppPageExtension on PAGES {
         return "medicos";
       case PAGES.centrosMedicos:
         return "centrosMedicos";
-
+      case PAGES.aboutus:
+        return "aboutus";
       default:
         return 'loading';
     }

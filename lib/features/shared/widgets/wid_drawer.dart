@@ -51,6 +51,11 @@ class DrawerCustom extends StatelessWidget {
           isUserOption: false,
           routeName: PAGES.preguntas.pageName),
       DrawerOption(
+          label: apptexts.avalonInfo.aboutUs,
+          icon: Icons.house,
+          isUserOption: false,
+          routeName: PAGES.aboutus.pageName),
+      DrawerOption(
           label: apptexts.appOptions.logout,
           icon: Icons.logout,
           isUserOption: false,
