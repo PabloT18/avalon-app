@@ -50,6 +50,16 @@ class UtilsFunctionsLogic {
     return finalWord.trimRight();
   }
 
+  static String formatFecha(DateTime? fecha) {
+    if (fecha == null) {
+      return '-';
+    } else {
+      final DateFormat formatter =
+          DateFormat('dd \'de\' MMMM \'del\' yyyy', 'es_ES');
+      return formatter.format(fecha);
+    }
+  }
+
   /// [Validators]
   static String? validateCorreo(String? correo, String errorMsg,
       {String? correoInsMsg}) {

@@ -28,7 +28,7 @@ class UserAgenteAsesorMembershipSecction extends StatelessWidget {
           children: [
             Text(
               userTypeName(state.user),
-              style: Theme.of(context).textTheme.titleSmall,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             Container(
               margin: const EdgeInsets.symmetric(

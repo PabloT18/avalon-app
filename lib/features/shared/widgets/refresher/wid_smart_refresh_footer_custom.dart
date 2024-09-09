@@ -12,19 +12,23 @@ class CustomFooterSmartRefrsh extends StatelessWidget {
       builder: (BuildContext context, LoadStatus? mode) {
         Widget body;
         if (mode == LoadStatus.idle || mode == LoadStatus.canLoading) {
-          body = const Row(
+          body = Row(
               mainAxisAlignment: MainAxisAlignment.center,
               // children: const [Icon(Icons.refresh), Text('Pull up load')]);
-              children: [Icon(Icons.refresh), Text('Más')]);
+              children: [
+                const Icon(Icons.refresh),
+                Text(apptexts.appOptions.scrollMore)
+              ]);
         } else if (mode == LoadStatus.loading) {
           body = const CupertinoActivityIndicator();
         } else if (mode == LoadStatus.failed) {
-          body = const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Icon(Icons.error), Text('Error en conexion')]);
+          body = Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            const Icon(Icons.error),
+            Text(apptexts.appOptions.scrollError)
+          ]);
         } else {
           body = moreelements
-              ? const Text('No hay mas datos por ahora')
+              ? Text(apptexts.appOptions.scrollNoMoreData)
               : Container();
         }
         return Container(

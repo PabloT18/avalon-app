@@ -26,7 +26,7 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       title: Text(
         title,
-        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),

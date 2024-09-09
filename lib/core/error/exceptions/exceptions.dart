@@ -24,6 +24,6 @@ class InternetAccessException extends ServerException {
       : super(message: apptexts.appOptions.error_access_internet);
 }
 
-class CacheException implements Exception {
-  const CacheException();
+class CacheException extends ServerException {
+  CacheException() : super(message: 'Data internal error');
 }

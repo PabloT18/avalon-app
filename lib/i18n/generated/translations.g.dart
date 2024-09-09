@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 208 (104 per locale)
+/// Strings: 220 (110 per locale)
 ///
-/// Built on 2024-09-09 at 01:02 UTC
+/// Built on 2024-09-09 at 05:00 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -175,6 +175,14 @@ class _TranslationsAppOptionsEs {
 	String get cliente => 'Client';
 	String get administrador => 'Admin';
 	String get rol => 'Rol';
+	String detalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Detalle',
+		other: 'Detalles',
+	);
+	String get fecha => 'Fecha';
+	String get scrollMore => 'Más';
+	String get scrollNoMoreData => 'No hay más datos';
+	String get scrollError => 'Error al cargar datos';
 	String get filtro => 'Filtro';
 	String filtro_de({required Object option}) => 'Filtro de ${option}';
 	String get error_servers => 'Servidores en mantenimiento. Por favor intente mas tarde.';
@@ -473,6 +481,14 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override String get cliente => 'Client';
 	@override String get administrador => 'Admin';
 	@override String get rol => 'Role';
+	@override String detalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Detail',
+		other: 'Details',
+	);
+	@override String get fecha => 'Date';
+	@override String get scrollMore => 'Scroll for more';
+	@override String get scrollNoMoreData => 'No more data';
+	@override String get scrollError => 'Error loading data';
 	@override String get filtro => 'Filter';
 	@override String filtro_de({required Object option}) => '${option} Filter';
 	@override String get error_servers => 'Servers under maintenance. Please try later';
@@ -731,6 +747,14 @@ extension on Translations {
 			case 'appOptions.cliente': return 'Client';
 			case 'appOptions.administrador': return 'Admin';
 			case 'appOptions.rol': return 'Rol';
+			case 'appOptions.detalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Detalle',
+				other: 'Detalles',
+			);
+			case 'appOptions.fecha': return 'Fecha';
+			case 'appOptions.scrollMore': return 'Más';
+			case 'appOptions.scrollNoMoreData': return 'No hay más datos';
+			case 'appOptions.scrollError': return 'Error al cargar datos';
 			case 'appOptions.filtro': return 'Filtro';
 			case 'appOptions.filtro_de': return ({required Object option}) => 'Filtro de ${option}';
 			case 'appOptions.error_servers': return 'Servidores en mantenimiento. Por favor intente mas tarde.';
@@ -861,6 +885,14 @@ extension on _TranslationsEn {
 			case 'appOptions.cliente': return 'Client';
 			case 'appOptions.administrador': return 'Admin';
 			case 'appOptions.rol': return 'Role';
+			case 'appOptions.detalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Detail',
+				other: 'Details',
+			);
+			case 'appOptions.fecha': return 'Date';
+			case 'appOptions.scrollMore': return 'Scroll for more';
+			case 'appOptions.scrollNoMoreData': return 'No more data';
+			case 'appOptions.scrollError': return 'Error loading data';
 			case 'appOptions.filtro': return 'Filter';
 			case 'appOptions.filtro_de': return ({required Object option}) => '${option} Filter';
 			case 'appOptions.error_servers': return 'Servers under maintenance. Please try later';

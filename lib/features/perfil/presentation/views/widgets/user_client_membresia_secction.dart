@@ -17,7 +17,7 @@ class UserMembershipSecction extends StatelessWidget {
       children: [
         Text(
           apptexts.membresiasPage.membresia(n: 1),
-          style: Theme.of(context).textTheme.titleSmall,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         Container(
           margin: const EdgeInsets.symmetric(

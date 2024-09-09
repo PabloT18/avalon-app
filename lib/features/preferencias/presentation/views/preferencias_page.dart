@@ -27,7 +27,7 @@ class PreferenciasPage extends StatelessWidget {
           children: [
             Text(
               apptexts.preferenciasPage.preferenciasUser,
-              style: Theme.of(context).textTheme.titleSmall,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: AppLayoutConst.spaceXL),
             const NotificationsPreferences(),

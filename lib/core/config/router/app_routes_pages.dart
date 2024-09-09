@@ -1,3 +1,5 @@
+import 'package:dartz/dartz.dart';
+
 enum PAGES {
   loading,
 
@@ -10,6 +12,9 @@ enum PAGES {
   editPerfilDir,
   preferencias,
 
+  casos,
+  crearCaso,
+  detaleCaso,
   reclamaciones,
   seguros,
   familiares,
@@ -44,8 +49,16 @@ extension AppPageExtension on PAGES {
 
       case PAGES.preferencias:
         return "/preferencias";
+      case PAGES.casos:
+        return "/casos";
+      case PAGES.crearCaso:
+        return "/crearCaso";
+      case PAGES.detaleCaso:
+        return "/detaleCaso";
+
       case PAGES.reclamaciones:
         return "/reclamaciones";
+
       case PAGES.seguros:
         return "/seguros";
       case PAGES.familiares:
@@ -90,6 +103,12 @@ extension AppPageExtension on PAGES {
 
       case PAGES.preferencias:
         return "preferencias";
+      case PAGES.casos:
+        return "casos";
+      case PAGES.crearCaso:
+        return "crearCaso";
+      case PAGES.detaleCaso:
+        return "detaleCaso";
       case PAGES.reclamaciones:
         return "reclamaciones";
       case PAGES.seguros:

@@ -8,8 +8,8 @@ import 'package:shared_models/shared_models.dart';
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 
-part 'wid_address_card.dart';
-part 'wid_personal_data_card.dart';
+import 'wid_address_card.dart';
+import 'wid_personal_data_card.dart';
 
 class UserDataSecction extends StatelessWidget {
   const UserDataSecction({
@@ -28,7 +28,7 @@ class UserDataSecction extends StatelessWidget {
             Expanded(
               child: Text(
                 apptexts.perfilPage.userData,
-                style: Theme.of(context).textTheme.titleSmall,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
             IconButton(

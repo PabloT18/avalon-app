@@ -4,6 +4,14 @@
     "cliente": "Client",
     "administrador": "Admin",
     "rol": "Rol",
+    "detalle": {
+        "one": "Detalle",
+        "other": "Detalles"
+    },
+    "fecha": "Fecha",
+    "scrollMore": "Más",
+    "scrollNoMoreData": "No hay más datos",
+    "scrollError": "Error al cargar datos",
     "filtro": "Filtro",
     "filtro_de": "Filtro de {{option}}",
     "error_servers": "Servidores en mantenimiento. Por favor intente mas tarde.",

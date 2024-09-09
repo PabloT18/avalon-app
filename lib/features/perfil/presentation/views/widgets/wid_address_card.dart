@@ -1,4 +1,12 @@
-part of 'user_data_secction.dart';
+import 'package:flutter/material.dart';
+
+import 'package:go_router/go_router.dart';
+
+import 'package:shared_models/shared_models.dart';
+
+import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
+import 'package:avalon_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 
 class AddressCard extends StatelessWidget {
   const AddressCard({

@@ -216,11 +216,11 @@ class User extends Equatable {
     } else {
       switch (rol!.id) {
         case 1:
-          return UserRol.client;
+          return UserRol.admin;
         case 2:
           return UserRol.asesor;
         case 3:
-          return UserRol.agente;
+          return UserRol.client;
         case 4:
           return UserRol.agente;
         default:

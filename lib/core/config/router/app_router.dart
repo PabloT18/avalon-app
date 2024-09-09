@@ -98,6 +98,34 @@ class AppRouter {
               ),
             ),
             GoRoute(
+                path: PAGES.casos.pageName,
+                name: PAGES.casos.pageName,
+                pageBuilder: (context, state) => pageBuilderByPlatform(
+                      context,
+                      state,
+                      const CasosPage(),
+                    ),
+                routes: [
+                  GoRoute(
+                    path: PAGES.crearCaso.pageName,
+                    name: PAGES.crearCaso.pageName,
+                    pageBuilder: (context, state) => pageBuilderByPlatform(
+                      context,
+                      state,
+                      const CrearCasoPage(),
+                    ),
+                  ),
+                  GoRoute(
+                    path: '${PAGES.detaleCaso.pageName}/:casoId',
+                    name: PAGES.detaleCaso.pageName,
+                    pageBuilder: (context, state) => pageBuilderByPlatform(
+                      context,
+                      state,
+                      const CasoDetallePage(),
+                    ),
+                  ),
+                ]),
+            GoRoute(
               path: PAGES.reclamaciones.pageName,
               name: PAGES.reclamaciones.pageName,
               pageBuilder: (context, state) => pageBuilderByPlatform(

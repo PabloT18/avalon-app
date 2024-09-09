@@ -15,17 +15,17 @@ class AppTheme {
       //     .copyWith(collapsedIconColor: AppColors.primaryBlue),
       textTheme: const TextTheme(
         titleLarge: TextStyle(
-          // fontSize: 24,
+          fontSize: 22,
           color: AppColors.primaryBlue,
           // fontWeight: FontWeight.bold,
         ),
         titleMedium: TextStyle(
-          fontSize: 22,
+          fontSize: 20,
           color: AppColors.primaryBlue,
           fontWeight: FontWeight.bold,
         ),
         titleSmall: TextStyle(
-          fontSize: 20,
+          fontSize: 18,
           color: AppColors.primaryBlue,
           fontWeight: FontWeight.bold,
         ),

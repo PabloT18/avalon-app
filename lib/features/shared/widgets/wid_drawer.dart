@@ -66,6 +66,11 @@ class DrawerCustom extends StatelessWidget {
       DrawerOption(
           label: 'Home', icon: Icons.house, routeName: PAGES.home.pagePath),
       DrawerOption(
+          label: apptexts.casosPage.title(n: 2),
+          icon: Icons.local_hospital_rounded,
+          isUserOption: true,
+          routeName: PAGES.casos.pageName),
+      DrawerOption(
           label: apptexts.reclamacionesPage.title(n: 2),
           icon: Icons.border_all,
           routeName: PAGES.reclamaciones.pageName),

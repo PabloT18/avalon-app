@@ -20,6 +20,11 @@ class CacheClient {
     }
   }
 
+  Future<void> writePrimary<T extends Object>(
+      {required String key, required T value}) async {
+    await _box.put(key, value);
+  }
+
   /// Reads the value for the provided [key].
   dynamic read({required String key}) {
     return _box.get(key);

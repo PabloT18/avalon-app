@@ -31,10 +31,11 @@ class SettingsRepositoryImpl implements SettingsRepository {
   Future<Either<Failure, AppLocale>> updateLanguage(AppLocale appLocale) async {
     // Use the shared_preferences package to persist settings locally or the
     try {
-      await _cache.write(key: _indexLanguage, value: appLocale.languageCode);
+      await _cache.writePrimary(
+          key: _indexLanguage, value: appLocale.languageCode);
       return (Right(appLocale));
     } catch (e) {
-      return const Left(CacheFailure());
+      return const Left(CacheFailure(message: "Internal data error"));
     }
   }
 }
