@@ -46,7 +46,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
       } else {
         emit(AppAuthenticated(user: event.user));
       }
-      add(AppGetMembresias(event.user));
+      if (event.user.rol != null && event.user.userRol == UserRol.client) {
+        add(AppGetMembresias(event.user));
+      }
     } else {
       // emit(const AppValidating(user: User.empty));
       // _authenticationRepository.logOut();

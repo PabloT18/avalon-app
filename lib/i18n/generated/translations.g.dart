@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 194 (97 per locale)
+/// Strings: 208 (104 per locale)
 ///
-/// Built on 2024-08-15 at 23:03 UTC
+/// Built on 2024-09-09 at 01:02 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -150,6 +150,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	// Translations
 	late final _TranslationsAppOptionsEs appOptions = _TranslationsAppOptionsEs._(_root);
 	late final _TranslationsAvalonInfoEs avalonInfo = _TranslationsAvalonInfoEs._(_root);
+	late final _TranslationsCasosPageEs casosPage = _TranslationsCasosPageEs._(_root);
 	late final _TranslationsCentrosMedicosEs centrosMedicos = _TranslationsCentrosMedicosEs._(_root);
 	late final _TranslationsFamiliaresPageEs familiaresPage = _TranslationsFamiliaresPageEs._(_root);
 	late final _TranslationsFaqsPAgeEs faqsPAge = _TranslationsFaqsPAgeEs._(_root);
@@ -169,6 +170,11 @@ class _TranslationsAppOptionsEs {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get asesor => 'Advisor';
+	String get agente => 'Agent';
+	String get cliente => 'Client';
+	String get administrador => 'Admin';
+	String get rol => 'Rol';
 	String get filtro => 'Filtro';
 	String filtro_de({required Object option}) => 'Filtro de ${option}';
 	String get error_servers => 'Servidores en mantenimiento. Por favor intente mas tarde.';
@@ -206,6 +212,19 @@ class _TranslationsAvalonInfoEs {
 	String get services => 'Servicios.';
 	String get servicesDescription => 'Contamos con un equipo de profesionales, multilingüe y multicultural, con una basta experiencia en la administración y solución integral de casos médicos complejos alrededor del mundo.';
 	late final _TranslationsAvalonInfoDetailsEs details = _TranslationsAvalonInfoDetailsEs._(_root);
+}
+
+// Path: casosPage
+class _TranslationsCasosPageEs {
+	_TranslationsCasosPageEs._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Caso',
+		other: 'Casos',
+	);
 }
 
 // Path: centrosMedicos
@@ -429,6 +448,7 @@ class _TranslationsEn implements Translations {
 	// Translations
 	@override late final _TranslationsAppOptionsEn appOptions = _TranslationsAppOptionsEn._(_root);
 	@override late final _TranslationsAvalonInfoEn avalonInfo = _TranslationsAvalonInfoEn._(_root);
+	@override late final _TranslationsCasosPageEn casosPage = _TranslationsCasosPageEn._(_root);
 	@override late final _TranslationsCentrosMedicosEn centrosMedicos = _TranslationsCentrosMedicosEn._(_root);
 	@override late final _TranslationsFamiliaresPageEn familiaresPage = _TranslationsFamiliaresPageEn._(_root);
 	@override late final _TranslationsFaqsPAgeEn faqsPAge = _TranslationsFaqsPAgeEn._(_root);
@@ -448,6 +468,11 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override final _TranslationsEn _root; // ignore: unused_field
 
 	// Translations
+	@override String get asesor => 'Advisor';
+	@override String get agente => 'Agent';
+	@override String get cliente => 'Client';
+	@override String get administrador => 'Admin';
+	@override String get rol => 'Role';
 	@override String get filtro => 'Filter';
 	@override String filtro_de({required Object option}) => '${option} Filter';
 	@override String get error_servers => 'Servers under maintenance. Please try later';
@@ -485,6 +510,19 @@ class _TranslationsAvalonInfoEn implements _TranslationsAvalonInfoEs {
 	@override String get services => 'Services.';
 	@override String get servicesDescription => 'We have a multilingual and multicultural team of professionals, with extensive experience in the administration and comprehensive solution of complex medical cases around the world.';
 	@override late final _TranslationsAvalonInfoDetailsEn details = _TranslationsAvalonInfoDetailsEn._(_root);
+}
+
+// Path: casosPage
+class _TranslationsCasosPageEn implements _TranslationsCasosPageEs {
+	_TranslationsCasosPageEn._(this._root);
+
+	@override final _TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Case',
+		other: 'Cases',
+	);
 }
 
 // Path: centrosMedicos
@@ -688,6 +726,11 @@ class _TranslationsAvalonInfoDetailsEn implements _TranslationsAvalonInfoDetails
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'appOptions.asesor': return 'Advisor';
+			case 'appOptions.agente': return 'Agent';
+			case 'appOptions.cliente': return 'Client';
+			case 'appOptions.administrador': return 'Admin';
+			case 'appOptions.rol': return 'Rol';
 			case 'appOptions.filtro': return 'Filtro';
 			case 'appOptions.filtro_de': return ({required Object option}) => 'Filtro de ${option}';
 			case 'appOptions.error_servers': return 'Servidores en mantenimiento. Por favor intente mas tarde.';
@@ -733,6 +776,10 @@ extension on Translations {
 			case 'avalonInfo.details.experts': return 'Expertos en facturación y contención costos';
 			case 'avalonInfo.details.offices': return 'Oficinas y operaciones en Houston';
 			case 'avalonInfo.details.lead': return 'TPA Líder en consejería médica integral internacional';
+			case 'casosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Caso',
+				other: 'Casos',
+			);
 			case 'centrosMedicos.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Centro Médico',
 				other: 'Centro Médicos',
@@ -809,6 +856,11 @@ extension on Translations {
 extension on _TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
+			case 'appOptions.asesor': return 'Advisor';
+			case 'appOptions.agente': return 'Agent';
+			case 'appOptions.cliente': return 'Client';
+			case 'appOptions.administrador': return 'Admin';
+			case 'appOptions.rol': return 'Role';
 			case 'appOptions.filtro': return 'Filter';
 			case 'appOptions.filtro_de': return ({required Object option}) => '${option} Filter';
 			case 'appOptions.error_servers': return 'Servers under maintenance. Please try later';
@@ -854,6 +906,10 @@ extension on _TranslationsEn {
 			case 'avalonInfo.details.experts': return 'Experts in billing and cost containment';
 			case 'avalonInfo.details.offices': return 'Headquarters located in Houston, Texas';
 			case 'avalonInfo.details.lead': return 'TPA leader in international medical concierge services';
+			case 'casosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Case',
+				other: 'Cases',
+			);
 			case 'centrosMedicos.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Medical Center',
 				other: 'Medical Centers',

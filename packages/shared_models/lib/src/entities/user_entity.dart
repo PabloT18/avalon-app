@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_models/shared_models.dart';
 
+enum UserRol { admin, client, asesor, agente }
+
 class User extends Equatable {
   final String? createdBy;
   final DateTime? createdDate;
@@ -207,6 +209,27 @@ class User extends Equatable {
   String get fullName => '$nombres $apellidos';
 
   String get fullNameUpperCase => '$nombres $apellidos'.toUpperCase();
+
+  UserRol get userRol {
+    if (rol == null) {
+      return UserRol.client;
+    } else {
+      switch (rol!.id) {
+        case 1:
+          return UserRol.client;
+        case 2:
+          return UserRol.asesor;
+        case 3:
+          return UserRol.agente;
+        case 4:
+          return UserRol.agente;
+        default:
+          return UserRol.client;
+      }
+    }
+  }
+
+  bool get isClient => userRol == UserRol.client;
 
   String formatFecha(DateTime? fecha) {
     if (fecha == null) {

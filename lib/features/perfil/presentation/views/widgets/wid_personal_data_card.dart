@@ -1,8 +1,4 @@
-import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
-import 'package:flutter/material.dart';
-
-import 'package:avalon_app/i18n/generated/translations.g.dart';
-import 'package:shared_models/shared_models.dart';
+part of 'user_data_secction.dart';
 
 class PersonalDataCard extends StatelessWidget {
   const PersonalDataCard({

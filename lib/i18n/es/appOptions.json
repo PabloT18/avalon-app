@@ -1,4 +1,9 @@
 {
+    "asesor": "Advisor",
+    "agente": "Agent",
+    "cliente": "Client",
+    "administrador": "Admin",
+    "rol": "Rol",
     "filtro": "Filtro",
     "filtro_de": "Filtro de {{option}}",
     "error_servers": "Servidores en mantenimiento. Por favor intente mas tarde.",

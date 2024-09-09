@@ -1,4 +1,9 @@
 {
+    "asesor": "Advisor",
+    "agente": "Agent",
+    "cliente": "Client",
+    "administrador": "Admin",
+    "rol": "Role",
     "filtro": "Filter",
     "filtro_de": "{{option}} Filter",
     "error_servers": "Servers under maintenance. Please try later",
