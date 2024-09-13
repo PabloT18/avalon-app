@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:avalon_app/core/error/failures/failures.dart';
-import 'package:avalon_app/features/casos/domain/models/caso_entity.dart';
 import 'package:avalon_app/features/user_features.dart';
 
 import 'package:dartz/dartz.dart';

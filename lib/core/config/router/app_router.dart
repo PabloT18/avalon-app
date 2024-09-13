@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:avalon_app/app/domain/entity/push_notifications/push_message.dart';
+import 'package:avalon_app/features/citas/citas.dart';
+
 import 'package:avalon_app/features/familiares/familiares.dart';
 
 import 'package:flutter/material.dart';
@@ -61,32 +63,44 @@ class AppRouter {
               ),
           routes: [
             GoRoute(
-                path: PAGES.editPerfil.pageName,
-                name: PAGES.editPerfil.pageName,
+                path: PAGES.perfil.pageName,
+                name: PAGES.perfil.pageName,
                 pageBuilder: (context, state) => pageBuilderByPlatform(
                       context,
                       state,
-                      const EditPerfilOptionsPage(),
+                      const PerfilPage(),
                     ),
                 routes: [
                   GoRoute(
-                    path: PAGES.editPerfilDatPer.pageName,
-                    name: PAGES.editPerfilDatPer.pageName,
-                    pageBuilder: (context, state) => pageBuilderByPlatform(
-                      context,
-                      state,
-                      const EditPerfilPage(),
-                    ),
-                  ),
-                  GoRoute(
-                    path: PAGES.editPerfilDir.pageName,
-                    name: PAGES.editPerfilDir.pageName,
-                    pageBuilder: (context, state) => pageBuilderByPlatform(
-                      context,
-                      state,
-                      const EditAddressPage(),
-                    ),
-                  ),
+                      path: PAGES.editPerfil.pageName,
+                      name: PAGES.editPerfil.pageName,
+                      pageBuilder: (context, state) => pageBuilderByPlatform(
+                            context,
+                            state,
+                            const EditPerfilOptionsPage(),
+                          ),
+                      routes: [
+                        GoRoute(
+                          path: PAGES.editPerfilDatPer.pageName,
+                          name: PAGES.editPerfilDatPer.pageName,
+                          pageBuilder: (context, state) =>
+                              pageBuilderByPlatform(
+                            context,
+                            state,
+                            const EditPerfilPage(),
+                          ),
+                        ),
+                        GoRoute(
+                          path: PAGES.editPerfilDir.pageName,
+                          name: PAGES.editPerfilDir.pageName,
+                          pageBuilder: (context, state) =>
+                              pageBuilderByPlatform(
+                            context,
+                            state,
+                            const EditAddressPage(),
+                          ),
+                        ),
+                      ]),
                 ]),
             GoRoute(
               path: PAGES.preferencias.pageName,
@@ -116,15 +130,52 @@ class AppRouter {
                     ),
                   ),
                   GoRoute(
-                    path: '${PAGES.detaleCaso.pageName}/:casoId',
-                    name: PAGES.detaleCaso.pageName,
+                      path: '${PAGES.detaleCaso.pageName}/:casoId',
+                      name: PAGES.detaleCaso.pageName,
+                      pageBuilder: (context, state) => pageBuilderByPlatform(
+                            context,
+                            state,
+                            CasoDetallePage(caso: state.extra as CasoEntity?),
+                          ),
+                      routes: const []),
+                  // GoRoute(
+                  //   path: '${PAGES.detalleCita.pageName}/:citaId',
+                  //   // name: PAGES.detalleCita.pageName,
+                  //   pageBuilder: (context, state) => pageBuilderByPlatform(
+                  //     context,
+                  //     state,
+                  //     CitaDetallePage(cita: state.extra as CitaMedica?),
+                  //   ),
+                  // ),
+                ]),
+            GoRoute(
+                path: PAGES.citas.pageName,
+                name: PAGES.citas.pageName,
+                pageBuilder: (context, state) => pageBuilderByPlatform(
+                      context,
+                      state,
+                      const CitasPage(),
+                    ),
+                routes: [
+                  GoRoute(
+                    path: PAGES.crearCita.pageName,
+                    name: PAGES.crearCita.pageName,
                     pageBuilder: (context, state) => pageBuilderByPlatform(
                       context,
                       state,
-                      const CasoDetallePage(),
+                      const CrearCitaPage(),
                     ),
                   ),
                 ]),
+            GoRoute(
+              path: '${PAGES.detalleCita.pageName}/:citaId',
+              name: PAGES.detalleCita.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                CitaDetallePage(cita: state.extra as CitaMedica?),
+              ),
+            ),
             GoRoute(
               path: PAGES.reclamaciones.pageName,
               name: PAGES.reclamaciones.pageName,
@@ -168,6 +219,15 @@ class AppRouter {
                   return pageBuilderByPlatform(
                       context, state, const MembresiasPage());
                 }),
+            GoRoute(
+              path: PAGES.noticias.pageName,
+              name: PAGES.noticias.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                const ComunicadosPage(),
+              ),
+            ),
             GoRoute(
               path: PAGES.preguntas.pageName,
               name: PAGES.preguntas.pageName,

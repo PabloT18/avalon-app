@@ -1,13 +1,16 @@
 import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
+import 'package:avalon_app/features/citas/presentation/views/pages/citas_page.dart';
 import 'package:avalon_app/features/perfil/perfil.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../../comunicados/comunicados.dart';
+import '../../../avalon_info/comunicados/comunicados.dart';
 
 import '../../../shared/widgets/wid_drawer.dart';
 
@@ -57,31 +60,30 @@ class _HomePageViewState extends State<HomePageView> {
     });
   }
 
-  // late RefreshController refreshController;
   @override
   Widget build(BuildContext context) {
-    // context.read<NotificationsBloc>().add(SubscribeTopics([
-    //       'todos',
-    //       'Todos',
-    //       userName,
-    //       rol,
-    //     ]));
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'AvalonPlus',
           style: TextStyle(
             color: AppColors.primaryBlue,
+            fontWeight: FontWeight.bold,
           ),
         ),
         elevation: 6,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              context.pushNamed(PAGES.preferencias.pageName);
-            },
+          Material(
+            elevation: 1, // Cambia este valor para ajustar la elevación
+            shape: const CircleBorder(),
+            child: CircleAvatar(
+              child: IconButton(
+                icon: const Icon(Icons.person),
+                onPressed: () {
+                  context.pushNamed(PAGES.perfil.pageName);
+                },
+              ),
+            ),
           ),
         ],
       ),
@@ -89,21 +91,30 @@ class _HomePageViewState extends State<HomePageView> {
         indexInitialName: PAGES.home.pageName,
         isInHome: true,
       ),
+      floatingActionButton: _currentIndex == 1
+          ? FloatingActionButton(
+              mini: true,
+              onPressed: () {
+                context.goNamed(PAGES.crearCita.pageName);
+              },
+              child: const Icon(Icons.add),
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: onTapped,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.newspaper),
-            label: 'Noticias',
+            icon: const FaIcon(FontAwesomeIcons.fileMedical),
+            label: apptexts.reclamacionesPage.title(n: 2),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.medical_services),
-            label: 'Citas',
+            icon: const FaIcon(FontAwesomeIcons.calendarPlus),
+            label: apptexts.citasPage.title(n: 2),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Perfil',
+            icon: const FaIcon(FontAwesomeIcons.kitMedical),
+            label: apptexts.emergenciasPage.title(n: 2),
           ),
         ],
       ),
@@ -111,72 +122,9 @@ class _HomePageViewState extends State<HomePageView> {
         controller: _pageController,
         onPageChanged: onPageChanged,
         children: const <Widget>[
-          ComunicadosPage(),
           CitasPanel(),
-          PerfilPage(),
-        ],
-      ),
-    );
-  }
-}
-
-class CitasPanel extends StatelessWidget {
-  const CitasPanel({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final refreshController = RefreshController(initialRefresh: false);
-
-    return SmartRefrehsCustom(
-      key: const Key('__citas_list_key__'),
-      onRefresh: () async {
-        await Future.delayed(const Duration(seconds: 1));
-        refreshController
-          ..refreshCompleted()
-          ..loadComplete();
-      },
-      refreshController: refreshController,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Card(
-            clipBehavior: Clip.hardEdge,
-            child: ListTile(
-              leading: const Icon(Icons.medical_services),
-              title: const Text('Requirimineto Cita Médica'),
-              subtitle: const Text('N. de Cita: 123456'),
-              trailing: const Icon(Icons.more_vert),
-              onTap: () {
-                // AppRouter.goToLogin();
-              },
-            ),
-          ),
-          Card(
-            clipBehavior: Clip.hardEdge,
-            child: ListTile(
-              leading: const Icon(Icons.medical_services),
-              title: const Text('Requirimineto Cita Médica'),
-              subtitle: const Text('N. de Cita: 123456'),
-              trailing: const Icon(Icons.more_vert),
-              onTap: () {
-                // AppRouter.goToLogin();
-              },
-            ),
-          ),
-          Card(
-            clipBehavior: Clip.hardEdge,
-            child: ListTile(
-              leading: const Icon(Icons.medical_services),
-              title: const Text('Requirimineto Cita Médica'),
-              subtitle: const Text('N. de Cita: 123456'),
-              trailing: const Icon(Icons.more_vert),
-              onTap: () {
-                // AppRouter.goToLogin();
-              },
-            ),
-          ),
+          CitasPanel(),
+          CitasPanel(),
         ],
       ),
     );

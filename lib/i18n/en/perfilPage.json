@@ -22,5 +22,8 @@
     "errorUpdateUserData": "Error updating user data",
     "errorUpdateUserAddress": "Error updating user address",
     "successUpdateUserData": "User data updated successfully",
-    "successUpdateUserAddress": "User address updated successfully"
+    "successUpdateUserAddress": "User address updated successfully",
+    "identificacion": "ID number",
+    "tipoIdentificacion": "ID Type",
+    "memberFamily": "Family Member"
 }

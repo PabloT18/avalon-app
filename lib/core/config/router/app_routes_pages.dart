@@ -7,11 +7,15 @@ enum PAGES {
   register,
 
   home,
+  perfil,
   editPerfil,
   editPerfilDatPer,
   editPerfilDir,
   preferencias,
 
+  citas,
+  detalleCita,
+  crearCita,
   casos,
   crearCaso,
   detaleCaso,
@@ -21,11 +25,12 @@ enum PAGES {
   addFamiliar,
   membresias,
 
+  noticias,
   preguntas,
   formasPago,
   medicos,
   centrosMedicos,
-  aboutus
+  aboutus,
 }
 
 extension AppPageExtension on PAGES {
@@ -40,6 +45,8 @@ extension AppPageExtension on PAGES {
         return "/register";
       case PAGES.home:
         return "/home";
+      case PAGES.perfil:
+        return "/perfil";
       case PAGES.editPerfil:
         return "/editPerfil";
       case PAGES.editPerfilDatPer:
@@ -49,6 +56,12 @@ extension AppPageExtension on PAGES {
 
       case PAGES.preferencias:
         return "/preferencias";
+      case PAGES.citas:
+        return "/citas";
+      case PAGES.detalleCita:
+        return "/detalleCita";
+      case PAGES.crearCita:
+        return "/crearCita";
       case PAGES.casos:
         return "/casos";
       case PAGES.crearCaso:
@@ -67,6 +80,10 @@ extension AppPageExtension on PAGES {
         return "/addFamiliar";
       case PAGES.membresias:
         return "/membresias";
+
+      case PAGES.noticias:
+        return "/noticias";
+
       case PAGES.preguntas:
         return "/preguntas";
       case PAGES.formasPago:
@@ -94,6 +111,9 @@ extension AppPageExtension on PAGES {
 
       case PAGES.home:
         return "home";
+
+      case PAGES.perfil:
+        return "perfil";
       case PAGES.editPerfil:
         return "editPerfil";
       case PAGES.editPerfilDatPer:
@@ -103,6 +123,12 @@ extension AppPageExtension on PAGES {
 
       case PAGES.preferencias:
         return "preferencias";
+      case PAGES.citas:
+        return "citas";
+      case PAGES.detalleCita:
+        return "detalleCita";
+      case PAGES.crearCita:
+        return "crearCita";
       case PAGES.casos:
         return "casos";
       case PAGES.crearCaso:
@@ -120,6 +146,9 @@ extension AppPageExtension on PAGES {
 
       case PAGES.membresias:
         return "membresias";
+      case PAGES.noticias:
+        return "noticias";
+
       case PAGES.preguntas:
         return "preguntas";
       case PAGES.formasPago:

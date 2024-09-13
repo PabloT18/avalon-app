@@ -8,6 +8,7 @@ class CrearCasoPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('CrearCasoPage'),
+        elevation: 6,
       ),
       body: const Center(
         child: Text('CrearCasoPage'),

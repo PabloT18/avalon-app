@@ -1,0 +1,19 @@
+{
+    "title": {
+        "one": "Cita Médica",
+        "other": "Citas Médicas"
+    },
+    "casoDetalle": {
+        "one": "Cita Médica Detalle",
+        "other": "Citas Médicas Detalles"
+    },
+    "estados": "Estados de las citas",
+    "estadoCerrado": "Cerrado",
+    "estadoGestionando": "Gestionando",
+    "estadoPorGestionar": "Por Gestionar",
+    "nuevaCita": "Nueva Cita",
+    "citaSinCaso": "Cita sin caso",
+    "creaCasoCita": "Crea un caso para la cita médica",
+    "citaEnCaso": "Escoje el caso para la cita médica",
+    "citaEstado": "Estado de la cita"
+}

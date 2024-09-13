@@ -26,6 +26,11 @@ class DrawerCustom extends StatelessWidget {
 
     final List<DrawerOption> generalOptions = [
       DrawerOption(
+          label: apptexts.comunicadospage.title(n: 2),
+          icon: Icons.newspaper,
+          isUserOption: false,
+          routeName: PAGES.noticias.pageName),
+      DrawerOption(
           label: apptexts.medicosPage.title(n: 2),
           icon: Icons.medication_sharp,
           isUserOption: false,
@@ -42,7 +47,7 @@ class DrawerCustom extends StatelessWidget {
           routeName: PAGES.formasPago.pageName),
       DrawerOption(
           label: apptexts.preferenciasPage.preferenciasUser,
-          icon: Icons.person,
+          icon: Icons.settings,
           isUserOption: false,
           routeName: PAGES.preferencias.pageName),
       DrawerOption(
@@ -51,7 +56,7 @@ class DrawerCustom extends StatelessWidget {
           isUserOption: false,
           routeName: PAGES.preguntas.pageName),
       DrawerOption(
-          label: apptexts.avalonInfo.aboutUs,
+          label: apptexts.avalonInfo.contactUs,
           icon: Icons.house,
           isUserOption: false,
           routeName: PAGES.aboutus.pageName),
@@ -64,16 +69,19 @@ class DrawerCustom extends StatelessWidget {
 
     final List<DrawerOption> userOptions = [
       DrawerOption(
-          label: 'Home', icon: Icons.house, routeName: PAGES.home.pagePath),
+        label: 'Home',
+        icon: Icons.house,
+        routeName: PAGES.home.pageName,
+      ),
       DrawerOption(
           label: apptexts.casosPage.title(n: 2),
           icon: Icons.local_hospital_rounded,
           isUserOption: true,
           routeName: PAGES.casos.pageName),
-      DrawerOption(
-          label: apptexts.reclamacionesPage.title(n: 2),
-          icon: Icons.border_all,
-          routeName: PAGES.reclamaciones.pageName),
+      // DrawerOption(
+      //     label: apptexts.reclamacionesPage.title(n: 2),
+      //     icon: Icons.border_all,
+      //     routeName: PAGES.reclamaciones.pageName),
       DrawerOption(
           label: apptexts.segurosPage.title(n: 2),
           icon: Icons.security_rounded,
@@ -88,10 +96,6 @@ class DrawerCustom extends StatelessWidget {
           routeName: PAGES.membresias.pageName),
     ].where((option) => option.isUserOption).toList();
 
-    // final List<DrawerOption> generalOptions =
-    //     drawerOptions.where((option) => option.isUserOption).toList();
-    // final List<DrawerOption> userOptions =
-    //     drawerOptions.where((option) => !option.isUserOption).toList();
     final List<DrawerOption> drawerOptions = [
       ...userOptions,
       ...generalOptions
@@ -108,10 +112,6 @@ class DrawerCustom extends StatelessWidget {
         Scaffold.of(context).closeDrawer();
         if (isSameDestination) return;
 
-        if (destination == 0) {
-          context.pop();
-          return;
-        }
         if (destination == drawerOptions.length - 1) {
           context.read<AuthenticationRepository>().logOut();
         } else {

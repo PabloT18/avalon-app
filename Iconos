@@ -1,0 +1,5 @@
+Iconos 
+CasoOption.caso => const FaIcon(FontAwesomeIcons.notesMedical),
+      CasoOption.citas => const FaIcon(FontAwesomeIcons.calendarPlus),
+      CasoOption.reembolso => const FaIcon(FontAwesomeIcons.fileMedical),
+      CasoOption.emergencia => const FaIcon(FontAwesomeIcons.kitMedical),

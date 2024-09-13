@@ -10,6 +10,8 @@ class AppTheme {
       // visualDensity: VisualDensity.adaptivePlatformDensity,
       colorSchemeSeed: AppColors.primaryBlueMaterial,
       fontFamily: 'Sora',
+      expansionTileTheme: const ExpansionTileThemeData().copyWith(
+          shape: const Border(), collapsedIconColor: AppColors.secondaryBlue),
       // dividerColor: ThemeData().dividerColor,
       // expansionTipleTheme: const ExpansionTileThemeData()
       //     .copyWith(collapsedIconColor: AppColors.primaryBlue),

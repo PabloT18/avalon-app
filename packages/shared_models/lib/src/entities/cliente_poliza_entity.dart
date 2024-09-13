@@ -12,8 +12,8 @@ class ClientePoliza extends Equatable {
   final String? empresa;
   final UsrCliente? cliente;
   final UsrAsesor? asesor;
-  final UsrAgenteResponse? agente;
-  final PolizaResponse? poliza;
+  final UsrAgente? agente;
+  final Poliza? poliza;
   final DateTime? fechaInicio;
   final DateTime? fechaFin;
   final String? estado;

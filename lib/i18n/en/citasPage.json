@@ -1,0 +1,19 @@
+{
+    "title": {
+        "one": "Appointment",
+        "other": "Appointments"
+    },
+    "casoDetalle": {
+        "one": "Appointment Detail",
+        "other": "Appointment Details"
+    },
+    "estados": "Appointment States",
+    "estadoCerrado": "Closed",
+    "estadoGestionando": "Managing",
+    "estadoPorGestionar": "Pending",
+    "nuevaCita": "New Appointment",
+    "citaSinCaso": "Appointment without Case",
+    "creaCasoCita": "Create a case for the appointment",
+    "citaEnCaso": "Choose the case for the appointment",
+    "citaEstado": "Appointment State"
+}

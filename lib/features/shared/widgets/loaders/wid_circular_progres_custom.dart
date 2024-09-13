@@ -15,8 +15,9 @@ class CircularProgressIndicatorCustom extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: paddinghorizontal),
         child: CircularProgressIndicator.adaptive(
-          backgroundColor: Platform.isIOS ? AppColors.threeBlue : null,
-          valueColor: const AlwaysStoppedAnimation<Color>(AppColors.threeBlue),
+          backgroundColor: Platform.isIOS ? AppColors.primaryBlue : null,
+          valueColor:
+              const AlwaysStoppedAnimation<Color>(AppColors.primaryBlue),
           // backgroundColor: isDarkTheme ? Colors.white : AppColors.primaryBlue,
         ),
       ),

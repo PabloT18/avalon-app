@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_models/shared_models.dart';
 
 class UsrCliente extends Equatable {
@@ -113,6 +114,57 @@ class UsrCliente extends Equatable {
         "lugarNacimiento": lugarNacimiento,
         "lugarResidencia": lugarResidencia,
       };
+
+  /// Empty user which represents an unauthenticated user.
+  static const empty = User(id: 0);
+
+  /// Convenience getter to determine whether the current user is empty.
+  bool get isEmpty => this == User.empty;
+
+  /// Convenience getter to determine whether the current user is not empty.
+  bool get isNotEmpty => this != User.empty;
+
+  String get fullName => '$nombres $apellidos';
+
+  String get fullNameUpperCase => '$nombres $apellidos'.toUpperCase();
+
+  UserRol get userRol {
+    if (rol == null) {
+      return UserRol.client;
+    } else {
+      switch (rol!.id) {
+        case 1:
+          return UserRol.admin;
+        case 2:
+          return UserRol.asesor;
+        case 3:
+          return UserRol.client;
+        case 4:
+          return UserRol.agente;
+        default:
+          return UserRol.client;
+      }
+    }
+  }
+
+  bool get isClient => userRol == UserRol.client;
+
+  String formatFecha(DateTime? fecha) {
+    if (fecha == null) {
+      return '-';
+    } else {
+      final DateFormat formatter =
+          DateFormat('dd \'de\' MMMM \'del\' yyyy', 'es_ES');
+      return formatter.format(fecha);
+    }
+  }
+
+  // Ejemplo de uso:
+  String get formattedFechaNacimiento => formatFecha(fechaNacimiento);
+  String get formattedCreatedDate => formatFecha(createdDate);
+  String get formattedLastModifiedDate => formatFecha(lastModifiedDate);
+
+  bool get isAddressComplete => direccion?.isComplete ?? false;
 
   @override
   List<Object?> get props => [

@@ -22,5 +22,8 @@
     "errorUpdateUserData": "Error al actualizar los datos del usuario",
     "errorUpdateUserAddress": "Error al actualizar la dirección del usuario",
     "successUpdateUserData": "Datos del usuario actualizados correctamente",
-    "successUpdateUserAddress": "Dirección del usuario actualizada correctamente"
+    "successUpdateUserAddress": "Dirección del usuario actualizada correctamente",
+    "identificacion": "Identificación",
+    "tipoIdentificacion": "Tipo de Identificación",
+    "memberFamily": "Familiar"
 }

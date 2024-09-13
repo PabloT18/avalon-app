@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 220 (110 per locale)
+/// Strings: 312 (156 per locale)
 ///
-/// Built on 2024-09-09 at 05:00 UTC
+/// Built on 2024-09-13 at 06:42 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -152,6 +152,9 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final _TranslationsAvalonInfoEs avalonInfo = _TranslationsAvalonInfoEs._(_root);
 	late final _TranslationsCasosPageEs casosPage = _TranslationsCasosPageEs._(_root);
 	late final _TranslationsCentrosMedicosEs centrosMedicos = _TranslationsCentrosMedicosEs._(_root);
+	late final _TranslationsCitasPageEs citasPage = _TranslationsCitasPageEs._(_root);
+	late final _TranslationsComunicadospageEs comunicadospage = _TranslationsComunicadospageEs._(_root);
+	late final _TranslationsEmergenciasPageEs emergenciasPage = _TranslationsEmergenciasPageEs._(_root);
 	late final _TranslationsFamiliaresPageEs familiaresPage = _TranslationsFamiliaresPageEs._(_root);
 	late final _TranslationsFaqsPAgeEs faqsPAge = _TranslationsFaqsPAgeEs._(_root);
 	late final _TranslationsMedicosPageEs medicosPage = _TranslationsMedicosPageEs._(_root);
@@ -179,6 +182,7 @@ class _TranslationsAppOptionsEs {
 		one: 'Detalle',
 		other: 'Detalles',
 	);
+	String get codigo => 'Código';
 	String get fecha => 'Fecha';
 	String get scrollMore => 'Más';
 	String get scrollNoMoreData => 'No hay más datos';
@@ -215,6 +219,7 @@ class _TranslationsAvalonInfoEs {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	String get contactUs => 'Contáctenos';
 	String get aboutUs => 'Sobre Nosotros';
 	String get aboutDescription => 'AVALON PLUS es una empresa líder en el conserjería médica integral internacional, fundada en Texas, formada por profesionales con más de 25 años de experiencia en las áreas de administración de cuentas hospitalarias, servicios médicos y seguros internacionales.\nEl Know-How de nuestro equipo de profesionales nos permite comprender las necesidades de nuestros clientes.';
 	String get services => 'Servicios.';
@@ -233,6 +238,10 @@ class _TranslationsCasosPageEs {
 		one: 'Caso',
 		other: 'Casos',
 	);
+	String casoDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Detalle de caso',
+		other: 'Detalles de caso',
+	);
 }
 
 // Path: centrosMedicos
@@ -245,6 +254,58 @@ class _TranslationsCentrosMedicosEs {
 	String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 		one: 'Centro Médico',
 		other: 'Centro Médicos',
+	);
+}
+
+// Path: citasPage
+class _TranslationsCitasPageEs {
+	_TranslationsCitasPageEs._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Cita Médica',
+		other: 'Citas Médicas',
+	);
+	String casoDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Cita Médica Detalle',
+		other: 'Citas Médicas Detalles',
+	);
+	String get estados => 'Estados de las citas';
+	String get estadoCerrado => 'Cerrado';
+	String get estadoGestionando => 'Gestionando';
+	String get estadoPorGestionar => 'Por Gestionar';
+	String get nuevaCita => 'Nueva Cita';
+	String get citaSinCaso => 'Cita sin caso';
+	String get creaCasoCita => 'Crea un caso para la cita médica';
+	String get citaEnCaso => 'Escoje el caso para la cita médica';
+	String get citaEstado => 'Estado de la cita';
+}
+
+// Path: comunicadospage
+class _TranslationsComunicadospageEs {
+	_TranslationsComunicadospageEs._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Noticia',
+		other: 'Noticias',
+	);
+}
+
+// Path: emergenciasPage
+class _TranslationsEmergenciasPageEs {
+	_TranslationsEmergenciasPageEs._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Emergencia',
+		other: 'Emergencias',
 	);
 }
 
@@ -346,6 +407,9 @@ class _TranslationsPerfilPageEs {
 	String get errorUpdateUserAddress => 'Error al actualizar la dirección del usuario';
 	String get successUpdateUserData => 'Datos del usuario actualizados correctamente';
 	String get successUpdateUserAddress => 'Dirección del usuario actualizada correctamente';
+	String get identificacion => 'Identificación';
+	String get tipoIdentificacion => 'Tipo de Identificación';
+	String get memberFamily => 'Familiar';
 }
 
 // Path: preferenciasPage
@@ -391,6 +455,44 @@ class _TranslationsSegurosPageEs {
 		one: 'Seguro',
 		other: 'Seguros',
 	);
+	String polizaSeguros({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Poliza de seguro',
+		other: 'Polizas de seguro',
+	);
+	String cliente({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Cliente',
+		other: 'Clientes',
+	);
+	String clienteDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Detalle de cliente',
+		other: 'Detalle de clientes',
+	);
+	String agente({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Agente AVALON',
+		other: 'Agentes AVALON',
+	);
+	String agenteDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Detalle de agente AVALON',
+		other: 'Detalle de agentes AVALON',
+	);
+	String asesor({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Agente del Broker',
+		other: 'Agentes del Broker',
+	);
+	String asesosDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Detalle de agente del Broker',
+		other: 'Detalle de agentes del Broker',
+	);
+	String detalleSeguro({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Detalle de poliza',
+		other: 'Detalles de poliza',
+	);
+	String get empresa => 'Empresa';
+	String get numeroCertificado => 'Número de certificado';
+	String get aseguradora => 'Aseguradora';
+	String get initDate => 'Fecha de inicio';
+	String get endDate => 'Fecha de fin';
+	String get tipoSeguro => 'Tipo de poliza';
 }
 
 // Path: appOptions.validators
@@ -458,6 +560,9 @@ class _TranslationsEn implements Translations {
 	@override late final _TranslationsAvalonInfoEn avalonInfo = _TranslationsAvalonInfoEn._(_root);
 	@override late final _TranslationsCasosPageEn casosPage = _TranslationsCasosPageEn._(_root);
 	@override late final _TranslationsCentrosMedicosEn centrosMedicos = _TranslationsCentrosMedicosEn._(_root);
+	@override late final _TranslationsCitasPageEn citasPage = _TranslationsCitasPageEn._(_root);
+	@override late final _TranslationsComunicadospageEn comunicadospage = _TranslationsComunicadospageEn._(_root);
+	@override late final _TranslationsEmergenciasPageEn emergenciasPage = _TranslationsEmergenciasPageEn._(_root);
 	@override late final _TranslationsFamiliaresPageEn familiaresPage = _TranslationsFamiliaresPageEn._(_root);
 	@override late final _TranslationsFaqsPAgeEn faqsPAge = _TranslationsFaqsPAgeEn._(_root);
 	@override late final _TranslationsMedicosPageEn medicosPage = _TranslationsMedicosPageEn._(_root);
@@ -485,6 +590,7 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 		one: 'Detail',
 		other: 'Details',
 	);
+	@override String get codigo => 'Code';
 	@override String get fecha => 'Date';
 	@override String get scrollMore => 'Scroll for more';
 	@override String get scrollNoMoreData => 'No more data';
@@ -521,6 +627,7 @@ class _TranslationsAvalonInfoEn implements _TranslationsAvalonInfoEs {
 	@override final _TranslationsEn _root; // ignore: unused_field
 
 	// Translations
+	@override String get contactUs => 'Contact Us';
 	@override String get aboutUs => 'About Us';
 	@override String get aboutDescription => 'AVALON PLUS is a leading international comprehensive medical concierge company, founded in Texas, made up of professionals with more than 25 years of experience in the areas of hospital account management, medical services and international insurance.\nThe Know-How of our team of professionals allows us to understand the needs of our clients.';
 	@override String get services => 'Services.';
@@ -539,6 +646,10 @@ class _TranslationsCasosPageEn implements _TranslationsCasosPageEs {
 		one: 'Case',
 		other: 'Cases',
 	);
+	@override String casoDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Case detail',
+		other: 'Case details',
+	);
 }
 
 // Path: centrosMedicos
@@ -551,6 +662,58 @@ class _TranslationsCentrosMedicosEn implements _TranslationsCentrosMedicosEs {
 	@override String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'Medical Center',
 		other: 'Medical Centers',
+	);
+}
+
+// Path: citasPage
+class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
+	_TranslationsCitasPageEn._(this._root);
+
+	@override final _TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Appointment',
+		other: 'Appointments',
+	);
+	@override String casoDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Appointment Detail',
+		other: 'Appointment Details',
+	);
+	@override String get estados => 'Appointment States';
+	@override String get estadoCerrado => 'Closed';
+	@override String get estadoGestionando => 'Managing';
+	@override String get estadoPorGestionar => 'Pending';
+	@override String get nuevaCita => 'New Appointment';
+	@override String get citaSinCaso => 'Appointment without Case';
+	@override String get creaCasoCita => 'Create a case for the appointment';
+	@override String get citaEnCaso => 'Choose the case for the appointment';
+	@override String get citaEstado => 'Appointment State';
+}
+
+// Path: comunicadospage
+class _TranslationsComunicadospageEn implements _TranslationsComunicadospageEs {
+	_TranslationsComunicadospageEn._(this._root);
+
+	@override final _TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'New',
+		other: 'News',
+	);
+}
+
+// Path: emergenciasPage
+class _TranslationsEmergenciasPageEn implements _TranslationsEmergenciasPageEs {
+	_TranslationsEmergenciasPageEn._(this._root);
+
+	@override final _TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Emergency',
+		other: 'Emergencies',
 	);
 }
 
@@ -652,6 +815,9 @@ class _TranslationsPerfilPageEn implements _TranslationsPerfilPageEs {
 	@override String get errorUpdateUserAddress => 'Error updating user address';
 	@override String get successUpdateUserData => 'User data updated successfully';
 	@override String get successUpdateUserAddress => 'User address updated successfully';
+	@override String get identificacion => 'ID number';
+	@override String get tipoIdentificacion => 'ID Type';
+	@override String get memberFamily => 'Family Member';
 }
 
 // Path: preferenciasPage
@@ -697,6 +863,44 @@ class _TranslationsSegurosPageEn implements _TranslationsSegurosPageEs {
 		one: 'Insurance',
 		other: 'Insurance',
 	);
+	@override String polizaSeguros({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Insurance policy',
+		other: 'Insurance policies',
+	);
+	@override String cliente({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Client',
+		other: 'Clients',
+	);
+	@override String clienteDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Client detail',
+		other: 'Clients details',
+	);
+	@override String agente({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'AVALON Agent',
+		other: 'AVALON Agents',
+	);
+	@override String agenteDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'AVALON Agent detail',
+		other: 'AVALON Agents details',
+	);
+	@override String asesor({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Broker Advisor',
+		other: 'Broker Advisors',
+	);
+	@override String asesosDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Broker Advisor detail',
+		other: 'Broker Advisors details',
+	);
+	@override String detalleSeguro({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Insurance detail',
+		other: 'Insurance details',
+	);
+	@override String get empresa => 'Company';
+	@override String get numeroCertificado => 'Certificate number';
+	@override String get aseguradora => 'Insurance company';
+	@override String get initDate => 'Init date';
+	@override String get endDate => 'End date';
+	@override String get tipoSeguro => 'Insurance type';
 }
 
 // Path: appOptions.validators
@@ -751,6 +955,7 @@ extension on Translations {
 				one: 'Detalle',
 				other: 'Detalles',
 			);
+			case 'appOptions.codigo': return 'Código';
 			case 'appOptions.fecha': return 'Fecha';
 			case 'appOptions.scrollMore': return 'Más';
 			case 'appOptions.scrollNoMoreData': return 'No hay más datos';
@@ -792,6 +997,7 @@ extension on Translations {
 			case 'appOptions.validators.passwordConfirm': return 'La confirmación de la contraseña es requerida';
 			case 'appOptions.validators.passwordChanged': return 'Contraseña cambiada con éxito';
 			case 'appOptions.validators.passwordNotMatch': return 'Las contraseñas no coinciden';
+			case 'avalonInfo.contactUs': return 'Contáctenos';
 			case 'avalonInfo.aboutUs': return 'Sobre Nosotros';
 			case 'avalonInfo.aboutDescription': return 'AVALON PLUS es una empresa líder en el conserjería médica integral internacional, fundada en Texas, formada por profesionales con más de 25 años de experiencia en las áreas de administración de cuentas hospitalarias, servicios médicos y seguros internacionales.\nEl Know-How de nuestro equipo de profesionales nos permite comprender las necesidades de nuestros clientes.';
 			case 'avalonInfo.services': return 'Servicios.';
@@ -804,9 +1010,38 @@ extension on Translations {
 				one: 'Caso',
 				other: 'Casos',
 			);
+			case 'casosPage.casoDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Detalle de caso',
+				other: 'Detalles de caso',
+			);
 			case 'centrosMedicos.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Centro Médico',
 				other: 'Centro Médicos',
+			);
+			case 'citasPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Cita Médica',
+				other: 'Citas Médicas',
+			);
+			case 'citasPage.casoDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Cita Médica Detalle',
+				other: 'Citas Médicas Detalles',
+			);
+			case 'citasPage.estados': return 'Estados de las citas';
+			case 'citasPage.estadoCerrado': return 'Cerrado';
+			case 'citasPage.estadoGestionando': return 'Gestionando';
+			case 'citasPage.estadoPorGestionar': return 'Por Gestionar';
+			case 'citasPage.nuevaCita': return 'Nueva Cita';
+			case 'citasPage.citaSinCaso': return 'Cita sin caso';
+			case 'citasPage.creaCasoCita': return 'Crea un caso para la cita médica';
+			case 'citasPage.citaEnCaso': return 'Escoje el caso para la cita médica';
+			case 'citasPage.citaEstado': return 'Estado de la cita';
+			case 'comunicadospage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Noticia',
+				other: 'Noticias',
+			);
+			case 'emergenciasPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Emergencia',
+				other: 'Emergencias',
 			);
 			case 'familiaresPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Familiar',
@@ -854,6 +1089,9 @@ extension on Translations {
 			case 'perfilPage.errorUpdateUserAddress': return 'Error al actualizar la dirección del usuario';
 			case 'perfilPage.successUpdateUserData': return 'Datos del usuario actualizados correctamente';
 			case 'perfilPage.successUpdateUserAddress': return 'Dirección del usuario actualizada correctamente';
+			case 'perfilPage.identificacion': return 'Identificación';
+			case 'perfilPage.tipoIdentificacion': return 'Tipo de Identificación';
+			case 'perfilPage.memberFamily': return 'Familiar';
 			case 'preferenciasPage.preferenciasTitle': return 'Preferencias';
 			case 'preferenciasPage.preferenciasUser': return 'Preferencias de usuario';
 			case 'preferenciasPage.notificaciones': return 'Notificaciones';
@@ -872,6 +1110,44 @@ extension on Translations {
 				one: 'Seguro',
 				other: 'Seguros',
 			);
+			case 'segurosPage.polizaSeguros': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Poliza de seguro',
+				other: 'Polizas de seguro',
+			);
+			case 'segurosPage.cliente': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Cliente',
+				other: 'Clientes',
+			);
+			case 'segurosPage.clienteDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Detalle de cliente',
+				other: 'Detalle de clientes',
+			);
+			case 'segurosPage.agente': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Agente AVALON',
+				other: 'Agentes AVALON',
+			);
+			case 'segurosPage.agenteDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Detalle de agente AVALON',
+				other: 'Detalle de agentes AVALON',
+			);
+			case 'segurosPage.asesor': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Agente del Broker',
+				other: 'Agentes del Broker',
+			);
+			case 'segurosPage.asesosDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Detalle de agente del Broker',
+				other: 'Detalle de agentes del Broker',
+			);
+			case 'segurosPage.detalleSeguro': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Detalle de poliza',
+				other: 'Detalles de poliza',
+			);
+			case 'segurosPage.empresa': return 'Empresa';
+			case 'segurosPage.numeroCertificado': return 'Número de certificado';
+			case 'segurosPage.aseguradora': return 'Aseguradora';
+			case 'segurosPage.initDate': return 'Fecha de inicio';
+			case 'segurosPage.endDate': return 'Fecha de fin';
+			case 'segurosPage.tipoSeguro': return 'Tipo de poliza';
 			default: return null;
 		}
 	}
@@ -889,6 +1165,7 @@ extension on _TranslationsEn {
 				one: 'Detail',
 				other: 'Details',
 			);
+			case 'appOptions.codigo': return 'Code';
 			case 'appOptions.fecha': return 'Date';
 			case 'appOptions.scrollMore': return 'Scroll for more';
 			case 'appOptions.scrollNoMoreData': return 'No more data';
@@ -930,6 +1207,7 @@ extension on _TranslationsEn {
 			case 'appOptions.validators.passwordConfirm': return 'Password confirmation is required';
 			case 'appOptions.validators.passwordChanged': return 'Password changed successfully';
 			case 'appOptions.validators.passwordNotMatch': return 'Passwords do not match';
+			case 'avalonInfo.contactUs': return 'Contact Us';
 			case 'avalonInfo.aboutUs': return 'About Us';
 			case 'avalonInfo.aboutDescription': return 'AVALON PLUS is a leading international comprehensive medical concierge company, founded in Texas, made up of professionals with more than 25 years of experience in the areas of hospital account management, medical services and international insurance.\nThe Know-How of our team of professionals allows us to understand the needs of our clients.';
 			case 'avalonInfo.services': return 'Services.';
@@ -942,9 +1220,38 @@ extension on _TranslationsEn {
 				one: 'Case',
 				other: 'Cases',
 			);
+			case 'casosPage.casoDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Case detail',
+				other: 'Case details',
+			);
 			case 'centrosMedicos.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Medical Center',
 				other: 'Medical Centers',
+			);
+			case 'citasPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Appointment',
+				other: 'Appointments',
+			);
+			case 'citasPage.casoDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Appointment Detail',
+				other: 'Appointment Details',
+			);
+			case 'citasPage.estados': return 'Appointment States';
+			case 'citasPage.estadoCerrado': return 'Closed';
+			case 'citasPage.estadoGestionando': return 'Managing';
+			case 'citasPage.estadoPorGestionar': return 'Pending';
+			case 'citasPage.nuevaCita': return 'New Appointment';
+			case 'citasPage.citaSinCaso': return 'Appointment without Case';
+			case 'citasPage.creaCasoCita': return 'Create a case for the appointment';
+			case 'citasPage.citaEnCaso': return 'Choose the case for the appointment';
+			case 'citasPage.citaEstado': return 'Appointment State';
+			case 'comunicadospage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'New',
+				other: 'News',
+			);
+			case 'emergenciasPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Emergency',
+				other: 'Emergencies',
 			);
 			case 'familiaresPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Family',
@@ -992,6 +1299,9 @@ extension on _TranslationsEn {
 			case 'perfilPage.errorUpdateUserAddress': return 'Error updating user address';
 			case 'perfilPage.successUpdateUserData': return 'User data updated successfully';
 			case 'perfilPage.successUpdateUserAddress': return 'User address updated successfully';
+			case 'perfilPage.identificacion': return 'ID number';
+			case 'perfilPage.tipoIdentificacion': return 'ID Type';
+			case 'perfilPage.memberFamily': return 'Family Member';
 			case 'preferenciasPage.preferenciasTitle': return 'Preferences';
 			case 'preferenciasPage.preferenciasUser': return 'User Preferences';
 			case 'preferenciasPage.notificaciones': return 'Notifications';
@@ -1010,6 +1320,44 @@ extension on _TranslationsEn {
 				one: 'Insurance',
 				other: 'Insurance',
 			);
+			case 'segurosPage.polizaSeguros': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Insurance policy',
+				other: 'Insurance policies',
+			);
+			case 'segurosPage.cliente': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Client',
+				other: 'Clients',
+			);
+			case 'segurosPage.clienteDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Client detail',
+				other: 'Clients details',
+			);
+			case 'segurosPage.agente': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'AVALON Agent',
+				other: 'AVALON Agents',
+			);
+			case 'segurosPage.agenteDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'AVALON Agent detail',
+				other: 'AVALON Agents details',
+			);
+			case 'segurosPage.asesor': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Broker Advisor',
+				other: 'Broker Advisors',
+			);
+			case 'segurosPage.asesosDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Broker Advisor detail',
+				other: 'Broker Advisors details',
+			);
+			case 'segurosPage.detalleSeguro': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Insurance detail',
+				other: 'Insurance details',
+			);
+			case 'segurosPage.empresa': return 'Company';
+			case 'segurosPage.numeroCertificado': return 'Certificate number';
+			case 'segurosPage.aseguradora': return 'Insurance company';
+			case 'segurosPage.initDate': return 'Init date';
+			case 'segurosPage.endDate': return 'End date';
+			case 'segurosPage.tipoSeguro': return 'Insurance type';
 			default: return null;
 		}
 	}

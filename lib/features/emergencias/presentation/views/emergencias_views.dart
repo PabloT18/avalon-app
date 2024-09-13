@@ -1,0 +1,1 @@
+export 'emergencias_page.dart';

@@ -2,5 +2,43 @@
     "title": {
         "one": "Insurance",
         "other": "Insurance"
-    }
+    },
+    "polizaSeguros": {
+        "one": "Insurance policy",
+        "other": "Insurance policies"
+    },
+    "cliente": {
+        "one": "Client",
+        "other": "Clients"
+    },
+    "clienteDetalle": {
+        "one": "Client detail",
+        "other": "Clients details"
+    },
+    "agente": {
+        "one": "AVALON Agent",
+        "other": "AVALON Agents"
+    },
+    "agenteDetalle": {
+        "one": "AVALON Agent detail",
+        "other": "AVALON Agents details"
+    },
+    "asesor": {
+        "one": "Broker Advisor",
+        "other": "Broker Advisors"
+    },
+    "asesosDetalle": {
+        "one": "Broker Advisor detail",
+        "other": "Broker Advisors details"
+    },
+    "detalleSeguro": {
+        "one": "Insurance detail",
+        "other": "Insurance details"
+    },
+    "empresa": "Company",
+    "numeroCertificado": "Certificate number",
+    "aseguradora": "Insurance company",
+    "initDate": "Init date",
+    "endDate": "End date",
+    "tipoSeguro": "Insurance type"
 }

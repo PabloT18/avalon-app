@@ -2,5 +2,43 @@
     "title": {
         "one": "Seguro",
         "other": "Seguros"
-    }
+    },
+    "polizaSeguros": {
+        "one": "Poliza de seguro",
+        "other": "Polizas de seguro"
+    },
+    "cliente": {
+        "one": "Cliente",
+        "other": "Clientes"
+    },
+    "clienteDetalle": {
+        "one": "Detalle de cliente",
+        "other": "Detalle de clientes"
+    },
+    "agente": {
+        "one": "Agente AVALON",
+        "other": "Agentes AVALON"
+    },
+    "agenteDetalle": {
+        "one": "Detalle de agente AVALON",
+        "other": "Detalle de agentes AVALON"
+    },
+    "asesor": {
+        "one": "Agente del Broker",
+        "other": "Agentes del Broker"
+    },
+    "asesosDetalle": {
+        "one": "Detalle de agente del Broker",
+        "other": "Detalle de agentes del Broker"
+    },
+    "detalleSeguro": {
+        "one": "Detalle de poliza",
+        "other": "Detalles de poliza"
+    },
+    "empresa": "Empresa",
+    "numeroCertificado": "Número de certificado",
+    "aseguradora": "Aseguradora",
+    "initDate": "Fecha de inicio",
+    "endDate": "Fecha de fin",
+    "tipoSeguro": "Tipo de poliza"
 }
