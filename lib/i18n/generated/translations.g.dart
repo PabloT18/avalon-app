@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 368 (184 per locale)
+/// Strings: 372 (186 per locale)
 ///
-/// Built on 2024-09-16 at 04:38 UTC
+/// Built on 2024-09-16 at 04:50 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -259,6 +259,7 @@ class _TranslationsCentrosMedicosEs {
 		one: 'Centro Médico',
 		other: 'Centro Médicos',
 	);
+	String get noData => 'No se encontraron centros médicos';
 }
 
 // Path: citasPage
@@ -398,6 +399,7 @@ class _TranslationsMetodosPagoPageEs {
 		one: 'Método de Pago',
 		other: 'Métodos de Pago',
 	);
+	String get noData => 'No se encontraron métodos de pago';
 }
 
 // Path: perfilPage
@@ -721,6 +723,7 @@ class _TranslationsCentrosMedicosEn implements _TranslationsCentrosMedicosEs {
 		one: 'Medical Center',
 		other: 'Medical Centers',
 	);
+	@override String get noData => 'No medical centers found';
 }
 
 // Path: citasPage
@@ -860,6 +863,7 @@ class _TranslationsMetodosPagoPageEn implements _TranslationsMetodosPagoPageEs {
 		one: 'Payment Method',
 		other: 'Payment Methods',
 	);
+	@override String get noData => 'No payment methods found';
 }
 
 // Path: perfilPage
@@ -1130,6 +1134,7 @@ extension on Translations {
 				one: 'Centro Médico',
 				other: 'Centro Médicos',
 			);
+			case 'centrosMedicos.noData': return 'No se encontraron centros médicos';
 			case 'citasPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Cita Médica',
 				other: 'Citas Médicas',
@@ -1203,6 +1208,7 @@ extension on Translations {
 				one: 'Método de Pago',
 				other: 'Métodos de Pago',
 			);
+			case 'metodosPagoPage.noData': return 'No se encontraron métodos de pago';
 			case 'perfilPage.userData': return 'Datos del Usuario';
 			case 'perfilPage.userPersonalData': return 'Datos Personales';
 			case 'perfilPage.username': return 'Nombre de Usuario';
@@ -1374,6 +1380,7 @@ extension on _TranslationsEn {
 				one: 'Medical Center',
 				other: 'Medical Centers',
 			);
+			case 'centrosMedicos.noData': return 'No medical centers found';
 			case 'citasPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Appointment',
 				other: 'Appointments',
@@ -1447,6 +1454,7 @@ extension on _TranslationsEn {
 				one: 'Payment Method',
 				other: 'Payment Methods',
 			);
+			case 'metodosPagoPage.noData': return 'No payment methods found';
 			case 'perfilPage.userData': return 'User Data';
 			case 'perfilPage.userPersonalData': return 'Personal Data';
 			case 'perfilPage.username': return 'Username';

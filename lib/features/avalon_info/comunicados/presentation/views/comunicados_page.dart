@@ -56,7 +56,7 @@ class _ComunicadosPageState extends State<ComunicadosPage> {
           title: Text(apptexts.comunicadospage.title(n: 2)),
           elevation: 6,
         ),
-        drawer: DrawerCustom(indexInitialName: PAGES.medicos.pageName),
+        drawer: DrawerCustom(indexInitialName: PAGES.noticias.pageName),
         body: FutureBuilder<List<dynamic>>(
           future: _futureNotificaciones,
           builder: (context, snapshot) {

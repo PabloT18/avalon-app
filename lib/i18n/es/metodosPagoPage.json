@@ -2,5 +2,6 @@
     "title": {
         "one": "Método de Pago",
         "other": "Métodos de Pago"
-    }
+    },
+    "noData": "No se encontraron métodos de pago"
 }

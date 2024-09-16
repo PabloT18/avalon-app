@@ -1,20 +1,26 @@
 import 'dart:async';
 
+import 'package:avalon_app/core/error/exceptions/exceptions.dart';
 import 'package:avalon_app/features/avalon_info/formaspago/data/models/metodo_pago_model.dart';
 import 'package:avalon_app/features/avalon_info/formaspago/domain/repository/formaspago_repository.dart';
 import 'package:avalon_app/features/avalon_info/formaspago/formaspago.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:shared_models/shared_models.dart';
 
 part 'formas_pago_event.dart';
 part 'formas_pago_state.dart';
 
 class FormasPagoBloc extends Bloc<FormasPagoEvent, FormasPagoState> {
-  FormasPagoBloc({required this.repository}) : super(FormasPagoInitial()) {
+  FormasPagoBloc(this.user, {required this.repository})
+      : super(FormasPagoInitial()) {
     on<GetMetodosPagoEvent>(_onGetMetodosPago);
     refreshController = RefreshController(initialRefresh: false);
   }
+
+  final User user;
 
   final FormasPagoRepository repository;
   late RefreshController refreshController;
@@ -33,15 +39,19 @@ class FormasPagoBloc extends Bloc<FormasPagoEvent, FormasPagoState> {
       ..refreshCompleted();
 
     try {
-      final List<MetodoPago> metodosPago = await repository.getMetodosPago();
+      final List<MetodoPago> metodosPago =
+          await repository.getMetodosPago(user);
       if (metodosPago.isEmpty) {
-        emit(const FormasPagoError(
-            "No hay formas de pago cargadas por el momento"));
+        emit(FormasPagoError(apptexts.metodosPagoPage.noData));
       } else {
         emit(FormasPagoLoaded(metodosPago));
       }
+    } on InternetAccessException catch (e) {
+      emit(FormasPagoError(e.message));
+    } on ServerException catch (e) {
+      emit(FormasPagoError(e.message ?? apptexts.appOptions.error_servers));
     } catch (e) {
-      emit(const FormasPagoError("Error al cargar los metodos de pago"));
+      emit(FormasPagoError(apptexts.appOptions.error_servers));
     }
   }
 }

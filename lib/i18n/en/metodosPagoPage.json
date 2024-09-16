@@ -2,5 +2,6 @@
     "title": {
         "one": "Payment Method",
         "other": "Payment Methods"
-    }
+    },
+    "noData": "No payment methods found"
 }

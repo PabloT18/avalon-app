@@ -1,3 +1,4 @@
+import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
@@ -14,8 +15,11 @@ class FormasPagoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+
     return BlocProvider(
       create: (context) => FormasPagoBloc(
+        user,
         repository: context.read<FormasPagoRepository>(),
       )..add(const GetMetodosPagoEvent()),
       child: const FormasPagoPageView(),
@@ -58,8 +62,7 @@ class FormasPagoPageView extends StatelessWidget {
       FormasPagoInitial() => const Center(child: CircularProgressIndicator()),
       FormasPagoLoading() => const Center(child: CircularProgressIndicator()),
       FormasPagoError() => MessageError(
-          message:
-              'Error al cargar las preguntas, por favor intente nuevamente',
+          message: state.message,
           onTap: () {
             formasPagoBloc.add(const GetMetodosPagoEvent());
           }),

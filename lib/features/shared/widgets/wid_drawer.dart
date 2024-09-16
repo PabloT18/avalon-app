@@ -1,3 +1,4 @@
+import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/core/config/responsive/responsive_class.dart';
 import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/core/config/router/app_routes_assets.dart';
@@ -8,6 +9,7 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_models/shared_models.dart';
 
 class DrawerCustom extends StatelessWidget {
   const DrawerCustom({
@@ -22,9 +24,36 @@ class DrawerCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final responsive = ResponsiveCustom.of(context);
-    // int index = indexInitial;
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+    final isRolCliente = user.userRol == UserRol.client;
 
-    final List<DrawerOption> generalOptions = [
+    final List<DrawerOption> drawerOptionsPre = [
+      DrawerOption(
+        label: 'Home',
+        icon: Icons.house,
+        routeName: PAGES.home.pageName,
+      ),
+      DrawerOption(
+          label: apptexts.casosPage.title(n: 2),
+          icon: Icons.local_hospital_rounded,
+          isUserOption: true,
+          routeName: PAGES.casos.pageName),
+      DrawerOption(
+          label: apptexts.segurosPage.polizaSeguros(n: 2),
+          icon: Icons.security_rounded,
+          routeName: PAGES.seguros.pageName),
+      DrawerOption(
+        label: apptexts.familiaresPage.title(n: 2),
+        icon: Icons.family_restroom,
+        routeName: PAGES.familiares.pageName,
+        isClientRol: true,
+      ),
+      DrawerOption(
+        label: apptexts.membresiasPage.membresia(n: 2),
+        icon: Icons.badge_outlined,
+        routeName: PAGES.membresias.pageName,
+        isClientRol: true,
+      ),
       DrawerOption(
           label: apptexts.comunicadospage.title(n: 2),
           icon: Icons.newspaper,
@@ -65,52 +94,25 @@ class DrawerCustom extends StatelessWidget {
           icon: Icons.logout,
           isUserOption: false,
           routeName: PAGES.login.pagePath),
-    ].where((option) => !option.isUserOption).toList();
-
-    final List<DrawerOption> userOptions = [
-      DrawerOption(
-        label: 'Home',
-        icon: Icons.house,
-        routeName: PAGES.home.pageName,
-      ),
-      DrawerOption(
-          label: apptexts.casosPage.title(n: 2),
-          icon: Icons.local_hospital_rounded,
-          isUserOption: true,
-          routeName: PAGES.casos.pageName),
-      // DrawerOption(
-      //     label: apptexts.reclamacionesPage.title(n: 2),
-      //     icon: Icons.border_all,
-      //     routeName: PAGES.reclamaciones.pageName),
-      DrawerOption(
-          label: apptexts.segurosPage.title(n: 2),
-          icon: Icons.security_rounded,
-          routeName: PAGES.seguros.pageName),
-      DrawerOption(
-          label: apptexts.familiaresPage.title(n: 2),
-          icon: Icons.family_restroom,
-          routeName: PAGES.familiares.pageName),
-      DrawerOption(
-          label: apptexts.membresiasPage.membresia(n: 2),
-          icon: Icons.badge_outlined,
-          routeName: PAGES.membresias.pageName),
-    ].where((option) => option.isUserOption).toList();
-
-    final List<DrawerOption> drawerOptions = [
-      ...userOptions,
-      ...generalOptions
     ];
-    int index = getDrawerOptionIndex(drawerOptions, indexInitialName);
+    // Filtrar las opciones basado en el rol del usuario
+    final List<DrawerOption> drawerOptions = drawerOptionsPre.where((option) {
+      if (option.isClientRol && !isRolCliente) {
+        return false; // Si requiere rol cliente y no lo tiene, excluye la opción
+      }
+      return true;
+    }).toList();
+
+    // Obtener el índice basado en la ruta inicial usando indexWhere
+    final int index = drawerOptions
+        .indexWhere((option) => option.routeName == indexInitialName);
+
     return NavigationDrawer(
       indicatorColor: AppColors.secondaryBlue.withOpacity(0.2),
       backgroundColor: AppColors.white,
       selectedIndex: index,
       onDestinationSelected: (destination) {
-        bool isSameDestination = index == destination;
-        index = destination;
-
         Scaffold.of(context).closeDrawer();
-        if (isSameDestination) return;
 
         if (destination == drawerOptions.length - 1) {
           context.read<AuthenticationRepository>().logOut();
@@ -127,7 +129,27 @@ class DrawerCustom extends StatelessWidget {
           ),
         ),
         SizedBox(height: responsive.hp(2)),
-        ...userOptions.map((option) {
+        // ...userOptions.map((option) {
+        //   return NavigationDrawerDestination(
+        //     label: Text(option.label),
+        //     icon: Icon(
+        //       option.icon,
+        //       color: AppColors.primaryBlue,
+        //     ),
+        //   );
+        // }),
+        // const Divider(),
+        // ...generalOptions.map((option) {
+        //   return NavigationDrawerDestination(
+        //     label: Text(option.label),
+        //     icon: Icon(
+        //       option.icon,
+        //       color: AppColors.primaryBlue,
+        //     ),
+        //   );
+        // }),
+        // Pintar las opciones donde isUserOption es true
+        ...drawerOptions.where((option) => option.isUserOption).map((option) {
           return NavigationDrawerDestination(
             label: Text(option.label),
             icon: Icon(
@@ -136,8 +158,12 @@ class DrawerCustom extends StatelessWidget {
             ),
           );
         }),
+
+        // Divider entre las dos secciones
         const Divider(),
-        ...generalOptions.map((option) {
+
+        // Pintar las opciones donde isUserOption es false
+        ...drawerOptions.where((option) => !option.isUserOption).map((option) {
           return NavigationDrawerDestination(
             label: Text(option.label),
             icon: Icon(
@@ -165,11 +191,13 @@ class DrawerOption {
   final IconData icon;
   final String routeName;
   final bool isUserOption;
+  final bool isClientRol;
 
   DrawerOption({
     required this.label,
     required this.icon,
     required this.routeName,
     this.isUserOption = true,
+    this.isClientRol = false,
   });
 }

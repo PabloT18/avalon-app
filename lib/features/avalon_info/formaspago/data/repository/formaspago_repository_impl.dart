@@ -1,31 +1,20 @@
-import 'package:avalon_app/app/data/sources/local/enviroment.dart';
+import 'package:avalon_app/core/config/remote/app_remote_config.dart';
 import 'package:avalon_app/features/avalon_info/formaspago/data/models/metodo_pago_model.dart';
-import 'package:dio/dio.dart';
+
+import 'package:shared_models/shared_models.dart';
 
 import '../../domain/repository/formaspago_repository.dart';
 
 class FormasPagoRepositoryImpl implements FormasPagoRepository {
-  final String baseUrl = Environment.avalonApi;
-  late Dio dio;
-
-  FormasPagoRepositoryImpl() {
-    dio = Dio();
-  }
-
   @override
-  Future<List<MetodoPago>> getMetodosPago() async {
-    final String url = '$baseUrl/metodosPago';
-    const String token =
-        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhdmFsb24iLCJpYXQiOjE3MTYyMTExNzgsImV4cCI6MTc0Nzc0NzE3OH0.rLk9oE1p0PJUGv8XZKgPNQJN0aDNuz0Gkr-IsNfGomzg1bv9-PTb40AIxCQJg2XXnMKSKfBUI-5bVI82pmBsWw';
+  Future<List<MetodoPago>> getMetodosPago(User user) async {
+    const String url = '/metodosPago';
 
     try {
-      final response = await dio.get(
-        url,
-        options: Options(
-          headers: {
-            'Authorization': token,
-          },
-        ),
+      final response = await APPRemoteConfig.httpGet(
+        url: url,
+        exception: Exception('Error fetching data'),
+        token: user.token!,
       );
       if (response.statusCode == 200) {
         final List<dynamic> jsonResponse = response.data;

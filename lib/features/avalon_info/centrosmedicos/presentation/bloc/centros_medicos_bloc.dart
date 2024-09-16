@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:avalon_app/core/error/exceptions/exceptions.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:shared_models/shared_models.dart';
 
 import '../../domain/models/centro_medico_entity.dart';
 import '../../domain/repository/centrosmedicos_repository.dart';
@@ -12,12 +15,13 @@ part 'centros_medicos_state.dart';
 
 class CentrosMedicosBloc
     extends Bloc<CentrosMedicosEvent, CentrosMedicosState> {
-  CentrosMedicosBloc({required this.repository})
+  CentrosMedicosBloc(this.user, {required this.repository})
       : super(CentrosMedicosLoading()) {
     on<GetCentrosMedicos>(_onGetCentrosMedicos);
     refreshController = RefreshController(initialRefresh: false);
   }
 
+  final User user;
   late RefreshController refreshController;
   final CentrosmedicosRepository repository;
 
@@ -36,15 +40,18 @@ class CentrosMedicosBloc
       ..refreshCompleted();
 
     try {
-      final List<CentroMedico> medicosList = await repository.getMedicos();
+      final List<CentroMedico> medicosList = await repository.getMedicos(user);
       if (medicosList.isEmpty) {
-        emit(const CentrosMedicosError(
-            "No hay formas de pago cargadas por el momento"));
+        emit(CentrosMedicosError(apptexts.centrosMedicos.noData));
       } else {
         emit(CentrosMedicosLoaded(medicosList));
       }
+    } on InternetAccessException catch (e) {
+      emit(CentrosMedicosError(e.message));
+    } on ServerException catch (e) {
+      emit(CentrosMedicosError(e.message ?? apptexts.appOptions.error_servers));
     } catch (e) {
-      emit(const CentrosMedicosError("Error al cargar los metodos de pago"));
+      emit(CentrosMedicosError(apptexts.appOptions.error_servers));
     }
   }
 }

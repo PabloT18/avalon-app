@@ -1,3 +1,4 @@
+import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
@@ -15,8 +16,11 @@ class CentrosMedicosPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+
     return BlocProvider(
       create: (context) => CentrosMedicosBloc(
+        user,
         repository: context.read<CentrosmedicosRepository>(),
       )..add(const GetCentrosMedicos()),
       child: const CentrosMedicosPageView(),
@@ -58,8 +62,7 @@ class CentrosMedicosPageView extends StatelessWidget {
       CentrosMedicosLoading() =>
         const Center(child: CircularProgressIndicator()),
       CentrosMedicosError() => MessageError(
-          message:
-              'Error al cargar las preguntas, por favor intente nuevamente',
+          message: state.message,
           onTap: () {
             centrosMedicosBloc.add(const GetCentrosMedicos());
           }),

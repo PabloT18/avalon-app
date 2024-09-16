@@ -1,7 +1,6 @@
-import 'package:avalon_app/app/data/sources/local/enviroment.dart';
 import 'package:avalon_app/core/config/remote/app_remote_config.dart';
 import 'package:avalon_app/features/avalon_info/medicos/domain/models/medico_entity.dart';
-import 'package:dio/dio.dart';
+
 import 'package:shared_models/shared_models.dart';
 
 import '../../domain/repository/medicos_repository.dart';
