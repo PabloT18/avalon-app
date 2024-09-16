@@ -8,5 +8,11 @@
     "spanish": "Español",
     "ingles": "Ingles",
     "lanES": "Idioma Español",
-    "lanEN": "Idioma Ingles"
+    "lanEN": "Idioma Ingles",
+    "permisos": {
+        "title": "Permisos",
+        "notificaciones": "Notificaciones",
+        "camara": "Cámara",
+        "almacenamiento": "Almacenamiento"
+    }
 }

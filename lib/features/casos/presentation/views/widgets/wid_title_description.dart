@@ -20,11 +20,11 @@ class TitleDescripcion extends StatelessWidget {
         style: isSubdescription
             ? Theme.of(context)
                 .textTheme
-                .bodyMedium!
+                .bodySmall!
                 .copyWith(fontWeight: FontWeight.bold)
             : Theme.of(context)
                 .textTheme
-                .bodyLarge!
+                .bodyMedium!
                 .copyWith(fontWeight: FontWeight.bold),
         children: <TextSpan>[
           TextSpan(
@@ -32,11 +32,11 @@ class TitleDescripcion extends StatelessWidget {
             style: isSubdescription
                 ? Theme.of(context)
                     .textTheme
-                    .bodyMedium!
+                    .bodySmall!
                     .copyWith(fontWeight: FontWeight.normal)
                 : Theme.of(context)
                     .textTheme
-                    .bodyLarge!
+                    .bodyMedium!
                     .copyWith(fontWeight: FontWeight.normal),
           ),
         ],

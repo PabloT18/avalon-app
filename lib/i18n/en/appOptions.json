@@ -8,6 +8,10 @@
         "one": "Detail",
         "other": "Details"
     },
+    "coment": {
+        "one": "Comment",
+        "other": "Comments"
+    },
     "codigo": "Code",
     "fecha": "Date",
     "scrollMore": "Scroll for more",

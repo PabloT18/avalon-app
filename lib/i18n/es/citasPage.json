@@ -3,10 +3,37 @@
         "one": "Cita Médica",
         "other": "Citas Médicas"
     },
-    "casoDetalle": {
-        "one": "Cita Médica Detalle",
-        "other": "Citas Médicas Detalles"
+    "citaDetalle": {
+        "one": "Detalle Cita Médica",
+        "other": "Detalles Citas Médicas"
     },
+    "historial": {
+        "one": "Historial de Citas",
+        "other": "Historial de Citas"
+    },
+    "moreDetails": {
+        "one": "Más Detalle",
+        "other": "Más Detalles"
+    },
+    "detailFechaTentativa": "Fecha Tentativa",
+    "detailPreferenceCity": "Ciudad de preferencia",
+    "detailAseguradoraName": "Aseguradora",
+    "detailHospital": "Hospital",
+    "detailPreferenceDoctor": "Doctor de preferencia",
+    "detailPadecimeiento": "Padecimeiento",
+    "detailAditionalInformation": "Información adicional",
+    "detailAditionalRequaimentes": "Requerimientos adicionales",
+    "aditionalRequaimentes": {
+        "ambulanciaTerrestre": "Ambulancia Terrestre",
+        "recetaMedica": "Receta Médica",
+        "ambulanciaAerea": "Ambulancia Aérea",
+        "sillaRuedas": "Silla de Ruedas",
+        "servicioTransporte": "Servicio de Transporte",
+        "viajes": "Viajes",
+        "hospedaje": "Hospedaje"
+    },
+    "detailOthersRequaimentes": "Otros requerimientos",
+    "detalleFoto": "Foto",
     "estados": "Estados de las citas",
     "estadoCerrado": "Cerrado",
     "estadoGestionando": "Gestionando",

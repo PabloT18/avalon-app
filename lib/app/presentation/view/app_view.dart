@@ -1,4 +1,6 @@
 import 'package:avalon_app/app/app.dart';
+import 'package:avalon_app/app/presentation/bloc/app_cycle/app_lifecycle_cubit.dart';
+import 'package:avalon_app/app/presentation/bloc/permissions/permissions_bloc.dart';
 
 import 'package:avalon_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
 import 'package:avalon_app/core/config/router/app_router.dart';
@@ -26,6 +28,14 @@ class MyApp extends StatelessWidget {
       value: _authenticationRepository,
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (context) => AppLifeCubit(),
+          ),
+          BlocProvider(
+            create: (contextPermission) => PermissionsBloc(
+              contextPermission.read<AppLifeCubit>(),
+            ),
+          ),
           BlocProvider(
             create: (_) => RepositoryProvider.of<AppSettingsCubit>(context),
           ),

@@ -18,7 +18,7 @@ class ClientePolizaDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 1,
+      elevation: 4,
       shape: RoundedRectangleBorder(
         side: BorderSide(
           color: AppColors.secondaryBlue.withOpacity(0.4),

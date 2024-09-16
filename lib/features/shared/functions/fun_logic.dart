@@ -60,6 +60,27 @@ class UtilsFunctionsLogic {
     }
   }
 
+  static String formatFechaLocal(DateTime? fecha, String locale) {
+    if (fecha == null) {
+      return '-';
+    } else {
+      String pattern;
+
+      // Detect locale and adjust the pattern
+      if (locale == 'es_ES' || locale == 'es') {
+        pattern = 'dd \'de\' MMMM \'del\' yyyy';
+      } else if (locale == 'en_US' || locale == 'en') {
+        pattern = 'MMMM dd, yyyy';
+      } else {
+        // Fallback pattern (you can customize this)
+        pattern = 'MMMM dd, yyyy';
+      }
+
+      final DateFormat formatter = DateFormat(pattern, locale);
+      return formatter.format(fecha);
+    }
+  }
+
   /// [Validators]
   static String? validateCorreo(String? correo, String errorMsg,
       {String? correoInsMsg}) {

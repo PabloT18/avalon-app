@@ -29,7 +29,7 @@ class CitasDetalleBox extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                apptexts.citasPage.casoDetalle(n: 2),
+                apptexts.citasPage.citaDetalle(n: 2),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               IconButton(

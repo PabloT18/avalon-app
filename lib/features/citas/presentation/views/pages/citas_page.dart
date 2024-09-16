@@ -68,6 +68,8 @@ class CitasPanelView extends StatelessWidget {
           },
           refreshController: citasBloc.refreshController,
           child: SingleChildScrollView(
+            padding: const EdgeInsets.all(AppLayoutConst.paddingL),
+
             physics:
                 const BouncingScrollPhysics(), // Asegura un desplazamiento suave
 

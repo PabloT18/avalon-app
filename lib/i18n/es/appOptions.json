@@ -8,6 +8,10 @@
         "one": "Detalle",
         "other": "Detalles"
     },
+    "coment": {
+        "one": "Comentario",
+        "other": "Comentarios"
+    },
     "codigo": "Código",
     "fecha": "Fecha",
     "scrollMore": "Más",

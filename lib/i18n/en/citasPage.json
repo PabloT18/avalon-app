@@ -3,10 +3,37 @@
         "one": "Appointment",
         "other": "Appointments"
     },
-    "casoDetalle": {
+    "citaDetalle": {
         "one": "Appointment Detail",
         "other": "Appointment Details"
     },
+    "historial": {
+        "one": "Appointment History",
+        "other": "Appointment History"
+    },
+    "moreDetails": {
+        "one": "More Detail",
+        "other": "More Details"
+    },
+    "detailFechaTentativa": "Tentative Date",
+    "detailPreferenceCity": "Preferred City",
+    "detailAseguradoraName": "Insurance Company",
+    "detailHospital": "Hospital",
+    "detailPreferenceDoctor": "Preferred Doctor",
+    "detailPadecimeiento": "Condition",
+    "detailAditionalInformation": "Additional Information",
+    "detailAditionalRequaimentes": "Additional Requirements",
+    "aditionalRequaimentes": {
+        "ambulanciaTerrestre": "Ground Ambulance",
+        "recetaMedica": "Medical Prescription",
+        "ambulanciaAerea": "Air Ambulance",
+        "sillaRuedas": "Wheelchair",
+        "servicioTransporte": "Transportation Service",
+        "viajes": "Trips",
+        "hospedaje": "Accommodation"
+    },
+    "detailOthersRequaimentes": "Other Requirements",
+    "detalleFoto": "Photo",
     "estados": "Appointment States",
     "estadoCerrado": "Closed",
     "estadoGestionando": "Managing",

@@ -32,9 +32,9 @@ class AppTheme {
           fontWeight: FontWeight.bold,
         ),
 
-        //   bodyLarge: TextStyle(fontSize: 18, color: Colors.black),
-        //   bodyMedium: TextStyle(fontSize: 16),
-        //   bodySmall: TextStyle(fontSize: 14),
+        bodyLarge: TextStyle(fontSize: 18, color: Colors.black),
+        bodyMedium: TextStyle(fontSize: 16),
+        bodySmall: TextStyle(fontSize: 14),
         labelLarge: TextStyle(
           fontSize: 16,
           color: Colors.white,
@@ -80,23 +80,29 @@ class AppTheme {
           borderSide: const BorderSide(color: Colors.red, width: 1),
           borderRadius: BorderRadius.circular(15),
         ),
+        disabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: AppColors.primaryBlue
+                  .withOpacity(0.3)), // Similar al enabledBorder
+          borderRadius: BorderRadius.circular(15),
+        ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         helperStyle: const TextStyle(
           fontSize: 14,
-          fontWeight: FontWeight.bold,
+          // fontWeight: FontWeight.bold,
           fontFamily: 'Sora',
         ),
         hintStyle: const TextStyle(
-          fontSize: 16,
+          fontSize: 14,
           fontFamily: 'Sora',
         ),
         labelStyle: const TextStyle(
-          fontSize: 16,
+          fontSize: 14,
           fontFamily: 'Sora',
-          fontWeight: FontWeight.bold,
+          // fontWeight: FontWeight.bold,
         ),
         errorStyle: const TextStyle(
-          fontWeight: FontWeight.bold,
+          // fontWeight: FontWeight.bold,
           fontFamily: 'Sora',
         ),
       ),

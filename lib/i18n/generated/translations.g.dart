@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 312 (156 per locale)
+/// Strings: 366 (183 per locale)
 ///
-/// Built on 2024-09-13 at 06:42 UTC
+/// Built on 2024-09-14 at 09:17 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -182,6 +182,10 @@ class _TranslationsAppOptionsEs {
 		one: 'Detalle',
 		other: 'Detalles',
 	);
+	String coment({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Comentario',
+		other: 'Comentarios',
+	);
 	String get codigo => 'Código';
 	String get fecha => 'Fecha';
 	String get scrollMore => 'Más';
@@ -268,10 +272,29 @@ class _TranslationsCitasPageEs {
 		one: 'Cita Médica',
 		other: 'Citas Médicas',
 	);
-	String casoDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-		one: 'Cita Médica Detalle',
-		other: 'Citas Médicas Detalles',
+	String citaDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Detalle Cita Médica',
+		other: 'Detalles Citas Médicas',
 	);
+	String historial({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Historial de Citas',
+		other: 'Historial de Citas',
+	);
+	String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Más Detalle',
+		other: 'Más Detalles',
+	);
+	String get detailFechaTentativa => 'Fecha Tentativa';
+	String get detailPreferenceCity => 'Ciudad de preferencia';
+	String get detailAseguradoraName => 'Aseguradora';
+	String get detailHospital => 'Hospital';
+	String get detailPreferenceDoctor => 'Doctor de preferencia';
+	String get detailPadecimeiento => 'Padecimeiento';
+	String get detailAditionalInformation => 'Información adicional';
+	String get detailAditionalRequaimentes => 'Requerimientos adicionales';
+	late final _TranslationsCitasPageAditionalRequaimentesEs aditionalRequaimentes = _TranslationsCitasPageAditionalRequaimentesEs._(_root);
+	String get detailOthersRequaimentes => 'Otros requerimientos';
+	String get detalleFoto => 'Foto';
 	String get estados => 'Estados de las citas';
 	String get estadoCerrado => 'Cerrado';
 	String get estadoGestionando => 'Gestionando';
@@ -429,6 +452,7 @@ class _TranslationsPreferenciasPageEs {
 	String get ingles => 'Ingles';
 	String get lanES => 'Idioma Español';
 	String get lanEN => 'Idioma Ingles';
+	late final _TranslationsPreferenciasPagePermisosEs permisos = _TranslationsPreferenciasPagePermisosEs._(_root);
 }
 
 // Path: reclamacionesPage
@@ -532,6 +556,35 @@ class _TranslationsAvalonInfoDetailsEs {
 	String get lead => 'TPA Líder en consejería médica integral internacional';
 }
 
+// Path: citasPage.aditionalRequaimentes
+class _TranslationsCitasPageAditionalRequaimentesEs {
+	_TranslationsCitasPageAditionalRequaimentesEs._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get ambulanciaTerrestre => 'Ambulancia Terrestre';
+	String get recetaMedica => 'Receta Médica';
+	String get ambulanciaAerea => 'Ambulancia Aérea';
+	String get sillaRuedas => 'Silla de Ruedas';
+	String get servicioTransporte => 'Servicio de Transporte';
+	String get viajes => 'Viajes';
+	String get hospedaje => 'Hospedaje';
+}
+
+// Path: preferenciasPage.permisos
+class _TranslationsPreferenciasPagePermisosEs {
+	_TranslationsPreferenciasPagePermisosEs._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Permisos';
+	String get notificaciones => 'Notificaciones';
+	String get camara => 'Cámara';
+	String get almacenamiento => 'Almacenamiento';
+}
+
 // Path: <root>
 class _TranslationsEn implements Translations {
 	/// You can call this constructor and build your own translation instance of this locale.
@@ -589,6 +642,10 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override String detalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'Detail',
 		other: 'Details',
+	);
+	@override String coment({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Comment',
+		other: 'Comments',
 	);
 	@override String get codigo => 'Code';
 	@override String get fecha => 'Date';
@@ -676,10 +733,29 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 		one: 'Appointment',
 		other: 'Appointments',
 	);
-	@override String casoDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+	@override String citaDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'Appointment Detail',
 		other: 'Appointment Details',
 	);
+	@override String historial({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Appointment History',
+		other: 'Appointment History',
+	);
+	@override String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'More Detail',
+		other: 'More Details',
+	);
+	@override String get detailFechaTentativa => 'Tentative Date';
+	@override String get detailPreferenceCity => 'Preferred City';
+	@override String get detailAseguradoraName => 'Insurance Company';
+	@override String get detailHospital => 'Hospital';
+	@override String get detailPreferenceDoctor => 'Preferred Doctor';
+	@override String get detailPadecimeiento => 'Condition';
+	@override String get detailAditionalInformation => 'Additional Information';
+	@override String get detailAditionalRequaimentes => 'Additional Requirements';
+	@override late final _TranslationsCitasPageAditionalRequaimentesEn aditionalRequaimentes = _TranslationsCitasPageAditionalRequaimentesEn._(_root);
+	@override String get detailOthersRequaimentes => 'Other Requirements';
+	@override String get detalleFoto => 'Photo';
 	@override String get estados => 'Appointment States';
 	@override String get estadoCerrado => 'Closed';
 	@override String get estadoGestionando => 'Managing';
@@ -837,6 +913,7 @@ class _TranslationsPreferenciasPageEn implements _TranslationsPreferenciasPageEs
 	@override String get ingles => 'English';
 	@override String get lanES => 'Set Spanish';
 	@override String get lanEN => 'Set English';
+	@override late final _TranslationsPreferenciasPagePermisosEn permisos = _TranslationsPreferenciasPagePermisosEn._(_root);
 }
 
 // Path: reclamacionesPage
@@ -860,8 +937,8 @@ class _TranslationsSegurosPageEn implements _TranslationsSegurosPageEs {
 
 	// Translations
 	@override String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
-		one: 'Insurance',
-		other: 'Insurance',
+		one: 'Insurance Company',
+		other: 'Insurance Company',
 	);
 	@override String polizaSeguros({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'Insurance policy',
@@ -940,6 +1017,35 @@ class _TranslationsAvalonInfoDetailsEn implements _TranslationsAvalonInfoDetails
 	@override String get lead => 'TPA leader in international medical concierge services';
 }
 
+// Path: citasPage.aditionalRequaimentes
+class _TranslationsCitasPageAditionalRequaimentesEn implements _TranslationsCitasPageAditionalRequaimentesEs {
+	_TranslationsCitasPageAditionalRequaimentesEn._(this._root);
+
+	@override final _TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get ambulanciaTerrestre => 'Ground Ambulance';
+	@override String get recetaMedica => 'Medical Prescription';
+	@override String get ambulanciaAerea => 'Air Ambulance';
+	@override String get sillaRuedas => 'Wheelchair';
+	@override String get servicioTransporte => 'Transportation Service';
+	@override String get viajes => 'Trips';
+	@override String get hospedaje => 'Accommodation';
+}
+
+// Path: preferenciasPage.permisos
+class _TranslationsPreferenciasPagePermisosEn implements _TranslationsPreferenciasPagePermisosEs {
+	_TranslationsPreferenciasPagePermisosEn._(this._root);
+
+	@override final _TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Permissions';
+	@override String get notificaciones => 'Notifications';
+	@override String get camara => 'Camera';
+	@override String get almacenamiento => 'Storage';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -954,6 +1060,10 @@ extension on Translations {
 			case 'appOptions.detalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Detalle',
 				other: 'Detalles',
+			);
+			case 'appOptions.coment': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Comentario',
+				other: 'Comentarios',
 			);
 			case 'appOptions.codigo': return 'Código';
 			case 'appOptions.fecha': return 'Fecha';
@@ -1022,10 +1132,35 @@ extension on Translations {
 				one: 'Cita Médica',
 				other: 'Citas Médicas',
 			);
-			case 'citasPage.casoDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-				one: 'Cita Médica Detalle',
-				other: 'Citas Médicas Detalles',
+			case 'citasPage.citaDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Detalle Cita Médica',
+				other: 'Detalles Citas Médicas',
 			);
+			case 'citasPage.historial': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Historial de Citas',
+				other: 'Historial de Citas',
+			);
+			case 'citasPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Más Detalle',
+				other: 'Más Detalles',
+			);
+			case 'citasPage.detailFechaTentativa': return 'Fecha Tentativa';
+			case 'citasPage.detailPreferenceCity': return 'Ciudad de preferencia';
+			case 'citasPage.detailAseguradoraName': return 'Aseguradora';
+			case 'citasPage.detailHospital': return 'Hospital';
+			case 'citasPage.detailPreferenceDoctor': return 'Doctor de preferencia';
+			case 'citasPage.detailPadecimeiento': return 'Padecimeiento';
+			case 'citasPage.detailAditionalInformation': return 'Información adicional';
+			case 'citasPage.detailAditionalRequaimentes': return 'Requerimientos adicionales';
+			case 'citasPage.aditionalRequaimentes.ambulanciaTerrestre': return 'Ambulancia Terrestre';
+			case 'citasPage.aditionalRequaimentes.recetaMedica': return 'Receta Médica';
+			case 'citasPage.aditionalRequaimentes.ambulanciaAerea': return 'Ambulancia Aérea';
+			case 'citasPage.aditionalRequaimentes.sillaRuedas': return 'Silla de Ruedas';
+			case 'citasPage.aditionalRequaimentes.servicioTransporte': return 'Servicio de Transporte';
+			case 'citasPage.aditionalRequaimentes.viajes': return 'Viajes';
+			case 'citasPage.aditionalRequaimentes.hospedaje': return 'Hospedaje';
+			case 'citasPage.detailOthersRequaimentes': return 'Otros requerimientos';
+			case 'citasPage.detalleFoto': return 'Foto';
 			case 'citasPage.estados': return 'Estados de las citas';
 			case 'citasPage.estadoCerrado': return 'Cerrado';
 			case 'citasPage.estadoGestionando': return 'Gestionando';
@@ -1102,6 +1237,10 @@ extension on Translations {
 			case 'preferenciasPage.ingles': return 'Ingles';
 			case 'preferenciasPage.lanES': return 'Idioma Español';
 			case 'preferenciasPage.lanEN': return 'Idioma Ingles';
+			case 'preferenciasPage.permisos.title': return 'Permisos';
+			case 'preferenciasPage.permisos.notificaciones': return 'Notificaciones';
+			case 'preferenciasPage.permisos.camara': return 'Cámara';
+			case 'preferenciasPage.permisos.almacenamiento': return 'Almacenamiento';
 			case 'reclamacionesPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Recalmación',
 				other: 'Recalmaciones',
@@ -1164,6 +1303,10 @@ extension on _TranslationsEn {
 			case 'appOptions.detalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Detail',
 				other: 'Details',
+			);
+			case 'appOptions.coment': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Comment',
+				other: 'Comments',
 			);
 			case 'appOptions.codigo': return 'Code';
 			case 'appOptions.fecha': return 'Date';
@@ -1232,10 +1375,35 @@ extension on _TranslationsEn {
 				one: 'Appointment',
 				other: 'Appointments',
 			);
-			case 'citasPage.casoDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+			case 'citasPage.citaDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Appointment Detail',
 				other: 'Appointment Details',
 			);
+			case 'citasPage.historial': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Appointment History',
+				other: 'Appointment History',
+			);
+			case 'citasPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'More Detail',
+				other: 'More Details',
+			);
+			case 'citasPage.detailFechaTentativa': return 'Tentative Date';
+			case 'citasPage.detailPreferenceCity': return 'Preferred City';
+			case 'citasPage.detailAseguradoraName': return 'Insurance Company';
+			case 'citasPage.detailHospital': return 'Hospital';
+			case 'citasPage.detailPreferenceDoctor': return 'Preferred Doctor';
+			case 'citasPage.detailPadecimeiento': return 'Condition';
+			case 'citasPage.detailAditionalInformation': return 'Additional Information';
+			case 'citasPage.detailAditionalRequaimentes': return 'Additional Requirements';
+			case 'citasPage.aditionalRequaimentes.ambulanciaTerrestre': return 'Ground Ambulance';
+			case 'citasPage.aditionalRequaimentes.recetaMedica': return 'Medical Prescription';
+			case 'citasPage.aditionalRequaimentes.ambulanciaAerea': return 'Air Ambulance';
+			case 'citasPage.aditionalRequaimentes.sillaRuedas': return 'Wheelchair';
+			case 'citasPage.aditionalRequaimentes.servicioTransporte': return 'Transportation Service';
+			case 'citasPage.aditionalRequaimentes.viajes': return 'Trips';
+			case 'citasPage.aditionalRequaimentes.hospedaje': return 'Accommodation';
+			case 'citasPage.detailOthersRequaimentes': return 'Other Requirements';
+			case 'citasPage.detalleFoto': return 'Photo';
 			case 'citasPage.estados': return 'Appointment States';
 			case 'citasPage.estadoCerrado': return 'Closed';
 			case 'citasPage.estadoGestionando': return 'Managing';
@@ -1312,13 +1480,17 @@ extension on _TranslationsEn {
 			case 'preferenciasPage.ingles': return 'English';
 			case 'preferenciasPage.lanES': return 'Set Spanish';
 			case 'preferenciasPage.lanEN': return 'Set English';
+			case 'preferenciasPage.permisos.title': return 'Permissions';
+			case 'preferenciasPage.permisos.notificaciones': return 'Notifications';
+			case 'preferenciasPage.permisos.camara': return 'Camera';
+			case 'preferenciasPage.permisos.almacenamiento': return 'Storage';
 			case 'reclamacionesPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Claim',
 				other: 'Claims',
 			);
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
-				one: 'Insurance',
-				other: 'Insurance',
+				one: 'Insurance Company',
+				other: 'Insurance Company',
 			);
 			case 'segurosPage.polizaSeguros': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Insurance policy',

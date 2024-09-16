@@ -15,7 +15,6 @@ class CitaDetalleBloc extends Bloc<CitaDetalleEvent, CitaDetalleState> {
       : super(cita == null
             ? CitaDetalleInitial()
             : CitaDetalleLoaded(cita: cita)) {
-    // on<SelectCasoOption>(_onSelectCasoOption);
     // on<GetCitas>(_onGetCitas);
     // on<GetEmergencias>(_onGetEmergencias);
 
