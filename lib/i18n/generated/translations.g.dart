@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 366 (183 per locale)
+/// Strings: 368 (184 per locale)
 ///
-/// Built on 2024-09-14 at 09:17 UTC
+/// Built on 2024-09-16 at 04:38 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -369,6 +369,7 @@ class _TranslationsMedicosPageEs {
 		one: 'Médico',
 		other: 'Médicos',
 	);
+	String get noData => 'No se encontraron médicos';
 }
 
 // Path: membresiasPage
@@ -830,6 +831,7 @@ class _TranslationsMedicosPageEn implements _TranslationsMedicosPageEs {
 		one: 'Doctor',
 		other: 'Doctors',
 	);
+	@override String get noData => 'No doctors found';
 }
 
 // Path: membresiasPage
@@ -1190,6 +1192,7 @@ extension on Translations {
 				one: 'Médico',
 				other: 'Médicos',
 			);
+			case 'medicosPage.noData': return 'No se encontraron médicos';
 			case 'membresiasPage.membresia': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Membresía',
 				other: 'Membresías',
@@ -1433,6 +1436,7 @@ extension on _TranslationsEn {
 				one: 'Doctor',
 				other: 'Doctors',
 			);
+			case 'medicosPage.noData': return 'No doctors found';
 			case 'membresiasPage.membresia': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Membership',
 				other: 'Memberships',

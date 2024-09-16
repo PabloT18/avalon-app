@@ -1,3 +1,4 @@
+import 'package:avalon_app/app/app.dart';
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
@@ -16,8 +17,11 @@ class MedicosPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+
     return BlocProvider(
       create: (context) => MedicosBloc(
+        user,
         repository: context.read<MedicosRepository>(),
       )..add(const GetMedicos()),
       child: const MedicosPageView(),
@@ -58,8 +62,7 @@ class MedicosPageView extends StatelessWidget {
     return switch (state) {
       MedicosLoading() => const Center(child: CircularProgressIndicator()),
       MedicosError() => MessageError(
-          message:
-              'Error al cargar las preguntas, por favor intente nuevamente',
+          message: state.message,
           onTap: () {
             medicosBloc.add(const GetMedicos());
           }),

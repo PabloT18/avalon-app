@@ -1,9 +1,12 @@
 import 'dart:async';
 
+import 'package:avalon_app/core/error/exceptions/exceptions.dart';
 import 'package:avalon_app/features/user_features.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:shared_models/shared_models.dart';
 
 import '../../domain/models/medico_models.dart';
 
@@ -11,7 +14,7 @@ part 'medicos_event.dart';
 part 'medicos_state.dart';
 
 class MedicosBloc extends Bloc<MedicosEvent, MedicosState> {
-  MedicosBloc({required this.repository}) : super(MedicosLoading()) {
+  MedicosBloc(this.user, {required this.repository}) : super(MedicosLoading()) {
     on<GetMedicos>(_onGetMedicos);
 
     refreshController = RefreshController(initialRefresh: false);
@@ -19,6 +22,7 @@ class MedicosBloc extends Bloc<MedicosEvent, MedicosState> {
 
   late RefreshController refreshController;
   final MedicosRepository repository;
+  final User user;
 
   @override
   Future<void> close() {
@@ -35,15 +39,18 @@ class MedicosBloc extends Bloc<MedicosEvent, MedicosState> {
       ..refreshCompleted();
 
     try {
-      final List<Medico> medicosList = await repository.getMedicos();
+      final List<Medico> medicosList = await repository.getMedicos(user);
       if (medicosList.isEmpty) {
-        emit(const MedicosError(
-            "No hay formas de pago cargadas por el momento"));
+        emit(MedicosError(apptexts.medicosPage.noData));
       } else {
         emit(MedicosLoaded(medicosList));
       }
+    } on InternetAccessException catch (e) {
+      emit(MedicosError(e.message));
+    } on ServerException catch (e) {
+      emit(MedicosError(e.message ?? apptexts.appOptions.error_servers));
     } catch (e) {
-      emit(const MedicosError("Error al cargar los metodos de pago"));
+      emit(MedicosError(apptexts.appOptions.error_servers));
     }
   }
 }

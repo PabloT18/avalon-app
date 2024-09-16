@@ -2,5 +2,6 @@
     "title": {
         "one": "Médico",
         "other": "Médicos"
-    }
+    },
+    "noData": "No se encontraron médicos"
 }
