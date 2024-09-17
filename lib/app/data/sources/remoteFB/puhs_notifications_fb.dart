@@ -36,6 +36,14 @@ class PushNotificationSourceFCM {
     return settings.authorizationStatus;
   }
 
+  Future<void> setAutoInitEnabled(bool state) async {
+    await _fbMessaging.setAutoInitEnabled(state);
+  }
+
+  Future<void> dellTokenFCM() async {
+    await _fbMessaging.deleteToken();
+  }
+
   // Obtiene el token de FCM
   Future<String?> fcmToken() async => await _fbMessaging.getToken();
 

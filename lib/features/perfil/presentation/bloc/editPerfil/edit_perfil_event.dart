@@ -6,3 +6,7 @@ sealed class EditPerfilEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class ValidateAndSubmitEvent extends EditPerfilEvent {
+  const ValidateAndSubmitEvent();
+}

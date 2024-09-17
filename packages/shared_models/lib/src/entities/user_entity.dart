@@ -5,28 +5,32 @@ import 'package:shared_models/shared_models.dart';
 enum UserRol { admin, client, asesor, agente }
 
 class User extends Equatable {
-  final String? createdBy;
-  final DateTime? createdDate;
-  final String? lastModifiedBy;
-  final DateTime? lastModifiedDate;
-  final int? id;
-  final String? nombres;
-  final String? nombresDos;
   final String? apellidos;
   final String? apellidosDos;
+  final String? contraseniaTemporal;
+  final bool? contraseniaTemporalModificada;
   final String? correoElectronico;
-  final String? numeroTelefono;
-  final String? nombreUsuario;
-  final String? contrasenia;
-  final String? urlImagen;
+  final String? createdBy;
+  final DateTime? createdDate;
   final Direccion? direccion;
   final String? estado;
+  final int? id;
+  final String? lastModifiedBy;
+  final DateTime? lastModifiedDate;
+  final String? nombreUsuario;
+  final String? nombres;
+  final String? nombresDos;
+  final String? numeroIdentificacion;
+  final String? numeroTelefono;
   final Rol? rol;
+  final String? tipoIdentificacion;
+  final String? urlImagen;
+
   final int? rolId; // para actualizar solo el ID del rol
   final String? token;
-  final DateTime? fechaNacimiento;
-  final String? lugarNacimiento;
-  final String? lugarResidencia;
+  // final DateTime? fechaNacimiento;
+  // final String? lugarNacimiento;
+  // final String? lugarResidencia;
 
   const User({
     this.createdBy,
@@ -41,16 +45,21 @@ class User extends Equatable {
     this.correoElectronico,
     this.numeroTelefono,
     this.nombreUsuario,
-    this.contrasenia,
     this.urlImagen,
     this.direccion,
     this.estado,
     this.rol,
     this.rolId,
     this.token,
-    this.fechaNacimiento,
-    this.lugarNacimiento,
-    this.lugarResidencia,
+    this.contraseniaTemporal,
+    this.contraseniaTemporalModificada,
+    this.numeroIdentificacion,
+    this.tipoIdentificacion,
+
+    // this.contrasenia,
+    // this.fechaNacimiento,
+    // this.lugarNacimiento,
+    // this.lugarResidencia,
   });
 
   User copyWith({
@@ -76,6 +85,10 @@ class User extends Equatable {
     DateTime? fechaNacimiento,
     String? lugarNacimiento,
     String? lugarResidencia,
+    String? contraseniaTemporal,
+    bool? contraseniaTemporalModificada,
+    String? numeroIdentificacion,
+    String? tipoIdentificacion,
   }) {
     return User(
       createdBy: createdBy ?? this.createdBy,
@@ -90,16 +103,21 @@ class User extends Equatable {
       correoElectronico: correoElectronico ?? this.correoElectronico,
       numeroTelefono: numeroTelefono ?? this.numeroTelefono,
       nombreUsuario: nombreUsuario ?? this.nombreUsuario,
-      contrasenia: contrasenia ?? this.contrasenia,
+
       urlImagen: urlImagen ?? this.urlImagen,
       direccion: direccion ?? this.direccion,
       estado: estado ?? this.estado,
       rol: rol ?? this.rol,
       rolId: rolId ?? this.rolId,
       token: token ?? this.token,
-      fechaNacimiento: fechaNacimiento ?? this.fechaNacimiento,
-      lugarNacimiento: lugarNacimiento ?? this.lugarNacimiento,
-      lugarResidencia: lugarResidencia ?? this.lugarResidencia,
+      contraseniaTemporal: contraseniaTemporal ?? this.contraseniaTemporal,
+      contraseniaTemporalModificada:
+          contraseniaTemporalModificada ?? this.contraseniaTemporalModificada,
+      numeroIdentificacion: numeroIdentificacion ?? this.numeroIdentificacion,
+      tipoIdentificacion: tipoIdentificacion ?? this.tipoIdentificacion,
+      // fechaNacimiento: fechaNacimiento ?? this.fechaNacimiento,
+      // lugarNacimiento: lugarNacimiento ?? this.lugarNacimiento,
+      // lugarResidencia: lugarResidencia ?? this.lugarResidencia,
 // Nuevo campo
     );
   }
@@ -119,7 +137,7 @@ class User extends Equatable {
       correoElectronico: response.correoElectronico,
       numeroTelefono: response.numeroTelefono,
       nombreUsuario: response.nombreUsuario,
-      contrasenia: response.contrasenia,
+
       urlImagen: response.urlImagen,
       direccion: response.direccion != null
           ? Direccion.fromJson(response.direccion!.toJson())
@@ -128,9 +146,13 @@ class User extends Equatable {
       token: token,
       rol: response.rol != null ? Rol.fromJson(response.rol!.toJson()) : null,
       rolId: response.rol?.id,
-      fechaNacimiento: response.fechaNacimiento,
-      lugarNacimiento: response.lugarNacimiento,
-      lugarResidencia: response.lugarResidencia,
+      contraseniaTemporal: response.contraseniaTemporal,
+      contraseniaTemporalModificada: response.contraseniaTemporalModificada,
+      numeroIdentificacion: response.contraseniaTemporal,
+      tipoIdentificacion: response.contraseniaTemporal,
+      // fechaNacimiento: response.fechaNacimiento,
+      // lugarNacimiento: response.lugarNacimiento,
+      // lugarResidencia: response.lugarResidencia,
     );
   }
 
@@ -149,16 +171,22 @@ class User extends Equatable {
       'correoElectronico': correoElectronico,
       'numeroTelefono': numeroTelefono,
       'nombreUsuario': nombreUsuario,
-      'contrasenia': contrasenia,
+
       'urlImagen': urlImagen,
       'direccion': direccion?.toJson(),
       'estado': estado,
       'rol': rol?.toJson(),
       'rolId': rolId,
       'token': token,
-      'fechaNacimiento': fechaNacimiento?.toIso8601String(),
-      'lugarNacimiento': lugarNacimiento,
-      'lugarResidencia': lugarResidencia,
+
+      'contraseniaTemporal': contraseniaTemporal,
+      'contraseniaTemporalModificada': contraseniaTemporalModificada,
+      'numeroIdentificacion': numeroIdentificacion,
+      'tipoIdentificacion': tipoIdentificacion,
+
+      // 'fechaNacimiento': fechaNacimiento?.toIso8601String(),
+      // 'lugarNacimiento': lugarNacimiento,
+      // 'lugarResidencia': lugarResidencia,
     };
   }
 
@@ -181,7 +209,6 @@ class User extends Equatable {
       correoElectronico: json['correoElectronico'] as String?,
       numeroTelefono: json['numeroTelefono'] as String?,
       nombreUsuario: json['nombreUsuario'] as String?,
-      contrasenia: json['contrasenia'] as String?,
       urlImagen: json['urlImagen'] as String?,
       direccion: json['direccion'] != null
           ? Direccion.fromJson(json['direccion'])
@@ -189,11 +216,11 @@ class User extends Equatable {
       estado: json['estado'] as String?,
       rol: json['rol'] != null ? Rol.fromJson(json['rol']) : null,
       token: json['token'] as String?,
-      fechaNacimiento: json['fechaNacimiento'] != null
-          ? DateTime.parse(json['fechaNacimiento'] as String)
-          : null,
-      lugarNacimiento: json['lugarNacimiento'],
-      lugarResidencia: json['lugarResidencia'],
+      contraseniaTemporal: json['contraseniaTemporal'] as String?,
+      contraseniaTemporalModificada:
+          json['contraseniaTemporalModificada'] as bool?,
+      numeroIdentificacion: json['numeroIdentificacion'] as String?,
+      tipoIdentificacion: json['tipoIdentificacion'] as String?,
     );
   }
 
@@ -242,9 +269,9 @@ class User extends Equatable {
   }
 
   // Ejemplo de uso:
-  String get formattedFechaNacimiento => formatFecha(fechaNacimiento);
-  String get formattedCreatedDate => formatFecha(createdDate);
-  String get formattedLastModifiedDate => formatFecha(lastModifiedDate);
+  // String get formattedFechaNacimiento => formatFecha(fechaNacimiento);
+  // String get formattedCreatedDate => formatFecha(createdDate);
+  // String get formattedLastModifiedDate => formatFecha(lastModifiedDate);
 
   bool get isAddressComplete => direccion?.isComplete ?? false;
 
@@ -254,10 +281,8 @@ class User extends Equatable {
       apellidos != null &&
       correoElectronico != null &&
       nombreUsuario != null &&
-      numeroTelefono != null &&
-      fechaNacimiento != null &&
-      lugarNacimiento != null &&
-      lugarResidencia != null;
+      numeroTelefono != null;
+
   @override
   List<Object?> get props => [
         createdBy,
@@ -272,15 +297,15 @@ class User extends Equatable {
         correoElectronico,
         numeroTelefono,
         nombreUsuario,
-        contrasenia,
         urlImagen,
         direccion,
         estado,
         rol,
         rolId,
         token,
-        fechaNacimiento,
-        lugarNacimiento,
-        lugarResidencia,
+        contraseniaTemporal,
+        contraseniaTemporalModificada,
+        numeroIdentificacion,
+        tipoIdentificacion,
       ];
 }

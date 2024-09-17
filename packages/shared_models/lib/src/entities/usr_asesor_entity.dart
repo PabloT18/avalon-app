@@ -1,50 +1,30 @@
-import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_models/shared_models.dart';
 
-class UsrAsesor extends Equatable {
-  final String? createdBy;
-  final DateTime? createdDate;
-  final String? lastModifiedBy;
-  final DateTime? lastModifiedDate;
-  final int? id;
-  final String? nombres;
-  final String? nombresDos;
-  final String? apellidos;
-  final String? apellidosDos;
-  final String? correoElectronico;
-  final String? contraseniaTemporal;
-  final String? numeroTelefono;
-  final String? nombreUsuario;
-  final bool? contraseniaTemporalModificada;
-  final String? urlImagen;
-  final Direccion? direccion;
-  final String? estado;
-  final String? numeroIdentificacion;
-  final String? tipoIdentificacion;
-  final Rol? rol;
-
+class UsrAsesor extends User {
   const UsrAsesor({
-    this.createdBy,
-    this.createdDate,
-    this.lastModifiedBy,
-    this.lastModifiedDate,
-    this.id,
-    this.nombres,
-    this.nombresDos,
-    this.apellidos,
-    this.apellidosDos,
-    this.correoElectronico,
-    this.contraseniaTemporal,
-    this.numeroTelefono,
-    this.nombreUsuario,
-    this.contraseniaTemporalModificada,
-    this.urlImagen,
-    this.direccion,
-    this.estado,
-    this.numeroIdentificacion,
-    this.tipoIdentificacion,
-    this.rol,
+    super.createdBy,
+    super.createdDate,
+    super.lastModifiedBy,
+    super.lastModifiedDate,
+    super.id,
+    super.nombres,
+    super.nombresDos,
+    super.apellidos,
+    super.apellidosDos,
+    super.correoElectronico,
+    super.contraseniaTemporal,
+    super.numeroTelefono,
+    super.nombreUsuario,
+    super.contraseniaTemporalModificada,
+    super.urlImagen,
+    super.direccion,
+    super.estado,
+    super.numeroIdentificacion,
+    super.tipoIdentificacion,
+    super.rol,
+    super.rolId,
+    super.token,
   });
 
   factory UsrAsesor.fromJson(Map<String, dynamic> json) => UsrAsesor(
@@ -74,8 +54,11 @@ class UsrAsesor extends Equatable {
         numeroIdentificacion: json["numeroIdentificacion"],
         tipoIdentificacion: json["tipoIdentificacion"],
         rol: json["rol"] == null ? null : Rol.fromJson(json["rol"]),
+        token: json["token"],
+        rolId: json["rolId"],
       );
 
+  @override
   Map<String, dynamic> toJson() => {
         "createdBy": createdBy,
         "createdDate": createdDate?.toIso8601String(),
@@ -97,20 +80,56 @@ class UsrAsesor extends Equatable {
         "numeroIdentificacion": numeroIdentificacion,
         "tipoIdentificacion": tipoIdentificacion,
         "rol": rol?.toJson(),
+        'rolId': rolId,
+        'token': token,
       };
 
+  factory UsrAsesor.fromUsuarioResponse(
+      UsrAsesorResponse response, String token) {
+    return UsrAsesor(
+      createdBy: response.createdBy,
+      createdDate: response.createdDate,
+      lastModifiedBy: response.lastModifiedBy,
+      lastModifiedDate: response.lastModifiedDate,
+      id: response.id,
+      nombres: response.nombres,
+      nombresDos: response.nombresDos,
+      apellidos: response.apellidos,
+      apellidosDos: response.apellidosDos,
+      correoElectronico: response.correoElectronico,
+      numeroTelefono: response.numeroTelefono,
+      nombreUsuario: response.nombreUsuario,
+      urlImagen: response.urlImagen,
+      direccion: response.direccion != null
+          ? Direccion.fromJson(response.direccion!.toJson())
+          : null,
+      estado: response.estado,
+      token: token,
+      rol: response.rol != null ? Rol.fromJson(response.rol!.toJson()) : null,
+      rolId: response.rol?.id,
+      contraseniaTemporal: response.contraseniaTemporal,
+      contraseniaTemporalModificada: response.contraseniaTemporalModificada,
+      numeroIdentificacion: response.contraseniaTemporal,
+      tipoIdentificacion: response.contraseniaTemporal,
+    );
+  }
   static const empty = User(id: 0);
 
   /// Convenience getter to determine whether the current user is empty.
+  @override
   bool get isEmpty => this == User.empty;
 
   /// Convenience getter to determine whether the current user is not empty.
+  @override
   bool get isNotEmpty => this != User.empty;
 
+  @override
   String get fullName => '$nombres $apellidos';
 
+  @override
   String get fullNameUpperCase => '$nombres $apellidos'.toUpperCase();
 
+  @override
   UserRol get userRol {
     if (rol == null) {
       return UserRol.client;
@@ -130,8 +149,10 @@ class UsrAsesor extends Equatable {
     }
   }
 
+  @override
   bool get isClient => userRol == UserRol.client;
 
+  @override
   String formatFecha(DateTime? fecha) {
     if (fecha == null) {
       return '-';
@@ -147,6 +168,7 @@ class UsrAsesor extends Equatable {
   String get formattedCreatedDate => formatFecha(createdDate);
   String get formattedLastModifiedDate => formatFecha(lastModifiedDate);
 
+  @override
   bool get isAddressComplete => direccion?.isComplete ?? false;
 
   @override

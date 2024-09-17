@@ -49,12 +49,14 @@ class PersonalDataCard extends StatelessWidget {
                       apptexts.perfilPage.username, user.nombreUsuario ?? '-'),
                   _buildProfileInfo(
                       apptexts.perfilPage.phone, user.numeroTelefono ?? '-'),
-                  _buildProfileInfo(
-                      apptexts.perfilPage.dob, user.formattedFechaNacimiento),
-                  _buildProfileInfo(apptexts.perfilPage.placeOfBirth,
-                      user.lugarNacimiento ?? '-'),
-                  _buildProfileInfo(apptexts.perfilPage.placeOfResidence,
-                      user.lugarResidencia ?? '-'),
+                  if (user is UsrCliente) ...[
+                    _buildProfileInfo(apptexts.perfilPage.dob,
+                        (user as UsrCliente).formattedFechaNacimiento),
+                    _buildProfileInfo(apptexts.perfilPage.placeOfBirth,
+                        (user as UsrCliente).lugarNacimiento ?? '-'),
+                    _buildProfileInfo(apptexts.perfilPage.placeOfResidence,
+                        (user as UsrCliente).lugarResidencia ?? '-'),
+                  ]
                 ],
               ),
             )),

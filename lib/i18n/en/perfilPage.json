@@ -25,5 +25,9 @@
     "successUpdateUserAddress": "User address updated successfully",
     "identificacion": "ID number",
     "tipoIdentificacion": "ID Type",
-    "memberFamily": "Family Member"
+    "memberFamily": "Family Member",
+    "firstName": "First Name",
+    "secondName": "Middle Name",
+    "firstLastName": "Last Name",
+    "secondLastName": "Second Last Name"
 }

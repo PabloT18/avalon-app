@@ -14,14 +14,14 @@ class UserResponse extends User {
     super.correoElectronico,
     super.numeroTelefono,
     super.nombreUsuario,
-    super.contrasenia,
     super.urlImagen,
     super.direccion,
     super.estado,
     super.rol,
-    super.fechaNacimiento,
-    super.lugarNacimiento,
-    super.lugarResidencia,
+    super.contraseniaTemporal,
+    super.contraseniaTemporalModificada,
+    super.numeroIdentificacion,
+    super.tipoIdentificacion,
   });
 
   factory UserResponse.fromJson(Map json) => UserResponse(
@@ -41,18 +41,23 @@ class UserResponse extends User {
         correoElectronico: json["correoElectronico"],
         numeroTelefono: json["numeroTelefono"],
         nombreUsuario: json["nombreUsuario"],
-        contrasenia: json["contrasenia"],
         urlImagen: json["urlImagen"],
         direccion: json["direccion"] == null
             ? null
             : DireccionModel.fromJson(json["direccion"]),
         estado: json["estado"],
         rol: json["rol"] == null ? null : RolModel.fromJson(json["rol"]),
-        fechaNacimiento: json["fechaNacimiento"] == null
-            ? null
-            : DateTime.parse(json["fechaNacimiento"]),
-        lugarNacimiento: json["lugarNacimiento"],
-        lugarResidencia: json["lugarResidencia"],
+        contraseniaTemporal: json["contraseniaTemporal"],
+        contraseniaTemporalModificada: json["contraseniaTemporalModificada"],
+        numeroIdentificacion: json["numeroIdentificacion"],
+        tipoIdentificacion: json["tipoIdentificacion"],
+
+        // contrasenia: json["contrasenia"],
+        // fechaNacimiento: json["fechaNacimiento"] == null
+        //     ? null
+        //     : DateTime.parse(json["fechaNacimiento"]),
+        // lugarNacimiento: json["lugarNacimiento"],
+        // lugarResidencia: json["lugarResidencia"],
       );
 
   @override
@@ -69,13 +74,13 @@ class UserResponse extends User {
         "correoElectronico": correoElectronico,
         "numeroTelefono": numeroTelefono,
         "nombreUsuario": nombreUsuario,
-        "contrasenia": contrasenia,
         "urlImagen": urlImagen,
         "direccion": direccion?.toJson(),
         "estado": estado,
         "rol": rol?.toJson(),
-        "fechaNacimiento": fechaNacimiento,
-        "lugarNacimiento": lugarNacimiento,
-        "lugarResidencia": lugarResidencia,
+        "contraseniaTemporal": contraseniaTemporal,
+        "contraseniaTemporalModificada": contraseniaTemporalModificada,
+        "numeroIdentificacion": numeroIdentificacion,
+        "tipoIdentificacion": tipoIdentificacion,
       };
 }

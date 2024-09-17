@@ -99,7 +99,20 @@ class AuthenticationRepository {
       return User.empty;
     }
 
-    final user = User.fromJson(cacheUser);
+    final rolId = cacheUser['rol']['id'];
+    if (rolId == null) {
+      return User.empty;
+    }
+    User user;
+    switch (rolId) {
+      case 3: // Cliente
+        user = UsrCliente.fromJson(cacheUser);
+      case 4: // Agente
+        user = UsrAgente.fromJson(cacheUser);
+        break;
+      default:
+        user = User.fromJson(cacheUser);
+    }
     return user;
   }
 
@@ -127,12 +140,12 @@ class AuthenticationRepository {
   /// Signs in with the provided [email] and [password].
   ///
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
-  Future<void> logInWithEmailAndPassword({
+  Future<Map<String, dynamic>> logInWithEmailAndPassword({
     required String usuario,
     required String password,
   }) async {
     try {
-      const urlLogin = '/login';
+      const urlLogin = '/login?generate2FA=SI';
       final data = {'usuario': usuario, 'contrasenia': password};
       final loginResponse = await dio.post(
         urlLogin,
@@ -154,16 +167,60 @@ class AuthenticationRepository {
             message: "Datos de autenticación no válidos");
       }
 
-      final String token = loginData['token'];
-      final int userId = loginData['id'];
+      // final String token = loginData['token'];
+      // final int userId = loginData['id'];
+      // Devuelve el token para usarlo más adelante en la validación del código 2FA
+      return loginData;
+    } on DioException catch (dioError) {
+      throw LogInWithEmailAndPasswordFailure(
+          message: dioError.response?.data['message'] ??
+              "Error en la red o del servidor");
+    } catch (e) {
+      throw const LogInWithEmailAndPasswordFailure(
+          message: "Error desconocido durante el inicio de sesión");
+    }
+  }
 
-      // Segunda solicitud para obtener los datos del usuario con el token
+  // Método para verificar el código de 2FA
+  Future<void> verifyTwoFactorCode({
+    required String usuario,
+    required String userId,
+    required String codigo,
+    required String token,
+  }) async {
+    try {
+      const urlVerify = '/verify-code';
+      final data = {'usuario': usuario, 'codigo': codigo};
+      final response = await dio.post(
+        urlVerify,
+        data: data,
+        options: Options(headers: {'Authorization': token}),
+      );
+
+      if (response.statusCode != 200 || !response.data['success']) {
+        throw const LogInWithEmailAndPasswordFailure(
+            message: "Código de verificación incorrecto");
+      }
+
+      // Si es exitoso, cargar los detalles del usuario
+      await _fetchUserDetails(token, userId);
+    } on DioException catch (dioError) {
+      throw LogInWithEmailAndPasswordFailure(
+          message: dioError.response?.data['message'] ??
+              "Error en la red o del servidor");
+    } catch (e) {
+      throw const LogInWithEmailAndPasswordFailure(
+          message: "Error desconocido durante la verificación");
+    }
+  }
+
+  // Método para obtener los detalles del usuario una vez validado el 2FA
+  Future<void> _fetchUserDetails(String token, String userId) async {
+    try {
       final urlUserDetails = '/usuarios/$userId';
       final userResponse = await dio.get(
         urlUserDetails,
-        options: Options(
-          headers: {'Authorization': token},
-        ),
+        options: Options(headers: {'Authorization': token}),
       );
 
       if (userResponse.statusCode != 200) {
@@ -171,27 +228,121 @@ class AuthenticationRepository {
             message: "Error al obtener datos del usuario");
       }
 
+      // final userData = userResponse.data;
+      // final User user = User.fromJson(userData);
+
       final userData = userResponse.data;
 
       final UserResponse userResponseData = UserResponse.fromJson(userData);
-      final User user = User.fromUsuarioResponse(userResponseData, token);
+      // final User user = User.fromUsuarioResponse(userResponseData, token);
+      final rolId = userData['rol']['id'];
+      User user;
+      switch (rolId) {
+        case 3: // Cliente
+          // Consumir el servicio adicional para obtener más detalles del cliente
+          final urlClientDetails = '/clientes/$userId';
+          final clientResponse = await dio.get(
+            urlClientDetails,
+            options: Options(headers: {'Authorization': token}),
+          );
 
+          if (clientResponse.statusCode != 200) {
+            throw const LogInWithEmailAndPasswordFailure(
+                message: "Error al obtener datos del cliente");
+          }
+
+          // Parseamos los datos adicionales del cliente
+          final clientData = clientResponse.data;
+          final UsrClienteResponse userClientData =
+              UsrClienteResponse.fromJson(clientData);
+          user = UsrCliente.fromUsuarioResponse(userClientData, token);
+          break;
+
+        case 4: // Agente
+          // Consumir el servicio adicional para obtener más detalles del agente
+          final urlAgenteDetails = '/agentes/$userId';
+          final agentResponse = await dio.get(
+            urlAgenteDetails,
+            options: Options(headers: {'Authorization': token}),
+          );
+
+          if (agentResponse.statusCode != 200) {
+            throw const LogInWithEmailAndPasswordFailure(
+                message: "Error al obtener datos del agente");
+          }
+
+          // Parseamos los datos adicionales del agente
+          final agentData = agentResponse.data;
+          final UsrAgenteResponse userAgentData =
+              UsrAgenteResponse.fromJson(agentData);
+          user = UsrAgente.fromUsuarioResponse(userAgentData, token);
+          break;
+        default:
+          user = User.fromUsuarioResponse(
+              userData, token); // Devuelve un User genérico
+      }
+
+      //TODO: refat
       await _cache.write(key: userCacheKey, value: user.toJson());
       _controller.add(user);
-    } on DioException catch (dioError) {
-      if (dioError.response!.statusCode == 404 ||
-          dioError.response!.statusCode == 400) {
-        final String? message = dioError.response!.data['message'];
-        throw LogInWithEmailAndPasswordFailure(
-            message: message ?? "Error en la red o del servidor");
-      } else {
-        throw throw LogInWithEmailAndPasswordFailure(
-            message: dioError.response?.statusMessage ??
-                "Error en la red o del servidor");
-      }
     } catch (e) {
       throw const LogInWithEmailAndPasswordFailure(
-          message: "Error desconocido durante el inicio de sesión");
+          message: "Error al obtener datos del usuario");
+    }
+  }
+
+  Future<void> changePassword({
+    required String usuario,
+    required String contraseniaActual,
+    required String contraseniaNueva,
+    required String token,
+  }) async {
+    try {
+      const url = '/change-password';
+      final data = {
+        'usuario': usuario,
+        'contraseniaActual': contraseniaActual,
+        'contraseniaNueva': contraseniaNueva,
+      };
+      final response = await dio.post(
+        url,
+        data: data,
+        options: Options(headers: {'Authorization': token}),
+      );
+
+      if (response.statusCode != 200) {
+        throw const LogInWithEmailAndPasswordFailure(
+            message: "Error al cambiar la contraseña");
+      }
+    } on DioException catch (e) {
+      // Si no hay respuesta del servidor
+      if (e.response == null) {
+        throw const LogInWithEmailAndPasswordFailure(
+            message: "Error de red o servidor no disponible");
+      }
+
+      // Manejo del error con código 400 y "CONTRASENIA_INCORRECTA"
+      if (e.response!.statusCode == 400) {
+        final responseData = e.response!.data;
+
+        // Verificamos si el asunto es "CONTRASENIA_INCORRECTA"
+        if (responseData != null) {
+          throw LogInWithEmailAndPasswordFailure(
+              message: responseData['message']);
+        }
+
+        // Si es otro error 400, manejamos de manera genérica
+        throw const LogInWithEmailAndPasswordFailure(
+            message: "Error durante el cambio de contraseña");
+      }
+
+      // Otros errores HTTP
+      throw const LogInWithEmailAndPasswordFailure(
+          message: "Error desconocido durante el cambio de contraseña");
+    } catch (e) {
+      // Manejar cualquier otro error
+      throw const LogInWithEmailAndPasswordFailure(
+          message: "Error inesperado durante el cambio de contraseña");
     }
   }
 

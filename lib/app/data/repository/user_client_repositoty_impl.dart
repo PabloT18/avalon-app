@@ -12,7 +12,64 @@ class UserClientRepositoryImpl extends UserClientRepository {
   @override
   Future<bool> updateClientData(
       {required User user, required String token}) async {
+    if (user.userRol == UserRol.agente) {
+      return _updateAgentetData(user: user, token: token);
+    } else if (user.userRol == UserRol.asesor) {
+      return _updateAsesorData(user: user, token: token);
+    } else {
+      return _updateClient(user: user, token: token);
+    }
+  }
+
+  Future<bool> _updateClient(
+      {required User user, required String token}) async {
     final String url = '/clientes/${user.id}'; // Ajusta la URL según tu API
+    final Map<String, dynamic> data = user.toJson();
+
+    try {
+      final response = await APPRemoteConfig.httpPut(
+        url: url,
+        data: data,
+        token: token,
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception(apptexts.perfilPage.errorUpdateUserData);
+      }
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  /// Actulaiza agent del broker
+
+  Future<bool> _updateAgentetData(
+      {required User user, required String token}) async {
+    final String url = '/agentes/${user.id}'; // Ajusta la URL según tu API
+    final Map<String, dynamic> data = user.toJson();
+
+    try {
+      final response = await APPRemoteConfig.httpPut(
+        url: url,
+        data: data,
+        token: token,
+      );
+
+      if (response.statusCode != 200) {
+        throw Exception(apptexts.perfilPage.errorUpdateUserData);
+      }
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  /// Actulaiza asesor aVLAOn INFO
+
+  Future<bool> _updateAsesorData(
+      {required User user, required String token}) async {
+    final String url = '/asesores/${user.id}'; // Ajusta la URL según tu API
     final Map<String, dynamic> data = user.toJson();
 
     try {

@@ -19,4 +19,5 @@ abstract class NotficationRepository {
   /// Permisos Dnegados devuelve null
   /// Permisos Consedidos devuelve el TOKENFCM
   Future<void> subscribeTotopics(List<String> topics);
+  Future<void> dellFCM();
 }

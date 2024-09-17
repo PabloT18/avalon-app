@@ -1,14 +1,15 @@
+import 'package:flutter/material.dart';
+
 import 'package:animate_do/animate_do.dart';
+
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 import 'package:avalon_app/core/config/router/app_routes_assets.dart';
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutusPage extends StatelessWidget {

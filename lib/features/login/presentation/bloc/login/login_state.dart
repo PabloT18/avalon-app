@@ -20,7 +20,23 @@ class LoginError extends LoginState {
   final String errorMessage;
 }
 
+class LoginMessage extends LoginState {
+  const LoginMessage(this.errorMessage);
+  final String errorMessage;
+}
+
 class LoginSucces extends LoginState {
   const LoginSucces(this.message);
+  final String message;
+}
+
+// login_state.dart
+final class LoginTwoFactorRequired extends LoginState {
+  const LoginTwoFactorRequired(this.message);
+  final String message;
+}
+
+final class LoginPasswordChangeRequired extends LoginState {
+  const LoginPasswordChangeRequired(this.message);
   final String message;
 }

@@ -47,11 +47,12 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => NotificationsBloc(
-              subscribeTopicsUseCase: context.read<SubscribeTopicsUseCase>(),
-              getStatusCheckUseCase: context.read<GetStatusCheckUseCase>(),
-              toogleNotificationStateUC:
-                  context.read<ToggleNotificationStateUseCase>(),
-            ),
+                subscribeTopicsUseCase: context.read<SubscribeTopicsUseCase>(),
+                getStatusCheckUseCase: context.read<GetStatusCheckUseCase>(),
+                toogleNotificationStateUC:
+                    context.read<ToggleNotificationStateUseCase>(),
+                notificationRepository:
+                    context.read<NotficationRepositoryImpl>()),
           ),
         ],
         child: const _BuildApp(),
@@ -82,9 +83,6 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Incio de [NotificationsBloc]
-    context.read<NotificationsBloc>().add(const InitiNotifications());
-
     return MaterialApp.router(
       debugShowCheckedModeBanner: true,
       title: 'AvalonPlus',

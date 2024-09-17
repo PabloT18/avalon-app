@@ -29,3 +29,7 @@ class _NotificationSetStatus extends NotificationsEvent {
 class NotificationToggleStatus extends NotificationsEvent {
   const NotificationToggleStatus();
 }
+
+class NotificationDellFCM extends NotificationsEvent {
+  const NotificationDellFCM();
+}

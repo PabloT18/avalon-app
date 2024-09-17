@@ -1,4 +1,5 @@
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
 import 'package:avalon_app/core/config/responsive/responsive_class.dart';
 
 import 'package:avalon_app/features/citas/citas.dart';
@@ -18,12 +19,18 @@ class CitasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(apptexts.citasPage.title(n: 2)),
-        elevation: 6,
-      ),
-      body: const CitasPanel(),
+    // final locale = TranslationProvider.of(context).locale;
+
+    return BlocBuilder<AppSettingsCubit, AppSettingsState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(apptexts.citasPage.title(n: 2)),
+            elevation: 6,
+          ),
+          body: const CitasPanel(),
+        );
+      },
     );
   }
 }
@@ -90,7 +97,8 @@ class CitasPanelView extends StatelessWidget {
     );
   }
 
-  Widget getChildByState(CitasState state, citasBloc, BuildContext context) {
+  Widget getChildByState(
+      CitasState state, CitasBloc citasBloc, BuildContext context) {
     return switch (state) {
       CitasInitial() => const Center(child: CircularProgressIndicatorCustom()),
       CitasError() => MessageError(

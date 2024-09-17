@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:avalon_app/features/citas/citas.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,8 +41,12 @@ class CitasBloc extends Bloc<CitasEvent, CitasState> {
 
     citas.fold((l) {
       emit(CitasError(l.message));
-    }, (r) {
-      emit(CitasLoaded(r));
+    }, (citas) {
+      if (citas.isEmpty) {
+        emit(CitasError(apptexts.appOptions.noData));
+      } else {
+        emit(CitasLoaded(citas));
+      }
     });
   }
 }

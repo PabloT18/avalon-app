@@ -4,7 +4,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 // import 'package:avalon_app/core/config/router/app_router.dart';
+import 'package:avalon_app/app/data/repository/notifications_repository_impl.dart';
 import 'package:avalon_app/app/data/sources/local_notifications.dart';
+import 'package:avalon_app/app/domain/repository/notification_repository.dart';
 import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +25,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     required GetStatusCheckUseCase getStatusCheckUseCase,
     required ToggleNotificationStateUseCase toogleNotificationStateUC,
     required SubscribeTopicsUseCase subscribeTopicsUseCase,
+    required this.notificationRepository,
   })  : _getStatusCheckUC = getStatusCheckUseCase,
         _toogleNotificationStateUC = toogleNotificationStateUC,
         _subscribeTopicsUseCase = subscribeTopicsUseCase,
@@ -31,6 +34,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     on<_NotificationSetStatus>(_onNotificationSetStatus);
     on<NotificationToggleStatus>(_onNotificationTooglePermision);
     on<SubscribeTopics>(_onSubscribeTopics);
+    on<NotificationDellFCM>(_onNotificationDellFCM);
     // Verificar estado de las notificaciones
     // _initialStatusCheck();
     _localNotificationCount = 0;
@@ -41,6 +45,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   final SubscribeTopicsUseCase _subscribeTopicsUseCase;
 
   late int _localNotificationCount;
+
+  final NotficationRepository notificationRepository;
 
   /// Metodo inicial que validad el estado de las notificaiones y emite un
   /// state segun los permisno de las notificaiones que tenga el telefono.
@@ -115,5 +121,12 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   FutureOr<void> _onSubscribeTopics(
       SubscribeTopics event, Emitter<NotificationsState> emit) async {
     await _subscribeTopicsUseCase.call(event.tipics);
+  }
+
+  FutureOr<void> _onNotificationDellFCM(
+      NotificationDellFCM event, Emitter<NotificationsState> emit) async {
+    try {
+      await notificationRepository.dellFCM();
+    } catch (e) {}
   }
 }

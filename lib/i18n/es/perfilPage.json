@@ -25,5 +25,9 @@
     "successUpdateUserAddress": "Dirección del usuario actualizada correctamente",
     "identificacion": "Identificación",
     "tipoIdentificacion": "Tipo de Identificación",
-    "memberFamily": "Familiar"
+    "memberFamily": "Familiar",
+    "firstName": "Nombre",
+    "secondName": "Segundo Nombre",
+    "firstLastName": "Apellido",
+    "secondLastName": "Segundo Apellido"
 }

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 372 (186 per locale)
+/// Strings: 392 (196 per locale)
 ///
-/// Built on 2024-09-16 at 04:50 UTC
+/// Built on 2024-09-16 at 07:59 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -173,9 +173,9 @@ class _TranslationsAppOptionsEs {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get asesor => 'Advisor';
-	String get agente => 'Agent';
-	String get cliente => 'Client';
+	String get asesor => 'Asesor';
+	String get agente => 'Agente';
+	String get cliente => 'Usuario';
 	String get administrador => 'Admin';
 	String get rol => 'Rol';
 	String detalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
@@ -188,6 +188,7 @@ class _TranslationsAppOptionsEs {
 	);
 	String get codigo => 'Código';
 	String get fecha => 'Fecha';
+	String get noData => 'No hay información cargada';
 	String get scrollMore => 'Más';
 	String get scrollNoMoreData => 'No hay más datos';
 	String get scrollError => 'Error al cargar datos';
@@ -208,11 +209,16 @@ class _TranslationsAppOptionsEs {
 	String get save => 'Guardar';
 	String get cancel => 'Cancelar';
 	String get changePassword => 'Cambiar Contraseña';
-	String get oldPassword => 'Contraseña Antigua';
 	String get newPassword => 'Nueva Contraseña';
 	String get confirmPassword => 'Confirmar Contraseña';
 	String get passwordNotMatch => 'Las contraseñas no coinciden';
 	String get passwordChanged => 'Contraseña cambiada con éxito';
+	String get passwordChangedError => 'Error al cambiar la contraseña';
+	String get currentPassword => 'Contraseña Actual';
+	String get verificationCode => 'Código de Verificación';
+	String get ingresarCode => 'Ingresar Código';
+	String get verificar => 'Verificar';
+	String get passwordDebil => 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número';
 	late final _TranslationsAppOptionsValidatorsEs validators = _TranslationsAppOptionsValidatorsEs._(_root);
 }
 
@@ -436,6 +442,10 @@ class _TranslationsPerfilPageEs {
 	String get identificacion => 'Identificación';
 	String get tipoIdentificacion => 'Tipo de Identificación';
 	String get memberFamily => 'Familiar';
+	String get firstName => 'Nombre';
+	String get secondName => 'Segundo Nombre';
+	String get firstLastName => 'Apellido';
+	String get secondLastName => 'Segundo Apellido';
 }
 
 // Path: preferenciasPage
@@ -652,6 +662,7 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	);
 	@override String get codigo => 'Code';
 	@override String get fecha => 'Date';
+	@override String get noData => 'No data loaded';
 	@override String get scrollMore => 'Scroll for more';
 	@override String get scrollNoMoreData => 'No more data';
 	@override String get scrollError => 'Error loading data';
@@ -672,11 +683,16 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override String get save => 'Save';
 	@override String get cancel => 'Cancel';
 	@override String get changePassword => 'Change Password';
-	@override String get oldPassword => 'Old Password';
 	@override String get newPassword => 'New Password';
 	@override String get confirmPassword => 'Confirm Password';
 	@override String get passwordNotMatch => 'Passwords do not match';
 	@override String get passwordChanged => 'Password changed successfully';
+	@override String get passwordChangedError => 'Error changing password';
+	@override String get currentPassword => 'Current Password';
+	@override String get verificationCode => 'Verification Code';
+	@override String get ingresarCode => 'Enter Code';
+	@override String get verificar => 'Verify';
+	@override String get passwordDebil => 'The password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number';
 	@override late final _TranslationsAppOptionsValidatorsEn validators = _TranslationsAppOptionsValidatorsEn._(_root);
 }
 
@@ -900,6 +916,10 @@ class _TranslationsPerfilPageEn implements _TranslationsPerfilPageEs {
 	@override String get identificacion => 'ID number';
 	@override String get tipoIdentificacion => 'ID Type';
 	@override String get memberFamily => 'Family Member';
+	@override String get firstName => 'First Name';
+	@override String get secondName => 'Middle Name';
+	@override String get firstLastName => 'Last Name';
+	@override String get secondLastName => 'Second Last Name';
 }
 
 // Path: preferenciasPage
@@ -1058,9 +1078,9 @@ class _TranslationsPreferenciasPagePermisosEn implements _TranslationsPreferenci
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'appOptions.asesor': return 'Advisor';
-			case 'appOptions.agente': return 'Agent';
-			case 'appOptions.cliente': return 'Client';
+			case 'appOptions.asesor': return 'Asesor';
+			case 'appOptions.agente': return 'Agente';
+			case 'appOptions.cliente': return 'Usuario';
 			case 'appOptions.administrador': return 'Admin';
 			case 'appOptions.rol': return 'Rol';
 			case 'appOptions.detalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
@@ -1073,6 +1093,7 @@ extension on Translations {
 			);
 			case 'appOptions.codigo': return 'Código';
 			case 'appOptions.fecha': return 'Fecha';
+			case 'appOptions.noData': return 'No hay información cargada';
 			case 'appOptions.scrollMore': return 'Más';
 			case 'appOptions.scrollNoMoreData': return 'No hay más datos';
 			case 'appOptions.scrollError': return 'Error al cargar datos';
@@ -1093,11 +1114,16 @@ extension on Translations {
 			case 'appOptions.save': return 'Guardar';
 			case 'appOptions.cancel': return 'Cancelar';
 			case 'appOptions.changePassword': return 'Cambiar Contraseña';
-			case 'appOptions.oldPassword': return 'Contraseña Antigua';
 			case 'appOptions.newPassword': return 'Nueva Contraseña';
 			case 'appOptions.confirmPassword': return 'Confirmar Contraseña';
 			case 'appOptions.passwordNotMatch': return 'Las contraseñas no coinciden';
 			case 'appOptions.passwordChanged': return 'Contraseña cambiada con éxito';
+			case 'appOptions.passwordChangedError': return 'Error al cambiar la contraseña';
+			case 'appOptions.currentPassword': return 'Contraseña Actual';
+			case 'appOptions.verificationCode': return 'Código de Verificación';
+			case 'appOptions.ingresarCode': return 'Ingresar Código';
+			case 'appOptions.verificar': return 'Verificar';
+			case 'appOptions.passwordDebil': return 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número';
 			case 'appOptions.validators.required': return 'Este campo es requerido';
 			case 'appOptions.validators.email': return 'Correo electrónico inválido';
 			case 'appOptions.validators.minLength': return ({required Object min}) => 'Debe tener al menos ${min} caracteres';
@@ -1236,6 +1262,10 @@ extension on Translations {
 			case 'perfilPage.identificacion': return 'Identificación';
 			case 'perfilPage.tipoIdentificacion': return 'Tipo de Identificación';
 			case 'perfilPage.memberFamily': return 'Familiar';
+			case 'perfilPage.firstName': return 'Nombre';
+			case 'perfilPage.secondName': return 'Segundo Nombre';
+			case 'perfilPage.firstLastName': return 'Apellido';
+			case 'perfilPage.secondLastName': return 'Segundo Apellido';
 			case 'preferenciasPage.preferenciasTitle': return 'Preferencias';
 			case 'preferenciasPage.preferenciasUser': return 'Preferencias de usuario';
 			case 'preferenciasPage.notificaciones': return 'Notificaciones';
@@ -1319,6 +1349,7 @@ extension on _TranslationsEn {
 			);
 			case 'appOptions.codigo': return 'Code';
 			case 'appOptions.fecha': return 'Date';
+			case 'appOptions.noData': return 'No data loaded';
 			case 'appOptions.scrollMore': return 'Scroll for more';
 			case 'appOptions.scrollNoMoreData': return 'No more data';
 			case 'appOptions.scrollError': return 'Error loading data';
@@ -1339,11 +1370,16 @@ extension on _TranslationsEn {
 			case 'appOptions.save': return 'Save';
 			case 'appOptions.cancel': return 'Cancel';
 			case 'appOptions.changePassword': return 'Change Password';
-			case 'appOptions.oldPassword': return 'Old Password';
 			case 'appOptions.newPassword': return 'New Password';
 			case 'appOptions.confirmPassword': return 'Confirm Password';
 			case 'appOptions.passwordNotMatch': return 'Passwords do not match';
 			case 'appOptions.passwordChanged': return 'Password changed successfully';
+			case 'appOptions.passwordChangedError': return 'Error changing password';
+			case 'appOptions.currentPassword': return 'Current Password';
+			case 'appOptions.verificationCode': return 'Verification Code';
+			case 'appOptions.ingresarCode': return 'Enter Code';
+			case 'appOptions.verificar': return 'Verify';
+			case 'appOptions.passwordDebil': return 'The password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number';
 			case 'appOptions.validators.required': return 'This field is required';
 			case 'appOptions.validators.email': return 'Invalid email';
 			case 'appOptions.validators.minLength': return ({required Object min}) => 'Must have at least ${min} characters';
@@ -1482,6 +1518,10 @@ extension on _TranslationsEn {
 			case 'perfilPage.identificacion': return 'ID number';
 			case 'perfilPage.tipoIdentificacion': return 'ID Type';
 			case 'perfilPage.memberFamily': return 'Family Member';
+			case 'perfilPage.firstName': return 'First Name';
+			case 'perfilPage.secondName': return 'Middle Name';
+			case 'perfilPage.firstLastName': return 'Last Name';
+			case 'perfilPage.secondLastName': return 'Second Last Name';
 			case 'preferenciasPage.preferenciasTitle': return 'Preferences';
 			case 'preferenciasPage.preferenciasUser': return 'User Preferences';
 			case 'preferenciasPage.notificaciones': return 'Notifications';

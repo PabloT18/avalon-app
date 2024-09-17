@@ -1,5 +1,3 @@
-import 'package:avalon_app/core/config/router/app_routes_pages.dart';
-import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +17,8 @@ class PerfilPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(apptexts.perfilPage.userData),

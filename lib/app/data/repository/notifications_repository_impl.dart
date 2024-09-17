@@ -83,6 +83,11 @@ class NotficationRepositoryImpl implements NotficationRepository {
     return await _remotePushNotification.subscribeTotopics(topics);
   }
 
+  @override
+  Future<void> dellFCM() async {
+    await _remotePushNotification.dellTokenFCM();
+  }
+
   // @override
   // Future<void> subscribeTotopics(List<String> topics) async {
   //   await _remotePushNotification.subscribeTotopics(topics);

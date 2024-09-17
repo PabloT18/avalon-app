@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:avalon_app/app/presentation/bloc/app_cycle/app_lifecycle_cubit.dart';
+import 'package:avalon_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
 import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:avalon_app/features/citas/presentation/views/pages/citas_page.dart';
@@ -88,6 +89,9 @@ class _HomePageViewState extends State<HomePageView> {
 
   @override
   Widget build(BuildContext context) {
+    /// Incio de [NotificationsBloc]
+    context.read<NotificationsBloc>().add(const InitiNotifications());
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(

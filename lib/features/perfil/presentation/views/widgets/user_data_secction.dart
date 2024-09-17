@@ -57,11 +57,11 @@ class UserDataSecction extends StatelessWidget {
               const SizedBox(height: AppLayoutConst.spaceL),
               PersonalDataCard(user: user),
               const SizedBox(height: AppLayoutConst.spaceXL),
-              AddressCard(user: user),
+              if (user.isClient) AddressCard(user: user),
             ],
           ),
         ),
-        if (!user.hasAllRequiredFields) ...[
+        if (!user.hasAllRequiredFields && (user.isClient)) ...[
           const SizedBox(height: 20),
           Align(
             alignment: Alignment.center,
