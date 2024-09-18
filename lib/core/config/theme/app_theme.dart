@@ -17,31 +17,31 @@ class AppTheme {
       //     .copyWith(collapsedIconColor: AppColors.primaryBlue),
       textTheme: const TextTheme(
         titleLarge: TextStyle(
-          fontSize: 22,
+          fontSize: 20,
           color: AppColors.primaryBlue,
           // fontWeight: FontWeight.bold,
         ),
         titleMedium: TextStyle(
-          fontSize: 20,
-          color: AppColors.primaryBlue,
-          fontWeight: FontWeight.bold,
-        ),
-        titleSmall: TextStyle(
           fontSize: 18,
           color: AppColors.primaryBlue,
           fontWeight: FontWeight.bold,
         ),
-
-        bodyLarge: TextStyle(fontSize: 18, color: Colors.black),
-        bodyMedium: TextStyle(fontSize: 16),
-        bodySmall: TextStyle(fontSize: 14),
-        labelLarge: TextStyle(
+        titleSmall: TextStyle(
           fontSize: 16,
+          color: AppColors.primaryBlue,
+          fontWeight: FontWeight.bold,
+        ),
+
+        bodyLarge: TextStyle(fontSize: 16, color: Colors.black),
+        bodyMedium: TextStyle(fontSize: 14),
+        bodySmall: TextStyle(fontSize: 12),
+        labelLarge: TextStyle(
+          fontSize: 14,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
         labelMedium: TextStyle(
-          fontSize: 14,
+          fontSize: 12,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),

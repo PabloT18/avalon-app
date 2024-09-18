@@ -61,7 +61,7 @@ class ClientePolizaDetail extends StatelessWidget {
           TitleDescripcion(
               isSubdescription: true,
               title: apptexts.segurosPage.empresa,
-              value: clientePoliza.empresa ?? ' - '),
+              value: clientePoliza.empresa?.nombre ?? ' - '),
           TitleDescripcion(
               isSubdescription: true,
               title: apptexts.segurosPage.numeroCertificado,

@@ -1,5 +1,6 @@
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

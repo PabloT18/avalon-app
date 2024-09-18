@@ -1,3 +1,4 @@
+import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'package:avalon_app/i18n/generated/translations.g.dart';
@@ -9,6 +10,9 @@ import 'package:avalon_app/features/shared/functions/fun_logic.dart';
 
 import 'package:avalon_app/features/citas/citas.dart';
 import 'package:avalon_app/features/citas/presentation/views/widgets/wid_detail_form_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../widgets/wid_cita_detail_iamge.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CitaDetalleMorePanel extends StatelessWidget {
@@ -21,10 +25,11 @@ class CitaDetalleMorePanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
 
     final locale = TranslationProvider.of(context).locale;
     return SingleChildScrollView(
+      primary: true,
       padding: const EdgeInsets.all(AppLayoutConst.paddingL),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,11 +79,11 @@ class CitaDetalleMorePanel extends StatelessWidget {
           DetailFormField(
               label: apptexts.citasPage.detailOthersRequaimentes,
               value: citaMedica.otrosRequisitos),
-          // if (citaMedica.imagenId != null)
-          //   DetailPhoto(
-          //     imageCode: citaMedica.imagenId!,
-          //     user: user,
-          //   ),
+          if (citaMedica.imagenId != null)
+            DetailPhoto(
+              imageCode: citaMedica.imagenId!,
+              user: user,
+            ),
           const SizedBox(height: AppLayoutConst.spaceXL),
         ],
       ),

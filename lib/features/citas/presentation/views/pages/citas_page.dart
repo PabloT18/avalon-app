@@ -42,13 +42,10 @@ class CitasPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
-
-    return BlocProvider(
-      create: (context) => CitasBloc(user)..add(const GetCitas()),
-      child: CitasPanelView(
-        user: user,
-      ),
+    return BlocBuilder<AppSettingsCubit, AppSettingsState>(
+      builder: (context, state) {
+        return const CitasPanelView();
+      },
     );
   }
 }
@@ -56,15 +53,16 @@ class CitasPanel extends StatelessWidget {
 class CitasPanelView extends StatelessWidget {
   const CitasPanelView({
     super.key,
-    required this.user,
   });
-
-  final User user;
 
   @override
   Widget build(BuildContext context) {
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+
     final citasBloc = context.read<CitasBloc>();
-    citasBloc.add(const GetCitas());
+    if (citasBloc.state is! CitasLoaded) {
+      citasBloc.add(const GetCitas());
+    }
 
     return BlocBuilder<CitasBloc, CitasState>(
       builder: (context, state) {
@@ -82,13 +80,13 @@ class CitasPanelView extends StatelessWidget {
 
             child: Column(
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: AppLayoutConst.spaceM),
                 Text(
                   apptexts.citasPage.title(n: 2),
                   style: Theme.of(context).textTheme.titleSmall,
                 ),
-                const SizedBox(height: 20),
-                getChildByState(state, citasBloc, context),
+                const SizedBox(height: AppLayoutConst.spaceL),
+                getChildByState(state, citasBloc, context, user),
               ],
             ),
           ),
@@ -98,7 +96,7 @@ class CitasPanelView extends StatelessWidget {
   }
 
   Widget getChildByState(
-      CitasState state, CitasBloc citasBloc, BuildContext context) {
+      CitasState state, CitasBloc citasBloc, BuildContext context, User user) {
     return switch (state) {
       CitasInitial() => const Center(child: CircularProgressIndicatorCustom()),
       CitasError() => MessageError(

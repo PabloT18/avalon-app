@@ -81,7 +81,7 @@ class PushNotificationSourceFCM {
   ///
   /// [1]
   static Future _backgroundHandler(RemoteMessage message) async {
-    // print("On background message: ${message.data}");
+    // log("On background onTerminateApp message: ${message.data}");
     if (message.notification != null) {
       _messageStream.add(PushMessageModel.fromRemoteMessage(
           message, NotificationMessageType.onTerminateApp));
@@ -90,7 +90,7 @@ class PushNotificationSourceFCM {
 
   /// [2] Mesages que llegan si la palicacion esta abierta
   static Future _onsMessageHandler(RemoteMessage message) async {
-    // print("On app opended message: ${message.data}");
+    // log("On app opended message: ${message.data}");
     if (message.notification != null) {
       _messageStream.add(PushMessageModel.fromRemoteMessage(
           message, NotificationMessageType.onOpenApp));
@@ -100,7 +100,7 @@ class PushNotificationSourceFCM {
   /// [2] Mesages que llegan si la palicacion esta suspendida y se abre la app
   /// desde la notificacion
   static Future _onMessageOpenApp(RemoteMessage message) async {
-    // print("On background message: ${message.data}");
+    // log("On background onSuspendApp message: ${message.data}");
     if (message.notification != null) {
       _messageStream.add(PushMessageModel.fromRemoteMessage(
           message, NotificationMessageType.onSuspendApp));

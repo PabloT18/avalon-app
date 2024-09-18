@@ -16,10 +16,6 @@ class ConstHiveBox {
 
   static const kUserModel = 'userModel';
 
-  static const kHorario = 'horario';
-  static const kHorarioPeriodo = 'horario_periodo';
-
-  static const kCartneStete = 'carnet_state';
-  static const kCartneImg = 'carnet_image';
-  static const kCartneImgUnitList = 'carnet_image_unit';
+  static const kUserNotificationPrefeerences = 'userNotificationPrefeerences';
+  static const kUserNotificationTopics = 'userNotificationTopics';
 }

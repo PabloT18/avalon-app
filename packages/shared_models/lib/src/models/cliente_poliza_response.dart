@@ -3,6 +3,7 @@ import 'package:shared_models/src/models/usr_agente_response.dart';
 import 'package:shared_models/src/models/usr_asesor_response.dart';
 
 import '../entities/cliente_poliza_entity.dart';
+import 'empresa_response.dart';
 import 'usr_cliente_response.dart';
 
 class ClientePolizaResponse extends ClientePoliza {
@@ -41,7 +42,9 @@ class ClientePolizaResponse extends ClientePoliza {
         id: json["id"],
         codigo: json["codigo"],
         numeroCertificado: json["numeroCertificado"],
-        empresa: json["empresa"],
+        empresa: json["empresa"] == null
+            ? null
+            : EmpresaResponse.fromJson(json["empresa"]),
         cliente: json["cliente"] == null
             ? null
             : UsrClienteResponse.fromJson(json["cliente"]),

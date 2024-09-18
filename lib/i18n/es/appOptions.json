@@ -45,6 +45,12 @@
     "ingresarCode": "Ingresar Código",
     "verificar": "Verificar",
     "passwordDebil": "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número",
+    "historialEmpty": "No hay un historial de comentarios aún",
+    "historialError": "Erroral cargar el historial de comentarios",
+    "comentMessage": "Escribe un comentario",
+    "comentError": "Error al enviar el comentario",
+    "comentSuccess": "Comentario enviado con éxito",
+    "comentEmpty": "El comentario no puede estar vacío",
     "validators": {
         "required": "Este campo es requerido",
         "email": "Correo electrónico inválido",

@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 // import 'package:avalon_app/core/config/router/app_router.dart';
-import 'package:avalon_app/app/data/repository/notifications_repository_impl.dart';
+
 import 'package:avalon_app/app/data/sources/local_notifications.dart';
 import 'package:avalon_app/app/domain/repository/notification_repository.dart';
 import 'package:avalon_app/core/config/router/app_router.dart';
@@ -64,17 +64,11 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     /// Listener para notificaiones en Foreground sin importat el estado de
     /// autorizacion de perimisos para las notificacioenes (Objeto estatico)
     PushNotificationSourceFCM.messagesStream.listen((message) {
-      // if (message.data['panel'] != null) {
-      //   // add(OnNotificationInToOpenApp(message));
-      // } else {
-      //   // add(OnNotificationIn(message));
-      // }
-
       switch (message.notificationMessageType) {
         case NotificationMessageType.onOpenApp:
+          log("NotificationsBloc -> NotificationMessageType.onOpenApp");
           LocalNotifications.showLocalNotification(++_localNotificationCount,
               message.title, message.body, json.encode(message.data));
-          log("NotificationsBloc -> NotificationMessageType.onOpenApp");
           break;
         case NotificationMessageType.onSuspendApp:
           if (message.hasRoute) {
@@ -83,11 +77,6 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
           break;
 
         case NotificationMessageType.onTerminateApp:
-
-          //TODO: fix navigate after load home
-          // if (message.hasRoute) {
-          //   AppRouter.navigateFromPushMessage(message);
-          // }
           break;
         default:
       }
@@ -97,11 +86,18 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   /// Emitir un estado segun el cambion a la autorizacion de un usario par las
   /// notificaciones
   FutureOr<void> _onNotificationSetStatus(
-      _NotificationSetStatus event, Emitter<NotificationsState> emit) {
+      _NotificationSetStatus event, Emitter<NotificationsState> emit) async {
     switch (event.status) {
       case AuthorizationStatus.authorized:
-        add(const SubscribeTopics(['todos']));
-        emit(const NotificationsAuthorized());
+        final getUserActiveNotification =
+            await notificationRepository.getUserActiveNotification();
+        if (getUserActiveNotification == null || getUserActiveNotification) {
+          add(const SubscribeTopics(['todos', 'PTorres']));
+          emit(const NotificationsAuthorized(userActiveNotifiaction: true));
+        } else {
+          emit(const NotificationsAuthorized(userActiveNotifiaction: false));
+        }
+        // emit(const NotificationsAuthorized());
         break;
       case AuthorizationStatus.denied:
         emit(const NotificationsDenied());
@@ -114,8 +110,20 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   FutureOr<void> _onNotificationTooglePermision(
       NotificationToggleStatus event, Emitter<NotificationsState> emit) async {
     final request = state is! NotificationsAuthorized;
-    final authorizationStatus = await _toogleNotificationStateUC.call(request);
-    add(_NotificationSetStatus(authorizationStatus));
+    if (request) {
+      final authorizationStatus =
+          await notificationRepository.requestPermission();
+      add(_NotificationSetStatus(authorizationStatus));
+    } else {
+      final getUserActiveNotification =
+          await notificationRepository.getUserActiveNotification();
+
+      final newState =
+          getUserActiveNotification == null ? true : !getUserActiveNotification;
+      final repsonse = await notificationRepository.toogleStatus(newState);
+      emit((state as NotificationsAuthorized)
+          .copyWiht(userActiveNotifiaction: repsonse));
+    }
   }
 
   FutureOr<void> _onSubscribeTopics(

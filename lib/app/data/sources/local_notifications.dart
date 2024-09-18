@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:avalon_app/app/data/models/push_notifications/push_message_model.dart';
 import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -32,7 +30,7 @@ class LocalNotifications {
   static void _onDidReceiveNotificationResponse(NotificationResponse message) {
     // AppRouter.router.push(location)
     final pushMessgae = PushMessageModel.fromLocalNotificationResponse(message);
-    log('LocalNotifications error -> $message');
+
     if (pushMessgae.hasRoute) {
       AppRouter.navigateFromPushMessage(pushMessgae);
     }

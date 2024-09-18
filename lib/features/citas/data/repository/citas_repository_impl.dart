@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:avalon_app/core/error/exceptions/exceptions.dart';
 import 'package:avalon_app/core/error/failures/failures.dart';
 
@@ -49,5 +51,31 @@ class CitasRepositoryImpl implements CitasRepository {
     } on Exception {
       return Left(ServerFailure(message: apptexts.appOptions.error_servers));
     }
+  }
+
+  @override
+  Future<Either<Failure, List<Comentario>>> getCitaHistorial(
+    User user,
+    int citaId,
+  ) async {
+    try {
+      final casosList = await remoteSource.getComentariosById(user, citaId);
+      return Right(casosList);
+    } on InternetAccessException catch (i) {
+      return Left(InternetFailure(message: i.message));
+    } on ServerException catch (s) {
+      return Left(ServerFailure(
+          message: s.message ?? apptexts.appOptions.error_servers));
+    } on Exception {
+      return Left(ServerFailure(message: apptexts.appOptions.error_servers));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Comentario>>> sendComentario(
+      User user, int citaId, String comentario,
+      {File? image}) {
+    // TODO: implement sendComentario
+    throw UnimplementedError();
   }
 }

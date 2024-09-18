@@ -31,6 +31,12 @@ class CitasBloc extends Bloc<CitasEvent, CitasState> {
 
   late int _pageCitas;
 
+  @override
+  Future<void> close() {
+    refreshController.dispose();
+    return super.close();
+  }
+
   FutureOr<void> _onGetCitas(GetCitas event, Emitter<CitasState> emit) async {
     emit(CitasInitial());
 

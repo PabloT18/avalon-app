@@ -1,21 +1,28 @@
 import 'dart:developer';
 
-import 'package:avalon_app/app/presentation/bloc/app_cycle/app_lifecycle_cubit.dart';
-import 'package:avalon_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
-import 'package:avalon_app/core/config/router/app_router.dart';
-import 'package:avalon_app/core/config/theme/app_colors.dart';
-import 'package:avalon_app/features/citas/presentation/views/pages/citas_page.dart';
-
-import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
-import 'package:avalon_app/i18n/generated/translations.g.dart';
+import 'package:avalon_app/features/emergencias/emergencias.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'package:avalon_app/i18n/generated/translations.g.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
+import 'package:avalon_app/core/config/router/app_router.dart';
+
+import 'package:avalon_app/app/presentation/bloc/app_cycle/app_lifecycle_cubit.dart';
+import 'package:avalon_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
+import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+
+import 'package:avalon_app/features/reclamaciones/reclamaciones.dart';
+import 'package:avalon_app/features/citas/citas.dart';
+
+import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 
 import '../../../shared/widgets/wid_drawer.dart';
+import '../cubit/home_navigation_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,52 +53,32 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return const HomePageView();
+    /// Incio de [NotificationsBloc]
+    ///
+    context.read<NotificationsBloc>().add(const InitiNotifications());
+
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NavigationCubit(),
+        ),
+        BlocProvider(create: (context) => CitasBloc(user)),
+        BlocProvider(create: (context) => ReclamacionesBloc(user)),
+        BlocProvider(create: (context) => EmergenciasBloc(user)),
+      ],
+      child: const HomePageView(),
+    );
   }
 }
 
-class HomePageView extends StatefulWidget {
+class HomePageView extends StatelessWidget {
   const HomePageView({super.key});
 
   @override
-  State<HomePageView> createState() => _HomePageViewState();
-}
-
-class _HomePageViewState extends State<HomePageView> {
-  int _currentIndex = 1;
-  PageController _pageController = PageController();
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(initialPage: _currentIndex);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  void onTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-    _pageController.animateToPage(index,
-        duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-  }
-
-  void onPageChanged(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    /// Incio de [NotificationsBloc]
-    context.read<NotificationsBloc>().add(const InitiNotifications());
-
+    final navigationCubit = context.read<NavigationCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -121,40 +108,53 @@ class _HomePageViewState extends State<HomePageView> {
         indexInitialName: PAGES.home.pageName,
         isInHome: true,
       ),
-      floatingActionButton: _currentIndex == 1
-          ? FloatingActionButton(
-              mini: true,
-              onPressed: () {
-                context.goNamed(PAGES.crearCita.pageName);
-              },
-              child: const Icon(Icons.add),
-            )
-          : null,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: onTapped,
-        items: [
-          BottomNavigationBarItem(
-            icon: const FaIcon(FontAwesomeIcons.fileMedical),
-            label: apptexts.reclamacionesPage.title(n: 2),
-          ),
-          BottomNavigationBarItem(
-            icon: const FaIcon(FontAwesomeIcons.calendarPlus),
-            label: apptexts.citasPage.title(n: 2),
-          ),
-          BottomNavigationBarItem(
-            icon: const FaIcon(FontAwesomeIcons.kitMedical),
-            label: apptexts.emergenciasPage.title(n: 2),
-          ),
-        ],
+      floatingActionButton: BlocBuilder<NavigationCubit, int>(
+        builder: (context, state) {
+          if (state != 1) {
+            return Container();
+          }
+          return FloatingActionButton(
+            mini: true,
+            onPressed: () {
+              context.goNamed(PAGES.crearCita.pageName);
+            },
+            child: const Icon(Icons.add),
+          );
+        },
+      ),
+      bottomNavigationBar: BlocBuilder<NavigationCubit, int>(
+        builder: (context, state) {
+          return BottomNavigationBar(
+            currentIndex: state,
+            onTap: (index) {
+              navigationCubit.setPage(index);
+            },
+            items: [
+              BottomNavigationBarItem(
+                icon: const FaIcon(FontAwesomeIcons.fileMedical),
+                label: apptexts.reclamacionesPage.title(n: 2),
+              ),
+              BottomNavigationBarItem(
+                icon: const FaIcon(FontAwesomeIcons.calendarPlus),
+                label: apptexts.citasPage.title(n: 2),
+              ),
+              BottomNavigationBarItem(
+                icon: const FaIcon(FontAwesomeIcons.kitMedical),
+                label: apptexts.emergenciasPage.title(n: 2),
+              ),
+            ],
+          );
+        },
       ),
       body: PageView(
-        controller: _pageController,
-        onPageChanged: onPageChanged,
+        controller: context.read<NavigationCubit>().pageController,
+        onPageChanged: (index) {
+          navigationCubit.onPageChanged(index);
+        },
         children: const <Widget>[
+          EmergenciaPanel(),
           CitasPanel(),
-          CitasPanel(),
-          CitasPanel(),
+          ReclamacionesPanel(),
         ],
       ),
     );

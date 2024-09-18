@@ -45,6 +45,12 @@
     "ingresarCode": "Enter Code",
     "verificar": "Verify",
     "passwordDebil": "The password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number",
+    "historialEmpty": "No comment history yet",
+    "historialError": "Error loading comment history",
+    "comentMessage": "Write a comment",
+    "comentError": "Error sending comment",
+    "comentSuccess": "Comment sent successfully",
+    "comentEmpty": "Comment cannot be empty",
     "validators": {
         "required": "This field is required",
         "email": "Invalid email",

@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:shared_models/shared_models.dart';
 
+import '../models/empresa_response.dart';
+
 class ClientePoliza extends Equatable {
   final String? createdBy;
   final DateTime? createdDate;
@@ -9,7 +11,7 @@ class ClientePoliza extends Equatable {
   final int? id;
   final String? codigo;
   final String? numeroCertificado;
-  final String? empresa;
+  final EmpresaResponse? empresa;
   final UsrCliente? cliente;
   final UsrAsesor? asesor;
   final UsrAgente? agente;
@@ -56,7 +58,9 @@ class ClientePoliza extends Equatable {
         id: json["id"],
         codigo: json["codigo"],
         numeroCertificado: json["numeroCertificado"],
-        empresa: json["empresa"],
+        empresa: json["empresa"] == null
+            ? null
+            : EmpresaResponse.fromJson(json["empresa"]),
         cliente: json["cliente"] == null
             ? null
             : UsrClienteResponse.fromJson(json["cliente"]),

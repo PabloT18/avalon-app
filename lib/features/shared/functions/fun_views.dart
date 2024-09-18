@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 
 import 'package:avalon_app/core/config/theme/app_colors.dart';
@@ -108,4 +110,30 @@ class UtilsFunctionsViews {
         prefixIcon: icon != null ? Icon(icon) : null,
         suffixIcon: suffixIcon,
       );
+
+  static Future<void> showFullScreenImage(File imageFile, context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context)
+                  .pop(); // Cierra el diálogo al hacer tap en cualquier parte
+            },
+            child: InteractiveViewer(
+              panEnabled: true, // Permite desplazar la imagen si está ampliada
+              minScale: 0.5, // Escala mínima para el zoom
+              maxScale: 4.0, // Escala máxima para el zoom
+              child: Image.file(
+                imageFile,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 }

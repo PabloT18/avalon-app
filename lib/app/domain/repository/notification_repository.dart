@@ -12,7 +12,8 @@ abstract class NotficationRepository {
   /// notificaicones
   /// Permisos Dnegados devuelve null
   /// Permisos Consedidos devuelve el TOKENFCM
-  Future<AuthorizationStatus> toogleStatus(bool request);
+  Future<AuthorizationStatus> requestPermission();
+  Future<bool> toogleStatus(bool request);
 
   /// Subscribir a topicos
   /// notificaicones
@@ -20,4 +21,7 @@ abstract class NotficationRepository {
   /// Permisos Consedidos devuelve el TOKENFCM
   Future<void> subscribeTotopics(List<String> topics);
   Future<void> dellFCM();
+
+  Future<void> deactivateNotifiactions();
+  Future<bool?> getUserActiveNotification();
 }

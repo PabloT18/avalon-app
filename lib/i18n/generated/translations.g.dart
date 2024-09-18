@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 392 (196 per locale)
+/// Strings: 408 (204 per locale)
 ///
-/// Built on 2024-09-16 at 07:59 UTC
+/// Built on 2024-09-18 at 06:29 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -219,6 +219,12 @@ class _TranslationsAppOptionsEs {
 	String get ingresarCode => 'Ingresar Código';
 	String get verificar => 'Verificar';
 	String get passwordDebil => 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número';
+	String get historialEmpty => 'No hay un historial de comentarios aún';
+	String get historialError => 'Erroral cargar el historial de comentarios';
+	String get comentMessage => 'Escribe un comentario';
+	String get comentError => 'Error al enviar el comentario';
+	String get comentSuccess => 'Comentario enviado con éxito';
+	String get comentEmpty => 'El comentario no puede estar vacío';
 	late final _TranslationsAppOptionsValidatorsEs validators = _TranslationsAppOptionsValidatorsEs._(_root);
 }
 
@@ -311,6 +317,8 @@ class _TranslationsCitasPageEs {
 	String get creaCasoCita => 'Crea un caso para la cita médica';
 	String get citaEnCaso => 'Escoje el caso para la cita médica';
 	String get citaEstado => 'Estado de la cita';
+	String get historialEmpty => 'No hay un historial de comentarios aún';
+	String get historialError => 'Erroral cargar el historial de comentarios';
 }
 
 // Path: comunicadospage
@@ -457,8 +465,8 @@ class _TranslationsPreferenciasPageEs {
 	// Translations
 	String get preferenciasTitle => 'Preferencias';
 	String get preferenciasUser => 'Preferencias de usuario';
-	String get notificaciones => 'Notificaciones';
-	String get notificacionesPermiso => 'Permiso de notificaciones';
+	String get notificaciones => 'Preferencias de Notificaciones';
+	String get notificacionesPermiso => 'Recivir notificaciones AvalonPlus';
 	String get idioma => 'Idioma';
 	String get title => 'Ajustes';
 	String get spanish => 'Español';
@@ -592,7 +600,7 @@ class _TranslationsPreferenciasPagePermisosEs {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get title => 'Permisos';
+	String get title => 'Permisos del dispositivo';
 	String get notificaciones => 'Notificaciones';
 	String get camara => 'Cámara';
 	String get almacenamiento => 'Almacenamiento';
@@ -693,6 +701,12 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override String get ingresarCode => 'Enter Code';
 	@override String get verificar => 'Verify';
 	@override String get passwordDebil => 'The password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number';
+	@override String get historialEmpty => 'No comment history yet';
+	@override String get historialError => 'Error loading comment history';
+	@override String get comentMessage => 'Write a comment';
+	@override String get comentError => 'Error sending comment';
+	@override String get comentSuccess => 'Comment sent successfully';
+	@override String get comentEmpty => 'Comment cannot be empty';
 	@override late final _TranslationsAppOptionsValidatorsEn validators = _TranslationsAppOptionsValidatorsEn._(_root);
 }
 
@@ -785,6 +799,8 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 	@override String get creaCasoCita => 'Create a case for the appointment';
 	@override String get citaEnCaso => 'Choose the case for the appointment';
 	@override String get citaEstado => 'Appointment State';
+	@override String get historialEmpty => 'No comment history yet';
+	@override String get historialError => 'Error loading comment history';
 }
 
 // Path: comunicadospage
@@ -931,8 +947,8 @@ class _TranslationsPreferenciasPageEn implements _TranslationsPreferenciasPageEs
 	// Translations
 	@override String get preferenciasTitle => 'Preferences';
 	@override String get preferenciasUser => 'User Preferences';
-	@override String get notificaciones => 'Notifications';
-	@override String get notificacionesPermiso => 'Notification Permission';
+	@override String get notificaciones => 'Notification Preferences';
+	@override String get notificacionesPermiso => 'Receive AvalonPlus notifications';
 	@override String get idioma => 'Language';
 	@override String get title => 'Settings';
 	@override String get spanish => 'Spanish';
@@ -1066,8 +1082,8 @@ class _TranslationsPreferenciasPagePermisosEn implements _TranslationsPreferenci
 	@override final _TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Permissions';
-	@override String get notificaciones => 'Notifications';
+	@override String get title => 'Device Permissions';
+	@override String get notificaciones => 'Notifications Permission';
 	@override String get camara => 'Camera';
 	@override String get almacenamiento => 'Storage';
 }
@@ -1124,6 +1140,12 @@ extension on Translations {
 			case 'appOptions.ingresarCode': return 'Ingresar Código';
 			case 'appOptions.verificar': return 'Verificar';
 			case 'appOptions.passwordDebil': return 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número';
+			case 'appOptions.historialEmpty': return 'No hay un historial de comentarios aún';
+			case 'appOptions.historialError': return 'Erroral cargar el historial de comentarios';
+			case 'appOptions.comentMessage': return 'Escribe un comentario';
+			case 'appOptions.comentError': return 'Error al enviar el comentario';
+			case 'appOptions.comentSuccess': return 'Comentario enviado con éxito';
+			case 'appOptions.comentEmpty': return 'El comentario no puede estar vacío';
 			case 'appOptions.validators.required': return 'Este campo es requerido';
 			case 'appOptions.validators.email': return 'Correo electrónico inválido';
 			case 'appOptions.validators.minLength': return ({required Object min}) => 'Debe tener al menos ${min} caracteres';
@@ -1203,6 +1225,8 @@ extension on Translations {
 			case 'citasPage.creaCasoCita': return 'Crea un caso para la cita médica';
 			case 'citasPage.citaEnCaso': return 'Escoje el caso para la cita médica';
 			case 'citasPage.citaEstado': return 'Estado de la cita';
+			case 'citasPage.historialEmpty': return 'No hay un historial de comentarios aún';
+			case 'citasPage.historialError': return 'Erroral cargar el historial de comentarios';
 			case 'comunicadospage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Noticia',
 				other: 'Noticias',
@@ -1268,15 +1292,15 @@ extension on Translations {
 			case 'perfilPage.secondLastName': return 'Segundo Apellido';
 			case 'preferenciasPage.preferenciasTitle': return 'Preferencias';
 			case 'preferenciasPage.preferenciasUser': return 'Preferencias de usuario';
-			case 'preferenciasPage.notificaciones': return 'Notificaciones';
-			case 'preferenciasPage.notificacionesPermiso': return 'Permiso de notificaciones';
+			case 'preferenciasPage.notificaciones': return 'Preferencias de Notificaciones';
+			case 'preferenciasPage.notificacionesPermiso': return 'Recivir notificaciones AvalonPlus';
 			case 'preferenciasPage.idioma': return 'Idioma';
 			case 'preferenciasPage.title': return 'Ajustes';
 			case 'preferenciasPage.spanish': return 'Español';
 			case 'preferenciasPage.ingles': return 'Ingles';
 			case 'preferenciasPage.lanES': return 'Idioma Español';
 			case 'preferenciasPage.lanEN': return 'Idioma Ingles';
-			case 'preferenciasPage.permisos.title': return 'Permisos';
+			case 'preferenciasPage.permisos.title': return 'Permisos del dispositivo';
 			case 'preferenciasPage.permisos.notificaciones': return 'Notificaciones';
 			case 'preferenciasPage.permisos.camara': return 'Cámara';
 			case 'preferenciasPage.permisos.almacenamiento': return 'Almacenamiento';
@@ -1380,6 +1404,12 @@ extension on _TranslationsEn {
 			case 'appOptions.ingresarCode': return 'Enter Code';
 			case 'appOptions.verificar': return 'Verify';
 			case 'appOptions.passwordDebil': return 'The password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number';
+			case 'appOptions.historialEmpty': return 'No comment history yet';
+			case 'appOptions.historialError': return 'Error loading comment history';
+			case 'appOptions.comentMessage': return 'Write a comment';
+			case 'appOptions.comentError': return 'Error sending comment';
+			case 'appOptions.comentSuccess': return 'Comment sent successfully';
+			case 'appOptions.comentEmpty': return 'Comment cannot be empty';
 			case 'appOptions.validators.required': return 'This field is required';
 			case 'appOptions.validators.email': return 'Invalid email';
 			case 'appOptions.validators.minLength': return ({required Object min}) => 'Must have at least ${min} characters';
@@ -1459,6 +1489,8 @@ extension on _TranslationsEn {
 			case 'citasPage.creaCasoCita': return 'Create a case for the appointment';
 			case 'citasPage.citaEnCaso': return 'Choose the case for the appointment';
 			case 'citasPage.citaEstado': return 'Appointment State';
+			case 'citasPage.historialEmpty': return 'No comment history yet';
+			case 'citasPage.historialError': return 'Error loading comment history';
 			case 'comunicadospage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'New',
 				other: 'News',
@@ -1524,16 +1556,16 @@ extension on _TranslationsEn {
 			case 'perfilPage.secondLastName': return 'Second Last Name';
 			case 'preferenciasPage.preferenciasTitle': return 'Preferences';
 			case 'preferenciasPage.preferenciasUser': return 'User Preferences';
-			case 'preferenciasPage.notificaciones': return 'Notifications';
-			case 'preferenciasPage.notificacionesPermiso': return 'Notification Permission';
+			case 'preferenciasPage.notificaciones': return 'Notification Preferences';
+			case 'preferenciasPage.notificacionesPermiso': return 'Receive AvalonPlus notifications';
 			case 'preferenciasPage.idioma': return 'Language';
 			case 'preferenciasPage.title': return 'Settings';
 			case 'preferenciasPage.spanish': return 'Spanish';
 			case 'preferenciasPage.ingles': return 'English';
 			case 'preferenciasPage.lanES': return 'Set Spanish';
 			case 'preferenciasPage.lanEN': return 'Set English';
-			case 'preferenciasPage.permisos.title': return 'Permissions';
-			case 'preferenciasPage.permisos.notificaciones': return 'Notifications';
+			case 'preferenciasPage.permisos.title': return 'Device Permissions';
+			case 'preferenciasPage.permisos.notificaciones': return 'Notifications Permission';
 			case 'preferenciasPage.permisos.camara': return 'Camera';
 			case 'preferenciasPage.permisos.almacenamiento': return 'Storage';
 			case 'reclamacionesPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,

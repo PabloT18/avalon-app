@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:avalon_app/core/error/failures/failures.dart';
 import 'package:avalon_app/features/citas/domain/models/citas_response.dart';
 import 'package:dartz/dartz.dart';
@@ -18,4 +20,13 @@ abstract class CitasRepository {
     String? search,
     bool? update = false,
   });
+
+  Future<Either<Failure, List<Comentario>>> getCitaHistorial(
+    User user,
+    int citaId,
+  );
+
+  Future<Either<Failure, List<Comentario>>> sendComentario(
+      User user, int citaId, String comentario,
+      {File? image});
 }

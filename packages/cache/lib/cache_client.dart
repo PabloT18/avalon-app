@@ -9,7 +9,7 @@ class CacheClient {
   final Box _box;
 
   /// Writes the provided [value] with [key] to the box.
-  Future<void> write<T extends Object>(
+  Future<void> write<T extends Object?>(
       {required String key, required T value}) async {
     if (value is Map<String, dynamic>) {
       await _box.put(key, value);
@@ -20,7 +20,7 @@ class CacheClient {
     }
   }
 
-  Future<void> writePrimary<T extends Object>(
+  Future<void> writePrimary<T extends Object?>(
       {required String key, required T value}) async {
     await _box.put(key, value);
   }

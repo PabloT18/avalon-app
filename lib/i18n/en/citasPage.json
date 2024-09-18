@@ -42,5 +42,7 @@
     "citaSinCaso": "Appointment without Case",
     "creaCasoCita": "Create a case for the appointment",
     "citaEnCaso": "Choose the case for the appointment",
-    "citaEstado": "Appointment State"
+    "citaEstado": "Appointment State",
+    "historialEmpty": "No comment history yet",
+    "historialError": "Error loading comment history"
 }

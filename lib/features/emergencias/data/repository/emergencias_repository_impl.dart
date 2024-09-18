@@ -32,4 +32,21 @@ class EmergenciasRepositoryImpl implements EmergenciasRepository {
       return Left(ServerFailure(message: apptexts.appOptions.error_servers));
     }
   }
+
+  @override
+  Future<Either<Failure, List<EmergenciaModel>>> getEmergencias(User user,
+      {required int page, String? search, bool? update = false}) async {
+    try {
+      final casosList =
+          await remoteSource.getEmergencias(user, page: page, search: search);
+      return Right(casosList);
+    } on InternetAccessException catch (i) {
+      return Left(InternetFailure(message: i.message));
+    } on ServerException catch (s) {
+      return Left(ServerFailure(
+          message: s.message ?? apptexts.appOptions.error_servers));
+    } on Exception {
+      return Left(ServerFailure(message: apptexts.appOptions.error_servers));
+    }
+  }
 }

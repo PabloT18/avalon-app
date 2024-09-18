@@ -71,4 +71,30 @@ class CitasRemoteSource {
       throw Exception('Error fetching data');
     }
   }
+
+  Future<List<Comentario>> getComentariosById(User user, int citaId) async {
+    String url = '/citasMedicas/$citaId/comentariosCitasMedicas';
+
+    try {
+      // Utiliza el método httpGet de APPRemoteConfig
+      final response = await APPRemoteConfig.httpGet(
+        url: url,
+        exception: Exception('Error fetching data'),
+        token: user.token!,
+      );
+
+      // Verifica el statusCode directamente en el response
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonResponse = response.data;
+        return jsonResponse
+            .map((data) => ComentarioResponse.fromJson(data))
+            .toList();
+      } else {
+        throw Exception('Error fetching data');
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+      throw Exception('Error fetching data');
+    }
+  }
 }

@@ -5,6 +5,6 @@ class ToggleNotificationStateUseCase {
       {required NotficationRepository repository})
       : _fbPushNotificationRepoImpl = repository;
   final NotficationRepository _fbPushNotificationRepoImpl;
-  Future<AuthorizationStatus> call(bool request) =>
+  Future<void> call(bool request) =>
       _fbPushNotificationRepoImpl.toogleStatus(request);
 }

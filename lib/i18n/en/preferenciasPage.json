@@ -1,8 +1,8 @@
 {
     "preferenciasTitle": "Preferences",
     "preferenciasUser": "User Preferences",
-    "notificaciones": "Notifications",
-    "notificacionesPermiso": "Notification Permission",
+    "notificaciones": "Notification Preferences",
+    "notificacionesPermiso": "Receive AvalonPlus notifications",
     "idioma": "Language",
     "title": "Settings",
     "spanish": "Spanish",
@@ -10,8 +10,8 @@
     "lanES": "Set Spanish",
     "lanEN": "Set English",
     "permisos": {
-        "title": "Permissions",
-        "notificaciones": "Notifications",
+        "title": "Device Permissions",
+        "notificaciones": "Notifications Permission",
         "camara": "Camera",
         "almacenamiento": "Storage"
     }

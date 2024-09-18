@@ -42,5 +42,7 @@
     "citaSinCaso": "Cita sin caso",
     "creaCasoCita": "Crea un caso para la cita médica",
     "citaEnCaso": "Escoje el caso para la cita médica",
-    "citaEstado": "Estado de la cita"
+    "citaEstado": "Estado de la cita",
+    "historialEmpty": "No hay un historial de comentarios aún",
+    "historialError": "Erroral cargar el historial de comentarios"
 }

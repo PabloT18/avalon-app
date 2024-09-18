@@ -102,7 +102,8 @@ class CitaMedica {
         caso: json["caso"] == null ? null : CasoResponse.fromJson(json["caso"]),
         clientePoliza: json["clientePoliza"] == null
             ? null
-            : ClientePoliza.fromJson(json["clientePoliza"]),
+            : ClientePolizaResponse.fromJson(
+                json["clientePoliza"] as Map<String, dynamic>),
         medicoCentroMedicoAseguradora:
             json["medicoCentroMedicoAseguradora"] == null
                 ? null
@@ -253,7 +254,7 @@ class Direccion {
   final String? ciudad;
   final String? codigoPostal;
   final Pais? pais;
-  final State? state;
+  final Estado? state;
 
   Direccion({
     this.direccionUno,
@@ -270,7 +271,7 @@ class Direccion {
         ciudad: json["ciudad"],
         codigoPostal: json["codigoPostal"],
         pais: json["pais"] == null ? null : Pais.fromJson(json["pais"]),
-        state: json["state"] == null ? null : State.fromJson(json["state"]),
+        state: json["state"] == null ? null : Estado.fromJson(json["state"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -303,18 +304,18 @@ class Pais {
       };
 }
 
-class State {
+class Estado {
   final int? id;
   final String? nombre;
   final Pais? pais;
 
-  State({
+  Estado({
     this.id,
     this.nombre,
     this.pais,
   });
 
-  factory State.fromJson(Map<String, dynamic> json) => State(
+  factory Estado.fromJson(Map<String, dynamic> json) => Estado(
         id: json["id"],
         nombre: json["nombre"],
         pais: json["pais"] == null ? null : Pais.fromJson(json["pais"]),

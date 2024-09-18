@@ -37,6 +37,8 @@ class PreferenciasPage extends StatelessWidget {
             const LenguagePreferences(),
             const SizedBox(height: AppLayoutConst.spaceL),
             const PermisosPreferences(),
+            const SizedBox(height: AppLayoutConst.spaceL),
+            const Noticicaiones(),
           ],
         ),
       ),
@@ -74,7 +76,7 @@ class PermisosPreferences extends StatelessWidget {
             CheckboxListTile(
               value: state.cameraGranted,
               title: Text(apptexts.preferenciasPage.permisos.camara),
-              subtitle: Text('${state.camera}'),
+              // subtitle: Text('${state.camera}'),
               onChanged: (_) {
                 context.read<PermissionsBloc>().requestCameraPermission();
               },
@@ -82,7 +84,7 @@ class PermisosPreferences extends StatelessWidget {
             CheckboxListTile(
               value: state.pthotoLibraryGranted,
               title: Text(apptexts.preferenciasPage.permisos.almacenamiento),
-              subtitle: Text('${state.pthotoLibrary}'),
+              // subtitle: Text('${state.pthotoLibrary}'),
               onChanged: (_) {
                 context
                     .read<PermissionsBloc>()
@@ -92,30 +94,62 @@ class PermisosPreferences extends StatelessWidget {
             CheckboxListTile(
               value: state.notificationGranted,
               title: Text(apptexts.preferenciasPage.permisos.notificaciones),
-              subtitle: Text('${state.notification}'),
+              // subtitle: Text('${state.notification}'),
               onChanged: (_) {
                 context.read<PermissionsBloc>().requestNotificationPermission();
-              },
-            ),
-            BlocBuilder<NotificationsBloc, NotificationsState>(
-              builder: (context, state) {
-                return CheckboxListTile(
-                  value: state is NotificationsAuthorized,
-                  title: Text(apptexts.preferenciasPage.notificacionesPermiso),
-                  subtitle: Text(
-                    state.title[0] + state.title.substring(1).toLowerCase(),
-                  ),
-                  onChanged: (_) {
-                    context
-                        .read<NotificationsBloc>()
-                        .add(const NotificationToggleStatus());
-                  },
-                );
               },
             ),
           ],
         );
       },
+    );
+  }
+}
+
+class Noticicaiones extends StatelessWidget {
+  const Noticicaiones({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            apptexts.preferenciasPage.permisos.notificaciones,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(
+            vertical: AppLayoutConst.marginM,
+          ),
+          height: 1,
+          color: AppColors.secondaryBlue.withOpacity(0.5),
+        ),
+        BlocBuilder<NotificationsBloc, NotificationsState>(
+          builder: (context, state) {
+            return CheckboxListTile(
+              value: state is NotificationsAuthorized
+                  ? (state).userActiveNotifiaction
+                  : false,
+              enabled: state is NotificationsAuthorized,
+              title: Text(apptexts.preferenciasPage.notificacionesPermiso),
+              onChanged: (_) {
+                if (state is NotificationsAuthorized) {
+                  context
+                      .read<NotificationsBloc>()
+                      .add(const NotificationToggleStatus());
+                }
+              },
+            );
+          },
+        ),
+      ],
     );
   }
 }

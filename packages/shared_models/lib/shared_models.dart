@@ -13,6 +13,7 @@ export 'src/entities/poliza_entity.dart';
 export 'src/entities/usr_agente_entity.dart';
 export 'src/entities/usr_asesor_entity.dart';
 export 'src/entities/usr_cliente_entity.dart';
+export 'src/entities/comentario_entity.dart';
 
 // Exporta los modelos de respuesta
 export 'src/models/pais_model.dart';
@@ -27,3 +28,4 @@ export 'src/models/poliza_response.dart';
 export 'src/models/usr_agente_response.dart';
 export 'src/models/usr_asesor_response.dart';
 export 'src/models/usr_cliente_response.dart';
+export 'src/models/comentario_response.dart';

@@ -6,3 +6,7 @@ sealed class CitaDetalleEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetCitaHistorial extends CitaDetalleEvent {
+  const GetCitaHistorial();
+}

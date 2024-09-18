@@ -11,4 +11,11 @@ abstract class EmergenciasRepository {
     String? search,
     bool? update = false,
   });
+
+  Future<Either<Failure, List<EmergenciaModel>>> getEmergencias(
+    User user, {
+    required int page,
+    String? search,
+    bool? update = false,
+  });
 }

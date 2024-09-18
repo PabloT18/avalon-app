@@ -81,6 +81,31 @@ class UtilsFunctionsLogic {
     }
   }
 
+  static String formatFechaHoraLocal(DateTime? fecha, String locale) {
+    if (fecha == null) {
+      return '-';
+    }
+
+    final now = DateTime.now();
+
+    // Verificar si es el mismo día
+    if (now.year == fecha.year &&
+        now.month == fecha.month &&
+        now.day == fecha.day) {
+      // Devuelve solo la hora (HH:mm)
+      return DateFormat('HH:mm', locale).format(fecha);
+    }
+
+    // Verificar si es el mismo año
+    if (now.year == fecha.year) {
+      // Devuelve la fecha en formato dd/MM
+      return DateFormat('dd/MM', locale).format(fecha);
+    }
+
+    // Si es de un año diferente, devolver la hora y la fecha en formato dd/MM/yy
+    return DateFormat('dd/MM/yy', locale).format(fecha);
+  }
+
   /// [Validators]
   static String? validateCorreo(String? correo, String errorMsg,
       {String? correoInsMsg}) {
