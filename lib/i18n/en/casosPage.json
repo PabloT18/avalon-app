@@ -6,5 +6,21 @@
     "casoDetalle": {
         "one": "Case detail",
         "other": "Case details"
+    },
+    "nuevoCaso": {
+        "one": "New case",
+        "other": "New cases"
+    },
+    "observationsCaso": {
+        "one": "Case observations",
+        "other": "Case observations"
+    },
+    "casoCliente": {
+        "one": "Client case",
+        "other": "Client cases"
+    },
+    "chooseClientCaso": {
+        "one": "Choose client",
+        "other": "Choose client"
     }
 }

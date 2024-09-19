@@ -1,6 +1,6 @@
 import 'package:avalon_app/features/citas/presentation/bloc/cita_detalle/cubit/comentario_nuev_cubit.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';

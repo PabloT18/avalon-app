@@ -22,8 +22,10 @@ final class DetalleCasoLoaded extends DetalleCasoState {
     this.optionSelected = CasoOption.caso,
     this.citas,
     this.emergencias,
+    this.reclamaciones,
     this.erroCitas,
     this.errorEmergencias,
+    this.errorReclamaciones,
     this.loadingCitas,
     this.loadingEmergencias,
     this.loadingReclamaciones,
@@ -34,9 +36,11 @@ final class DetalleCasoLoaded extends DetalleCasoState {
 
   final List<EmergenciaModel>? emergencias;
   final List<CitaMedica>? citas;
+  final List<ReclamacionModel>? reclamaciones;
 
   final String? erroCitas;
   final String? errorEmergencias;
+  final String? errorReclamaciones;
 
   final bool? loadingCitas;
   final bool? loadingEmergencias;
@@ -47,8 +51,10 @@ final class DetalleCasoLoaded extends DetalleCasoState {
     CasoOption? optionSelected,
     List<EmergenciaModel>? emergencias,
     List<CitaMedica>? citas,
+    List<ReclamacionModel>? reclamaciones,
     String? erroCitas,
     String? errorEmergencias,
+    String? errorReclamaciones,
     bool? loadingCitas,
     bool? loadingEmergencias,
     bool? loadingReclamaciones,
@@ -58,8 +64,10 @@ final class DetalleCasoLoaded extends DetalleCasoState {
       optionSelected: optionSelected ?? this.optionSelected,
       emergencias: emergencias ?? this.emergencias,
       citas: citas ?? this.citas,
+      reclamaciones: reclamaciones ?? this.reclamaciones,
       erroCitas: erroCitas,
       errorEmergencias: errorEmergencias,
+      errorReclamaciones: errorReclamaciones,
       loadingCitas: loadingCitas,
       loadingEmergencias: loadingEmergencias,
       loadingReclamaciones: loadingReclamaciones,
@@ -72,8 +80,10 @@ final class DetalleCasoLoaded extends DetalleCasoState {
         optionSelected,
         emergencias,
         citas,
+        reclamaciones,
         erroCitas,
         errorEmergencias,
+        errorReclamaciones,
         loadingCitas,
         loadingEmergencias,
         loadingReclamaciones,

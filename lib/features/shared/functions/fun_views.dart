@@ -4,11 +4,105 @@ import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:another_flushbar/flushbar.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
 class UtilsFunctionsViews {
+  static Future<void> showInfoStatesTypesDialog(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(
+          apptexts.citasPage.estados,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 15,
+                  height: 15,
+                  decoration: const BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Text('${apptexts.citasPage.estadoCerrado} (C)'),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Container(
+                  width: 15,
+                  height: 15,
+                  decoration: const BoxDecoration(
+                    color: Colors.blue,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Text('${apptexts.citasPage.estadoGestionando} (G)'),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Container(
+                  width: 15,
+                  height: 15,
+                  decoration: const BoxDecoration(
+                    color: Colors.green,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Text('${apptexts.citasPage.estadoPorGestionar} (P)'),
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cerrar'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static Color getColorByState(String state) {
+    switch (state.toUpperCase()) {
+      case 'CERRADO' || "C":
+        return Colors.red;
+      case 'GESTIONANDO' || "G":
+        return Colors.blue;
+      case 'POR GESTIONAR' || "P" || "N":
+        return Colors.green;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  static String getStateStrinByState(String state) {
+    switch (state.toUpperCase()) {
+      case 'CERRADO' || "C":
+        return apptexts.citasPage.estadoCerrado;
+      case 'GESTIONANDO' || "G":
+        return apptexts.citasPage.estadoGestionando;
+      case 'POR GESTIONAR' || "P" || "N":
+        return apptexts.citasPage.estadoPorGestionar;
+      default:
+        return ' - ';
+    }
+  }
+
   static Future<void> openInWebview(BuildContext context, String url,
       {String parent = ''}) async {
     // final uri = Uri.parse(url);

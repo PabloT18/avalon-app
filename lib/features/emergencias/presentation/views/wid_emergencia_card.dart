@@ -12,10 +12,14 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 
 class EmergenciaCard extends StatelessWidget {
   const EmergenciaCard(
-      {super.key, required this.emergenciaModel, required this.isClient});
+      {super.key,
+      required this.emergenciaModel,
+      required this.isClient,
+      this.navigatePush = false});
 
   final EmergenciaModel emergenciaModel;
   final bool isClient;
+  final bool navigatePush;
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +36,23 @@ class EmergenciaCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppLayoutConst.cardBorderRadius),
         child: InkWell(
           onTap: () {
-            context.goNamed(
-              PAGES.emergenciaDetalle.pageName,
-              pathParameters: {
-                'emergenciaId': emergenciaModel.id?.toString() ?? '',
-              },
-              extra: emergenciaModel,
-            );
+            if (!navigatePush) {
+              context.goNamed(
+                PAGES.emergenciaDetalle.pageName,
+                pathParameters: {
+                  'emergenciaId': emergenciaModel.id?.toString() ?? '',
+                },
+                extra: emergenciaModel,
+              );
+            } else {
+              context.pushNamed(
+                PAGES.emergenciaDetalle.pageName,
+                pathParameters: {
+                  'emergenciaId': emergenciaModel.id?.toString() ?? '',
+                },
+                extra: emergenciaModel,
+              );
+            }
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(
@@ -58,13 +72,18 @@ class EmergenciaCard extends StatelessWidget {
                         ),
                       TitleDescripcion(
                         isSubdescription: true,
+                        title: apptexts.emergenciasPage.sintomas,
+                        value: emergenciaModel.sintomas!,
+                      ),
+                      TitleDescripcion(
+                        isSubdescription: true,
                         title: apptexts.citasPage.estados,
                         value:
                             getStateStrinByState(emergenciaModel.estado ?? ''),
                       ),
                       TitleDescripcion(
                         isSubdescription: true,
-                        title: '${apptexts.citasPage.title(n: 1)} Id',
+                        title: '${apptexts.emergenciasPage.title(n: 1)} Id',
                         value: emergenciaModel.codigo!,
                       ),
                       // TitleDescripcion(

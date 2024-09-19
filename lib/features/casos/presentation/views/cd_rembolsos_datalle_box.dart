@@ -2,6 +2,7 @@ import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 
 import 'package:avalon_app/features/citas/presentation/views/widgets/cita_card.dart';
+import 'package:avalon_app/features/reclamaciones/presentation/views/wid_reclamacion_card.dart';
 import 'package:avalon_app/features/shared/functions/fun_views.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,8 @@ import 'package:avalon_app/features/casos/presentation/bloc/detallecaso/detallec
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/loaders/loaders_widgets.dart';
 
-class CitasDetalleBox extends StatelessWidget {
-  const CitasDetalleBox({
+class CDRembolososDetalleBox extends StatelessWidget {
+  const CDRembolososDetalleBox({
     super.key,
   });
 
@@ -29,7 +30,7 @@ class CitasDetalleBox extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                apptexts.citasPage.citaDetalle(n: 2),
+                apptexts.reclamacionesPage.reclamacionDetalle(n: 2),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               IconButton(
@@ -45,13 +46,13 @@ class CitasDetalleBox extends StatelessWidget {
             builder: (context, state) {
               if (state is! DetalleCasoLoaded) {
                 return const SizedBox();
-              } else if (state.erroCitas != null) {
+              } else if (state.errorReclamaciones != null) {
                 return MessageError(
                     message: apptexts.appOptions.noData,
                     onTap: () {
                       detalleCasoBloc.add(const CDGetCitas());
                     });
-              } else if (state.citas == null) {
+              } else if (state.reclamaciones == null) {
                 return const Center(child: CircularProgressIndicatorCustom());
               }
 
@@ -59,7 +60,7 @@ class CitasDetalleBox extends StatelessWidget {
                 return MessageError(
                     message: apptexts.appOptions.noData,
                     onTap: () {
-                      detalleCasoBloc.add(const CDGetCitas());
+                      detalleCasoBloc.add(const CDGetReclamaciones());
                     });
               } else {
                 return Expanded(
@@ -67,12 +68,12 @@ class CitasDetalleBox extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: AppLayoutConst.paddingL),
                         children: [
-                      ...state.citas!.map(
-                        (cita) => Hero(
-                          tag: cita.hashCode,
-                          child: CitaCard(
+                      ...state.reclamaciones!.map(
+                        (reclamacion) => Hero(
+                          tag: reclamacion.hashCode,
+                          child: ReclamacionCard(
                             navigatePush: true,
-                            cita: cita,
+                            reclamacion: reclamacion,
                             isClient: user.isClient,
                           ),
                         ),

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 482 (241 per locale)
+/// Strings: 552 (276 per locale)
 ///
-/// Built on 2024-09-19 at 04:53 UTC
+/// Built on 2024-09-19 at 07:30 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -207,6 +207,7 @@ class _TranslationsAppOptionsEs {
 	String get follow => 'Seguir';
 	String get edit => 'Editar';
 	String get save => 'Guardar';
+	String get crate => 'Crear';
 	String get cancel => 'Cancelar';
 	String get changePassword => 'Cambiar Contraseña';
 	String get newPassword => 'Nueva Contraseña';
@@ -257,6 +258,22 @@ class _TranslationsCasosPageEs {
 	String casoDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 		one: 'Detalle de caso',
 		other: 'Detalles de caso',
+	);
+	String nuevoCaso({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Nuevo caso',
+		other: 'Nuevos casos',
+	);
+	String observationsCaso({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Observación del caso',
+		other: 'Observaciones del caso',
+	);
+	String casoCliente({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Caso del cliente',
+		other: 'Casos del cliente',
+	);
+	String chooseClientCaso({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Elegir cliente',
+		other: 'Elegir clientes',
 	);
 }
 
@@ -309,6 +326,7 @@ class _TranslationsCitasPageEs {
 	String get detailOthersRequaimentes => 'Otros requerimientos';
 	String get detalleFoto => 'Foto';
 	String get estados => 'Estados de las citas';
+	String get estado => 'Estado de las cita';
 	String get estadoCerrado => 'Cerrado';
 	String get estadoGestionando => 'Gestionando';
 	String get estadoPorGestionar => 'Por Gestionar';
@@ -359,6 +377,30 @@ class _TranslationsEmergenciasPageEs {
 	);
 	String get diagnostico => 'Diagnóstico';
 	String get sintomas => 'Síntomas';
+	String get detailFechaTentativa => 'Fecha Tentativa';
+	String get detailPreferenceCity => 'Ciudad de preferencia';
+	String get detailAseguradoraName => 'Aseguradora';
+	String get detailHospital => 'Hospital';
+	String get detailPreferenceDoctor => 'Doctor de preferencia';
+	String get detailPadecimeiento => 'Padecimeiento';
+	String get detailPadecimeientoDiagnostico => 'Padecimeiento/Diagnóstico';
+	String get detailAditionalInformation => 'Información adicional';
+	String get detailAditionalRequaimentes => 'Requerimientos adicionales';
+	String get detailOthersRequaimentes => 'Otros requerimientos';
+	String get detalleFoto => 'Foto';
+	String get estados => 'Estados de las emergencias';
+	String get estado => 'Estado de la emergencia';
+	String get estadoCerrado => 'Cerrado';
+	String get estadoGestionando => 'Gestionando';
+	String get estadoPorGestionar => 'Por Gestionar';
+	String get nuevaEmergencia => 'Nueva Emergencia';
+	String get emergenciaSinCaso => 'Emergencia sin caso';
+	String get creaCasoEmergencia => 'Crea un caso para la emergencia';
+	String get emergenciaEnCaso => 'Escoje el caso para la emergencia';
+	String get emergenciaEstado => 'Estado de la emergencia';
+	String get historialEmpty => 'No hay un historial de comentarios aún';
+	String get historialError => 'Error al cargar el historial de comentarios';
+	String get tipoAdministacion => 'Tipo de Administración';
 }
 
 // Path: familiaresPage
@@ -525,6 +567,7 @@ class _TranslationsReclamacionesPageEs {
 	String get detailOthersRequaimentes => 'Otros requerimientos';
 	String get detalleFoto => 'Foto';
 	String get estados => 'Estados de las reclamaciones';
+	String get estado => 'Estado de las reclamación';
 	String get estadoCerrado => 'Cerrado';
 	String get estadoGestionando => 'Gestionando';
 	String get estadoPorGestionar => 'Por Gestionar';
@@ -738,6 +781,7 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override String get follow => 'Follow';
 	@override String get edit => 'Edit';
 	@override String get save => 'Save';
+	@override String get crate => 'Create';
 	@override String get cancel => 'Cancel';
 	@override String get changePassword => 'Change Password';
 	@override String get newPassword => 'New Password';
@@ -788,6 +832,22 @@ class _TranslationsCasosPageEn implements _TranslationsCasosPageEs {
 	@override String casoDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'Case detail',
 		other: 'Case details',
+	);
+	@override String nuevoCaso({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'New case',
+		other: 'New cases',
+	);
+	@override String observationsCaso({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Case observations',
+		other: 'Case observations',
+	);
+	@override String casoCliente({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Client case',
+		other: 'Client cases',
+	);
+	@override String chooseClientCaso({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Choose client',
+		other: 'Choose client',
 	);
 }
 
@@ -840,6 +900,7 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 	@override String get detailOthersRequaimentes => 'Other Requirements';
 	@override String get detalleFoto => 'Photo';
 	@override String get estados => 'Appointment States';
+	@override String get estado => 'Appointment State';
 	@override String get estadoCerrado => 'Closed';
 	@override String get estadoGestionando => 'Managing';
 	@override String get estadoPorGestionar => 'Pending';
@@ -890,6 +951,30 @@ class _TranslationsEmergenciasPageEn implements _TranslationsEmergenciasPageEs {
 	);
 	@override String get diagnostico => 'Diagnosis';
 	@override String get sintomas => 'Symptoms';
+	@override String get detailFechaTentativa => 'Tentative Date';
+	@override String get detailPreferenceCity => 'Preferred City';
+	@override String get detailAseguradoraName => 'Insurance';
+	@override String get detailHospital => 'Hospital';
+	@override String get detailPreferenceDoctor => 'Preferred Doctor';
+	@override String get detailPadecimeiento => 'Condition';
+	@override String get detailPadecimeientoDiagnostico => 'Condition/Diagnosis';
+	@override String get detailAditionalInformation => 'Additional Information';
+	@override String get detailAditionalRequaimentes => 'Additional Requirements';
+	@override String get detailOthersRequaimentes => 'Other Requirements';
+	@override String get detalleFoto => 'Photo';
+	@override String get estados => 'Emergency States';
+	@override String get estado => 'Emergency State';
+	@override String get estadoCerrado => 'Closed';
+	@override String get estadoGestionando => 'Managing';
+	@override String get estadoPorGestionar => 'To Be Managed';
+	@override String get nuevaEmergencia => 'New Emergency';
+	@override String get emergenciaSinCaso => 'Emergency without Case';
+	@override String get creaCasoEmergencia => 'Create a Case for the Emergency';
+	@override String get emergenciaEnCaso => 'Choose the Case for the Emergency';
+	@override String get emergenciaEstado => 'Emergency State';
+	@override String get historialEmpty => 'No comment history yet';
+	@override String get historialError => 'Error loading comment history';
+	@override String get tipoAdministacion => 'Type of Administration';
 }
 
 // Path: familiaresPage
@@ -1056,6 +1141,7 @@ class _TranslationsReclamacionesPageEn implements _TranslationsReclamacionesPage
 	@override String get detailOthersRequaimentes => 'Other Requirements';
 	@override String get detalleFoto => 'Photo';
 	@override String get estados => 'Claim States';
+	@override String get estado => 'Claim State';
 	@override String get estadoCerrado => 'Closed';
 	@override String get estadoGestionando => 'Managing';
 	@override String get estadoPorGestionar => 'Pending Management';
@@ -1226,6 +1312,7 @@ extension on Translations {
 			case 'appOptions.follow': return 'Seguir';
 			case 'appOptions.edit': return 'Editar';
 			case 'appOptions.save': return 'Guardar';
+			case 'appOptions.crate': return 'Crear';
 			case 'appOptions.cancel': return 'Cancelar';
 			case 'appOptions.changePassword': return 'Cambiar Contraseña';
 			case 'appOptions.newPassword': return 'Nueva Contraseña';
@@ -1276,6 +1363,22 @@ extension on Translations {
 				one: 'Detalle de caso',
 				other: 'Detalles de caso',
 			);
+			case 'casosPage.nuevoCaso': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Nuevo caso',
+				other: 'Nuevos casos',
+			);
+			case 'casosPage.observationsCaso': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Observación del caso',
+				other: 'Observaciones del caso',
+			);
+			case 'casosPage.casoCliente': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Caso del cliente',
+				other: 'Casos del cliente',
+			);
+			case 'casosPage.chooseClientCaso': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Elegir cliente',
+				other: 'Elegir clientes',
+			);
 			case 'centrosMedicos.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Centro Médico',
 				other: 'Centro Médicos',
@@ -1315,6 +1418,7 @@ extension on Translations {
 			case 'citasPage.detailOthersRequaimentes': return 'Otros requerimientos';
 			case 'citasPage.detalleFoto': return 'Foto';
 			case 'citasPage.estados': return 'Estados de las citas';
+			case 'citasPage.estado': return 'Estado de las cita';
 			case 'citasPage.estadoCerrado': return 'Cerrado';
 			case 'citasPage.estadoGestionando': return 'Gestionando';
 			case 'citasPage.estadoPorGestionar': return 'Por Gestionar';
@@ -1347,6 +1451,30 @@ extension on Translations {
 			);
 			case 'emergenciasPage.diagnostico': return 'Diagnóstico';
 			case 'emergenciasPage.sintomas': return 'Síntomas';
+			case 'emergenciasPage.detailFechaTentativa': return 'Fecha Tentativa';
+			case 'emergenciasPage.detailPreferenceCity': return 'Ciudad de preferencia';
+			case 'emergenciasPage.detailAseguradoraName': return 'Aseguradora';
+			case 'emergenciasPage.detailHospital': return 'Hospital';
+			case 'emergenciasPage.detailPreferenceDoctor': return 'Doctor de preferencia';
+			case 'emergenciasPage.detailPadecimeiento': return 'Padecimeiento';
+			case 'emergenciasPage.detailPadecimeientoDiagnostico': return 'Padecimeiento/Diagnóstico';
+			case 'emergenciasPage.detailAditionalInformation': return 'Información adicional';
+			case 'emergenciasPage.detailAditionalRequaimentes': return 'Requerimientos adicionales';
+			case 'emergenciasPage.detailOthersRequaimentes': return 'Otros requerimientos';
+			case 'emergenciasPage.detalleFoto': return 'Foto';
+			case 'emergenciasPage.estados': return 'Estados de las emergencias';
+			case 'emergenciasPage.estado': return 'Estado de la emergencia';
+			case 'emergenciasPage.estadoCerrado': return 'Cerrado';
+			case 'emergenciasPage.estadoGestionando': return 'Gestionando';
+			case 'emergenciasPage.estadoPorGestionar': return 'Por Gestionar';
+			case 'emergenciasPage.nuevaEmergencia': return 'Nueva Emergencia';
+			case 'emergenciasPage.emergenciaSinCaso': return 'Emergencia sin caso';
+			case 'emergenciasPage.creaCasoEmergencia': return 'Crea un caso para la emergencia';
+			case 'emergenciasPage.emergenciaEnCaso': return 'Escoje el caso para la emergencia';
+			case 'emergenciasPage.emergenciaEstado': return 'Estado de la emergencia';
+			case 'emergenciasPage.historialEmpty': return 'No hay un historial de comentarios aún';
+			case 'emergenciasPage.historialError': return 'Error al cargar el historial de comentarios';
+			case 'emergenciasPage.tipoAdministacion': return 'Tipo de Administración';
 			case 'familiaresPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Familiar',
 				other: 'Familiares',
@@ -1444,6 +1572,7 @@ extension on Translations {
 			case 'reclamacionesPage.detailOthersRequaimentes': return 'Otros requerimientos';
 			case 'reclamacionesPage.detalleFoto': return 'Foto';
 			case 'reclamacionesPage.estados': return 'Estados de las reclamaciones';
+			case 'reclamacionesPage.estado': return 'Estado de las reclamación';
 			case 'reclamacionesPage.estadoCerrado': return 'Cerrado';
 			case 'reclamacionesPage.estadoGestionando': return 'Gestionando';
 			case 'reclamacionesPage.estadoPorGestionar': return 'Por Gestionar';
@@ -1539,6 +1668,7 @@ extension on _TranslationsEn {
 			case 'appOptions.follow': return 'Follow';
 			case 'appOptions.edit': return 'Edit';
 			case 'appOptions.save': return 'Save';
+			case 'appOptions.crate': return 'Create';
 			case 'appOptions.cancel': return 'Cancel';
 			case 'appOptions.changePassword': return 'Change Password';
 			case 'appOptions.newPassword': return 'New Password';
@@ -1589,6 +1719,22 @@ extension on _TranslationsEn {
 				one: 'Case detail',
 				other: 'Case details',
 			);
+			case 'casosPage.nuevoCaso': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'New case',
+				other: 'New cases',
+			);
+			case 'casosPage.observationsCaso': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Case observations',
+				other: 'Case observations',
+			);
+			case 'casosPage.casoCliente': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Client case',
+				other: 'Client cases',
+			);
+			case 'casosPage.chooseClientCaso': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Choose client',
+				other: 'Choose client',
+			);
 			case 'centrosMedicos.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Medical Center',
 				other: 'Medical Centers',
@@ -1628,6 +1774,7 @@ extension on _TranslationsEn {
 			case 'citasPage.detailOthersRequaimentes': return 'Other Requirements';
 			case 'citasPage.detalleFoto': return 'Photo';
 			case 'citasPage.estados': return 'Appointment States';
+			case 'citasPage.estado': return 'Appointment State';
 			case 'citasPage.estadoCerrado': return 'Closed';
 			case 'citasPage.estadoGestionando': return 'Managing';
 			case 'citasPage.estadoPorGestionar': return 'Pending';
@@ -1660,6 +1807,30 @@ extension on _TranslationsEn {
 			);
 			case 'emergenciasPage.diagnostico': return 'Diagnosis';
 			case 'emergenciasPage.sintomas': return 'Symptoms';
+			case 'emergenciasPage.detailFechaTentativa': return 'Tentative Date';
+			case 'emergenciasPage.detailPreferenceCity': return 'Preferred City';
+			case 'emergenciasPage.detailAseguradoraName': return 'Insurance';
+			case 'emergenciasPage.detailHospital': return 'Hospital';
+			case 'emergenciasPage.detailPreferenceDoctor': return 'Preferred Doctor';
+			case 'emergenciasPage.detailPadecimeiento': return 'Condition';
+			case 'emergenciasPage.detailPadecimeientoDiagnostico': return 'Condition/Diagnosis';
+			case 'emergenciasPage.detailAditionalInformation': return 'Additional Information';
+			case 'emergenciasPage.detailAditionalRequaimentes': return 'Additional Requirements';
+			case 'emergenciasPage.detailOthersRequaimentes': return 'Other Requirements';
+			case 'emergenciasPage.detalleFoto': return 'Photo';
+			case 'emergenciasPage.estados': return 'Emergency States';
+			case 'emergenciasPage.estado': return 'Emergency State';
+			case 'emergenciasPage.estadoCerrado': return 'Closed';
+			case 'emergenciasPage.estadoGestionando': return 'Managing';
+			case 'emergenciasPage.estadoPorGestionar': return 'To Be Managed';
+			case 'emergenciasPage.nuevaEmergencia': return 'New Emergency';
+			case 'emergenciasPage.emergenciaSinCaso': return 'Emergency without Case';
+			case 'emergenciasPage.creaCasoEmergencia': return 'Create a Case for the Emergency';
+			case 'emergenciasPage.emergenciaEnCaso': return 'Choose the Case for the Emergency';
+			case 'emergenciasPage.emergenciaEstado': return 'Emergency State';
+			case 'emergenciasPage.historialEmpty': return 'No comment history yet';
+			case 'emergenciasPage.historialError': return 'Error loading comment history';
+			case 'emergenciasPage.tipoAdministacion': return 'Type of Administration';
 			case 'familiaresPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Family',
 				other: 'Family',
@@ -1757,6 +1928,7 @@ extension on _TranslationsEn {
 			case 'reclamacionesPage.detailOthersRequaimentes': return 'Other Requirements';
 			case 'reclamacionesPage.detalleFoto': return 'Photo';
 			case 'reclamacionesPage.estados': return 'Claim States';
+			case 'reclamacionesPage.estado': return 'Claim State';
 			case 'reclamacionesPage.estadoCerrado': return 'Closed';
 			case 'reclamacionesPage.estadoGestionando': return 'Managing';
 			case 'reclamacionesPage.estadoPorGestionar': return 'Pending Management';

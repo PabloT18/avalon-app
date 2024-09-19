@@ -27,6 +27,7 @@ class ClientePolizaDetail extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppLayoutConst.cardBorderRadius),
       ),
       child: ExpansionTile(
+        dense: true,
         childrenPadding: const EdgeInsets.all(AppLayoutConst.paddingL),
         expandedCrossAxisAlignment: CrossAxisAlignment.start,
         expandedAlignment: Alignment.centerLeft,

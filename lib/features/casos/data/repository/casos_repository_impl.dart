@@ -56,4 +56,24 @@ class CasosRepositoryImpl implements CasosRepository {
       return Left(ServerFailure(message: apptexts.appOptions.error_servers));
     }
   }
+
+  @override
+  Future<Either<Failure, CasoEntity>> crearCaso(
+      User user, String observacion, int clientePolizaId) async {
+    try {
+      final casosList = await remoteSource.crearCaso(
+        user,
+        observacion,
+        clientePolizaId,
+      );
+      return Right(casosList);
+    } on InternetAccessException catch (i) {
+      return Left(InternetFailure(message: i.message));
+    } on ServerException catch (s) {
+      return Left(ServerFailure(
+          message: s.message ?? apptexts.appOptions.error_servers));
+    } on Exception {
+      return Left(ServerFailure(message: apptexts.appOptions.error_servers));
+    }
+  }
 }

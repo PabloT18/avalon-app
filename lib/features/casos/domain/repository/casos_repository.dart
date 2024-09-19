@@ -13,4 +13,7 @@ abstract class CasosRepository {
       String? search,
       required int clientePolizaId,
       required bool update});
+
+  Future<Either<Failure, CasoEntity>> crearCaso(
+      User user, String observacion, int clientePolizaId);
 }

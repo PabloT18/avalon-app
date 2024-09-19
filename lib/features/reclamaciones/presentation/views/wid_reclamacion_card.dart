@@ -13,10 +13,14 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 
 class ReclamacionCard extends StatelessWidget {
   const ReclamacionCard(
-      {super.key, required this.reclamacion, required this.isClient});
+      {super.key,
+      required this.reclamacion,
+      required this.isClient,
+      this.navigatePush = false});
 
   final ReclamacionModel reclamacion;
   final bool isClient;
+  final bool navigatePush;
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +35,23 @@ class ReclamacionCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          context.goNamed(
-            PAGES.reclamacionDetalle.pageName,
-            pathParameters: {
-              'reclamacionId': reclamacion.id?.toString() ?? '',
-            },
-            extra: reclamacion,
-          );
+          if (!navigatePush) {
+            context.goNamed(
+              PAGES.reclamacionDetalle.pageName,
+              pathParameters: {
+                'reclamacionId': reclamacion.id?.toString() ?? '',
+              },
+              extra: reclamacion,
+            );
+          } else {
+            context.pushNamed(
+              PAGES.reclamacionDetalle.pageName,
+              pathParameters: {
+                'reclamacionId': reclamacion.id?.toString() ?? '',
+              },
+              extra: reclamacion,
+            );
+          }
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -67,7 +81,7 @@ class ReclamacionCard extends StatelessWidget {
                     ),
                     TitleDescripcion(
                       isSubdescription: true,
-                      title: apptexts.reclamacionesPage.estados,
+                      title: apptexts.reclamacionesPage.estado,
                       value: getStateStrinByState(reclamacion.estado ?? ''),
                     ),
                   ],

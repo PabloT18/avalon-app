@@ -12,10 +12,10 @@ class CasosRemoteSource {
     String url;
 
     if (search == null) {
-      url = '/casos?page=$page&size=5&sortField=createdDate&sortOrder=desc';
+      url = '/casos?page=$page&size=10&sortField=createdDate&sortOrder=desc';
     } else {
       url =
-          '/casos?page=$page&size=5&busqueda=$search&sortField=createdDate&sortOrder=desc';
+          '/casos?page=$page&size=10&busqueda=$search&sortField=createdDate&sortOrder=desc';
     }
 
     try {
@@ -48,10 +48,10 @@ class CasosRemoteSource {
     String url;
     if (search == null) {
       url =
-          '/casos?page=$page&size=5&sortField=createdDate&sortOrder=desc&clientePolizaId=$clientePolizaId';
+          '/casos?page=$page&size=10&sortField=createdDate&sortOrder=desc&clientePolizaId=$clientePolizaId';
     } else {
       url =
-          '/casos?page=$page&size=5&busqueda=$search&sortField=createdDate&sortOrder=desc&clientePolizaId=$clientePolizaId';
+          '/casos?page=$page&size=10&busqueda=$search&sortField=createdDate&sortOrder=desc&clientePolizaId=$clientePolizaId';
     }
 
     try {
@@ -72,6 +72,35 @@ class CasosRemoteSource {
     } catch (e) {
       print('Error fetching data: $e');
       throw Exception('Error fetching data');
+    }
+  }
+
+  Future<CasoEntity> crearCaso(
+      User user, String observacion, int clientePolizaId) async {
+    String url = '/casos';
+
+    Map<String, dynamic> requestData = {
+      "observaciones": observacion,
+      "clientePolizaId": clientePolizaId,
+    };
+
+    try {
+      final response = await APPRemoteConfig.httpPost(
+        url: url,
+        data: requestData,
+        token: user.token!,
+      );
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        // Assuming the response is a single CasoEntity in JSON format
+        final casoEntity = CasoEntity.fromJson(response.data);
+        return casoEntity;
+      } else {
+        throw Exception('Error al crear el caso');
+      }
+    } catch (e) {
+      print('Error creando caso: $e');
+      throw Exception('Error creando caso');
     }
   }
 }

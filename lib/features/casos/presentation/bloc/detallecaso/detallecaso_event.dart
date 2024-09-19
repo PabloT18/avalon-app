@@ -13,14 +13,14 @@ class SelectCasoOption extends DetalleCasoEvent {
   final CasoOption? optionSelected;
 }
 
-class GetCitas extends DetalleCasoEvent {
-  const GetCitas();
+class CDGetCitas extends DetalleCasoEvent {
+  const CDGetCitas();
 }
 
-class GetEmergencias extends DetalleCasoEvent {
-  const GetEmergencias();
+class CDGetEmergencias extends DetalleCasoEvent {
+  const CDGetEmergencias();
 }
 
-class GetReclamaciones extends DetalleCasoEvent {
-  const GetReclamaciones();
+class CDGetReclamaciones extends DetalleCasoEvent {
+  const CDGetReclamaciones();
 }

@@ -27,6 +27,8 @@ class AgenteDetailCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppLayoutConst.cardBorderRadius),
       ),
       child: ExpansionTile(
+        dense: true,
+
         childrenPadding: const EdgeInsets.all(AppLayoutConst.paddingL)
             .copyWith(top: AppLayoutConst.spaceS),
         expandedCrossAxisAlignment: CrossAxisAlignment.start,

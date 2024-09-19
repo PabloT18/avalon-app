@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-// import 'dart:convert';
-import 'dart:developer';
 
-// import 'package:avalon_app/core/config/router/app_router.dart';
+import 'dart:developer';
 
 import 'package:avalon_app/app/data/sources/local_notifications.dart';
 import 'package:avalon_app/app/domain/repository/notification_repository.dart';

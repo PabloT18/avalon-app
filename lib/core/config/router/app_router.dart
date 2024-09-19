@@ -139,15 +139,6 @@ class AppRouter {
                             CasoDetallePage(caso: state.extra as CasoEntity?),
                           ),
                       routes: const []),
-                  // GoRoute(
-                  //   path: '${PAGES.detalleCita.pageName}/:citaId',
-                  //   // name: PAGES.detalleCita.pageName,
-                  //   pageBuilder: (context, state) => pageBuilderByPlatform(
-                  //     context,
-                  //     state,
-                  //     CitaDetallePage(cita: state.extra as CitaMedica?),
-                  //   ),
-                  // ),
                 ]),
             GoRoute(
                 path: PAGES.citas.pageName,

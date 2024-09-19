@@ -19,6 +19,8 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'cd_caso_detalle_box.dart';
 
 import 'cd_citas_datalle_box.dart';
+import 'cd_emergencias_datalle_box.dart';
+import 'cd_rembolsos_datalle_box.dart';
 import 'widgets/wid_caso_card.dart';
 
 class CasoDetallePage extends StatelessWidget {
@@ -126,9 +128,9 @@ class DetalleCasoView extends StatelessWidget {
                   case CasoOption.citas:
                     return const CitasDetalleBox();
                   case CasoOption.reembolso:
-                    return const SizedBox();
+                    return const CDRembolososDetalleBox();
                   case CasoOption.emergencia:
-                    return const SizedBox();
+                    return const CDEmergenciasDetalleBox();
                   default:
                     return const SizedBox();
                 }
