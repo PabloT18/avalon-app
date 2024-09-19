@@ -91,10 +91,18 @@ class PushNotificationSourceFCM {
   /// [2] Mesages que llegan si la palicacion esta abierta
   static Future _onsMessageHandler(RemoteMessage message) async {
     // log("On app opended message: ${message.data}");
+    // Verificar si la notificación es local
+    if (message.data['isLocal'] == true) {
+      return; // Ignorar notificaciones locales
+    }
     if (message.notification != null) {
       _messageStream.add(PushMessageModel.fromRemoteMessage(
           message, NotificationMessageType.onOpenApp));
     }
+    // if (message.notification != null) {
+    //   _messageStream.add(PushMessageModel.fromRemoteMessage(
+    //       message, NotificationMessageType.onOpenApp));
+    // }
   }
 
   /// [2] Mesages que llegan si la palicacion esta suspendida y se abre la app

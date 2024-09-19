@@ -2,5 +2,40 @@
     "title": {
         "one": "Claim",
         "other": "Claims"
-    }
+    },
+    "reclamacionDetalle": {
+        "one": "Claim Detail",
+        "other": "Claim Details"
+    },
+    "historial": {
+        "one": "Claims History",
+        "other": "Claims History"
+    },
+    "moreDetails": {
+        "one": "More Detail",
+        "other": "More Details"
+    },
+    "detailFechaTentativa": "Tentative Date",
+    "detailPreferenceCity": "Preferred City",
+    "detailAseguradoraName": "Insurance Company",
+    "detailHospital": "Hospital",
+    "detailPreferenceDoctor": "Preferred Doctor",
+    "detailPadecimeiento": "Condition",
+    "detailPadecimeientoDiagnostico": "Condition/Diagnosis",
+    "detailAditionalInformation": "Additional Information",
+    "detailAditionalRequaimentes": "Additional Requirements",
+    "detailOthersRequaimentes": "Other Requirements",
+    "detalleFoto": "Photo",
+    "estados": "Claim States",
+    "estadoCerrado": "Closed",
+    "estadoGestionando": "Managing",
+    "estadoPorGestionar": "Pending Management",
+    "nuevaReclamacion": "New Claim",
+    "reclamacionSinCaso": "Claim without Case",
+    "creaCasoReclamacion": "Create a Case for the Claim",
+    "reclamacionEnCaso": "Choose the Case for the Claim",
+    "reclamacionEstado": "Claim Status",
+    "historialEmpty": "No comment history yet",
+    "historialError": "Error loading comment history",
+    "tipoAdministacion": "Administration Type"
 }

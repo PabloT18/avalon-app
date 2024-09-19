@@ -27,8 +27,7 @@ class CitaDetalleLoaded extends CitaDetalleState {
     return CitaDetalleLoaded(
       cita: cita ?? this.cita,
       comentarios: comentarios ?? this.comentarios,
-      messageErrorLoadComentarios:
-          messageErrorLoadComentarios ?? this.messageErrorLoadComentarios,
+      messageErrorLoadComentarios: messageErrorLoadComentarios,
     );
   }
 

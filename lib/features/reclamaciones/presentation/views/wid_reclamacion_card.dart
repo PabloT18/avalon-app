@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import 'package:avalon_app/i18n/generated/translations.g.dart';
-
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
-
 import 'package:avalon_app/features/casos/presentation/views/widgets/wid_title_description.dart';
-import 'package:avalon_app/features/citas/citas.dart';
 
-class CitaCard extends StatelessWidget {
-  const CitaCard({super.key, required this.cita, required this.isClient});
+import 'package:avalon_app/features/reclamaciones/data/models/reclamaciones_response.dart';
 
-  final CitaMedica cita;
+import 'package:avalon_app/i18n/generated/translations.g.dart';
+
+class ReclamacionCard extends StatelessWidget {
+  const ReclamacionCard(
+      {super.key, required this.reclamacion, required this.isClient});
+
+  final ReclamacionModel reclamacion;
   final bool isClient;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 1,
-      clipBehavior: Clip.hardEdge,
       shape: RoundedRectangleBorder(
         side: BorderSide(
           color: AppColors.secondaryBlue.withOpacity(0.4),
@@ -32,11 +32,11 @@ class CitaCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           context.goNamed(
-            PAGES.detalleCita.pageName,
+            PAGES.reclamacionDetalle.pageName,
             pathParameters: {
-              'citaId': cita.id?.toString() ?? '',
+              'reclamacionId': reclamacion.id?.toString() ?? '',
             },
-            extra: cita,
+            extra: reclamacion,
           );
         },
         child: Padding(
@@ -52,24 +52,23 @@ class CitaCard extends StatelessWidget {
                   children: [
                     if (!isClient)
                       TitleDescripcion(
-                        isSubdescription: true,
                         title: apptexts.appOptions.cliente,
-                        value: cita.clientePoliza!.displayName!,
+                        value: reclamacion.clientePoliza!.displayName!,
                       ),
                     TitleDescripcion(
                       isSubdescription: true,
-                      title: apptexts.citasPage.estados,
-                      value: getStateStrinByState(cita.estado ?? ''),
+                      title: apptexts.reclamacionesPage.detailPadecimeiento,
+                      value: reclamacion.padecimientoDiagnostico!,
                     ),
                     TitleDescripcion(
                       isSubdescription: true,
-                      title: '${apptexts.citasPage.title(n: 1)} Id',
-                      value: cita.codigo!,
+                      title: '${apptexts.reclamacionesPage.title(n: 1)} Id',
+                      value: reclamacion.codigo!,
                     ),
                     TitleDescripcion(
                       isSubdescription: true,
-                      title: apptexts.appOptions.detalle(n: 1),
-                      value: cita.padecimiento!,
+                      title: apptexts.reclamacionesPage.estados,
+                      value: getStateStrinByState(reclamacion.estado ?? ''),
                     ),
                   ],
                 ),
@@ -78,7 +77,7 @@ class CitaCard extends StatelessWidget {
                 width: 10, // Tamaño del círculo
                 height: 10,
                 decoration: BoxDecoration(
-                  color: getColorByState(cita.estado ?? ''),
+                  color: getColorByState(reclamacion.estado ?? ''),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -95,7 +94,7 @@ class CitaCard extends StatelessWidget {
         return Colors.red;
       case 'GESTIONANDO' || "G":
         return Colors.blue;
-      case 'POR GESTIONAR' || "P":
+      case 'POR GESTIONAR' || "P" || "N":
         return Colors.green;
       default:
         return Colors.grey;
@@ -108,7 +107,7 @@ class CitaCard extends StatelessWidget {
         return apptexts.citasPage.estadoCerrado;
       case 'GESTIONANDO' || "G":
         return apptexts.citasPage.estadoGestionando;
-      case 'POR GESTIONAR' || "P":
+      case 'POR GESTIONAR' || "P" || "N":
         return apptexts.citasPage.estadoPorGestionar;
       default:
         return ' - ';

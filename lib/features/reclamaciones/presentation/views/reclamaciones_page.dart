@@ -10,31 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_models/shared_models.dart';
 
-import '../../../shared/widgets/wid_drawer.dart';
 import '../bloc/reclamaciones_bloc.dart';
-
-class ReclamacionesPage extends StatelessWidget {
-  const ReclamacionesPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Reclamaciones Page'),
-        elevation: 6,
-      ),
-      drawer: DrawerCustom(indexInitialName: PAGES.reclamaciones.pageName),
-      body: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Text('Pagina en desarollo'),
-          ),
-        ],
-      ),
-    );
-  }
-}
+import 'wid_reclamacion_card.dart';
 
 class ReclamacionesPanel extends StatelessWidget {
   const ReclamacionesPanel({
@@ -73,7 +50,7 @@ class ReclamacionesPanelView extends StatelessWidget {
     return BlocBuilder<ReclamacionesBloc, ReclamacionesState>(
       builder: (context, state) {
         return SmartRefrehsCustom(
-          key: const Key('__Reclamaciones_list_key__'),
+          key: const Key('__reclamaciones_list_key__'),
           onRefresh: () async {
             reclamacionesBloc.add(const GetReclamaciones());
           },
@@ -115,7 +92,12 @@ class ReclamacionesPanelView extends StatelessWidget {
           children: [
             for (final recalmacion
                 in state.recalmaciones) // Repite los elementos 5 veces
-              Hero(tag: recalmacion.hashCode, child: Container()),
+              Hero(
+                  tag: recalmacion.hashCode,
+                  child: ReclamacionCard(
+                    reclamacion: recalmacion,
+                    isClient: user.isClient,
+                  )),
             const SizedBox(height: AppLayoutConst.spaceXL),
           ],
         ),

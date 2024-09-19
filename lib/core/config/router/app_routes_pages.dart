@@ -67,11 +67,11 @@ extension AppPageExtension on PAGES {
       case PAGES.emergenciaDetalle:
         return "/emergenciaDetalle";
       case PAGES.crearEmergencia:
-        return "/  crearEmergencia";
+        return "/crearEmergencia";
       case PAGES.reclamacionDetalle:
-        return "/  reclamacionDetalle";
+        return "/reclamacionDetalle";
       case PAGES.crearReclamacion:
-        return "/  crearReclamacion";
+        return "/crearReclamacion";
 
       case PAGES.casos:
         return "/casos";
@@ -143,11 +143,11 @@ extension AppPageExtension on PAGES {
       case PAGES.emergenciaDetalle:
         return "emergenciaDetalle";
       case PAGES.crearEmergencia:
-        return "  crearEmergencia";
+        return "crearEmergencia";
       case PAGES.reclamacionDetalle:
-        return "  reclamacionDetalle";
+        return "reclamacionDetalle";
       case PAGES.crearReclamacion:
-        return "  crearReclamacion";
+        return "crearReclamacion";
       case PAGES.casos:
         return "casos";
       case PAGES.crearCaso:

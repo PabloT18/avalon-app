@@ -28,59 +28,63 @@ class EmergenciaCard extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(AppLayoutConst.cardBorderRadius),
       ),
-      child: InkWell(
-        onTap: () {
-          context.goNamed(
-            PAGES.emergenciaDetalle.pageName,
-            pathParameters: {
-              'emergenciaId': emergenciaModel.id?.toString() ?? '',
-            },
-            extra: emergenciaModel,
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 8.0), // Agrega el padding similar a ListTile
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (!isClient)
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppLayoutConst.cardBorderRadius),
+        child: InkWell(
+          onTap: () {
+            context.goNamed(
+              PAGES.emergenciaDetalle.pageName,
+              pathParameters: {
+                'emergenciaId': emergenciaModel.id?.toString() ?? '',
+              },
+              extra: emergenciaModel,
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0), // Agrega el padding similar a ListTile
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (!isClient)
+                        TitleDescripcion(
+                          title: apptexts.appOptions.cliente,
+                          value: emergenciaModel.clientePoliza!.displayName!,
+                        ),
                       TitleDescripcion(
-                        title: apptexts.appOptions.cliente,
-                        value: emergenciaModel.clientePoliza!.displayName!,
+                        isSubdescription: true,
+                        title: apptexts.citasPage.estados,
+                        value:
+                            getStateStrinByState(emergenciaModel.estado ?? ''),
                       ),
-                    TitleDescripcion(
-                      isSubdescription: true,
-                      title: apptexts.citasPage.estados,
-                      value: getStateStrinByState(emergenciaModel.estado ?? ''),
-                    ),
-                    TitleDescripcion(
-                      isSubdescription: true,
-                      title: '${apptexts.citasPage.title(n: 1)} Id',
-                      value: emergenciaModel.codigo!,
-                    ),
-                    // TitleDescripcion(
-                    //   isSubdescription: true,
-                    //   title: apptexts.appOptions.detalle(n: 1),
-                    //   value: emergenciaModel.padecimiento!,
-                    // ),
-                  ],
+                      TitleDescripcion(
+                        isSubdescription: true,
+                        title: '${apptexts.citasPage.title(n: 1)} Id',
+                        value: emergenciaModel.codigo!,
+                      ),
+                      // TitleDescripcion(
+                      //   isSubdescription: true,
+                      //   title: apptexts.appOptions.detalle(n: 1),
+                      //   value: emergenciaModel.padecimiento!,
+                      // ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                width: 10, // Tamaño del círculo
-                height: 10,
-                decoration: BoxDecoration(
-                  color: getColorByState(emergenciaModel.estado ?? ''),
-                  shape: BoxShape.circle,
+                Container(
+                  width: 10, // Tamaño del círculo
+                  height: 10,
+                  decoration: BoxDecoration(
+                    color: getColorByState(emergenciaModel.estado ?? ''),
+                    shape: BoxShape.circle,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

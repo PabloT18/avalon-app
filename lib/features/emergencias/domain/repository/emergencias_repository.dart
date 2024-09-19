@@ -21,7 +21,7 @@ abstract class EmergenciasRepository {
     bool? update = false,
   });
 
-  Future<Either<Failure, List<Comentario>>> getCitaHistorial(
+  Future<Either<Failure, List<Comentario>>> getEmergenciasHistorial(
     User user,
     int emergenciaId,
   );

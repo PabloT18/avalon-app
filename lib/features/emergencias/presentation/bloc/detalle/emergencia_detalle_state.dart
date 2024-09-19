@@ -27,8 +27,7 @@ class EmergenciaDetalleLoaded extends EmergenciaDetalleState {
     return EmergenciaDetalleLoaded(
       emergenciaModel: emergenciaModel ?? this.emergenciaModel,
       comentarios: comentarios ?? this.comentarios,
-      messageErrorLoadComentarios:
-          messageErrorLoadComentarios ?? this.messageErrorLoadComentarios,
+      messageErrorLoadComentarios: messageErrorLoadComentarios,
     );
   }
 

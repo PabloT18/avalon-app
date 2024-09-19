@@ -1,4 +1,3 @@
-import 'package:avalon_app/features/emergencias/presentation/bloc/detalle/emergencia_detalle_bloc.dart';
 import 'package:avalon_app/features/shared/widgets/wid_comentario_card.dart';
 import 'package:flutter/material.dart';
 
@@ -13,37 +12,34 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:shared_models/shared_models.dart';
+import '../bloc/detalle/bloc/reclamcaion_detalle_bloc.dart';
 
-class DetalleHistoryPanel extends StatelessWidget {
-  const DetalleHistoryPanel({
+class ReclamacionDetalleHistoryPanel extends StatelessWidget {
+  const ReclamacionDetalleHistoryPanel({
     super.key,
-    this.comentarios,
   });
-
-  final List<Comentario>? comentarios;
 
   @override
   Widget build(BuildContext context) {
-    final blocObjet = context.read<EmergenciaDetalleBloc>();
+    final blocObjet = context.read<ReclamacionDetalleBloc>();
 
-    if (blocObjet.state is! EmergenciaDetalleLoaded) return const SizedBox();
+    if (blocObjet.state is! ReclamacionDetalleLoaded) return const SizedBox();
 
-    if ((blocObjet.state as EmergenciaDetalleLoaded).comentarios == null) {
-      blocObjet.add(const GetEmergenciaHistorial());
+    if ((blocObjet.state as ReclamacionDetalleLoaded).comentarios == null) {
+      blocObjet.add(const GetReclamacionHistorial());
     }
     final user = context.read<AppBloc>().state.user;
 
-    // final currentstate = (blocObjet.state as EmergenciaDetalleLoaded);
-    return BlocBuilder<EmergenciaDetalleBloc, EmergenciaDetalleState>(
+    // final currentstate = (blocObjet.state as ReclamacionDetalleLoaded);
+    return BlocBuilder<ReclamacionDetalleBloc, ReclamacionDetalleState>(
       builder: (context, state) {
-        final currentstate = (blocObjet.state as EmergenciaDetalleLoaded);
+        final currentstate = (blocObjet.state as ReclamacionDetalleLoaded);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              apptexts.emergenciasPage.historial(n: 2),
+              apptexts.reclamacionesPage.historial(n: 2),
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -59,7 +55,7 @@ class DetalleHistoryPanel extends StatelessWidget {
               MessageError(
                   message: currentstate.messageErrorLoadComentarios!,
                   onTap: () {
-                    blocObjet.add(const GetEmergenciaHistorial());
+                    blocObjet.add(const GetReclamacionHistorial());
                   }),
             if (currentstate.comentarios == null &&
                 currentstate.messageErrorLoadComentarios == null)
@@ -69,7 +65,7 @@ class DetalleHistoryPanel extends StatelessWidget {
               MessageError(
                   message: apptexts.appOptions.historialEmpty,
                   onTap: () {
-                    blocObjet.add(const GetEmergenciaHistorial());
+                    blocObjet.add(const GetReclamacionHistorial());
                   }),
             if (currentstate.comentarios != null &&
                 currentstate.comentarios!.isNotEmpty) ...[

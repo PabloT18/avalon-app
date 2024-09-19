@@ -88,6 +88,7 @@ class HomePageView extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
+        centerTitle: true,
         elevation: 6,
         actions: [
           Material(

@@ -39,8 +39,8 @@ class LocalNotifications {
   static void showLocalNotification(
       int id, String? title, String? body, String? data) {
     const androidDetails = AndroidNotificationDetails(
-      'channelId',
-      'channelName',
+      'local_channel_id', // Asegúrate de usar un ID de canal diferente
+      'Local Notifications',
       playSound: true,
       importance: Importance.max,
       priority: Priority.high,
@@ -56,7 +56,12 @@ class LocalNotifications {
     );
 
     final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.show(id, title, body, notificationDetails,
-        payload: data.toString());
+    flutterLocalNotificationsPlugin.show(
+      id, title, body, notificationDetails,
+      // payload: data.toString()
+      payload: data != null
+          ? '{"isLocal": true, "data": $data}'
+          : '{"isLocal": true}',
+    );
   }
 }

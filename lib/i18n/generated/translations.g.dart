@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 424 (212 per locale)
+/// Strings: 482 (241 per locale)
 ///
-/// Built on 2024-09-19 at 01:54 UTC
+/// Built on 2024-09-19 at 04:53 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -501,6 +501,41 @@ class _TranslationsReclamacionesPageEs {
 		one: 'Recalmación',
 		other: 'Recalmaciones',
 	);
+	String reclamacionDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Detalle Reclamación',
+		other: 'Detalles Reclamaciones',
+	);
+	String historial({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Historial de Reclamaciones',
+		other: 'Historial de Reclamaciones',
+	);
+	String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Más Detalle',
+		other: 'Más Detalles',
+	);
+	String get detailFechaTentativa => 'Fecha Tentativa';
+	String get detailPreferenceCity => 'Ciudad de preferencia';
+	String get detailAseguradoraName => 'Aseguradora';
+	String get detailHospital => 'Hospital';
+	String get detailPreferenceDoctor => 'Doctor de preferencia';
+	String get detailPadecimeiento => 'Padecimeiento';
+	String get detailPadecimeientoDiagnostico => 'Padecimeiento/Diagnóstico';
+	String get detailAditionalInformation => 'Información adicional';
+	String get detailAditionalRequaimentes => 'Requerimientos adicionales';
+	String get detailOthersRequaimentes => 'Otros requerimientos';
+	String get detalleFoto => 'Foto';
+	String get estados => 'Estados de las reclamaciones';
+	String get estadoCerrado => 'Cerrado';
+	String get estadoGestionando => 'Gestionando';
+	String get estadoPorGestionar => 'Por Gestionar';
+	String get nuevaReclamacion => 'Nueva Reclamación';
+	String get reclamacionSinCaso => 'Reclamación sin caso';
+	String get creaCasoReclamacion => 'Crea un caso para la reclamación';
+	String get reclamacionEnCaso => 'Escoje el caso para la reclamación';
+	String get reclamacionEstado => 'Estado de la reclamación';
+	String get historialEmpty => 'No hay un historial de comentarios aún';
+	String get historialError => 'Error al cargar el historial de comentarios';
+	String get tipoAdministacion => 'Tipo de Administración';
 }
 
 // Path: segurosPage
@@ -997,6 +1032,41 @@ class _TranslationsReclamacionesPageEn implements _TranslationsReclamacionesPage
 		one: 'Claim',
 		other: 'Claims',
 	);
+	@override String reclamacionDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Claim Detail',
+		other: 'Claim Details',
+	);
+	@override String historial({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Claims History',
+		other: 'Claims History',
+	);
+	@override String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'More Detail',
+		other: 'More Details',
+	);
+	@override String get detailFechaTentativa => 'Tentative Date';
+	@override String get detailPreferenceCity => 'Preferred City';
+	@override String get detailAseguradoraName => 'Insurance Company';
+	@override String get detailHospital => 'Hospital';
+	@override String get detailPreferenceDoctor => 'Preferred Doctor';
+	@override String get detailPadecimeiento => 'Condition';
+	@override String get detailPadecimeientoDiagnostico => 'Condition/Diagnosis';
+	@override String get detailAditionalInformation => 'Additional Information';
+	@override String get detailAditionalRequaimentes => 'Additional Requirements';
+	@override String get detailOthersRequaimentes => 'Other Requirements';
+	@override String get detalleFoto => 'Photo';
+	@override String get estados => 'Claim States';
+	@override String get estadoCerrado => 'Closed';
+	@override String get estadoGestionando => 'Managing';
+	@override String get estadoPorGestionar => 'Pending Management';
+	@override String get nuevaReclamacion => 'New Claim';
+	@override String get reclamacionSinCaso => 'Claim without Case';
+	@override String get creaCasoReclamacion => 'Create a Case for the Claim';
+	@override String get reclamacionEnCaso => 'Choose the Case for the Claim';
+	@override String get reclamacionEstado => 'Claim Status';
+	@override String get historialEmpty => 'No comment history yet';
+	@override String get historialError => 'Error loading comment history';
+	@override String get tipoAdministacion => 'Administration Type';
 }
 
 // Path: segurosPage
@@ -1350,6 +1420,41 @@ extension on Translations {
 				one: 'Recalmación',
 				other: 'Recalmaciones',
 			);
+			case 'reclamacionesPage.reclamacionDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Detalle Reclamación',
+				other: 'Detalles Reclamaciones',
+			);
+			case 'reclamacionesPage.historial': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Historial de Reclamaciones',
+				other: 'Historial de Reclamaciones',
+			);
+			case 'reclamacionesPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Más Detalle',
+				other: 'Más Detalles',
+			);
+			case 'reclamacionesPage.detailFechaTentativa': return 'Fecha Tentativa';
+			case 'reclamacionesPage.detailPreferenceCity': return 'Ciudad de preferencia';
+			case 'reclamacionesPage.detailAseguradoraName': return 'Aseguradora';
+			case 'reclamacionesPage.detailHospital': return 'Hospital';
+			case 'reclamacionesPage.detailPreferenceDoctor': return 'Doctor de preferencia';
+			case 'reclamacionesPage.detailPadecimeiento': return 'Padecimeiento';
+			case 'reclamacionesPage.detailPadecimeientoDiagnostico': return 'Padecimeiento/Diagnóstico';
+			case 'reclamacionesPage.detailAditionalInformation': return 'Información adicional';
+			case 'reclamacionesPage.detailAditionalRequaimentes': return 'Requerimientos adicionales';
+			case 'reclamacionesPage.detailOthersRequaimentes': return 'Otros requerimientos';
+			case 'reclamacionesPage.detalleFoto': return 'Foto';
+			case 'reclamacionesPage.estados': return 'Estados de las reclamaciones';
+			case 'reclamacionesPage.estadoCerrado': return 'Cerrado';
+			case 'reclamacionesPage.estadoGestionando': return 'Gestionando';
+			case 'reclamacionesPage.estadoPorGestionar': return 'Por Gestionar';
+			case 'reclamacionesPage.nuevaReclamacion': return 'Nueva Reclamación';
+			case 'reclamacionesPage.reclamacionSinCaso': return 'Reclamación sin caso';
+			case 'reclamacionesPage.creaCasoReclamacion': return 'Crea un caso para la reclamación';
+			case 'reclamacionesPage.reclamacionEnCaso': return 'Escoje el caso para la reclamación';
+			case 'reclamacionesPage.reclamacionEstado': return 'Estado de la reclamación';
+			case 'reclamacionesPage.historialEmpty': return 'No hay un historial de comentarios aún';
+			case 'reclamacionesPage.historialError': return 'Error al cargar el historial de comentarios';
+			case 'reclamacionesPage.tipoAdministacion': return 'Tipo de Administración';
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Seguro',
 				other: 'Seguros',
@@ -1628,6 +1733,41 @@ extension on _TranslationsEn {
 				one: 'Claim',
 				other: 'Claims',
 			);
+			case 'reclamacionesPage.reclamacionDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Claim Detail',
+				other: 'Claim Details',
+			);
+			case 'reclamacionesPage.historial': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Claims History',
+				other: 'Claims History',
+			);
+			case 'reclamacionesPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'More Detail',
+				other: 'More Details',
+			);
+			case 'reclamacionesPage.detailFechaTentativa': return 'Tentative Date';
+			case 'reclamacionesPage.detailPreferenceCity': return 'Preferred City';
+			case 'reclamacionesPage.detailAseguradoraName': return 'Insurance Company';
+			case 'reclamacionesPage.detailHospital': return 'Hospital';
+			case 'reclamacionesPage.detailPreferenceDoctor': return 'Preferred Doctor';
+			case 'reclamacionesPage.detailPadecimeiento': return 'Condition';
+			case 'reclamacionesPage.detailPadecimeientoDiagnostico': return 'Condition/Diagnosis';
+			case 'reclamacionesPage.detailAditionalInformation': return 'Additional Information';
+			case 'reclamacionesPage.detailAditionalRequaimentes': return 'Additional Requirements';
+			case 'reclamacionesPage.detailOthersRequaimentes': return 'Other Requirements';
+			case 'reclamacionesPage.detalleFoto': return 'Photo';
+			case 'reclamacionesPage.estados': return 'Claim States';
+			case 'reclamacionesPage.estadoCerrado': return 'Closed';
+			case 'reclamacionesPage.estadoGestionando': return 'Managing';
+			case 'reclamacionesPage.estadoPorGestionar': return 'Pending Management';
+			case 'reclamacionesPage.nuevaReclamacion': return 'New Claim';
+			case 'reclamacionesPage.reclamacionSinCaso': return 'Claim without Case';
+			case 'reclamacionesPage.creaCasoReclamacion': return 'Create a Case for the Claim';
+			case 'reclamacionesPage.reclamacionEnCaso': return 'Choose the Case for the Claim';
+			case 'reclamacionesPage.reclamacionEstado': return 'Claim Status';
+			case 'reclamacionesPage.historialEmpty': return 'No comment history yet';
+			case 'reclamacionesPage.historialError': return 'Error loading comment history';
+			case 'reclamacionesPage.tipoAdministacion': return 'Administration Type';
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Insurance Company',
 				other: 'Insurance Company',

@@ -53,7 +53,7 @@ class EmergenciasRepositoryImpl implements EmergenciasRepository {
   }
 
   @override
-  Future<Either<Failure, List<Comentario>>> getCitaHistorial(
+  Future<Either<Failure, List<Comentario>>> getEmergenciasHistorial(
     User user,
     int emergenciaId,
   ) async {

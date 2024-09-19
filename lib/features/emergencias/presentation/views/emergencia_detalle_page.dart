@@ -132,7 +132,6 @@ class EmergenciaDetalleView extends StatelessWidget {
                                     ],
                                   ),
                                   const SizedBox(height: AppLayoutConst.spaceL),
-
                                   Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: AppLayoutConst.spaceM),
@@ -140,7 +139,6 @@ class EmergenciaDetalleView extends StatelessWidget {
                                           ? DetalleMorePanel(
                                               emergencia: state.emergenciaModel)
                                           : const DetalleHistoryPanel()),
-                                  // const DetalleHistoryPanel(),
                                 ],
                               ),
                             ));

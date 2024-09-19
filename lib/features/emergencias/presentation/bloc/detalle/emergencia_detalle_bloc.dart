@@ -46,7 +46,7 @@ class EmergenciaDetalleBloc
     if (state is! EmergenciaDetalleLoaded) return;
     final currrentStat = (state as EmergenciaDetalleLoaded);
 
-    final comentariosResponse = await emerRepository.getCitaHistorial(
+    final comentariosResponse = await emerRepository.getEmergenciasHistorial(
         _user, currrentStat.emergenciaModel.id!);
 
     comentariosResponse.fold(

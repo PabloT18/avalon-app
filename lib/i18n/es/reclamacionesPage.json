@@ -2,5 +2,40 @@
     "title": {
         "one": "Recalmación",
         "other": "Recalmaciones"
-    }
+    },
+    "reclamacionDetalle": {
+        "one": "Detalle Reclamación",
+        "other": "Detalles Reclamaciones"
+    },
+    "historial": {
+        "one": "Historial de Reclamaciones",
+        "other": "Historial de Reclamaciones"
+    },
+    "moreDetails": {
+        "one": "Más Detalle",
+        "other": "Más Detalles"
+    },
+    "detailFechaTentativa": "Fecha Tentativa",
+    "detailPreferenceCity": "Ciudad de preferencia",
+    "detailAseguradoraName": "Aseguradora",
+    "detailHospital": "Hospital",
+    "detailPreferenceDoctor": "Doctor de preferencia",
+    "detailPadecimeiento": "Padecimeiento",
+    "detailPadecimeientoDiagnostico": "Padecimeiento/Diagnóstico",
+    "detailAditionalInformation": "Información adicional",
+    "detailAditionalRequaimentes": "Requerimientos adicionales",
+    "detailOthersRequaimentes": "Otros requerimientos",
+    "detalleFoto": "Foto",
+    "estados": "Estados de las reclamaciones",
+    "estadoCerrado": "Cerrado",
+    "estadoGestionando": "Gestionando",
+    "estadoPorGestionar": "Por Gestionar",
+    "nuevaReclamacion": "Nueva Reclamación",
+    "reclamacionSinCaso": "Reclamación sin caso",
+    "creaCasoReclamacion": "Crea un caso para la reclamación",
+    "reclamacionEnCaso": "Escoje el caso para la reclamación",
+    "reclamacionEstado": "Estado de la reclamación",
+    "historialEmpty": "No hay un historial de comentarios aún",
+    "historialError": "Error al cargar el historial de comentarios",
+    "tipoAdministacion": "Tipo de Administración"
 }

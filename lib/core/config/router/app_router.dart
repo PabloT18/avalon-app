@@ -193,18 +193,19 @@ class AppRouter {
               pageBuilder: (context, state) => pageBuilderByPlatform(
                 context,
                 state,
-                ReclamacionDetalle(reclamacion: state.extra),
+                ReclamacionDetalle(
+                    reclamacion: state.extra as ReclamacionModel),
               ),
             ),
-            GoRoute(
-              path: PAGES.reclamaciones.pageName,
-              name: PAGES.reclamaciones.pageName,
-              pageBuilder: (context, state) => pageBuilderByPlatform(
-                context,
-                state,
-                const ReclamacionesPage(),
-              ),
-            ),
+            // GoRoute(
+            //   path: PAGES.reclamaciones.pageName,
+            //   name: PAGES.reclamaciones.pageName,
+            //   pageBuilder: (context, state) => pageBuilderByPlatform(
+            //     context,
+            //     state,
+            //     const ReclamacionesPage(),
+            //   ),
+            // ),
             GoRoute(
               path: PAGES.seguros.pageName,
               name: PAGES.seguros.pageName,
