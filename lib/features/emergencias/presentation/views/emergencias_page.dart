@@ -1,37 +1,19 @@
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
+
+import 'package:avalon_app/features/emergencias/emergencias.dart';
+import 'package:avalon_app/features/emergencias/presentation/views/wid_emergencia_card.dart';
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/loaders/loaders_widgets.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:shared_models/shared_models.dart';
 
 import '../bloc/emergencias_bloc.dart';
-
-// import 'package:avalon/features/shared/widgets/wid_drawer.dart';
-
-class EmergenciasPage extends StatelessWidget {
-  const EmergenciasPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Emergencias'),
-        elevation: 6,
-      ),
-      // drawer: const DrawerCustom(
-      //     indexInitial: x,
-      // ),
-      body: const Center(
-        child: Text('Welcome to Emergencias'),
-      ),
-    );
-  }
-}
 
 class EmergenciaPanel extends StatelessWidget {
   const EmergenciaPanel({
@@ -65,7 +47,7 @@ class EmergenciasPanelView extends StatelessWidget {
     return BlocBuilder<EmergenciasBloc, EmergenciasState>(
       builder: (context, state) {
         return SmartRefrehsCustom(
-          key: const Key('__citas_list_key__'),
+          key: const Key('__emergencias_list_key__'),
           onRefresh: () async {
             emergenciaBloc.add(const GetEmergencias());
           },
@@ -109,11 +91,10 @@ class EmergenciasPanelView extends StatelessWidget {
                 in state.emergencias) // Repite los elementos 5 veces
               Hero(
                 tag: emergencia.hashCode,
-                // child: EmergenciaCard(
-                //   emergencia: emergencia,
-                //   isClient: user.isClient,
-                // ),
-                child: Container(),
+                child: EmergenciaCard(
+                  emergenciaModel: emergencia,
+                  isClient: user.isClient,
+                ),
               ),
             const SizedBox(height: AppLayoutConst.spaceXL),
           ],

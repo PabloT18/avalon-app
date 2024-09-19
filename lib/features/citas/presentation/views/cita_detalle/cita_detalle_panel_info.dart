@@ -9,7 +9,7 @@ import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:avalon_app/features/shared/functions/fun_logic.dart';
 
 import 'package:avalon_app/features/citas/citas.dart';
-import 'package:avalon_app/features/citas/presentation/views/widgets/wid_detail_form_field.dart';
+import 'package:avalon_app/features/shared/widgets/wid_detail_form_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/wid_cita_detail_iamge.dart';
@@ -28,65 +28,60 @@ class CitaDetalleMorePanel extends StatelessWidget {
     final user = (context.read<AppBloc>().state as AppAuthenticated).user;
 
     final locale = TranslationProvider.of(context).locale;
-    return SingleChildScrollView(
-      primary: true,
-      padding: const EdgeInsets.all(AppLayoutConst.paddingL),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            apptexts.citasPage.moreDetails(n: 2),
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          apptexts.citasPage.moreDetails(n: 2),
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(
+            vertical: AppLayoutConst.marginXS,
+          ).copyWith(bottom: AppLayoutConst.marginM),
+          height: 1,
+          color: AppColors.secondaryBlue.withOpacity(0.5),
+        ),
+        DetailFormField(
+          label: apptexts.citasPage.detailFechaTentativa,
+          value: UtilsFunctionsLogic.formatFechaLocal(
+              citaMedica.fechaTentativa, locale.languageCode),
+        ),
+        DetailFormField(
+            label: apptexts.citasPage.detailPreferenceCity,
+            value: citaMedica.ciudadPreferencia),
+        DetailFormField(
+            label: apptexts.citasPage.detailAseguradoraName,
+            value: citaMedica.clientePoliza?.poliza?.aseguradora?.nombre),
+        DetailFormField(
+          label: apptexts.citasPage.detailHospital,
+          value: citaMedica.medicoCentroMedicoAseguradora?.centroMedico?.nombre,
+        ),
+        DetailFormField(
+            label: apptexts.citasPage.detailPreferenceDoctor,
+            value: citaMedica
+                .medicoCentroMedicoAseguradora?.medico?.nombreCompleto),
+        DetailFormField(
+            label: apptexts.citasPage.detailPadecimeiento,
+            value: citaMedica.padecimiento),
+        DetailFormField(
+            label: apptexts.citasPage.detailAditionalInformation,
+            value: citaMedica.informacionAdicional),
+        DetailRequisitosAdicionales(
+          requisitos: citaMedica.requisitosAdicionales,
+        ),
+        DetailFormField(
+            label: apptexts.citasPage.detailOthersRequaimentes,
+            value: citaMedica.otrosRequisitos),
+        if (citaMedica.imagenId != null)
+          DetailPhoto(
+            imageCode: citaMedica.imagenId!,
+            user: user,
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(
-              vertical: AppLayoutConst.marginXS,
-            ).copyWith(bottom: AppLayoutConst.marginM),
-            height: 1,
-            color: AppColors.secondaryBlue.withOpacity(0.5),
-          ),
-          DetailFormField(
-            label: apptexts.citasPage.detailFechaTentativa,
-            value: UtilsFunctionsLogic.formatFechaLocal(
-                citaMedica.fechaTentativa, locale.languageCode),
-          ),
-          DetailFormField(
-              label: apptexts.citasPage.detailPreferenceCity,
-              value: citaMedica.ciudadPreferencia),
-          DetailFormField(
-              label: apptexts.citasPage.detailAseguradoraName,
-              value: citaMedica.clientePoliza?.poliza?.aseguradora?.nombre),
-          DetailFormField(
-            label: apptexts.citasPage.detailHospital,
-            value:
-                citaMedica.medicoCentroMedicoAseguradora?.centroMedico?.nombre,
-          ),
-          DetailFormField(
-              label: apptexts.citasPage.detailPreferenceDoctor,
-              value: citaMedica
-                  .medicoCentroMedicoAseguradora?.medico?.nombreCompleto),
-          DetailFormField(
-              label: apptexts.citasPage.detailPadecimeiento,
-              value: citaMedica.padecimiento),
-          DetailFormField(
-              label: apptexts.citasPage.detailAditionalInformation,
-              value: citaMedica.informacionAdicional),
-          DetailRequisitosAdicionales(
-            requisitos: citaMedica.requisitosAdicionales,
-          ),
-          DetailFormField(
-              label: apptexts.citasPage.detailOthersRequaimentes,
-              value: citaMedica.otrosRequisitos),
-          if (citaMedica.imagenId != null)
-            DetailPhoto(
-              imageCode: citaMedica.imagenId!,
-              user: user,
-            ),
-          const SizedBox(height: AppLayoutConst.spaceXL),
-        ],
-      ),
+        const SizedBox(height: AppLayoutConst.spaceXL),
+      ],
     );
   }
 }

@@ -1,4 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:avalon_app/core/config/remote/app_remote_config.dart';
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
 
 import 'package:shared_models/shared_models.dart';
 
@@ -95,6 +102,74 @@ class CitasRemoteSource {
     } catch (e) {
       print('Error fetching data: $e');
       throw Exception('Error fetching data');
+    }
+  }
+
+  Future<void> sendComentario({
+    required User user,
+    required int citaId,
+    required String comentario,
+    File? image,
+    required String nombreDocumento,
+  }) async {
+    String url = '/comentariosCitasMedicas';
+
+    // Build the comentario object
+    Map<String, dynamic> comentarioData = {
+      "citaMedicaId": citaId,
+      "contenido": comentario,
+      "usuarioComentaId": user.id,
+      "estado": "A",
+      "nombreDocumento": nombreDocumento,
+    };
+
+    // Prepare the FormData
+    FormData formData = FormData();
+
+    // Add the comentarioCitaMedica part with Content-Type application/json
+    formData.files.add(
+      MapEntry(
+        'comentarioCitaMedica',
+        MultipartFile.fromString(
+          jsonEncode(comentarioData),
+          contentType: MediaType('application', 'json'),
+        ),
+      ),
+    );
+
+    // If an image is provided, add it to the form data
+    if (image != null) {
+      String fileName = image.path.split('/').last;
+      formData.files.add(
+        MapEntry(
+          'fotoComentarioCitaMedica',
+          await MultipartFile.fromFile(
+            image.path,
+            filename: fileName,
+            contentType:
+                MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+          ),
+        ),
+      );
+    }
+
+    try {
+      final response = await APPRemoteConfig.httpPost(
+        url: url,
+        data: formData,
+        token: user.token!,
+      );
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        // Success
+        log('Comentario enviado con éxito');
+      } else {
+        // Handle error
+        throw Exception('Error al enviar el comentario');
+      }
+    } catch (e) {
+      print('Error sending comentario: $e');
+      throw Exception('Error sending comentario');
     }
   }
 }

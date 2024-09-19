@@ -80,130 +80,38 @@ class APPRemoteConfig {
     }
   }
 
-  // static Future<Response> httpPost({
-  //   required String url,
-  //   required Map<String, dynamic> body,
-  //   required Exception exception,
-  //   String? credencialServicio,
-  //   bool auth = true,
-  // }) async {
-  //   String basicAuth;
-  //   Dio dio;
-  //   if (Environment.apiMobsvc) {
-  //     dio = dioMobsvc;
-  //     basicAuth = 'Bearer $credencialServicio';
-  //   } else {
-  //     dio = Dio(BaseOptions(baseUrl: Environment.upsServerApiPro));
-  //     basicAuth = 'Token $credencialServicio';
-  //   }
+// Aquí está el nuevo método POST
+  static Future<Response> httpPost({
+    required String url,
+    required dynamic data, // Puede ser un Map<String, dynamic> o FormData
+    required String token,
+    bool isMultipart = false, // Si es true, se usará multipart/form-data
+  }) async {
+    Options options = Options(
+      headers: <String, String>{
+        'authorization': token,
+        'Content-Type': 'application/json',
+      },
+    );
 
-  //   try {
-  //     final response = await dio.post(
-  //       url,
-  //       data: Environment.apiMobsvc ? body : FormData.fromMap(body),
-  //       // data: FormData.fromMap(body),
-
-  //       options: credencialServicio != null
-  //           ? Options(headers: <String, String>{
-  //               'authorization': basicAuth,
-  //               HttpHeaders.contentTypeHeader: "multipart/form-data",
-  //             })
-  //           : null,
-  //     );
-
-  //     return response;
-  //   } on DioException catch (e) {
-  //     if (e.response!.statusCode == 404 || e.response!.statusCode == 401) {
-  //       return e.response!;
-  //     } else if (e.response!.statusCode == 201) {
-  //       return e.response!;
-  //     } else {
-  //       throw exception;
-  //     }
-  //   } catch (e) {
-  //     throw exception;
-  //   }
-  // }
-
-  // static Future<Response> httpPostJsonApp({
-  //   required String url,
-  //   required Map<String, dynamic> body,
-  //   required Exception exception,
-  //   String? credencialServicio,
-  //   bool auth = true,
-  // }) async {
-  //   String basicAuth;
-  //   Dio dio;
-  //   if (Environment.apiMobsvc) {
-  //     dio = dioMobsvc;
-  //     basicAuth = 'Bearer $credencialServicio';
-  //   } else {
-  //     dio = Dio(BaseOptions(baseUrl: Environment.upsServerApiPro));
-  //     basicAuth = 'Token $credencialServicio';
-  //   }
-
-  //   try {
-  //     final response = await dio.post(
-  //       url,
-  //       data: Environment.apiMobsvc ? body : FormData.fromMap(body),
-  //       options: credencialServicio != null
-  //           ? Options(headers: <String, String>{
-  //               'authorization': basicAuth,
-  //               HttpHeaders.contentTypeHeader: "application/json",
-  //             })
-  //           : null,
-  //     );
-
-  //     return response;
-  //   } on DioException catch (e) {
-  //     if (e.response!.statusCode == 404 || e.response!.statusCode == 401) {
-  //       return e.response!;
-  //     } else if (e.response!.statusCode == 201) {
-  //       return e.response!;
-  //     } else {
-  //       throw exception;
-  //     }
-  //   } catch (e) {
-  //     throw exception;
-  //   }
-  // }
-
-  // static Future<Response> httpPostBarrer({
-  //   required String url,
-  //   required Map<String, dynamic> body,
-  //   required Exception exception,
-  //   String? credencialServicio,
-  //   bool auth = true,
-  // }) async {
-  //   // var dio = dioUPSapi;
-
-  //   final dio = Dio();
-
-  //   String basicAuth = 'Bearer $credencialServicio';
-
-  //   try {
-  //     final response = await dio.post(
-  //       url,
-  //       data: FormData.fromMap(body),
-  //       options: credencialServicio != null
-  //           ? Options(headers: <String, String>{
-  //               'authorization': basicAuth,
-  //               HttpHeaders.contentTypeHeader: "multipart/form-data",
-  //             })
-  //           : null,
-  //     );
-
-  //     return response;
-  //   } on DioException catch (e) {
-  //     if (e.response!.statusCode == 404 || e.response!.statusCode == 401) {
-  //       return e.response!;
-  //     } else if (e.response!.statusCode == 201) {
-  //       return e.response!;
-  //     } else {
-  //       throw exception;
-  //     }
-  //   } catch (e) {
-  //     throw exception;
-  //   }
-  // }
+    try {
+      final response = await dioApp.post(url, data: data, options: options);
+      return response;
+    } on DioException catch (e) {
+      if (e.error is SocketException) {
+        throw InternetAccessException();
+      }
+      if (e.response == null) {
+        throw Exception('Failed to post data');
+      }
+      if (e.response!.statusCode == 404 || e.response!.statusCode == 401) {
+        return e.response!;
+      } else {
+        throw Exception('Failed to post data');
+      }
+    } catch (e) {
+      log('APP Services POST error: $e');
+      throw Exception('Failed to post data');
+    }
+  }
 }

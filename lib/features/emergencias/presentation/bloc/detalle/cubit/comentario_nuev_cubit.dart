@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:avalon_app/features/emergencias/emergencias.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:avalon_app/features/citas/citas.dart';
+
 import 'package:shared_models/shared_models.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,16 +16,16 @@ class ComentarioNuevCubit extends Cubit<ComentarioNuevState> {
   // ComentarioNuevCubit() : super(ComentarioNuevInitial());
 
   ComentarioNuevCubit({
-    required this.citasRepository,
+    required this.repository,
     required this.user,
-    required this.citaId,
+    required this.emergenciaId,
   }) : super(ComentarioInitial()) {
     textFieldFocusNode = FocusNode();
   }
 
-  final CitasRepository citasRepository;
+  final EmergenciasRepository repository;
   final User user;
-  final int citaId;
+  final int emergenciaId;
 
   late FocusNode textFieldFocusNode;
 
@@ -55,9 +56,9 @@ class ComentarioNuevCubit extends Cubit<ComentarioNuevState> {
     final nombreDocumento = image != null ? image.path.split('/').last : '';
 
     // Llamada al repositorio para enviar el comentario
-    final response = await citasRepository.sendComentario(
+    final response = await repository.sendComentario(
       user,
-      citaId,
+      emergenciaId,
       comentario,
       image: image,
       nombreDocumento: nombreDocumento,

@@ -2,5 +2,19 @@
     "title": {
         "one": "Emergencia",
         "other": "Emergencias"
-    }
+    },
+    "emergenciaDetalle": {
+        "one": "Detalle de Emergencia",
+        "other": "Detalles de Emergencia"
+    },
+    "historial": {
+        "one": "Historial de Emergencia",
+        "other": "Historial de Emergencias"
+    },
+    "moreDetails": {
+        "one": "Más Detalle",
+        "other": "Más Detalles"
+    },
+    "diagnostico": "Diagnóstico",
+    "sintomas": "Síntomas"
 }

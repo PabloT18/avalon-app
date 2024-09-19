@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import 'package:avalon_app/i18n/generated/translations.g.dart';
-
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
-
 import 'package:avalon_app/features/casos/presentation/views/widgets/wid_title_description.dart';
-import 'package:avalon_app/features/citas/citas.dart';
+import 'package:avalon_app/features/emergencias/emergencias.dart';
 
-class CitaCard extends StatelessWidget {
-  const CitaCard({super.key, required this.cita, required this.isClient});
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 
-  final CitaMedica cita;
+class EmergenciaCard extends StatelessWidget {
+  const EmergenciaCard(
+      {super.key, required this.emergenciaModel, required this.isClient});
+
+  final EmergenciaModel emergenciaModel;
   final bool isClient;
 
   @override
@@ -31,11 +31,11 @@ class CitaCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           context.goNamed(
-            PAGES.detalleCita.pageName,
+            PAGES.emergenciaDetalle.pageName,
             pathParameters: {
-              'citaId': cita.id?.toString() ?? '',
+              'emergenciaId': emergenciaModel.id?.toString() ?? '',
             },
-            extra: cita,
+            extra: emergenciaModel,
           );
         },
         child: Padding(
@@ -51,25 +51,24 @@ class CitaCard extends StatelessWidget {
                   children: [
                     if (!isClient)
                       TitleDescripcion(
-                        isSubdescription: true,
                         title: apptexts.appOptions.cliente,
-                        value: cita.clientePoliza!.displayName!,
+                        value: emergenciaModel.clientePoliza!.displayName!,
                       ),
                     TitleDescripcion(
                       isSubdescription: true,
                       title: apptexts.citasPage.estados,
-                      value: getStateStrinByState(cita.estado ?? ''),
+                      value: getStateStrinByState(emergenciaModel.estado ?? ''),
                     ),
                     TitleDescripcion(
                       isSubdescription: true,
                       title: '${apptexts.citasPage.title(n: 1)} Id',
-                      value: cita.codigo!,
+                      value: emergenciaModel.codigo!,
                     ),
-                    TitleDescripcion(
-                      isSubdescription: true,
-                      title: apptexts.appOptions.detalle(n: 1),
-                      value: cita.padecimiento!,
-                    ),
+                    // TitleDescripcion(
+                    //   isSubdescription: true,
+                    //   title: apptexts.appOptions.detalle(n: 1),
+                    //   value: emergenciaModel.padecimiento!,
+                    // ),
                   ],
                 ),
               ),
@@ -77,7 +76,7 @@ class CitaCard extends StatelessWidget {
                 width: 10, // Tamaño del círculo
                 height: 10,
                 decoration: BoxDecoration(
-                  color: getColorByState(cita.estado ?? ''),
+                  color: getColorByState(emergenciaModel.estado ?? ''),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -94,7 +93,7 @@ class CitaCard extends StatelessWidget {
         return Colors.red;
       case 'GESTIONANDO' || "G":
         return Colors.blue;
-      case 'POR GESTIONAR' || "P":
+      case 'POR GESTIONAR' || "P" || "N":
         return Colors.green;
       default:
         return Colors.grey;
@@ -107,7 +106,7 @@ class CitaCard extends StatelessWidget {
         return apptexts.citasPage.estadoCerrado;
       case 'GESTIONANDO' || "G":
         return apptexts.citasPage.estadoGestionando;
-      case 'POR GESTIONAR' || "P":
+      case 'POR GESTIONAR' || "P" || "N":
         return apptexts.citasPage.estadoPorGestionar;
       default:
         return ' - ';

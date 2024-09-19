@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:avalon_app/core/error/failures/failures.dart';
 import 'package:avalon_app/features/emergencias/data/models/emergencias_response.dart';
 import 'package:dartz/dartz.dart';
@@ -18,4 +20,13 @@ abstract class EmergenciasRepository {
     String? search,
     bool? update = false,
   });
+
+  Future<Either<Failure, List<Comentario>>> getCitaHistorial(
+    User user,
+    int emergenciaId,
+  );
+
+  Future<Either<Failure, List<Comentario>>> sendComentario(
+      User user, int emergenciaId, String comentario,
+      {File? image, required String nombreDocumento});
 }

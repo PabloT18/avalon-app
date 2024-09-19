@@ -152,9 +152,9 @@ class HomePageView extends StatelessWidget {
           navigationCubit.onPageChanged(index);
         },
         children: const <Widget>[
-          EmergenciaPanel(),
-          CitasPanel(),
           ReclamacionesPanel(),
+          CitasPanel(),
+          EmergenciaPanel(),
         ],
       ),
     );

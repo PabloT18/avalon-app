@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 408 (204 per locale)
+/// Strings: 424 (212 per locale)
 ///
-/// Built on 2024-09-18 at 06:29 UTC
+/// Built on 2024-09-19 at 01:54 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -345,6 +345,20 @@ class _TranslationsEmergenciasPageEs {
 		one: 'Emergencia',
 		other: 'Emergencias',
 	);
+	String emergenciaDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Detalle de Emergencia',
+		other: 'Detalles de Emergencia',
+	);
+	String historial({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Historial de Emergencia',
+		other: 'Historial de Emergencias',
+	);
+	String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Más Detalle',
+		other: 'Más Detalles',
+	);
+	String get diagnostico => 'Diagnóstico';
+	String get sintomas => 'Síntomas';
 }
 
 // Path: familiaresPage
@@ -827,6 +841,20 @@ class _TranslationsEmergenciasPageEn implements _TranslationsEmergenciasPageEs {
 		one: 'Emergency',
 		other: 'Emergencies',
 	);
+	@override String emergenciaDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Emergency Detail',
+		other: 'Emergency Details',
+	);
+	@override String historial({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Emergency History',
+		other: 'Emergency History',
+	);
+	@override String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'More Detail',
+		other: 'More Details',
+	);
+	@override String get diagnostico => 'Diagnosis';
+	@override String get sintomas => 'Symptoms';
 }
 
 // Path: familiaresPage
@@ -1235,6 +1263,20 @@ extension on Translations {
 				one: 'Emergencia',
 				other: 'Emergencias',
 			);
+			case 'emergenciasPage.emergenciaDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Detalle de Emergencia',
+				other: 'Detalles de Emergencia',
+			);
+			case 'emergenciasPage.historial': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Historial de Emergencia',
+				other: 'Historial de Emergencias',
+			);
+			case 'emergenciasPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Más Detalle',
+				other: 'Más Detalles',
+			);
+			case 'emergenciasPage.diagnostico': return 'Diagnóstico';
+			case 'emergenciasPage.sintomas': return 'Síntomas';
 			case 'familiaresPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Familiar',
 				other: 'Familiares',
@@ -1499,6 +1541,20 @@ extension on _TranslationsEn {
 				one: 'Emergency',
 				other: 'Emergencies',
 			);
+			case 'emergenciasPage.emergenciaDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Emergency Detail',
+				other: 'Emergency Details',
+			);
+			case 'emergenciasPage.historial': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Emergency History',
+				other: 'Emergency History',
+			);
+			case 'emergenciasPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'More Detail',
+				other: 'More Details',
+			);
+			case 'emergenciasPage.diagnostico': return 'Diagnosis';
+			case 'emergenciasPage.sintomas': return 'Symptoms';
 			case 'familiaresPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Family',
 				other: 'Family',

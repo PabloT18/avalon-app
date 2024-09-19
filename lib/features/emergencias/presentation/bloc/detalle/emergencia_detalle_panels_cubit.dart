@@ -1,15 +1,15 @@
 import 'package:equatable/equatable.dart';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'cita_detalle_panels_state.dart';
+part 'emergencia_detalle_panels_state.dart';
 
-class CitaDetallePanelsCubit extends Cubit<CitaDetallePanelsState> {
-  CitaDetallePanelsCubit() : super(const CitaDetalleInfo());
+class DetallePanelsCubit extends Cubit<DetallePanelsState> {
+  DetallePanelsCubit() : super(const DetalleInfo());
 
-  // final PageController pageController = PageController();
+  final PageController pageController = PageController();
 
-  togglePanel(CitaDetallePanelsState stateOption) {
+  togglePanel(DetallePanelsState stateOption) {
     if (stateOption == state) {
       return;
     }
@@ -22,9 +22,9 @@ class CitaDetallePanelsCubit extends Cubit<CitaDetallePanelsState> {
 
   void onPageChanged(int value) {
     if (value == 0) {
-      emit(const CitaDetalleInfo());
+      emit(const DetalleInfo());
     } else {
-      emit(const CitaDetalleHistorial());
+      emit(const DetalleHistorial());
     }
   }
 }

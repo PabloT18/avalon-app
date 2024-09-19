@@ -29,11 +29,6 @@ class DetailFormField extends StatelessWidget {
               border: OutlineInputBorder(),
               isDense: true,
             ),
-            // style: const TextStyle(
-            //   fontSize: 14, // Ajusta el tamaño de texto a 14 como en el tema
-            //   fontFamily: 'Sora', // Asegura que el estilo de texto coincida
-            //   color: Colors.black, // Asegura que el color de texto coincida
-            // ),
             style: Theme.of(context).textTheme.bodyMedium!,
           ),
         ],

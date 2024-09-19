@@ -1,4 +1,6 @@
 import 'package:avalon_app/features/citas/presentation/bloc/cita_detalle/cubit/comentario_nuev_cubit.dart';
+import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
@@ -60,17 +62,14 @@ class CitaDetalleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final citaDetalleBloc = context.read<CitaDetalleBloc>();
-    final citaDetallePanelsCubit = context.read<CitaDetallePanelsCubit>();
-    final bottomPadding = MediaQuery.of(context)
-        .viewInsets
-        .bottom; // Maneja el espacio del teclado
+
+    // Maneja el espacio del teclado
 
     return Scaffold(
       appBar: AppBar(
         title: Text(apptexts.citasPage.citaDetalle(n: 1)),
         elevation: 6,
       ),
-      resizeToAvoidBottomInset: true,
       body: BlocBuilder<CitaDetalleBloc, CitaDetalleState>(
         builder: (context, stateCitaDetalle) {
           return switch (stateCitaDetalle) {
@@ -83,60 +82,72 @@ class CitaDetalleView extends StatelessWidget {
                 }),
             CitaDetalleLoaded() => BlocProvider(
                 create: (context) => ComentarioNuevCubit(
-                  citasRepository: citaDetalleBloc.citasRepository,
-                  user: context.read<AppBloc>().state.user,
-                  citaId: (citaDetalleBloc.state as CitaDetalleLoaded).cita.id!,
-                ),
+                      citasRepository: citaDetalleBloc.citasRepository,
+                      user: context.read<AppBloc>().state.user,
+                      citaId:
+                          (citaDetalleBloc.state as CitaDetalleLoaded).cita.id!,
+                    ),
                 child: Stack(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(AppLayoutConst.paddingL),
-                      child: Column(
-                        children: [
-                          Hero(
-                            tag: stateCitaDetalle.cita.hashCode,
-                            child: CitaCard(
-                              cita: stateCitaDetalle.cita,
-                              isClient: user.isClient,
-                            ),
-                          ),
-                          const SizedBox(height: AppLayoutConst.spaceL),
-                          BlocBuilder<CitaDetallePanelsCubit,
-                              CitaDetallePanelsState>(
-                            builder: (context, state) {
-                              return Wrap(
-                                alignment: WrapAlignment.spaceEvenly,
-                                spacing: AppLayoutConst.spaceL,
-                                runSpacing: AppLayoutConst.spaceL,
-                                children: [
-                                  CitaOptionButton(
-                                      option: const CitaDetalleInfo(),
-                                      optionSelected: state),
-                                  CitaOptionButton(
-                                      option: const CitaDetalleHistorial(),
-                                      optionSelected: state),
-                                ],
-                              );
+                    BlocBuilder<CitaDetallePanelsCubit, CitaDetallePanelsState>(
+                      builder: (context, statePanels) {
+                        return SmartRefrehsCustom(
+                            key: const Key('__caso_detalle_historial_key__'),
+                            onRefresh: () async {
+                              citaDetalleBloc.add(const GetCitaHistorial());
+                              citaDetalleBloc.refreshController
+                                ..loadFailed()
+                                ..refreshCompleted();
                             },
-                          ),
-                          const SizedBox(height: AppLayoutConst.spaceL),
-                          Expanded(
-                            child: PageView(
-                              controller: citaDetallePanelsCubit.pageController,
-                              onPageChanged:
-                                  citaDetallePanelsCubit.onPageChanged,
-                              children: <Widget>[
-                                CitaDetalleMorePanel(
-                                    citaMedica: stateCitaDetalle.cita),
-                                const CitaDetalleHistoryPanel(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                            refreshController:
+                                citaDetalleBloc.refreshController,
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding: const EdgeInsets.all(
+                                    AppLayoutConst.paddingL),
+                                child: Column(
+                                  children: [
+                                    Hero(
+                                      tag: stateCitaDetalle.cita.hashCode,
+                                      child: CitaCard(
+                                        cita: stateCitaDetalle.cita,
+                                        isClient: user.isClient,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                        height: AppLayoutConst.spaceL),
+                                    Wrap(
+                                      alignment: WrapAlignment.spaceEvenly,
+                                      spacing: AppLayoutConst.spaceL,
+                                      runSpacing: AppLayoutConst.spaceL,
+                                      children: [
+                                        CitaOptionButton(
+                                            option: const CitaDetalleInfo(),
+                                            optionSelected: statePanels),
+                                        CitaOptionButton(
+                                            option:
+                                                const CitaDetalleHistorial(),
+                                            optionSelected: statePanels),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                        height: AppLayoutConst.spaceL),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: AppLayoutConst.spaceM),
+                                      child: statePanels.index == 0
+                                          ? CitaDetalleMorePanel(
+                                              citaMedica: stateCitaDetalle.cita)
+                                          : const CitaDetalleHistoryPanel(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ));
+                      },
                     ),
                     Positioned(
-                      bottom: 10,
+                      bottom: 0,
                       left: 0,
                       right: 0,
                       child: BlocBuilder<CitaDetallePanelsCubit,
@@ -144,15 +155,12 @@ class CitaDetalleView extends StatelessWidget {
                         builder: (context, state) {
                           if (state.index == 0) return const SizedBox();
 
-                          return Container(
-                              color: Colors.white,
-                              child: const ComentarioTextBox());
+                          return const ComentarioCitaTextBox();
                         },
                       ),
                     ),
                   ],
-                ),
-              )
+                )),
           };
         },
       ),

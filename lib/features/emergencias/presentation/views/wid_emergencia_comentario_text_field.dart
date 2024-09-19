@@ -1,18 +1,14 @@
-import 'package:avalon_app/features/citas/presentation/bloc/cita_detalle/cita_detalle_bloc.dart';
-import 'package:avalon_app/features/citas/presentation/bloc/cita_detalle/cubit/comentario_nuev_cubit.dart';
-
-import 'package:flutter/material.dart';
-
 import 'package:animate_do/animate_do.dart';
-
-import 'package:avalon_app/features/shared/functions/utils_functions.dart';
-
+import 'package:avalon_app/features/emergencias/presentation/bloc/detalle/emergencia_detalle_bloc.dart';
+import 'package:avalon_app/features/shared/functions/fun_views.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ComentarioCitaTextBox extends StatelessWidget {
-  const ComentarioCitaTextBox({
+import '../bloc/detalle/cubit/comentario_nuev_cubit.dart';
+
+class ComentarioTextBox extends StatelessWidget {
+  const ComentarioTextBox({
     super.key,
   });
 
@@ -31,14 +27,16 @@ class ComentarioCitaTextBox extends StatelessWidget {
         }
         if (state is ComentarioSent) {
           messageController.clear();
-          context.read<CitaDetalleBloc>().add(const GetCitaHistorial());
+          context
+              .read<EmergenciaDetalleBloc>()
+              .add(const GetEmergenciaHistorial());
         }
       },
       builder: (context, state) {
         return FadeInUp(
           child: Container(
-            color: Colors.white,
             padding: const EdgeInsets.only(bottom: 8),
+            color: Colors.white,
             child: Column(
               children: [
                 if (state is ComentarioImageSelected)

@@ -28,5 +28,5 @@ abstract class CitasRepository {
 
   Future<Either<Failure, List<Comentario>>> sendComentario(
       User user, int citaId, String comentario,
-      {File? image});
+      {File? image, required String nombreDocumento});
 }

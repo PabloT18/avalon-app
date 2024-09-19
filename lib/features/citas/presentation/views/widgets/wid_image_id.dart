@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:avalon_app/app/data/sources/local/enviroment.dart';
+import 'package:avalon_app/features/citas/presentation/bloc/cita_detalle/cubit/comentario_nuev_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_models/shared_models.dart';
 
 class FullScreenImageFromId extends StatefulWidget {
@@ -121,6 +123,10 @@ class _FullScreenImageFromIdState extends State<FullScreenImageFromId> {
               ),
               child: GestureDetector(
                 onTap: () {
+                  // FocusScope.of(context).unfocus();
+                  final cubit = context.read<ComentarioNuevCubit>();
+                  cubit.textFieldFocusNode.unfocus();
+
                   _showFullScreenImage(context);
                 },
                 child: Image.memory(

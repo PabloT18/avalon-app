@@ -8,6 +8,7 @@ class SmartRefrehsCustom extends StatelessWidget {
     required this.onRefresh,
     this.onLoading,
     this.enablePullUp = false,
+    this.enablePullDown = true,
   });
 
   final Widget child;
@@ -16,13 +17,14 @@ class SmartRefrehsCustom extends StatelessWidget {
   final Function()? onLoading;
 
   final bool enablePullUp;
+  final bool enablePullDown;
 
   @override
   Widget build(BuildContext context) {
     return SmartRefresher(
       key: key,
-      physics: const BouncingScrollPhysics(),
-      enablePullDown: true,
+      // physics: const BouncingScrollPhysics(),
+      enablePullDown: enablePullDown,
       enablePullUp: enablePullUp,
       controller: refreshController,
       header: WaterDropMaterialHeader(

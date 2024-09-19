@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:avalon_app/app/domain/entity/push_notifications/push_message.dart';
 import 'package:avalon_app/features/citas/citas.dart';
+import 'package:avalon_app/features/emergencias/emergencias.dart';
 
 import 'package:avalon_app/features/familiares/familiares.dart';
 
@@ -174,6 +175,25 @@ class AppRouter {
                 context,
                 state,
                 CitaDetallePage(cita: state.extra as CitaMedica?),
+              ),
+            ),
+            GoRoute(
+              path: '${PAGES.emergenciaDetalle.pageName}/:emergenciaId',
+              name: PAGES.emergenciaDetalle.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                EmergenciaDetallePage(
+                    emergencia: state.extra as EmergenciaModel?),
+              ),
+            ),
+            GoRoute(
+              path: '${PAGES.reclamacionDetalle.pageName}/:reclamacionId',
+              name: PAGES.reclamacionDetalle.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                ReclamacionDetalle(reclamacion: state.extra),
               ),
             ),
             GoRoute(

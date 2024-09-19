@@ -14,6 +14,10 @@ enum PAGES {
   citas,
   detalleCita,
   crearCita,
+  emergenciaDetalle,
+  crearEmergencia,
+  reclamacionDetalle,
+  crearReclamacion,
   casos,
   crearCaso,
   detaleCaso,
@@ -60,6 +64,15 @@ extension AppPageExtension on PAGES {
         return "/detalleCita";
       case PAGES.crearCita:
         return "/crearCita";
+      case PAGES.emergenciaDetalle:
+        return "/emergenciaDetalle";
+      case PAGES.crearEmergencia:
+        return "/  crearEmergencia";
+      case PAGES.reclamacionDetalle:
+        return "/  reclamacionDetalle";
+      case PAGES.crearReclamacion:
+        return "/  crearReclamacion";
+
       case PAGES.casos:
         return "/casos";
       case PAGES.crearCaso:
@@ -127,6 +140,14 @@ extension AppPageExtension on PAGES {
         return "detalleCita";
       case PAGES.crearCita:
         return "crearCita";
+      case PAGES.emergenciaDetalle:
+        return "emergenciaDetalle";
+      case PAGES.crearEmergencia:
+        return "  crearEmergencia";
+      case PAGES.reclamacionDetalle:
+        return "  reclamacionDetalle";
+      case PAGES.crearReclamacion:
+        return "  crearReclamacion";
       case PAGES.casos:
         return "casos";
       case PAGES.crearCaso:

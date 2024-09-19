@@ -277,9 +277,13 @@ class AuthenticationRepository {
               UsrAgenteResponse.fromJson(agentData);
           user = UsrAgente.fromUsuarioResponse(userAgentData, token);
           break;
+        case 2:
+          user = User.fromUsuarioResponse(
+              userResponseData, token); // Devuelve un User genérico
+          break;
         default:
           user = User.fromUsuarioResponse(
-              userData, token); // Devuelve un User genérico
+              userResponseData, token); // Devuelve un User genérico
       }
 
       //TODO: refat

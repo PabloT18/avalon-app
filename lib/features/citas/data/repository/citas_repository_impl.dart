@@ -74,8 +74,20 @@ class CitasRepositoryImpl implements CitasRepository {
   @override
   Future<Either<Failure, List<Comentario>>> sendComentario(
       User user, int citaId, String comentario,
-      {File? image}) {
-    // TODO: implement sendComentario
-    throw UnimplementedError();
+      {File? image, required String nombreDocumento}) async {
+    try {
+      await remoteSource.sendComentario(
+        user: user,
+        citaId: citaId,
+        comentario: comentario,
+        image: image,
+        nombreDocumento: nombreDocumento,
+      );
+      return const Right([]);
+    } on InternetAccessException catch (e) {
+      return Left(InternetFailure(message: e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
   }
 }
