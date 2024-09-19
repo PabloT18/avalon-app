@@ -68,5 +68,6 @@
         "passwordConfirm": "La confirmación de la contraseña es requerida",
         "passwordChanged": "Contraseña cambiada con éxito",
         "passwordNotMatch": "Las contraseñas no coinciden"
-    }
+    },
+    "deshabilitadoTemporalemnte": "Temporalmente deshabilitado"
 }

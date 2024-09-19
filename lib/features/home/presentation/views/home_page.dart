@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:avalon_app/features/emergencias/emergencias.dart';
+import 'package:avalon_app/features/shared/functions/utils_functions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -111,14 +112,17 @@ class HomePageView extends StatelessWidget {
       ),
       floatingActionButton: BlocBuilder<NavigationCubit, int>(
         builder: (context, state) {
-          if (state != 1) {
-            return Container();
-          }
           return FloatingActionButton(
             mini: true,
-            onPressed: () {
-              context.goNamed(PAGES.crearCita.pageName);
-            },
+            onPressed: state == 1
+                ? () {
+                    context.goNamed(PAGES.crearCita.pageName);
+                  }
+                : () {
+                    UtilsFunctionsViews.showFlushBar(
+                        message: apptexts.appOptions.deshabilitadoTemporalemnte,
+                        isError: true);
+                  },
             child: const Icon(Icons.add),
           );
         },

@@ -68,5 +68,6 @@
         "passwordConfirm": "Password confirmation is required",
         "passwordChanged": "Password changed successfully",
         "passwordNotMatch": "Passwords do not match"
-    }
+    },
+    "deshabilitadoTemporalemnte": "Temporarily disabled"
 }

@@ -1,12 +1,14 @@
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/features/citas/presentation/views/cita_detalle/cita_detalle_page.dart';
 
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../shared/widgets/wid_drawer.dart';
 import '../bloc/casos/casos_bloc.dart';
@@ -41,7 +43,9 @@ class CasosPageView extends StatelessWidget {
         elevation: 6,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.goNamed(PAGES.crearCaso.pageName);
+        },
         child: const Icon(Icons.add),
       ),
       drawer: DrawerCustom(indexInitialName: PAGES.casos.pageName),

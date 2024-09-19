@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 552 (276 per locale)
+/// Strings: 562 (281 per locale)
 ///
-/// Built on 2024-09-19 at 07:30 UTC
+/// Built on 2024-09-19 at 14:11 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -227,6 +227,7 @@ class _TranslationsAppOptionsEs {
 	String get comentSuccess => 'Comentario enviado con éxito';
 	String get comentEmpty => 'El comentario no puede estar vacío';
 	late final _TranslationsAppOptionsValidatorsEs validators = _TranslationsAppOptionsValidatorsEs._(_root);
+	String get deshabilitadoTemporalemnte => 'Temporalmente deshabilitado';
 }
 
 // Path: avalonInfo
@@ -274,6 +275,14 @@ class _TranslationsCasosPageEs {
 	String chooseClientCaso({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 		one: 'Elegir cliente',
 		other: 'Elegir clientes',
+	);
+	String casoCreado({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Caso creado',
+		other: 'Casos creados',
+	);
+	String casoErrorCreate({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Error creating case',
+		other: 'Error creating cases',
 	);
 }
 
@@ -801,6 +810,7 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override String get comentSuccess => 'Comment sent successfully';
 	@override String get comentEmpty => 'Comment cannot be empty';
 	@override late final _TranslationsAppOptionsValidatorsEn validators = _TranslationsAppOptionsValidatorsEn._(_root);
+	@override String get deshabilitadoTemporalemnte => 'Temporarily disabled';
 }
 
 // Path: avalonInfo
@@ -848,6 +858,14 @@ class _TranslationsCasosPageEn implements _TranslationsCasosPageEs {
 	@override String chooseClientCaso({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'Choose client',
 		other: 'Choose client',
+	);
+	@override String casoCreado({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Case created',
+		other: 'Cases created',
+	);
+	@override String casoErrorCreate({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Error creating case',
+		other: 'Error creating cases',
 	);
 }
 
@@ -1346,6 +1364,7 @@ extension on Translations {
 			case 'appOptions.validators.passwordConfirm': return 'La confirmación de la contraseña es requerida';
 			case 'appOptions.validators.passwordChanged': return 'Contraseña cambiada con éxito';
 			case 'appOptions.validators.passwordNotMatch': return 'Las contraseñas no coinciden';
+			case 'appOptions.deshabilitadoTemporalemnte': return 'Temporalmente deshabilitado';
 			case 'avalonInfo.contactUs': return 'Contáctenos';
 			case 'avalonInfo.aboutUs': return 'Sobre Nosotros';
 			case 'avalonInfo.aboutDescription': return 'AVALON PLUS es una empresa líder en el conserjería médica integral internacional, fundada en Texas, formada por profesionales con más de 25 años de experiencia en las áreas de administración de cuentas hospitalarias, servicios médicos y seguros internacionales.\nEl Know-How de nuestro equipo de profesionales nos permite comprender las necesidades de nuestros clientes.';
@@ -1378,6 +1397,14 @@ extension on Translations {
 			case 'casosPage.chooseClientCaso': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Elegir cliente',
 				other: 'Elegir clientes',
+			);
+			case 'casosPage.casoCreado': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Caso creado',
+				other: 'Casos creados',
+			);
+			case 'casosPage.casoErrorCreate': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Error creating case',
+				other: 'Error creating cases',
 			);
 			case 'centrosMedicos.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Centro Médico',
@@ -1702,6 +1729,7 @@ extension on _TranslationsEn {
 			case 'appOptions.validators.passwordConfirm': return 'Password confirmation is required';
 			case 'appOptions.validators.passwordChanged': return 'Password changed successfully';
 			case 'appOptions.validators.passwordNotMatch': return 'Passwords do not match';
+			case 'appOptions.deshabilitadoTemporalemnte': return 'Temporarily disabled';
 			case 'avalonInfo.contactUs': return 'Contact Us';
 			case 'avalonInfo.aboutUs': return 'About Us';
 			case 'avalonInfo.aboutDescription': return 'AVALON PLUS is a leading international comprehensive medical concierge company, founded in Texas, made up of professionals with more than 25 years of experience in the areas of hospital account management, medical services and international insurance.\nThe Know-How of our team of professionals allows us to understand the needs of our clients.';
@@ -1734,6 +1762,14 @@ extension on _TranslationsEn {
 			case 'casosPage.chooseClientCaso': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Choose client',
 				other: 'Choose client',
+			);
+			case 'casosPage.casoCreado': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Case created',
+				other: 'Cases created',
+			);
+			case 'casosPage.casoErrorCreate': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Error creating case',
+				other: 'Error creating cases',
 			);
 			case 'centrosMedicos.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Medical Center',

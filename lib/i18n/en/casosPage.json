@@ -22,5 +22,13 @@
     "chooseClientCaso": {
         "one": "Choose client",
         "other": "Choose client"
+    },
+    "casoCreado": {
+        "one": "Case created",
+        "other": "Cases created"
+    },
+    "casoErrorCreate": {
+        "one": "Error creating case",
+        "other": "Error creating cases"
     }
 }
