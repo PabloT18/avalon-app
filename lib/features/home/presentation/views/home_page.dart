@@ -114,15 +114,24 @@ class HomePageView extends StatelessWidget {
         builder: (context, state) {
           return FloatingActionButton(
             mini: true,
-            onPressed: state == 1
-                ? () {
-                    context.goNamed(PAGES.crearCita.pageName);
-                  }
-                : () {
-                    UtilsFunctionsViews.showFlushBar(
-                        message: apptexts.appOptions.deshabilitadoTemporalemnte,
-                        isError: true);
-                  },
+            // onPressed: state == 1
+            //     ? () {
+            //         context.goNamed(PAGES.crearCita.pageName);
+            //       }
+            //     : () {
+            //         UtilsFunctionsViews.showFlushBar(
+            //                 message:
+            //                     apptexts.appOptions.deshabilitadoTemporalemnte,
+            //                 isError: true)
+            //             .show(context);
+            //       },
+
+            onPressed: () {
+              UtilsFunctionsViews.showFlushBar(
+                      message: apptexts.appOptions.deshabilitadoTemporalemnte,
+                      isError: true)
+                  .show(context);
+            },
             child: const Icon(Icons.add),
           );
         },
