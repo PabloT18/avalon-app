@@ -61,6 +61,10 @@ class ReclamacionesPanelView extends StatelessWidget {
             onRefresh: () async {
               reclamacionesBloc.add(const GetReclamaciones());
             },
+            enablePullDown: true,
+            enablePullUp: true,
+            onLoading: () =>
+                reclamacionesBloc.add(const GetReclamacionesNextPage()),
             refreshController: reclamacionesBloc.refreshController,
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(AppLayoutConst.paddingL),

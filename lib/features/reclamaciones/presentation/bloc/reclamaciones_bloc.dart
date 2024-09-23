@@ -7,14 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_models/shared_models.dart';
 
-import '../../data/models/reclamaciones_response.dart';
-
 part 'reclamaciones_event.dart';
 part 'reclamaciones_state.dart';
 
 class ReclamacionesBloc extends Bloc<ReclamacionesEvent, ReclamacionesState> {
   ReclamacionesBloc(this._user) : super(ReclamacionesInitial()) {
     on<GetReclamaciones>(_onGetReclamaciones);
+    on<GetReclamacionesNextPage>(_onGetReclamacionesNextPage);
     refreshController = RefreshController(initialRefresh: false);
 
     reclamacioesRepository = ReclamacionesRepositoryImpl();
@@ -38,6 +37,7 @@ class ReclamacionesBloc extends Bloc<ReclamacionesEvent, ReclamacionesState> {
   FutureOr<void> _onGetReclamaciones(
       GetReclamaciones event, Emitter<ReclamacionesState> emit) async {
     emit(ReclamacionesInitial());
+    _pageCitas = 0;
 
     refreshController
       ..loadFailed()
@@ -53,6 +53,41 @@ class ReclamacionesBloc extends Bloc<ReclamacionesEvent, ReclamacionesState> {
       } else {
         emit(ReclamacionesLoaded(reclamaciones));
       }
+    });
+  }
+
+  FutureOr<void> _onGetReclamacionesNextPage(
+      GetReclamacionesNextPage event, Emitter<ReclamacionesState> emit) async {
+    // emit(ReclamacionesInitial());
+
+    if (state is! ReclamacionesLoaded) return;
+
+    List<ReclamacionModel> listadoNew = [];
+    listadoNew.addAll((state as ReclamacionesLoaded).recalmaciones);
+
+    refreshController.requestLoading();
+
+    final reclamaciones = await reclamacioesRepository.getReclamaciones(
+      _user,
+      page: _pageCitas + 1,
+    );
+
+    reclamaciones.fold((l) {
+      if (state is ReclamacionesLoaded) {
+        refreshController.loadFailed();
+        return;
+      } else {
+        refreshController.loadFailed();
+      }
+    }, (reclamaciones) {
+      _pageCitas = _pageCitas + 1;
+      if (reclamaciones.isNotEmpty) {
+        listadoNew.addAll(reclamaciones);
+        refreshController.loadComplete();
+      } else {
+        refreshController.loadNoData();
+      }
+      emit((state as ReclamacionesLoaded).copyWith(recalmaciones: listadoNew));
     });
   }
 }

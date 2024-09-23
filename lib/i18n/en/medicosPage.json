@@ -3,5 +3,19 @@
         "one": "Doctor",
         "other": "Doctors"
     },
-    "noData": "No doctors found"
+    "noData": "No doctors found",
+    "medico": "Doctor",
+    "medicoName": "Name",
+    "medicoPhone": "Phone",
+    "medicoEmail": "Email",
+    "medicoAddress": "Address",
+    "medicoAddressDos": "Address 2",
+    "medicoAddressMain": "Street Name",
+    "medicoAddressSecondary": "Apartment, Floor, Building (optional)",
+    "medicoCity": "City",
+    "medicoState": "State",
+    "medicoZipCode": "Zip Code",
+    "medicoCountry": "Country",
+    "medicoSpecialty": "Specialty",
+    "medicoSpecialtyDetail": "Specialty Description"
 }

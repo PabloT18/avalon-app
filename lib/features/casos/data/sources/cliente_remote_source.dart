@@ -2,8 +2,6 @@ import 'package:avalon_app/core/config/remote/app_remote_config.dart';
 
 import 'package:shared_models/shared_models.dart';
 
-import '../models/cliente_poliza_service_sresponse.dart';
-
 class ClienteRemoteSource {
   Future<List<UsrCliente>> getClientes(User user,
       {required int page, String? search, bool? update = false}) async {
@@ -65,6 +63,45 @@ class ClienteRemoteSource {
         final clientePolizas = clientePolizasJson
             .map((json) => ClientePolizaResponse.fromJson(json))
             .toList();
+
+        return clientePolizas;
+        // final responseService =
+        //     ClientePolizaResponseService.fromJson(response.data);
+        // return responseService.clientePolizas ?? [];
+      } else {
+        throw Exception('Error fetching policies');
+      }
+    } catch (e) {
+      throw Exception('Error fetching policies for client: $e');
+    }
+  }
+
+  Future<List<User>> getFamiliaresByPlozizaClienteId(User user, int polizaId,
+      {required int page, String? search, bool? update = false}) async {
+    String url;
+    if (search == null) {
+      url =
+          '/clientesPolizas/$polizaId/cargasFamiliares?page=$page&size=100&sortField=createdDate&sortOrder=desc';
+    } else {
+      url =
+          '/clientesPolizas/$polizaId/cargasFamiliares?page=$page&size=100&busqueda=$search&sortField=createdDate&sortOrder=desc';
+    }
+    try {
+      final response = await APPRemoteConfig.httpGet(
+        url: url,
+        exception: Exception('Error fetching data'),
+        token: user.token!,
+      );
+
+      if (response.statusCode == 200) {
+        final List<dynamic> clientePolizasJson = response.data["data"];
+        if (clientePolizasJson.isEmpty) {
+          return [];
+        }
+
+        // Mapear directamente la lista a objetos ClientePolizaResponse
+        final clientePolizas =
+            clientePolizasJson.map((json) => User.fromJson(json)).toList();
 
         return clientePolizas;
         // final responseService =

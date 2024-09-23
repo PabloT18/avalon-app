@@ -21,8 +21,7 @@ class ReclamacionNuevaState extends Equatable {
   final bool waitForCreateCase;
 
   final String? tipoAdmSeleccionado;
-
-  final ReclamacionModel? reclamacionCreada;
+  final bool? reclamacionCreada;
 
   String get tipoAdm => tipoAdmSeleccionado ?? '';
 
@@ -33,7 +32,7 @@ class ReclamacionNuevaState extends Equatable {
     bool? isLoading,
     bool? waitForCreateCase,
     String? tipoAdmSeleccionado,
-    ReclamacionModel? reclamacionCreada,
+    bool? reclamacionCreada,
   }) {
     return ReclamacionNuevaState(
       casos: casos ?? this.casos,

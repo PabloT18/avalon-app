@@ -7,9 +7,7 @@ import 'package:avalon_app/core/error/failures/failures.dart';
 import 'package:avalon_app/features/casos/data/repository/casos_repository_impl.dart';
 import 'package:avalon_app/features/casos/domain/models/caso_entity.dart';
 import 'package:avalon_app/features/casos/domain/repository/casos_repository.dart';
-import 'package:avalon_app/features/citas/data/repository/citas_repository_impl.dart';
-import 'package:avalon_app/features/citas/domain/repository/citas_repository.dart';
-import 'package:avalon_app/features/emergencias/data/models/emergencias_response.dart';
+
 import 'package:avalon_app/features/emergencias/emergencias.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 

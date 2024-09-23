@@ -18,10 +18,10 @@ class EmergenciasRemoteSource {
 
     if (search == null) {
       url =
-          '/emergencias?casoId=$casoId&page=$page&size=5&sortField=createdDate&sortOrder=desc';
+          '/emergencias?casoId=$casoId&page=$page&size=50&sortField=createdDate&sortOrder=desc';
     } else {
       url =
-          '/emergencias?casoId=$casoId&page=$page&size=5&busqueda=$search&sortField=createdDate&sortOrder=desc';
+          '/emergencias?casoId=$casoId&page=$page&size=50&busqueda=$search&sortField=createdDate&sortOrder=desc';
     }
 
     try {
@@ -51,10 +51,10 @@ class EmergenciasRemoteSource {
 
     if (search == null) {
       url =
-          '/emergencias?&page=$page&size=5&sortField=createdDate&sortOrder=desc';
+          '/emergencias?&page=$page&size=50&sortField=createdDate&sortOrder=desc';
     } else {
       url =
-          '/emergencias?&page=$page&size=5&busqueda=$search&sortField=createdDate&sortOrder=desc';
+          '/emergencias?&page=$page&size=50&busqueda=$search&sortField=createdDate&sortOrder=desc';
     }
 
     try {

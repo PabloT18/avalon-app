@@ -1,3 +1,5 @@
+import 'package:avalon_app/app/presentation/bloc/creationEntities/creation_cubit_cubit.dart';
+import 'package:avalon_app/features/shared/functions/utils_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,6 +56,15 @@ class CrearEmergenciaView extends StatelessWidget {
         listener: (context, state) {
           if (state.waitForCreateCase) {
             showAlertCreateDialog(context, reclamacionNuevaBloc);
+          }
+          if (state.reclamacionCreada != null && !state.reclamacionCreada!) {
+            UtilsFunctionsViews.showFlushBar(
+                    message: apptexts.reclamacionesPage.reclamacionCreadaError)
+                .show(context);
+          }
+          if (state.reclamacionCreada != null && state.reclamacionCreada!) {
+            context.read<CreationCubit>().itemCreated(ItemType.reclamaciones);
+            Navigator.of(context).pop();
           }
         },
         child: BlocBuilder<ReclamacionNuevaBloc, ReclamacionNuevaState>(

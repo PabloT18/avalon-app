@@ -8,6 +8,7 @@ class CreationCubit extends Cubit<CreationState> {
 
   void itemCreated(ItemType itemType) {
     emit(ItemCreated(itemType));
+    reset();
   }
 
   void reset() {

@@ -13,6 +13,7 @@
     "placeOfResidence": "Place of Residence",
     "completeInformation": "Please complete your personal information",
     "address": "Address",
+    "addressDos": "Address 2",
     "addressMain": "Street Name",
     "addressSecondary": "Apartment, Floor, Building (optional)",
     "city": "City",

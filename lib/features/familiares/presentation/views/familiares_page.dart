@@ -1,6 +1,11 @@
+import 'package:avalon_app/app/data/sources/local/enviroment.dart';
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/features/casos/data/sources/cliente_remote_source.dart';
+import 'package:avalon_app/features/familiares/presentation/bloc/bloc/familiares_bloc.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -8,287 +13,248 @@ import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:shared_models/shared_models.dart';
 
-class FamiliaresPage extends StatefulWidget {
-  const FamiliaresPage({super.key});
-
-  @override
-  State<FamiliaresPage> createState() => _FamiliaresPageState();
-}
-
-class _FamiliaresPageState extends State<FamiliaresPage> {
-  Future<List<dynamic>>? _futurePolizas;
-  Future<List<dynamic>>? _futureFamiliares;
-  dynamic _selectedPoliza;
-  late String id;
-
-  @override
-  void initState() {
-    final user = context.read<AppBloc>().state.user;
-    id = user.id!.toString();
-    super.initState();
-    _futurePolizas = fetchPolizas();
-  }
-
-  Future<List<dynamic>> fetchPolizas() async {
-    String url = 'http://149.56.110.32:8086/clientes/$id/clientesPolizas';
-    const String token =
-        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhdmFsb24iLCJpYXQiOjE3MTYyMTExNzgsImV4cCI6MTc0Nzc0NzE3OH0.rLk9oE1p0PJUGv8XZKgPNQJN0aDNuz0Gkr-IsNfGomzg1bv9-PTb40AIxCQJg2XXnMKSKfBUI-5bVI82pmBsWw';
-
-    final dio = Dio();
-    try {
-      final response = await dio.get(
-        url,
-        options: Options(
-          headers: {
-            'Authorization': token,
-          },
-        ),
-      );
-      return response.data;
-    } catch (e) {
-      print('Error fetching data: $e');
-      throw Exception('Error fetching data');
-    }
-  }
-
-  Future<List<dynamic>> fetchFamiliares(int polizaId) async {
-    final String url =
-        'http://149.56.110.32:8086/clientesPolizas/$polizaId/cargasFamiliares';
-    const String token =
-        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhdmFsb24iLCJpYXQiOjE3MTYyMTExNzgsImV4cCI6MTc0Nzc0NzE3OH0.rLk9oE1p0PJUGv8XZKgPNQJN0aDNuz0Gkr-IsNfGomzg1bv9-PTb40AIxCQJg2XXnMKSKfBUI-5bVI82pmBsWw';
-
-    final dio = Dio();
-    try {
-      final response = await dio.get(
-        url,
-        options: Options(
-          headers: {
-            'Authorization': token,
-          },
-        ),
-      );
-      return response.data;
-    } catch (e) {
-      print('Error fetching data: $e');
-      throw Exception('Error fetching data');
-    }
-  }
-
-  void _selectPoliza(dynamic poliza) {
-    setState(() {
-      _selectedPoliza = poliza;
-      _futureFamiliares = fetchFamiliares(poliza['id']);
-    });
-  }
+class FamiliaresPage extends StatelessWidget {
+  const FamiliaresPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final refreshController = RefreshController(initialRefresh: false);
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Familiares'),
-        elevation: 6,
-      ),
-      drawer: DrawerCustom(indexInitialName: PAGES.familiares.pageName),
-      body: FutureBuilder<List<dynamic>>(
-        future: _futurePolizas,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  _futurePolizas = fetchPolizas();
-                });
-              },
-              child: const Center(
-                child: Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text('Problemas de conexión. Toca para reintentar'),
-                  ),
-                ),
-              ),
-            );
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return GestureDetector(
-              onTap: () {
-                setState(() {
-                  _futurePolizas = fetchPolizas();
-                });
-              },
-              child: const Center(
-                child: Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child:
-                        Text('No se encontraron pólizas. Toca para reintentar'),
-                  ),
-                ),
-              ),
-            );
-          } else {
-            final polizas = snapshot.data!;
-            return SmartRefrehsCustom(
-              key: const Key('__noticias_list_key__'),
-              onRefresh: () async {
-                await Future.delayed(const Duration(seconds: 1));
-                setState(() {
-                  _futurePolizas = fetchPolizas();
-                  _selectedPoliza = null;
-                  _futureFamiliares = null;
-                });
-                refreshController
-                  ..refreshCompleted()
-                  ..loadComplete();
-              },
-              refreshController: refreshController,
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 10)
-                    .copyWith(top: 10),
-                children: [
-                  ...polizas.map((poliza) {
-                    return Card(
+    return BlocProvider(
+        create: (context) => FamiliaresBloc(
+              user,
+            ),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(apptexts.familiaresPage.title(n: 1)),
+            elevation: 6,
+          ),
+          body: FamiliaresBody(
+            user: user,
+          ),
+        ));
+  }
+}
+
+class FamiliaresBody extends StatelessWidget {
+  const FamiliaresBody({
+    super.key,
+    required this.user,
+  });
+
+  final User user;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<FamiliaresBloc, FamiliaresState>(
+      builder: (context, state) {
+        return SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildClienteDropdown(context, user),
+              const SizedBox(height: 20),
+              _buildPolizaDropdown(context, user),
+              const SizedBox(height: 20),
+
+              if (state.familiares != null && state.familiares!.isEmpty)
+                Text(apptexts.familiaresPage.noFamily),
+              if (state.familiares != null && state.familiares!.isNotEmpty)
+                ...state.familiares!.map((familiar) => Card(
                       clipBehavior: Clip.hardEdge,
-                      child: InkWell(
-                        onTap: () {
-                          _selectPoliza(poliza);
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ListTile(
-                              title: Text(poliza['poliza']['nombre']),
-                              subtitle: Text(
-                                'Aseguradora: ${poliza['poliza']['aseguradora']['nombre']}',
-                              ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ListTile(
+                            title: Text(familiar.fullName),
+                            // subtitle: Text(
+                            //    familiar.par),
+                          ),
+                          // if (familiar['urlImagen'] != null)
+                          //   Image.network(
+                          //     familiar['urlImagen'],
+                          //     fit: BoxFit.cover,
+                          //   ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(familiar.correoElectronico ?? ' - '),
+                                Text(familiar.correoElectronico ?? ' - '),
+                              ],
                             ),
-                            if (poliza['poliza']['aseguradora']['urlImagen'] !=
-                                null)
-                              Image.network(
-                                poliza['poliza']['aseguradora']['urlImagen'],
-                                fit: BoxFit.cover,
-                              ),
-                          ],
+                          ),
+                        ],
+                      ),
+                    ))
+
+              // _buildSubmitButton(context),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildClienteDropdown(BuildContext context, User user) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            user.isClient
+                ? apptexts.appOptions.cliente
+                : apptexts.casosPage.chooseClientCaso(n: 2),
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: AppLayoutConst.spaceM,
+          ),
+          BlocBuilder<FamiliaresBloc, FamiliaresState>(
+            builder: (context, state) {
+              return DropdownButtonFormField<UsrCliente>(
+                decoration: InputDecoration(
+                  labelText: apptexts.appOptions.cliente,
+                  isDense: true,
+                ),
+                menuMaxHeight: 500,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                ),
+                items: state.clientes
+                    .map((cliente) => DropdownMenuItem(
+                          value: cliente,
+                          // child: Text(poliza.nombrePoliza ?? '-'),
+                          child: Text(
+                            (cliente.fullName),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (cliente) {
+                  // if (cliente != null && cliente != state.selectedCliente) {
+                  if (cliente != null) {
+                    context
+                        .read<FamiliaresBloc>()
+                        .add(SelectClienteEvent(cliente, cliente.id!));
+                  }
+                },
+                selectedItemBuilder: (BuildContext context) {
+                  // Aquí se define cómo mostrar el elemento seleccionado
+                  return state.clientes.map<Widget>((UsrCliente cliente) {
+                    return SizedBox(
+                      // width: MediaQuery.of(context).size.width *
+                      //     (fromAlert ? 0.45 : 0.75),
+                      child: Text(
+                        cliente.fullName,
+                        overflow:
+                            TextOverflow.ellipsis, // Evita el desbordamiento
+                        maxLines: 1, // Asegurarse que solo se muestre una línea
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     );
-                  }),
-                  if (_selectedPoliza != null) ...[
-                    const SizedBox(height: 20),
-                    const Padding(
-                      padding: EdgeInsets.all(10.0),
+                  }).toList();
+                },
+                value: state.selectedCliente,
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPolizaDropdown(BuildContext context, User user) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            apptexts.segurosPage.polizaSeguros(n: 2),
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: AppLayoutConst.spaceM,
+          ),
+          BlocBuilder<FamiliaresBloc, FamiliaresState>(
+            buildWhen: (previous, current) =>
+                previous.polizas != current.polizas,
+            builder: (context, state) {
+              // if (state.isLoadingPolizas) {
+              //   return const CircularProgressIndicator();
+              // }
+              return DropdownButtonFormField<ClientePoliza>(
+                decoration: InputDecoration(
+                  labelText: apptexts.segurosPage.polizaSeguros(n: 1),
+                  isDense: true,
+                ),
+                menuMaxHeight: 500,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                ),
+                items: state.polizas
+                    .map((poliza) => DropdownMenuItem(
+                          value: poliza,
+                          // child: Text(poliza.nombrePoliza ?? '-'),
+                          child: Text(
+                            (poliza.nombrePoliza),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (poliza) {
+                  if (poliza != null) {
+                    context
+                        .read<FamiliaresBloc>()
+                        .add(SelectPolizaEvent(poliza));
+                  }
+                },
+                selectedItemBuilder: (BuildContext context) {
+                  // Aquí se define cómo mostrar el elemento seleccionado
+                  return state.polizas.map<Widget>((ClientePoliza poliza) {
+                    return SizedBox(
                       child: Text(
-                        'Familiares:',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                        poliza.nombrePoliza,
+                        overflow:
+                            TextOverflow.ellipsis, // Evita el desbordamiento
+                        maxLines: 1, // Asegurarse que solo se muestre una línea
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
-                    ),
-                    FutureBuilder<List<dynamic>>(
-                      future: _futureFamiliares,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        } else if (snapshot.hasError) {
-                          return GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _futureFamiliares =
-                                    fetchFamiliares(_selectedPoliza['id']);
-                              });
-                            },
-                            child: const Center(
-                              child: Card(
-                                child: Padding(
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Text(
-                                      'Problemas de conexión. Toca para reintentar'),
-                                ),
-                              ),
-                            ),
-                          );
-                        } else if (!snapshot.hasData ||
-                            snapshot.data!.isEmpty) {
-                          return const Center(
-                            child: Card(
-                              child: Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: Text('No se encontraron familiares.'),
-                              ),
-                            ),
-                          );
-                        } else {
-                          final familiares = snapshot.data!;
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Column(
-                              children: familiares.map<Widget>((familiar) {
-                                return Card(
-                                  clipBehavior: Clip.hardEdge,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      ListTile(
-                                        title: Text(
-                                            '${familiar['nombres']} ${familiar['apellidos']}'),
-                                        subtitle: Text(
-                                            'Parentesco: ${familiar['parentesco']}'),
-                                      ),
-                                      if (familiar['urlImagen'] != null)
-                                        Image.network(
-                                          familiar['urlImagen'],
-                                          fit: BoxFit.cover,
-                                        ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                                'Correo: ${familiar['correoElectronico']}'),
-                                            Text(
-                                                'Teléfono: ${familiar['numeroTelefono']}'),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                ],
-              ),
-            );
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _selectedPoliza != null
-            ? () {
-                if (_selectedPoliza != null) {
-                  // context.go('/addFamiliar', extra: _selectedPoliza['id']);
-                  context.pushNamed(PAGES.addFamiliar.pageName,
-                      extra: _selectedPoliza['id']);
-                }
-              }
-            : null,
-        elevation: _selectedPoliza != null ? null : 0,
-        child: const Icon(Icons.add),
+                    );
+                  }).toList();
+                },
+                value: state.selectedPoliza,
+              );
+            },
+          ),
+        ],
       ),
     );
   }
@@ -297,7 +263,10 @@ class _FamiliaresPageState extends State<FamiliaresPage> {
 class AddFamiliarPage extends StatefulWidget {
   final int polizaId;
 
-  const AddFamiliarPage({super.key, required this.polizaId});
+  const AddFamiliarPage({
+    super.key,
+    required this.polizaId,
+  });
 
   @override
   State<AddFamiliarPage> createState() => _AddFamiliarPageState();
@@ -314,8 +283,7 @@ class _AddFamiliarPageState extends State<AddFamiliarPage> {
   Future<void> _addFamiliar() async {
     const String url =
         'http://149.56.110.32:8086/clientesPolizas/agregarFamiliar';
-    const String token =
-        'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhdmFsb24iLCJpYXQiOjE3MTYyMTExNzgsImV4cCI6MTc0Nzc0NzE3OH0.rLk9oE1p0PJUGv8XZKgPNQJN0aDNuz0Gkr-IsNfGomzg1bv9-PTb40AIxCQJg2XXnMKSKfBUI-5bVI82pmBsWw';
+    const String token = 'widget.user.token!';
 
     final dio = Dio();
     try {

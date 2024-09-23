@@ -10,3 +10,7 @@ sealed class ReclamacionesEvent extends Equatable {
 class GetReclamaciones extends ReclamacionesEvent {
   const GetReclamaciones();
 }
+
+class GetReclamacionesNextPage extends ReclamacionesEvent {
+  const GetReclamacionesNextPage();
+}

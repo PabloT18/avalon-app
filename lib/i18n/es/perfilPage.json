@@ -13,6 +13,7 @@
     "placeOfResidence": "Lugar de Residencia",
     "completeInformation": "Por favor, completa tu información personal",
     "address": "Dirección",
+    "addressDos": "Dirección 2",
     "addressMain": "Nombre de la calle",
     "addressSecondary": "Departamento, piso, unidad, edificion (opcional)",
     "city": "Ciudad",

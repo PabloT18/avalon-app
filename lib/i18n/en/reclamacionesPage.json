@@ -43,5 +43,6 @@
     "reclamacionEstado": "Claim Status",
     "historialEmpty": "No comment history yet",
     "historialError": "Error loading comment history",
-    "reclamacionCreada": "Claim created"
+    "reclamacionCreada": "Claim created",
+    "reclamacionCreadaError": "Error creating claim"
 }

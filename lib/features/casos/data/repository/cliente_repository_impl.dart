@@ -47,4 +47,24 @@ class ClientesRepositoryImpl extends ClientesRepository {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, List<User>>> getFamiliares(User user, int polizaId,
+      {required int page, String? search, bool? update = false}) async {
+    try {
+      final familiares =
+          await clienteRemoteSource.getFamiliaresByPlozizaClienteId(
+        user,
+        polizaId,
+        page: page,
+        search: search,
+        update: update,
+      );
+      return Right(familiares);
+    } on InternetAccessException catch (e) {
+      return Left(InternetFailure(message: e.message));
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
 }

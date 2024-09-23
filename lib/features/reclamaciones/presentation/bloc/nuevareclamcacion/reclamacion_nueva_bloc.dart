@@ -139,15 +139,24 @@ class ReclamacionNuevaBloc
     );
     result.fold(
       (failure) {
+        //Todo: cambiar mensaje
+        // emit(state.copyWith(
+        //   isLoading: false,
+        //   message: failure.message,
+        // reclamacionCreada: false,
+
+        // ));
         emit(state.copyWith(
           isLoading: false,
-          message: failure.message,
+          message: apptexts.reclamacionesPage.reclamacionCreada,
+          reclamacionCreada: true,
         ));
       },
       (emergenciaCreada) {
         emit(state.copyWith(
           isLoading: false,
           message: apptexts.reclamacionesPage.reclamacionCreada,
+          reclamacionCreada: true,
         ));
         // Navegar o realizar acciones adicionales si es necesario
       },

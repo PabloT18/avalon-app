@@ -10,4 +10,7 @@ abstract class ClientesRepository {
   Future<Either<Failure, List<ClientePoliza>>> getClientesPolizas(
       User user, int clienteId,
       {required int page, String? search, bool? update = false});
+
+  Future<Either<Failure, List<User>>> getFamiliares(User user, int polizaId,
+      {required int page, String? search, bool? update = false});
 }

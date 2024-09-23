@@ -77,13 +77,18 @@ class ReclamacionCard extends StatelessWidget {
                     ),
                     TitleDescripcion(
                       isSubdescription: true,
-                      title: '${apptexts.reclamacionesPage.title(n: 1)} Id',
-                      value: reclamacion.codigo!,
+                      title: apptexts.reclamacionesPage.estado,
+                      value: getStateStrinByState(reclamacion.estado ?? ''),
                     ),
                     TitleDescripcion(
                       isSubdescription: true,
-                      title: apptexts.reclamacionesPage.estado,
-                      value: getStateStrinByState(reclamacion.estado ?? ''),
+                      title: '${apptexts.casosPage.title(n: 1)} Id',
+                      value: reclamacion.caso?.codigo ?? '',
+                    ),
+                    TitleDescripcion(
+                      isSubdescription: true,
+                      title: '${apptexts.reclamacionesPage.title(n: 1)} Id',
+                      value: reclamacion.codigo!,
                     ),
                   ],
                 ),

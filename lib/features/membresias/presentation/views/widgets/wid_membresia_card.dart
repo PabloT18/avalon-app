@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/core/config/responsive/responsive.dart';
 import 'package:avalon_app/core/config/router/app_routes_assets.dart';

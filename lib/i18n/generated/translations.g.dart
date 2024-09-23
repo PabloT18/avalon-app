@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 576 (288 per locale)
+/// Strings: 610 (305 per locale)
 ///
-/// Built on 2024-09-23 at 03:36 UTC
+/// Built on 2024-09-23 at 05:59 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -425,6 +425,7 @@ class _TranslationsFamiliaresPageEs {
 		one: 'Familiar',
 		other: 'Familiares',
 	);
+	String get noFamily => 'No hay familiares registrados';
 }
 
 // Path: faqsPAge
@@ -452,6 +453,20 @@ class _TranslationsMedicosPageEs {
 		other: 'Médicos',
 	);
 	String get noData => 'No se encontraron médicos';
+	String get medico => 'Médico';
+	String get medicoName => 'Nombre';
+	String get medicoPhone => 'Teléfono';
+	String get medicoEmail => 'Correo Electrónico';
+	String get medicoAddress => 'Dirección';
+	String get medicoAddressDos => 'Dirección 2';
+	String get medicoAddressMain => 'Nombre de la Calle';
+	String get medicoAddressSecondary => 'Apartamento, Piso, Edificio (opcional)';
+	String get medicoCity => 'Ciudad';
+	String get medicoState => 'Estado';
+	String get medicoZipCode => 'Código Postal';
+	String get medicoCountry => 'País';
+	String get medicoSpecialty => 'Especialidad';
+	String get medicoSpecialtyDetail => 'Descripción de la Especialidad';
 }
 
 // Path: membresiasPage
@@ -506,6 +521,7 @@ class _TranslationsPerfilPageEs {
 	String get placeOfResidence => 'Lugar de Residencia';
 	String get completeInformation => 'Por favor, completa tu información personal';
 	String get address => 'Dirección';
+	String get addressDos => 'Dirección 2';
 	String get addressMain => 'Nombre de la calle';
 	String get addressSecondary => 'Departamento, piso, unidad, edificion (opcional)';
 	String get city => 'Ciudad';
@@ -594,6 +610,7 @@ class _TranslationsReclamacionesPageEs {
 	String get historialEmpty => 'No hay un historial de comentarios aún';
 	String get historialError => 'Error al cargar el historial de comentarios';
 	String get reclamacionCreada => 'Reclamación creada';
+	String get reclamacionCreadaError => 'Error al crear la reclamación';
 }
 
 // Path: segurosPage
@@ -1025,6 +1042,7 @@ class _TranslationsFamiliaresPageEn implements _TranslationsFamiliaresPageEs {
 		one: 'Family',
 		other: 'Family',
 	);
+	@override String get noFamily => 'No family members registered';
 }
 
 // Path: faqsPAge
@@ -1052,6 +1070,20 @@ class _TranslationsMedicosPageEn implements _TranslationsMedicosPageEs {
 		other: 'Doctors',
 	);
 	@override String get noData => 'No doctors found';
+	@override String get medico => 'Doctor';
+	@override String get medicoName => 'Name';
+	@override String get medicoPhone => 'Phone';
+	@override String get medicoEmail => 'Email';
+	@override String get medicoAddress => 'Address';
+	@override String get medicoAddressDos => 'Address 2';
+	@override String get medicoAddressMain => 'Street Name';
+	@override String get medicoAddressSecondary => 'Apartment, Floor, Building (optional)';
+	@override String get medicoCity => 'City';
+	@override String get medicoState => 'State';
+	@override String get medicoZipCode => 'Zip Code';
+	@override String get medicoCountry => 'Country';
+	@override String get medicoSpecialty => 'Specialty';
+	@override String get medicoSpecialtyDetail => 'Specialty Description';
 }
 
 // Path: membresiasPage
@@ -1106,6 +1138,7 @@ class _TranslationsPerfilPageEn implements _TranslationsPerfilPageEs {
 	@override String get placeOfResidence => 'Place of Residence';
 	@override String get completeInformation => 'Please complete your personal information';
 	@override String get address => 'Address';
+	@override String get addressDos => 'Address 2';
 	@override String get addressMain => 'Street Name';
 	@override String get addressSecondary => 'Apartment, Floor, Building (optional)';
 	@override String get city => 'City';
@@ -1194,6 +1227,7 @@ class _TranslationsReclamacionesPageEn implements _TranslationsReclamacionesPage
 	@override String get historialEmpty => 'No comment history yet';
 	@override String get historialError => 'Error loading comment history';
 	@override String get reclamacionCreada => 'Claim created';
+	@override String get reclamacionCreadaError => 'Error creating claim';
 }
 
 // Path: segurosPage
@@ -1542,6 +1576,7 @@ extension on Translations {
 				one: 'Familiar',
 				other: 'Familiares',
 			);
+			case 'familiaresPage.noFamily': return 'No hay familiares registrados';
 			case 'faqsPAge.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Pregunta Frecuente',
 				other: 'Preguntas Frecuentes',
@@ -1551,6 +1586,20 @@ extension on Translations {
 				other: 'Médicos',
 			);
 			case 'medicosPage.noData': return 'No se encontraron médicos';
+			case 'medicosPage.medico': return 'Médico';
+			case 'medicosPage.medicoName': return 'Nombre';
+			case 'medicosPage.medicoPhone': return 'Teléfono';
+			case 'medicosPage.medicoEmail': return 'Correo Electrónico';
+			case 'medicosPage.medicoAddress': return 'Dirección';
+			case 'medicosPage.medicoAddressDos': return 'Dirección 2';
+			case 'medicosPage.medicoAddressMain': return 'Nombre de la Calle';
+			case 'medicosPage.medicoAddressSecondary': return 'Apartamento, Piso, Edificio (opcional)';
+			case 'medicosPage.medicoCity': return 'Ciudad';
+			case 'medicosPage.medicoState': return 'Estado';
+			case 'medicosPage.medicoZipCode': return 'Código Postal';
+			case 'medicosPage.medicoCountry': return 'País';
+			case 'medicosPage.medicoSpecialty': return 'Especialidad';
+			case 'medicosPage.medicoSpecialtyDetail': return 'Descripción de la Especialidad';
 			case 'membresiasPage.membresia': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Membresía',
 				other: 'Membresías',
@@ -1578,6 +1627,7 @@ extension on Translations {
 			case 'perfilPage.placeOfResidence': return 'Lugar de Residencia';
 			case 'perfilPage.completeInformation': return 'Por favor, completa tu información personal';
 			case 'perfilPage.address': return 'Dirección';
+			case 'perfilPage.addressDos': return 'Dirección 2';
 			case 'perfilPage.addressMain': return 'Nombre de la calle';
 			case 'perfilPage.addressSecondary': return 'Departamento, piso, unidad, edificion (opcional)';
 			case 'perfilPage.city': return 'Ciudad';
@@ -1652,6 +1702,7 @@ extension on Translations {
 			case 'reclamacionesPage.historialEmpty': return 'No hay un historial de comentarios aún';
 			case 'reclamacionesPage.historialError': return 'Error al cargar el historial de comentarios';
 			case 'reclamacionesPage.reclamacionCreada': return 'Reclamación creada';
+			case 'reclamacionesPage.reclamacionCreadaError': return 'Error al crear la reclamación';
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Seguro',
 				other: 'Seguros',
@@ -1914,6 +1965,7 @@ extension on _TranslationsEn {
 				one: 'Family',
 				other: 'Family',
 			);
+			case 'familiaresPage.noFamily': return 'No family members registered';
 			case 'faqsPAge.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'FAQ',
 				other: 'FAQs',
@@ -1923,6 +1975,20 @@ extension on _TranslationsEn {
 				other: 'Doctors',
 			);
 			case 'medicosPage.noData': return 'No doctors found';
+			case 'medicosPage.medico': return 'Doctor';
+			case 'medicosPage.medicoName': return 'Name';
+			case 'medicosPage.medicoPhone': return 'Phone';
+			case 'medicosPage.medicoEmail': return 'Email';
+			case 'medicosPage.medicoAddress': return 'Address';
+			case 'medicosPage.medicoAddressDos': return 'Address 2';
+			case 'medicosPage.medicoAddressMain': return 'Street Name';
+			case 'medicosPage.medicoAddressSecondary': return 'Apartment, Floor, Building (optional)';
+			case 'medicosPage.medicoCity': return 'City';
+			case 'medicosPage.medicoState': return 'State';
+			case 'medicosPage.medicoZipCode': return 'Zip Code';
+			case 'medicosPage.medicoCountry': return 'Country';
+			case 'medicosPage.medicoSpecialty': return 'Specialty';
+			case 'medicosPage.medicoSpecialtyDetail': return 'Specialty Description';
 			case 'membresiasPage.membresia': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Membership',
 				other: 'Memberships',
@@ -1950,6 +2016,7 @@ extension on _TranslationsEn {
 			case 'perfilPage.placeOfResidence': return 'Place of Residence';
 			case 'perfilPage.completeInformation': return 'Please complete your personal information';
 			case 'perfilPage.address': return 'Address';
+			case 'perfilPage.addressDos': return 'Address 2';
 			case 'perfilPage.addressMain': return 'Street Name';
 			case 'perfilPage.addressSecondary': return 'Apartment, Floor, Building (optional)';
 			case 'perfilPage.city': return 'City';
@@ -2024,6 +2091,7 @@ extension on _TranslationsEn {
 			case 'reclamacionesPage.historialEmpty': return 'No comment history yet';
 			case 'reclamacionesPage.historialError': return 'Error loading comment history';
 			case 'reclamacionesPage.reclamacionCreada': return 'Claim created';
+			case 'reclamacionesPage.reclamacionCreadaError': return 'Error creating claim';
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Insurance Company',
 				other: 'Insurance Company',

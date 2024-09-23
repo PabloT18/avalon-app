@@ -43,5 +43,6 @@
     "reclamacionEstado": "Estado de la reclamación",
     "historialEmpty": "No hay un historial de comentarios aún",
     "historialError": "Error al cargar el historial de comentarios",
-    "reclamacionCreada": "Reclamación creada"
+    "reclamacionCreada": "Reclamación creada",
+    "reclamacionCreadaError": "Error al crear la reclamación"
 }

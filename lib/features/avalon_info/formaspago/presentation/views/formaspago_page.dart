@@ -1,11 +1,14 @@
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 import 'package:avalon_app/core/config/router/app_router.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
 import 'package:flutter/material.dart';
 
 import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../domain/formaspago_domain.dart';
 import '../bloc/bloc/formas_pago_bloc.dart';
@@ -69,9 +72,23 @@ class FormasPagoPageView extends StatelessWidget {
       FormasPagoLoaded() => ListView(
           children: [
             for (final metodoPago in state.metodosPago)
-              ListTile(
-                title: Text(metodoPago.nombre!),
-              ),
+              Card(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: AppColors.secondaryBlue.withOpacity(0.4),
+                    width: 1,
+                  ),
+                  borderRadius:
+                      BorderRadius.circular(AppLayoutConst.cardBorderRadius),
+                ),
+                elevation: 1,
+                child: ListTile(
+                  // dense: true,
+                  leading: const FaIcon(FontAwesomeIcons.wallet),
+                  title: Text(metodoPago.nombre ?? ''),
+                  subtitle: Text(metodoPago.descripcion ?? ''),
+                ),
+              )
           ],
         ),
     };

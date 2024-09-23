@@ -14,7 +14,7 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shared_models/shared_models.dart';

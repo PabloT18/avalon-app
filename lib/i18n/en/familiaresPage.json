@@ -2,5 +2,6 @@
     "title": {
         "one": "Family",
         "other": "Family"
-    }
+    },
+    "noFamily": "No family members registered"
 }
