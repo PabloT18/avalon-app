@@ -229,6 +229,7 @@ class FormNewCita extends StatelessWidget {
             },
             child: Text(apptexts.appOptions.crate),
           ),
+          const SizedBox(height: AppLayoutConst.spaceXL),
         ],
       ),
     );

@@ -7,6 +7,10 @@ class EmergenciaNuevaState extends Equatable {
     this.casoSeleccionado,
     this.isLoading = false,
     this.waitForCreateCase = false,
+    this.paises = const [],
+    this.selectedCountryId,
+    this.estados = const [],
+    this.selectedEstadoId,
   });
   final List<CasoEntity>? casos;
   final String? message;
@@ -15,19 +19,33 @@ class EmergenciaNuevaState extends Equatable {
   final bool? isLoading;
   final bool waitForCreateCase;
 
+  // Nuevos campos para países y estados
+  final List<Pais> paises;
+  final int? selectedCountryId;
+  final List<Estado> estados;
+  final int? selectedEstadoId;
+
   EmergenciaNuevaState copyWith({
     List<CasoEntity>? casos,
     String? message,
     CasoEntity? casoSeleccionado,
     bool? isLoading,
     bool? waitForCreateCase,
+    List<Pais>? paises,
+    int? selectedCountryId,
+    List<Estado>? estados,
+    int? selectedEstadoId,
   }) {
     return EmergenciaNuevaState(
       casos: casos ?? this.casos,
-      message: message,
+      message: message ?? this.message,
       casoSeleccionado: casoSeleccionado ?? this.casoSeleccionado,
-      isLoading: isLoading,
-      waitForCreateCase: waitForCreateCase ?? false,
+      isLoading: isLoading ?? this.isLoading,
+      waitForCreateCase: waitForCreateCase ?? this.waitForCreateCase,
+      paises: paises ?? this.paises,
+      selectedCountryId: selectedCountryId ?? this.selectedCountryId,
+      estados: estados ?? this.estados,
+      selectedEstadoId: selectedEstadoId ?? this.selectedEstadoId,
     );
   }
 
@@ -38,13 +56,9 @@ class EmergenciaNuevaState extends Equatable {
         casoSeleccionado,
         isLoading,
         waitForCreateCase,
+        paises,
+        selectedCountryId,
+        estados,
+        selectedEstadoId,
       ];
 }
-
-// final class CitaNuevaInitial extends CitaNuevaState {}
-
-// final class CitaNuevaLoading extends CitaNuevaState {}
-
-// final class CitaNuevaSuccess extends CitaNuevaState {}
-
-// final class CitaNuevaError extends CitaNuevaState {}

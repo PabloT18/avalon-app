@@ -43,8 +43,8 @@ class Direccion extends Equatable {
         "codigoPostal": codigoPostal,
         "pais": pais?.toJson(),
         "state": estado?.toJson(),
-        "paisId": paisId,
-        "estadoId": estadoId,
+        "paisId": pais?.id,
+        "estadoId": estado?.id,
       };
 
   String get direccionCompleta {

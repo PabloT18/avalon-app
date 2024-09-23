@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:avalon_app/features/casos/data/models/casos_response.dart';
+import 'package:avalon_app/features/user_features.dart';
 import 'package:shared_models/shared_models.dart';
 
 EmergenciaResponse emergenciaResponseFromJson(String str) =>
@@ -50,7 +51,7 @@ class EmergenciaModel {
   final String? estado;
   final String? diagnostico;
   final String? sintomas;
-  final CasoResponse? caso;
+  final CasoEntity? caso;
   final Direccion? direccion;
   final ClientePoliza? clientePoliza;
   final MedicoCentroMedicoAseguradora? medicoCentroMedicoAseguradora;
@@ -118,6 +119,14 @@ class EmergenciaModel {
         "clientePoliza": clientePoliza?.toJson(),
         "medicoCentroMedicoAseguradora":
             medicoCentroMedicoAseguradora?.toJson(),
+      };
+
+  Map<String, dynamic> toJsonCreate() => {
+        "diagnostico": diagnostico,
+        "sintomas": sintomas,
+        "direccion": direccion?.toJson(),
+        "casoId": caso?.id,
+        "clientePolizaId": clientePoliza?.id,
       };
 }
 

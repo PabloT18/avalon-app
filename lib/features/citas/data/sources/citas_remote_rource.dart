@@ -183,24 +183,6 @@ class CitasRemoteSource {
 
     final Map<String, dynamic> requestData = cita.toJsonCreate();
     print(requestData);
-    Map<String, dynamic> comentarioData = {
-      "fechaTentativa": "2024-09-22",
-      "ciudadPreferencia": "Cuenca",
-      "padecimiento": "DESE APP",
-      "informacionAdicional": "DESE APP",
-      "otrosRequisitos": "fsa",
-      "clientePolizaId": 1302,
-      "casoId": 858,
-      "requisitosAdicionales": {
-        "VIAJES": false,
-        "HOSPEDAJE": false,
-        "SER_TRANSPORTE": false,
-        "AMB_TERRESTRE": false,
-        "AMB_AEREA": true,
-        "SILLA_RUEDAS": false,
-        "RECETA_MEDICA": false
-      }
-    };
 
     // Prepare the FormData
     FormData formData = FormData();

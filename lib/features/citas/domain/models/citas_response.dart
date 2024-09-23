@@ -158,8 +158,8 @@ class CitaMedica {
           "${fechaTentativa!.year.toString().padLeft(4, '0')}-${fechaTentativa!.month.toString().padLeft(2, '0')}-${fechaTentativa!.day.toString().padLeft(2, '0')}",
       "ciudadPreferencia": ciudadPreferencia,
       "medicoCentroMedicoAseguradora": medicoCentroMedicoAseguradora?.id,
-      "clientePoliza": clientePoliza?.id,
-      "caso": caso?.id,
+      "clientePolizaId": clientePoliza?.id,
+      "casoId": caso?.id,
       "padecimiento": padecimiento,
       "informacionAdicional": informacionAdicional,
       "otrosRequisitos": otrosRequisitos,
@@ -312,50 +312,6 @@ class Direccion {
         "codigoPostal": codigoPostal,
         "pais": pais?.toJson(),
         "state": state?.toJson(),
-      };
-}
-
-class Pais {
-  final int? id;
-  final String? nombre;
-
-  Pais({
-    this.id,
-    this.nombre,
-  });
-
-  factory Pais.fromJson(Map<String, dynamic> json) => Pais(
-        id: json["id"],
-        nombre: json["nombre"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "nombre": nombre,
-      };
-}
-
-class Estado {
-  final int? id;
-  final String? nombre;
-  final Pais? pais;
-
-  Estado({
-    this.id,
-    this.nombre,
-    this.pais,
-  });
-
-  factory Estado.fromJson(Map<String, dynamic> json) => Estado(
-        id: json["id"],
-        nombre: json["nombre"],
-        pais: json["pais"] == null ? null : Pais.fromJson(json["pais"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "nombre": nombre,
-        "pais": pais?.toJson(),
       };
 }
 

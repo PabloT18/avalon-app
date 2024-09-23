@@ -172,4 +172,60 @@ class EmergenciasRemoteSource {
       throw Exception('Error sending comentario');
     }
   }
+
+  Future<EmergenciaModel> crearEmergencia(
+      User user, EmergenciaModel emergencia, File? image,
+      {required String nombreDocumento}) async {
+    String url = '/emergencias';
+
+    final Map<String, dynamic> requestData = emergencia.toJsonCreate();
+
+    // Prepare the FormData
+    FormData formData = FormData();
+
+    // Add the comentarioCitaMedica part with Content-Type application/json
+    formData.files.add(
+      MapEntry(
+        'emergencia',
+        MultipartFile.fromString(
+          jsonEncode(requestData),
+          contentType: MediaType('application', 'json'),
+        ),
+      ),
+    );
+    // If an image is provided, add it to the form data
+    if (image != null) {
+      String fileName = image.path.split('/').last;
+      formData.files.add(
+        MapEntry(
+          'fotoEmergencia',
+          await MultipartFile.fromFile(
+            image.path,
+            filename: fileName,
+            contentType:
+                MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+          ),
+        ),
+      );
+    }
+
+    try {
+      final response = await APPRemoteConfig.httpPost(
+        url: url,
+        data: formData,
+        token: user.token!,
+      );
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        // Assuming the response is a single CasoEntity in JSON format
+        final casoEntity = EmergenciaModel.fromJson(response.data);
+        return casoEntity;
+      } else {
+        throw Exception('Error al crear el caso');
+      }
+    } catch (e) {
+      print('Error creando caso: $e');
+      throw Exception('Error creando caso');
+    }
+  }
 }

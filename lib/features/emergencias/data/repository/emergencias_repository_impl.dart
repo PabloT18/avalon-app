@@ -90,4 +90,26 @@ class EmergenciasRepositoryImpl implements EmergenciasRepository {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, EmergenciaModel>> createEmergencia(
+      User user, EmergenciaModel emergencia,
+      {File? image, required String nombreDocumento}) async {
+    try {
+      final casosList = await remoteSource.crearEmergencia(
+        user,
+        emergencia,
+        image,
+        nombreDocumento: nombreDocumento,
+      );
+      return Right(casosList);
+    } on InternetAccessException catch (i) {
+      return Left(InternetFailure(message: i.message));
+    } on ServerException catch (s) {
+      return Left(ServerFailure(
+          message: s.message ?? apptexts.appOptions.error_servers));
+    } on Exception {
+      return Left(ServerFailure(message: apptexts.appOptions.error_servers));
+    }
+  }
 }
