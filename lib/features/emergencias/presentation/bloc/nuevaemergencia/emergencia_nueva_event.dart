@@ -49,3 +49,11 @@ class UpdateSelectedEstadoEvent extends EmergenciaNuevaEvent {
   @override
   List<Object?> get props => [estadoId];
 }
+
+class ImageSelected extends EmergenciaNuevaEvent {
+  const ImageSelected();
+}
+
+class RemoveImage extends EmergenciaNuevaEvent {
+  const RemoveImage();
+}

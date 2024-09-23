@@ -15,6 +15,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_models/shared_models.dart';
 
@@ -37,6 +38,9 @@ class EmergenciaNuevaBloc
     on<UpdateSelectedCountryEvent>(_onUpdateSelectedCountry);
     on<UpdateSelectedEstadoEvent>(_onUpdateSelectedEstado);
     on<SubmitEmergenciaEvent>(_onSubmitEmergencia);
+
+    on<ImageSelected>(_onImageSelected);
+    on<RemoveImage>(_onRemoveImage);
     // on<SelectCasoOption>(_onSelectCasoOption);
     // on<GetCitas>(_onGetCitas);
     // on<GetEmergencias>(_onGetEmergencias);
@@ -183,28 +187,53 @@ class EmergenciaNuevaBloc
       ),
       // Otros campos necesarios...
     );
-    final nombreDocumento =
-        event.image != null ? event.image!.path.split('/').last : '';
+    final dateimage =
+        '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}';
+    final nombreDocumento = state.image != null
+        ? '${_user.id}_${dateimage}_${state.image!.path.split('/').last}'
+        : '';
+
     final result = await emergenciasRepo.createEmergencia(
       _user,
       emergencia,
-      image: event.image,
+      image: state.image,
       nombreDocumento: nombreDocumento,
     );
     result.fold(
       (failure) {
+        // emit(state.copyWith(
+        //   isLoading: false,
+        //   message: failure.message,
+        //   citaCreada: false
+        // ));
         emit(state.copyWith(
-          isLoading: false,
-          message: failure.message,
-        ));
+            isLoading: false, message: failure.message, citaCreada: true));
       },
       (emergenciaCreada) {
         emit(state.copyWith(
-          isLoading: false,
-          message: apptexts.emergenciasPage.emergenciaCreada,
-        ));
+            isLoading: false,
+            message: apptexts.emergenciasPage.emergenciaCreada,
+            citaCreada: true));
         // Navegar o realizar acciones adicionales si es necesario
       },
     );
+  }
+
+  FutureOr<void> _onImageSelected(
+      ImageSelected event, Emitter<EmergenciaNuevaState> emit) async {
+    final ImagePicker picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      emit(state.copyWith(image: File(pickedFile.path)));
+    }
+  }
+
+  FutureOr<void> _onRemoveImage(
+      RemoveImage event, Emitter<EmergenciaNuevaState> emit) {
+    emit(state.copyWith(
+      image: null,
+      removeImage: true,
+    ));
   }
 }

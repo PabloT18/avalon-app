@@ -1,4 +1,5 @@
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/app/presentation/bloc/creationEntities/creation_cubit_cubit.dart';
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 
 import 'package:avalon_app/features/casos/presentation/views/widgets/wid_caso_card.dart';
@@ -49,10 +50,15 @@ class CrearCitaView extends StatelessWidget {
           if (state.waitForCreateCase) {
             showAlertCreateDialog(context, cerarCitaBloc);
           }
-          if (state.message != null) {
+
+          if (state.citaCreada != null && !state.citaCreada!) {
             UtilsFunctionsViews.showFlushBar(
-                    message: state.message!, isError: false)
+                    message: apptexts.reclamacionesPage.reclamacionCreadaError)
                 .show(context);
+          }
+          if (state.citaCreada != null && state.citaCreada!) {
+            context.read<CreationCubit>().itemCreated(ItemType.citas);
+            Navigator.of(context).pop();
           }
         },
         child: BlocBuilder<CitaNuevaBloc, CitaNuevaState>(
@@ -194,16 +200,16 @@ class FormNewCita extends StatelessWidget {
             apptexts.citasPage.detailPreferenceCity,
             cerarCitaBloc.detailPreferenceCity,
           ),
-          EditableTextDescription(
-            apptexts.citasPage.detailHospital,
-            cerarCitaBloc.detailHospital,
-            beNull: true,
-          ),
-          EditableTextDescription(
-            apptexts.citasPage.detailPreferenceDoctor,
-            cerarCitaBloc.detailPreferenceDoctor,
-            beNull: true,
-          ),
+          // EditableTextDescription(
+          //   apptexts.citasPage.detailHospital,
+          //   cerarCitaBloc.detailHospital,
+          //   beNull: true,
+          // ),
+          // EditableTextDescription(
+          //   apptexts.citasPage.detailPreferenceDoctor,
+          //   cerarCitaBloc.detailPreferenceDoctor,
+          //   beNull: true,
+          // ),
           EditableTextAreaDescription(
             apptexts.citasPage.detailPadecimeiento,
             cerarCitaBloc.detailPadecimeiento,
@@ -218,6 +224,7 @@ class FormNewCita extends StatelessWidget {
             cerarCitaBloc.detailOthersRequaimentes,
             beNull: true,
           ),
+          const ImageSelccion(),
           ElevatedButton(
             onPressed: () {
               if (cerarCitaBloc.formKey.currentState!.validate()) {
@@ -317,6 +324,97 @@ class EditableRequisitosAdicionales extends StatelessWidget {
         ),
         Text(label),
       ],
+    );
+  }
+}
+
+class ImageSelccion extends StatelessWidget {
+  const ImageSelccion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final image = context.select((CitaNuevaBloc bloc) => bloc.state.image);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(width: double.infinity),
+          Text(
+            apptexts.citasPage.detalleFoto,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: AppLayoutConst.spaceM,
+          ),
+          if (image == null)
+            Card(
+              clipBehavior: Clip.hardEdge,
+              child: InkWell(
+                  onTap: () => context.read<CitaNuevaBloc>().add(
+                        const ImageSelected(),
+                      ),
+                  child: const SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Icon(
+                      Icons.photo,
+                      size: 50,
+                    ),
+                  )),
+            ),
+          if (image != null)
+            Stack(
+              children: [
+                // Imagen seleccionada
+                GestureDetector(
+                  onTap: () {
+                    UtilsFunctionsViews.showFullScreenImage(
+                      image,
+                      context,
+                    ); // Llamamos a la función para mostrar la imagen en un dialogo
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.all(8.0),
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: FileImage(image),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                // Botón de eliminar (X) en la esquina superior derecha
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: GestureDetector(
+                    onTap: () {
+                      context.read<CitaNuevaBloc>().add(const RemoveImage());
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(2.0),
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        size: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+        ],
+      ),
     );
   }
 }

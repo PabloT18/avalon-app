@@ -12,6 +12,7 @@ class ReclamacionNuevaState extends Equatable {
     this.waitForCreateCase = false,
     this.tipoAdmSeleccionado,
     this.reclamacionCreada,
+    this.image,
   });
   final List<CasoEntity>? casos;
   final String? message;
@@ -23,6 +24,8 @@ class ReclamacionNuevaState extends Equatable {
   final String? tipoAdmSeleccionado;
   final bool? reclamacionCreada;
 
+  final File? image;
+
   String get tipoAdm => tipoAdmSeleccionado ?? '';
 
   ReclamacionNuevaState copyWith({
@@ -33,6 +36,8 @@ class ReclamacionNuevaState extends Equatable {
     bool? waitForCreateCase,
     String? tipoAdmSeleccionado,
     bool? reclamacionCreada,
+    File? image,
+    bool removeImage = false,
   }) {
     return ReclamacionNuevaState(
       casos: casos ?? this.casos,
@@ -41,7 +46,8 @@ class ReclamacionNuevaState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
       waitForCreateCase: waitForCreateCase ?? this.waitForCreateCase,
       tipoAdmSeleccionado: tipoAdmSeleccionado ?? this.tipoAdmSeleccionado,
-      reclamacionCreada: reclamacionCreada ?? this.reclamacionCreada,
+      reclamacionCreada: reclamacionCreada,
+      image: removeImage ? null : image ?? this.image,
     );
   }
 
@@ -54,5 +60,6 @@ class ReclamacionNuevaState extends Equatable {
         waitForCreateCase,
         tipoAdmSeleccionado,
         reclamacionCreada,
+        image,
       ];
 }

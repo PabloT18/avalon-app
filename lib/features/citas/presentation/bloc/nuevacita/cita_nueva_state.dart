@@ -8,6 +8,8 @@ class CitaNuevaState extends Equatable {
     this.isLoading = false,
     this.waitForCreateCase = false,
     RequisitosAdicionales? requisitosAdicionales,
+    this.image,
+    this.citaCreada,
   }) : requisitosAdicionales = requisitosAdicionales ??
             const RequisitosAdicionales(
               ambTerrestre: false,
@@ -26,6 +28,9 @@ class CitaNuevaState extends Equatable {
   final bool waitForCreateCase;
   final RequisitosAdicionales requisitosAdicionales;
 
+  final File? image;
+  final bool? citaCreada;
+
   CitaNuevaState copyWith({
     List<CasoEntity>? casos,
     String? message,
@@ -33,6 +38,9 @@ class CitaNuevaState extends Equatable {
     bool? isLoading,
     bool? waitForCreateCase,
     RequisitosAdicionales? requisitosAdicionales,
+    File? image,
+    bool removeImage = false,
+    bool? citaCreada,
   }) {
     return CitaNuevaState(
       casos: casos ?? this.casos,
@@ -42,6 +50,8 @@ class CitaNuevaState extends Equatable {
       waitForCreateCase: waitForCreateCase ?? false,
       requisitosAdicionales:
           requisitosAdicionales ?? this.requisitosAdicionales,
+      image: removeImage ? null : image ?? this.image,
+      citaCreada: citaCreada ?? this.citaCreada,
     );
   }
 
@@ -53,13 +63,7 @@ class CitaNuevaState extends Equatable {
         isLoading,
         waitForCreateCase,
         requisitosAdicionales,
+        image,
+        citaCreada,
       ];
 }
-
-// final class CitaNuevaInitial extends CitaNuevaState {}
-
-// final class CitaNuevaLoading extends CitaNuevaState {}
-
-// final class CitaNuevaSuccess extends CitaNuevaState {}
-
-// final class CitaNuevaError extends CitaNuevaState {}

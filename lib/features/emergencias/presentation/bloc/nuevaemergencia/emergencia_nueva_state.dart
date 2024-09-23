@@ -11,6 +11,8 @@ class EmergenciaNuevaState extends Equatable {
     this.selectedCountryId,
     this.estados = const [],
     this.selectedEstadoId,
+    this.image,
+    this.citaCreada,
   });
   final List<CasoEntity>? casos;
   final String? message;
@@ -25,6 +27,9 @@ class EmergenciaNuevaState extends Equatable {
   final List<Estado> estados;
   final int? selectedEstadoId;
 
+  final File? image;
+  final bool? citaCreada;
+
   EmergenciaNuevaState copyWith({
     List<CasoEntity>? casos,
     String? message,
@@ -35,6 +40,9 @@ class EmergenciaNuevaState extends Equatable {
     int? selectedCountryId,
     List<Estado>? estados,
     int? selectedEstadoId,
+    File? image,
+    bool removeImage = false,
+    bool? citaCreada,
   }) {
     return EmergenciaNuevaState(
       casos: casos ?? this.casos,
@@ -46,6 +54,8 @@ class EmergenciaNuevaState extends Equatable {
       selectedCountryId: selectedCountryId ?? this.selectedCountryId,
       estados: estados ?? this.estados,
       selectedEstadoId: selectedEstadoId ?? this.selectedEstadoId,
+      image: removeImage ? null : image ?? this.image,
+      citaCreada: citaCreada ?? this.citaCreada,
     );
   }
 
@@ -60,5 +70,7 @@ class EmergenciaNuevaState extends Equatable {
         selectedCountryId,
         estados,
         selectedEstadoId,
+        image,
+        citaCreada,
       ];
 }

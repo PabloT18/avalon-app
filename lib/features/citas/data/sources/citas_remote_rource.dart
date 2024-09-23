@@ -41,7 +41,6 @@ class CitasRemoteSource {
         throw Exception('Error fetching data');
       }
     } catch (e) {
-      print('Error fetching data: $e');
       throw Exception('Error fetching data');
     }
   }
@@ -74,7 +73,6 @@ class CitasRemoteSource {
         throw Exception('Error fetching data');
       }
     } catch (e) {
-      print('Error fetching data: $e');
       throw Exception('Error fetching data');
     }
   }
@@ -100,7 +98,6 @@ class CitasRemoteSource {
         throw Exception('Error fetching data');
       }
     } catch (e) {
-      print('Error fetching data: $e');
       throw Exception('Error fetching data');
     }
   }
@@ -168,7 +165,6 @@ class CitasRemoteSource {
         throw Exception('Error al enviar el comentario');
       }
     } catch (e) {
-      print('Error sending comentario: $e');
       throw Exception('Error sending comentario');
     }
   }
@@ -182,8 +178,12 @@ class CitasRemoteSource {
     String url = '/citasMedicas';
 
     final Map<String, dynamic> requestData = cita.toJsonCreate();
-    print(requestData);
 
+    final Map<String, dynamic> docuemntoName = {
+      "nombreDocumento": nombreDocumento,
+    };
+
+    requestData.addEntries(docuemntoName.entries);
     // Prepare the FormData
     FormData formData = FormData();
 
@@ -198,16 +198,19 @@ class CitasRemoteSource {
       ),
     );
     // If an image is provided, add it to the form data
+    // If an image is provided, add it to the form data
     if (image != null) {
-      String fileName = image.path.split('/').last;
+      String fileName = nombreDocumento;
+
+      String fileType = nombreDocumento.split('.').last;
+
       formData.files.add(
         MapEntry(
           'fotoCitaMedica',
           await MultipartFile.fromFile(
             image.path,
             filename: fileName,
-            contentType:
-                MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+            contentType: MediaType('image', fileType),
           ),
         ),
       );
@@ -228,7 +231,6 @@ class CitasRemoteSource {
         throw Exception('Error al crear el caso');
       }
     } catch (e) {
-      print('Error creando caso: $e');
       throw Exception('Error creando caso');
     }
   }

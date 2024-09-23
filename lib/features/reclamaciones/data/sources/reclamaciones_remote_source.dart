@@ -178,36 +178,41 @@ class ReclamacionesRemoteSource {
     String url = '/reclamaciones';
 
     final Map<String, dynamic> requestData = reclamacion.toJsonCreate();
+    final Map<String, dynamic> docuemntoName = {
+      "nombreDocumento": nombreDocumento,
+    };
+    try {
+      requestData.addEntries(docuemntoName.entries);
+      FormData formData = FormData();
 
-    FormData formData = FormData();
-
-    // Add the comentarioCitaMedica part with Content-Type application/json
-    formData.files.add(
-      MapEntry(
-        'reclamacion',
-        MultipartFile.fromString(
-          jsonEncode(requestData),
-          contentType: MediaType('application', 'json'),
-        ),
-      ),
-    );
-    // If an image is provided, add it to the form data
-    if (image != null) {
-      String fileName = image.path.split('/').last;
+      // Add the comentarioCitaMedica part with Content-Type application/json
       formData.files.add(
         MapEntry(
-          'fotoReclamacion',
-          await MultipartFile.fromFile(
-            image.path,
-            filename: fileName,
-            contentType:
-                MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+          'reclamacion',
+          MultipartFile.fromString(
+            jsonEncode(requestData),
+            contentType: MediaType('application', 'json'),
           ),
         ),
       );
-    }
+      // If an image is provided, add it to the form data
+      if (image != null) {
+        String fileName = nombreDocumento;
 
-    try {
+        String fileType = nombreDocumento.split('.').last;
+
+        formData.files.add(
+          MapEntry(
+            'fotoReclamo',
+            await MultipartFile.fromFile(
+              image.path,
+              filename: fileName,
+              contentType: MediaType('image', fileType),
+            ),
+          ),
+        );
+      }
+
       final response = await APPRemoteConfig.httpPost(
         url: url,
         data: formData,

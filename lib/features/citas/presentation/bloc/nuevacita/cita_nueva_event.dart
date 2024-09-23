@@ -38,3 +38,11 @@ class UpdateRequisitoAdicional extends CitaNuevaEvent {
   @override
   List<Object?> get props => [field, value];
 }
+
+class ImageSelected extends CitaNuevaEvent {
+  const ImageSelected();
+}
+
+class RemoveImage extends CitaNuevaEvent {
+  const RemoveImage();
+}

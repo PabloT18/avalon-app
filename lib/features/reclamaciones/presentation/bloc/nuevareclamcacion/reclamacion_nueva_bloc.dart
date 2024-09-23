@@ -9,6 +9,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_models/shared_models.dart';
@@ -28,6 +29,9 @@ class ReclamacionNuevaBloc
 
     on<SubmitReclamacionesEvent>(_onSubmitReclamaciones);
     on<UpdateTipoAdmEvent>(_onUpdateTipoAdm);
+
+    on<ImageSelected>(_onImageSelected);
+    on<RemoveImage>(_onRemoveImage);
 
     refreshController = RefreshController(initialRefresh: false);
 
@@ -129,27 +133,25 @@ class ReclamacionNuevaBloc
       infoAdicional: detailAditionalInformation.text,
       // Otros campos necesarios...
     );
-    final nombreDocumento =
-        event.image != null ? event.image!.path.split('/').last : '';
+
+    final dateimage =
+        '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}';
+    final nombreDocumento = state.image != null
+        ? '${_user.id}_${dateimage}_${state.image!.path.split('/').last}'
+        : '';
+    //
     final result = await reclamacionRepo.createReclamacion(
       _user,
       reclamacion,
-      image: event.image,
+      image: state.image,
       nombreDocumento: nombreDocumento,
     );
     result.fold(
       (failure) {
-        //Todo: cambiar mensaje
-        // emit(state.copyWith(
-        //   isLoading: false,
-        //   message: failure.message,
-        // reclamacionCreada: false,
-
-        // ));
         emit(state.copyWith(
           isLoading: false,
-          message: apptexts.reclamacionesPage.reclamacionCreada,
-          reclamacionCreada: true,
+          message: failure.message,
+          reclamacionCreada: false,
         ));
       },
       (emergenciaCreada) {
@@ -166,5 +168,23 @@ class ReclamacionNuevaBloc
   void _onUpdateTipoAdm(
       UpdateTipoAdmEvent event, Emitter<ReclamacionNuevaState> emit) {
     emit(state.copyWith(tipoAdmSeleccionado: event.tipoAdm));
+  }
+
+  FutureOr<void> _onImageSelected(
+      ImageSelected event, Emitter<ReclamacionNuevaState> emit) async {
+    final ImagePicker picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      emit(state.copyWith(image: File(pickedFile.path)));
+    }
+  }
+
+  FutureOr<void> _onRemoveImage(
+      RemoveImage event, Emitter<ReclamacionNuevaState> emit) {
+    emit(state.copyWith(
+      image: null,
+      removeImage: true,
+    ));
   }
 }

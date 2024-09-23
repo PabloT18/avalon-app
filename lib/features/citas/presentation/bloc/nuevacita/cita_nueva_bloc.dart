@@ -12,6 +12,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_models/shared_models.dart';
@@ -29,6 +30,9 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
     on<SelectCaso>(_onSelectCaso);
     on<UpdateRequisitoAdicional>(_onUpdateRequisitoAdicional);
     on<SubmitCitaEvent>(_onSubmitCitaEvent);
+
+    on<ImageSelected>(_onImageSelected);
+    on<RemoveImage>(_onRemoveImage);
 
     // on<SelectCasoOption>(_onSelectCasoOption);
     // on<GetCitas>(_onGetCitas);
@@ -156,6 +160,8 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
       SubmitCitaEvent event, Emitter<CitaNuevaState> emit) async {
     // Crear el objeto CitaMedica con los datos del formulario
 
+    emit(state.copyWith(isLoading: true));
+
     final citaMedica = CitaMedica(
       clientePoliza: state.casoSeleccionado!.clientePoliza,
       caso: state.casoSeleccionado!,
@@ -168,23 +174,32 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
       otrosRequisitos: detailOthersRequaimentes.text,
       requisitosAdicionales: state.requisitosAdicionales,
     );
-    print(citaMedica);
 
-    final nombreDocumento =
-        event.image != null ? event.image!.path.split('/').last : '';
+    // final nombreDocumento =
+    //     state.image != null ? state.image!.path.split('/').last : '';
+
+    final dateimage =
+        '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}';
+    final nombreDocumento = state.image != null
+        ? '${_user.id}_${dateimage}_${state.image!.path.split('/').last}'
+        : '';
 
     // // Llamar al repositorio para persistir la cita
     Either<Failure, CitaMedica> result = await citasRepository.crearCita(
       _user,
       citaMedica,
-      image: event.image,
+      image: state.image,
       nombreDocumento: nombreDocumento,
     );
 
     result.fold(
       (failure) {
         // Maneja el error
-        emit(state.copyWith(message: failure.message));
+        emit(state.copyWith(
+          isLoading: false,
+          message: failure.message,
+          citaCreada: true,
+        ));
       },
       (cita) {
         birthDateController.clear();
@@ -197,9 +212,29 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
         // Maneja el éxito
         emit(state.copyWith(
           message: apptexts.citasPage.citaCreada,
+          citaCreada: true,
+          isLoading: false,
         ));
         // Puedes navegar a otra pantalla o resetear el formulario
       },
     );
+  }
+
+  FutureOr<void> _onImageSelected(
+      ImageSelected event, Emitter<CitaNuevaState> emit) async {
+    final ImagePicker picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      emit(state.copyWith(image: File(pickedFile.path)));
+    }
+  }
+
+  FutureOr<void> _onRemoveImage(
+      RemoveImage event, Emitter<CitaNuevaState> emit) {
+    emit(state.copyWith(
+      image: null,
+      removeImage: true,
+    ));
   }
 }

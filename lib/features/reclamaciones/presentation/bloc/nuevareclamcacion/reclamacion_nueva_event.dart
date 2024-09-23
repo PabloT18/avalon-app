@@ -37,3 +37,11 @@ class UpdateTipoAdmEvent extends ReclamacionNuevaEvent {
   @override
   List<Object> get props => [tipoAdm];
 }
+
+class ImageSelected extends ReclamacionNuevaEvent {
+  const ImageSelected();
+}
+
+class RemoveImage extends ReclamacionNuevaEvent {
+  const RemoveImage();
+}

@@ -213,9 +213,11 @@ class FormNewReclamacion extends StatelessWidget {
             label: apptexts.citasPage.detailFechaTentativa,
             dateTextController: reclamacionNuevaBloc.dateController,
           ),
+
           // Campos de dirección
           // Agrega el DropdownButtonFormField aquí
           _buildTipoAdmDropdown(reclamacionNuevaBloc),
+          const ImageSelccion(),
           const SizedBox(height: AppLayoutConst.spaceM),
           BlocBuilder<ReclamacionNuevaBloc, ReclamacionNuevaState>(
             builder: (context, state) {
@@ -301,6 +303,100 @@ class FormNewReclamacion extends StatelessWidget {
               );
             },
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class ImageSelccion extends StatelessWidget {
+  const ImageSelccion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final image =
+        context.select((ReclamacionNuevaBloc bloc) => bloc.state.image);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(width: double.infinity),
+          Text(
+            apptexts.citasPage.detalleFoto,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: AppLayoutConst.spaceM,
+          ),
+          if (image == null)
+            Card(
+              clipBehavior: Clip.hardEdge,
+              child: InkWell(
+                  onTap: () => context.read<ReclamacionNuevaBloc>().add(
+                        const ImageSelected(),
+                      ),
+                  child: const SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Icon(
+                      Icons.photo,
+                      size: 50,
+                    ),
+                  )),
+            ),
+          if (image != null)
+            Stack(
+              children: [
+                // Imagen seleccionada
+                GestureDetector(
+                  onTap: () {
+                    UtilsFunctionsViews.showFullScreenImage(
+                      image,
+                      context,
+                    ); // Llamamos a la función para mostrar la imagen en un dialogo
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.all(8.0),
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: FileImage(image),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+                // Botón de eliminar (X) en la esquina superior derecha
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: GestureDetector(
+                    onTap: () {
+                      context
+                          .read<ReclamacionNuevaBloc>()
+                          .add(const RemoveImage());
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(2.0),
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.close,
+                        size: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
     );
