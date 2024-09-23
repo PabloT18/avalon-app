@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:animate_do/animate_do.dart';
 import 'package:avalon_app/app/data/sources/local/enviroment.dart';
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:image_gallery_saver/image_gallery_saver.dart';
 // import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_models/shared_models.dart';
@@ -14,10 +16,12 @@ class DetailPhoto extends StatefulWidget {
     super.key,
     required this.imageCode,
     required this.user,
+    this.title = true,
   });
 
   final int imageCode;
   final User user;
+  final bool title;
 
   @override
   _DetailPhotoState createState() => _DetailPhotoState();
@@ -103,39 +107,6 @@ class _DetailPhotoState extends State<DetailPhoto> {
     );
   }
 
-  // Future<void> _saveImage() async {
-  //   if (_imageData == null || _documentName == null) return;
-
-  //   // Solicita permisos para acceder al almacenamiento
-  //   if (await _requestPermission(Permission.storage)) {
-  //     // Guarda la imagen en la galería usando el nombre del documento
-  //     final result = await ImageGallerySaver.saveImage(
-  //       _imageData!,
-  //       quality: 100,
-  //       name: _documentName!, // Utiliza el nombre del documento
-  //     );
-
-  //     if (result['isSuccess']) {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(content: Text("Imagen guardada en la galería")),
-  //       );
-  //     } else {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(content: Text("Error al guardar la imagen")),
-  //       );
-  //     }
-  //   }
-  // }
-
-  // Future<bool> _requestPermission(Permission permission) async {
-  //   if (await permission.isGranted) {
-  //     return true;
-  //   } else {
-  //     final status = await permission.request();
-  //     return status == PermissionStatus.granted;
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -143,31 +114,61 @@ class _DetailPhotoState extends State<DetailPhoto> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                apptexts.citasPage.detalleFoto,
-              ),
-              // IconButton(
-              //   icon: const Icon(Icons.save_alt),
-              //   onPressed: _saveImage, // Guarda la imagen al hacer clic
-              // ),
-            ],
-          ),
-          const SizedBox(height: AppLayoutConst.spaceM),
+          if (widget.title) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  apptexts.citasPage.detalleFoto,
+                ),
+                // IconButton(
+                //   icon: const Icon(Icons.save_alt),
+                //   onPressed: _saveImage, // Guarda la imagen al hacer clic
+                // ),
+              ],
+            ),
+            const SizedBox(height: AppLayoutConst.spaceM),
+          ],
           if (_isLoading)
-            const Center(child: CircularProgressIndicator())
+            // const Center(child: CircularProgressIndicator())
+            Card(
+              clipBehavior: Clip.hardEdge,
+              child: InkWell(
+                  onTap: () => _fetchImageData(),
+                  child: const SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Icon(
+                      Icons.photo,
+                      size: 50,
+                    ),
+                  )),
+            )
           else if (_errorMessage.isNotEmpty)
-            Center(child: Text(_errorMessage))
+            // Center(child: Text(_errorMessage))
+            Card(
+              clipBehavior: Clip.hardEdge,
+              child: InkWell(
+                  onTap: () => _fetchImageData(),
+                  child: const SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: FaIcon(
+                      FontAwesomeIcons.triangleExclamation,
+                      size: 50,
+                    ),
+                  )),
+            )
           else if (_imageData != null)
-            GestureDetector(
-              onTap: _showFullScreenImage,
-              child: Image.memory(
-                _imageData!,
-                fit: BoxFit.contain,
-                width: 150,
-                height: 150,
+            FadeIn(
+              child: GestureDetector(
+                onTap: _showFullScreenImage,
+                child: Image.memory(
+                  _imageData!,
+                  fit: BoxFit.contain,
+                  width: 150,
+                  height: 150,
+                ),
               ),
             ),
         ],

@@ -1,3 +1,4 @@
+import 'package:avalon_app/features/citas/presentation/views/widgets/wid_cita_detail_iamge.dart';
 import 'package:flutter/material.dart';
 
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
@@ -12,10 +13,12 @@ class ComentarioCard extends StatelessWidget {
     super.key,
     required this.comentario,
     required this.userComent,
+    required this.user,
   });
 
   final Comentario comentario;
   final bool userComent;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +86,12 @@ class ComentarioCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (comentario.imagenId != null)
+                  DetailPhoto(
+                    imageCode: comentario.imagenId!,
+                    title: false,
+                    user: user,
+                  ),
               ],
             ),
           ),

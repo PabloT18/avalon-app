@@ -72,6 +72,7 @@ class CitaDetalleHistoryPanel extends StatelessWidget {
                   key: Key(comentario.hashCode.toString()),
                   comentario: comentario,
                   userComent: userComent,
+                  user: user,
                 );
               }),
               // const SizedBox(
