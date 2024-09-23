@@ -15,7 +15,12 @@
         "one": "More Detail",
         "other": "More Details"
     },
-    "detailFechaTentativa": "Tentative Date",
+    "reclamcionDate": "Date",
+    "tipoAdministacion": "Administration Type",
+    "tiposAdministacion": {
+        "tipoEmergencia": "Emergency",
+        "tipoProgramada": "Scheduled"
+    },
     "detailPreferenceCity": "Preferred City",
     "detailAseguradoraName": "Insurance Company",
     "detailHospital": "Hospital",
@@ -38,5 +43,5 @@
     "reclamacionEstado": "Claim Status",
     "historialEmpty": "No comment history yet",
     "historialError": "Error loading comment history",
-    "tipoAdministacion": "Administration Type"
+    "reclamacionCreada": "Claim created"
 }

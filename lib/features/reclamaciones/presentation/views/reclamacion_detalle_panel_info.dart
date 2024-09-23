@@ -53,7 +53,7 @@ class ReclacmaionDetalleMorePanel extends StatelessWidget {
             label: apptexts.reclamacionesPage.tipoAdministacion,
             value: reclamacion.tipoAdm),
         DetailFormField(
-          label: apptexts.reclamacionesPage.detailFechaTentativa,
+          label: apptexts.reclamacionesPage.reclamcionDate,
           value: UtilsFunctionsLogic.formatFechaLocal(
               reclamacion.fechaServicio, locale.languageCode),
         ),

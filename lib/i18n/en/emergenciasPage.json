@@ -40,5 +40,6 @@
     "emergenciaEstado": "Emergency State",
     "historialEmpty": "No comment history yet",
     "historialError": "Error loading comment history",
-    "tipoAdministacion": "Type of Administration"
+    "tipoAdministacion": "Type of Administration",
+    "emergenciaCreada": "Emergency created"
 }

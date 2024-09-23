@@ -93,4 +93,26 @@ class ReclamacionesRepositoryImpl implements ReclamacionesRepository {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, ReclamacionModel>> createReclamacion(
+      User user, ReclamacionModel reclamacion,
+      {File? image, required String nombreDocumento}) async {
+    try {
+      final casosList = await remoteSource.crearReclamacion(
+        user,
+        reclamacion,
+        image,
+        nombreDocumento: nombreDocumento,
+      );
+      return Right(casosList);
+    } on InternetAccessException catch (i) {
+      return Left(InternetFailure(message: i.message));
+    } on ServerException catch (s) {
+      return Left(ServerFailure(
+          message: s.message ?? apptexts.appOptions.error_servers));
+    } on Exception {
+      return Left(ServerFailure(message: apptexts.appOptions.error_servers));
+    }
+  }
 }

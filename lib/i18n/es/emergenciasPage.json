@@ -40,5 +40,6 @@
     "emergenciaEstado": "Estado de la emergencia",
     "historialEmpty": "No hay un historial de comentarios aún",
     "historialError": "Error al cargar el historial de comentarios",
-    "tipoAdministacion": "Tipo de Administración"
+    "tipoAdministacion": "Tipo de Administración",
+    "emergenciaCreada": "Emergencia creada"
 }

@@ -11,6 +11,7 @@ import 'package:avalon_app/features/citas/data/repository/citas_repository_impl.
 import 'package:avalon_app/features/citas/domain/repository/citas_repository.dart';
 import 'package:avalon_app/features/emergencias/data/models/emergencias_response.dart';
 import 'package:avalon_app/features/emergencias/emergencias.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -202,7 +203,7 @@ class EmergenciaNuevaBloc
       (emergenciaCreada) {
         emit(state.copyWith(
           isLoading: false,
-          message: 'Emergencia creada con éxito',
+          message: apptexts.emergenciasPage.emergenciaCreada,
         ));
         // Navegar o realizar acciones adicionales si es necesario
       },

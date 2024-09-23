@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 568 (284 per locale)
+/// Strings: 576 (288 per locale)
 ///
-/// Built on 2024-09-23 at 00:47 UTC
+/// Built on 2024-09-23 at 03:36 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -411,6 +411,7 @@ class _TranslationsEmergenciasPageEs {
 	String get historialEmpty => 'No hay un historial de comentarios aún';
 	String get historialError => 'Error al cargar el historial de comentarios';
 	String get tipoAdministacion => 'Tipo de Administración';
+	String get emergenciaCreada => 'Emergencia creada';
 }
 
 // Path: familiaresPage
@@ -567,7 +568,9 @@ class _TranslationsReclamacionesPageEs {
 		one: 'Más Detalle',
 		other: 'Más Detalles',
 	);
-	String get detailFechaTentativa => 'Fecha Tentativa';
+	String get reclamcionDate => 'Fecha';
+	String get tipoAdministacion => 'Tipo de Administración';
+	late final _TranslationsReclamacionesPageTiposAdministacionEs tiposAdministacion = _TranslationsReclamacionesPageTiposAdministacionEs._(_root);
 	String get detailPreferenceCity => 'Ciudad de preferencia';
 	String get detailAseguradoraName => 'Aseguradora';
 	String get detailHospital => 'Hospital';
@@ -590,7 +593,7 @@ class _TranslationsReclamacionesPageEs {
 	String get reclamacionEstado => 'Estado de la reclamación';
 	String get historialEmpty => 'No hay un historial de comentarios aún';
 	String get historialError => 'Error al cargar el historial de comentarios';
-	String get tipoAdministacion => 'Tipo de Administración';
+	String get reclamacionCreada => 'Reclamación creada';
 }
 
 // Path: segurosPage
@@ -708,6 +711,17 @@ class _TranslationsPreferenciasPagePermisosEs {
 	String get notificaciones => 'Notificaciones';
 	String get camara => 'Cámara';
 	String get almacenamiento => 'Almacenamiento';
+}
+
+// Path: reclamacionesPage.tiposAdministacion
+class _TranslationsReclamacionesPageTiposAdministacionEs {
+	_TranslationsReclamacionesPageTiposAdministacionEs._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get tipoEmergencia => 'Emergencia';
+	String get tipoProgramada => 'Programada';
 }
 
 // Path: <root>
@@ -997,6 +1011,7 @@ class _TranslationsEmergenciasPageEn implements _TranslationsEmergenciasPageEs {
 	@override String get historialEmpty => 'No comment history yet';
 	@override String get historialError => 'Error loading comment history';
 	@override String get tipoAdministacion => 'Type of Administration';
+	@override String get emergenciaCreada => 'Emergency created';
 }
 
 // Path: familiaresPage
@@ -1153,7 +1168,9 @@ class _TranslationsReclamacionesPageEn implements _TranslationsReclamacionesPage
 		one: 'More Detail',
 		other: 'More Details',
 	);
-	@override String get detailFechaTentativa => 'Tentative Date';
+	@override String get reclamcionDate => 'Date';
+	@override String get tipoAdministacion => 'Administration Type';
+	@override late final _TranslationsReclamacionesPageTiposAdministacionEn tiposAdministacion = _TranslationsReclamacionesPageTiposAdministacionEn._(_root);
 	@override String get detailPreferenceCity => 'Preferred City';
 	@override String get detailAseguradoraName => 'Insurance Company';
 	@override String get detailHospital => 'Hospital';
@@ -1176,7 +1193,7 @@ class _TranslationsReclamacionesPageEn implements _TranslationsReclamacionesPage
 	@override String get reclamacionEstado => 'Claim Status';
 	@override String get historialEmpty => 'No comment history yet';
 	@override String get historialError => 'Error loading comment history';
-	@override String get tipoAdministacion => 'Administration Type';
+	@override String get reclamacionCreada => 'Claim created';
 }
 
 // Path: segurosPage
@@ -1294,6 +1311,17 @@ class _TranslationsPreferenciasPagePermisosEn implements _TranslationsPreferenci
 	@override String get notificaciones => 'Notifications Permission';
 	@override String get camara => 'Camera';
 	@override String get almacenamiento => 'Storage';
+}
+
+// Path: reclamacionesPage.tiposAdministacion
+class _TranslationsReclamacionesPageTiposAdministacionEn implements _TranslationsReclamacionesPageTiposAdministacionEs {
+	_TranslationsReclamacionesPageTiposAdministacionEn._(this._root);
+
+	@override final _TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get tipoEmergencia => 'Emergency';
+	@override String get tipoProgramada => 'Scheduled';
 }
 
 /// Flat map(s) containing all translations.
@@ -1509,6 +1537,7 @@ extension on Translations {
 			case 'emergenciasPage.historialEmpty': return 'No hay un historial de comentarios aún';
 			case 'emergenciasPage.historialError': return 'Error al cargar el historial de comentarios';
 			case 'emergenciasPage.tipoAdministacion': return 'Tipo de Administración';
+			case 'emergenciasPage.emergenciaCreada': return 'Emergencia creada';
 			case 'familiaresPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Familiar',
 				other: 'Familiares',
@@ -1596,7 +1625,10 @@ extension on Translations {
 				one: 'Más Detalle',
 				other: 'Más Detalles',
 			);
-			case 'reclamacionesPage.detailFechaTentativa': return 'Fecha Tentativa';
+			case 'reclamacionesPage.reclamcionDate': return 'Fecha';
+			case 'reclamacionesPage.tipoAdministacion': return 'Tipo de Administración';
+			case 'reclamacionesPage.tiposAdministacion.tipoEmergencia': return 'Emergencia';
+			case 'reclamacionesPage.tiposAdministacion.tipoProgramada': return 'Programada';
 			case 'reclamacionesPage.detailPreferenceCity': return 'Ciudad de preferencia';
 			case 'reclamacionesPage.detailAseguradoraName': return 'Aseguradora';
 			case 'reclamacionesPage.detailHospital': return 'Hospital';
@@ -1619,7 +1651,7 @@ extension on Translations {
 			case 'reclamacionesPage.reclamacionEstado': return 'Estado de la reclamación';
 			case 'reclamacionesPage.historialEmpty': return 'No hay un historial de comentarios aún';
 			case 'reclamacionesPage.historialError': return 'Error al cargar el historial de comentarios';
-			case 'reclamacionesPage.tipoAdministacion': return 'Tipo de Administración';
+			case 'reclamacionesPage.reclamacionCreada': return 'Reclamación creada';
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Seguro',
 				other: 'Seguros',
@@ -1877,6 +1909,7 @@ extension on _TranslationsEn {
 			case 'emergenciasPage.historialEmpty': return 'No comment history yet';
 			case 'emergenciasPage.historialError': return 'Error loading comment history';
 			case 'emergenciasPage.tipoAdministacion': return 'Type of Administration';
+			case 'emergenciasPage.emergenciaCreada': return 'Emergency created';
 			case 'familiaresPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Family',
 				other: 'Family',
@@ -1964,7 +1997,10 @@ extension on _TranslationsEn {
 				one: 'More Detail',
 				other: 'More Details',
 			);
-			case 'reclamacionesPage.detailFechaTentativa': return 'Tentative Date';
+			case 'reclamacionesPage.reclamcionDate': return 'Date';
+			case 'reclamacionesPage.tipoAdministacion': return 'Administration Type';
+			case 'reclamacionesPage.tiposAdministacion.tipoEmergencia': return 'Emergency';
+			case 'reclamacionesPage.tiposAdministacion.tipoProgramada': return 'Scheduled';
 			case 'reclamacionesPage.detailPreferenceCity': return 'Preferred City';
 			case 'reclamacionesPage.detailAseguradoraName': return 'Insurance Company';
 			case 'reclamacionesPage.detailHospital': return 'Hospital';
@@ -1987,7 +2023,7 @@ extension on _TranslationsEn {
 			case 'reclamacionesPage.reclamacionEstado': return 'Claim Status';
 			case 'reclamacionesPage.historialEmpty': return 'No comment history yet';
 			case 'reclamacionesPage.historialError': return 'Error loading comment history';
-			case 'reclamacionesPage.tipoAdministacion': return 'Administration Type';
+			case 'reclamacionesPage.reclamacionCreada': return 'Claim created';
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Insurance Company',
 				other: 'Insurance Company',

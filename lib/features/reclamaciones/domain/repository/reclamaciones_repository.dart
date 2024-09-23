@@ -29,4 +29,8 @@ abstract class ReclamacionesRepository {
   Future<Either<Failure, List<Comentario>>> sendComentarioReclamacion(
       User user, int reclamacionId, String comentario,
       {File? image, required String nombreDocumento});
+
+  Future<Either<Failure, ReclamacionModel>> createReclamacion(
+      User user, ReclamacionModel reclamacion,
+      {File? image, required String nombreDocumento});
 }

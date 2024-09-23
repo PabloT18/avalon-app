@@ -5,8 +5,10 @@
 //     final reclamacionResponse = reclamacionResponseFromJson(jsonString);
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:avalon_app/features/casos/data/models/casos_response.dart';
+import 'package:avalon_app/features/casos/domain/models/caso_entity.dart';
 import 'package:avalon_app/features/citas/domain/models/citas_response.dart';
 import 'package:shared_models/shared_models.dart';
 
@@ -57,7 +59,7 @@ class ReclamacionModel {
   final String? infoAdicional;
   final String? estado;
   final ClientePoliza? clientePoliza;
-  final CasoResponse? caso;
+  final CasoEntity? caso;
 
   ReclamacionModel({
     this.createdBy,
@@ -128,4 +130,15 @@ class ReclamacionModel {
         "clientePoliza": clientePoliza?.toJson(),
         "caso": caso?.toJson(),
       };
+
+  Map<String, dynamic> toJsonCreate() {
+    return {
+      "fechaServicio": fechaServicio!.toIso8601String(),
+      "tipoAdm": tipoAdm,
+      "padecimientoDiagnostico": padecimientoDiagnostico,
+      "infoAdicional": infoAdicional,
+      "clientePolizaId": clientePoliza!.id,
+      "casoId": caso!.id,
+    };
+  }
 }
