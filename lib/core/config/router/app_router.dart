@@ -161,6 +161,16 @@ class AppRouter {
             ),
 
             GoRoute(
+              path: PAGES.crearReclamacion.pageName,
+              name: PAGES.crearReclamacion.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                const CrearReclamacionPage(),
+              ),
+            ),
+
+            GoRoute(
               path: '${PAGES.detalleCita.pageName}/:citaId',
               name: PAGES.detalleCita.pageName,
               pageBuilder: (context, state) => pageBuilderByPlatform(

@@ -1,5 +1,6 @@
 import 'package:avalon_app/app/app.dart';
 import 'package:avalon_app/app/presentation/bloc/app_cycle/app_lifecycle_cubit.dart';
+import 'package:avalon_app/app/presentation/bloc/creationEntities/creation_cubit_cubit.dart';
 import 'package:avalon_app/app/presentation/bloc/permissions/permissions_bloc.dart';
 
 import 'package:avalon_app/app/presentation/bloc/push_notifications/notifications_bloc.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
               getMembresias: RepositoryProvider.of<GetMembresiasUC>(context),
             ),
           ),
+          BlocProvider(create: (_) => CreationCubit()),
           BlocProvider(
             create: (context) => NotificationsBloc(
                 subscribeTopicsUseCase: context.read<SubscribeTopicsUseCase>(),

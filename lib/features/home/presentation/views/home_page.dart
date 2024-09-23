@@ -129,19 +129,8 @@ class HomePageView extends StatelessWidget {
                         context.goNamed(PAGES.crearEmergencia.pageName);
                       }
                     : () {
-                        UtilsFunctionsViews.showFlushBar(
-                                message: apptexts
-                                    .appOptions.deshabilitadoTemporalemnte,
-                                isError: true)
-                            .show(context);
+                        context.goNamed(PAGES.crearReclamacion.pageName);
                       },
-
-            // onPressed: () {
-            //   UtilsFunctionsViews.showFlushBar(
-            //           message: apptexts.appOptions.deshabilitadoTemporalemnte,
-            //           isError: true)
-            //       .show(context);
-            // },
             child: const Icon(Icons.add),
           );
         },

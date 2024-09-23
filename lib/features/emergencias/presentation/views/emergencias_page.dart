@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/app/presentation/bloc/creationEntities/creation_cubit_cubit.dart';
 import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 
@@ -44,34 +47,41 @@ class EmergenciasPanelView extends StatelessWidget {
       emergenciaBloc.add(const GetEmergencias());
     }
 
-    return BlocBuilder<EmergenciasBloc, EmergenciasState>(
-      builder: (context, state) {
-        return SmartRefrehsCustom(
-          key: const Key('__emergencias_list_key__'),
-          onRefresh: () async {
-            emergenciaBloc.add(const GetEmergencias());
-          },
-          refreshController: emergenciaBloc.refreshController,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppLayoutConst.paddingL),
-
-            physics:
-                const BouncingScrollPhysics(), // Asegura un desplazamiento suave
-
-            child: Column(
-              children: [
-                const SizedBox(height: AppLayoutConst.spaceM),
-                Text(
-                  apptexts.emergenciasPage.title(n: 2),
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                const SizedBox(height: AppLayoutConst.spaceL),
-                getChildByState(state, emergenciaBloc, context, user),
-              ],
-            ),
-          ),
-        );
+    return BlocListener<CreationCubit, CreationState>(
+      listener: (context, state) {
+        if (state is ItemCreated && state.itemType == ItemType.emergencia) {
+          emergenciaBloc.add(const GetEmergencias());
+        }
       },
+      child: BlocBuilder<EmergenciasBloc, EmergenciasState>(
+        builder: (context, state) {
+          return SmartRefrehsCustom(
+            key: const Key('__emergencias_list_key__'),
+            onRefresh: () async {
+              emergenciaBloc.add(const GetEmergencias());
+            },
+            refreshController: emergenciaBloc.refreshController,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(AppLayoutConst.paddingL),
+
+              physics:
+                  const BouncingScrollPhysics(), // Asegura un desplazamiento suave
+
+              child: Column(
+                children: [
+                  const SizedBox(height: AppLayoutConst.spaceM),
+                  Text(
+                    apptexts.emergenciasPage.title(n: 2),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  const SizedBox(height: AppLayoutConst.spaceL),
+                  getChildByState(state, emergenciaBloc, context, user),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 

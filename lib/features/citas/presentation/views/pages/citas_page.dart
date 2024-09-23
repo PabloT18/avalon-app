@@ -1,4 +1,5 @@
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/app/presentation/bloc/creationEntities/creation_cubit_cubit.dart';
 import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
 import 'package:avalon_app/core/config/responsive/responsive_class.dart';
 
@@ -64,34 +65,41 @@ class CitasPanelView extends StatelessWidget {
       citasBloc.add(const GetCitas());
     }
 
-    return BlocBuilder<CitasBloc, CitasState>(
-      builder: (context, state) {
-        return SmartRefrehsCustom(
-          key: const Key('__citas_list_key__'),
-          onRefresh: () async {
-            citasBloc.add(const GetCitas());
-          },
-          refreshController: citasBloc.refreshController,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppLayoutConst.paddingL),
-
-            physics:
-                const BouncingScrollPhysics(), // Asegura un desplazamiento suave
-
-            child: Column(
-              children: [
-                const SizedBox(height: AppLayoutConst.spaceM),
-                Text(
-                  apptexts.citasPage.title(n: 2),
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                const SizedBox(height: AppLayoutConst.spaceL),
-                getChildByState(state, citasBloc, context, user),
-              ],
-            ),
-          ),
-        );
+    return BlocListener<CreationCubit, CreationState>(
+      listener: (context, state) {
+        if (state is ItemCreated && state.itemType == ItemType.citas) {
+          citasBloc.add(const GetCitas());
+        }
       },
+      child: BlocBuilder<CitasBloc, CitasState>(
+        builder: (context, state) {
+          return SmartRefrehsCustom(
+            key: const Key('__citas_list_key__'),
+            onRefresh: () async {
+              citasBloc.add(const GetCitas());
+            },
+            refreshController: citasBloc.refreshController,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(AppLayoutConst.paddingL),
+
+              physics:
+                  const BouncingScrollPhysics(), // Asegura un desplazamiento suave
+
+              child: Column(
+                children: [
+                  const SizedBox(height: AppLayoutConst.spaceM),
+                  Text(
+                    apptexts.citasPage.title(n: 2),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  const SizedBox(height: AppLayoutConst.spaceL),
+                  getChildByState(state, citasBloc, context, user),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 

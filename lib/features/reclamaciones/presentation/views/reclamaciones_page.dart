@@ -1,7 +1,8 @@
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/app/presentation/bloc/creationEntities/creation_cubit_cubit.dart';
 import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
-import 'package:avalon_app/core/config/router/app_router.dart';
+
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/loaders/loaders_widgets.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
@@ -47,34 +48,41 @@ class ReclamacionesPanelView extends StatelessWidget {
       reclamacionesBloc.add(const GetReclamaciones());
     }
 
-    return BlocBuilder<ReclamacionesBloc, ReclamacionesState>(
-      builder: (context, state) {
-        return SmartRefrehsCustom(
-          key: const Key('__reclamaciones_list_key__'),
-          onRefresh: () async {
-            reclamacionesBloc.add(const GetReclamaciones());
-          },
-          refreshController: reclamacionesBloc.refreshController,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppLayoutConst.paddingL),
-
-            physics:
-                const BouncingScrollPhysics(), // Asegura un desplazamiento suave
-
-            child: Column(
-              children: [
-                const SizedBox(height: AppLayoutConst.spaceM),
-                Text(
-                  apptexts.reclamacionesPage.title(n: 2),
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                const SizedBox(height: AppLayoutConst.spaceL),
-                getChildByState(state, reclamacionesBloc, context),
-              ],
-            ),
-          ),
-        );
+    return BlocListener<CreationCubit, CreationState>(
+      listener: (context, state) {
+        if (state is ItemCreated && state.itemType == ItemType.reclamaciones) {
+          reclamacionesBloc.add(const GetReclamaciones());
+        }
       },
+      child: BlocBuilder<ReclamacionesBloc, ReclamacionesState>(
+        builder: (context, state) {
+          return SmartRefrehsCustom(
+            key: const Key('__reclamaciones_list_key__'),
+            onRefresh: () async {
+              reclamacionesBloc.add(const GetReclamaciones());
+            },
+            refreshController: reclamacionesBloc.refreshController,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(AppLayoutConst.paddingL),
+
+              physics:
+                  const BouncingScrollPhysics(), // Asegura un desplazamiento suave
+
+              child: Column(
+                children: [
+                  const SizedBox(height: AppLayoutConst.spaceM),
+                  Text(
+                    apptexts.reclamacionesPage.title(n: 2),
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  const SizedBox(height: AppLayoutConst.spaceL),
+                  getChildByState(state, reclamacionesBloc, context),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 
