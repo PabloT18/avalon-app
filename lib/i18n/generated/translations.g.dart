@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 562 (281 per locale)
+/// Strings: 568 (284 per locale)
 ///
-/// Built on 2024-09-19 at 14:11 UTC
+/// Built on 2024-09-23 at 00:47 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -227,7 +227,7 @@ class _TranslationsAppOptionsEs {
 	String get comentSuccess => 'Comentario enviado con éxito';
 	String get comentEmpty => 'El comentario no puede estar vacío';
 	late final _TranslationsAppOptionsValidatorsEs validators = _TranslationsAppOptionsValidatorsEs._(_root);
-	String get deshabilitadoTemporalemnte => 'Temporalmente deshabilitado';
+	String get deshabilitadoTemporalemnte => 'Pendiente para la sigueinte actualización';
 }
 
 // Path: avalonInfo
@@ -346,6 +346,7 @@ class _TranslationsCitasPageEs {
 	String get citaEstado => 'Estado de la cita';
 	String get historialEmpty => 'No hay un historial de comentarios aún';
 	String get historialError => 'Erroral cargar el historial de comentarios';
+	String get citaCreada => 'Cita creada';
 }
 
 // Path: comunicadospage
@@ -465,6 +466,8 @@ class _TranslationsMembresiasPageEs {
 	);
 	String get description => 'Accede a nuestro plan de Membresía de Asistencia Médica en el extranjero, diseñado para brindarte la mejor atención médica disponible dentro de un marco rentable.';
 	String get description2 => 'Lista de historial de membresías actuales y vencidas';
+	String get loadingMembresias => 'Cargando información';
+	String get noMembresias => 'No hay membresías asignadas';
 }
 
 // Path: metodosPagoPage
@@ -648,7 +651,7 @@ class _TranslationsAppOptionsValidatorsEs {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get required => 'Este campo es requerido';
+	String get requiredField => 'Este campo es requerido';
 	String get email => 'Correo electrónico inválido';
 	String minLength({required Object min}) => 'Debe tener al menos ${min} caracteres';
 	String maxLength({required Object max}) => 'Debe tener máximo ${max} caracteres';
@@ -810,7 +813,7 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override String get comentSuccess => 'Comment sent successfully';
 	@override String get comentEmpty => 'Comment cannot be empty';
 	@override late final _TranslationsAppOptionsValidatorsEn validators = _TranslationsAppOptionsValidatorsEn._(_root);
-	@override String get deshabilitadoTemporalemnte => 'Temporarily disabled';
+	@override String get deshabilitadoTemporalemnte => 'Pending for the next update';
 }
 
 // Path: avalonInfo
@@ -929,6 +932,7 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 	@override String get citaEstado => 'Appointment State';
 	@override String get historialEmpty => 'No comment history yet';
 	@override String get historialError => 'Error loading comment history';
+	@override String get citaCreada => 'Appointment created';
 }
 
 // Path: comunicadospage
@@ -1048,6 +1052,8 @@ class _TranslationsMembresiasPageEn implements _TranslationsMembresiasPageEs {
 	);
 	@override String get description => 'Access our Overseas Medical Assistance Membership plan, which is designed to provide you with the best medical care available within a cost-effective framework.';
 	@override String get description2 => 'List of current and expired membership history';
+	@override String get loadingMembresias => 'Loading data';
+	@override String get noMembresias => 'User has no memberships';
 }
 
 // Path: metodosPagoPage
@@ -1231,7 +1237,7 @@ class _TranslationsAppOptionsValidatorsEn implements _TranslationsAppOptionsVali
 	@override final _TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get required => 'This field is required';
+	@override String get requiredField => 'This field is required';
 	@override String get email => 'Invalid email';
 	@override String minLength({required Object min}) => 'Must have at least ${min} characters';
 	@override String maxLength({required Object max}) => 'Must have a maximum of ${max} characters';
@@ -1349,7 +1355,7 @@ extension on Translations {
 			case 'appOptions.comentError': return 'Error al enviar el comentario';
 			case 'appOptions.comentSuccess': return 'Comentario enviado con éxito';
 			case 'appOptions.comentEmpty': return 'El comentario no puede estar vacío';
-			case 'appOptions.validators.required': return 'Este campo es requerido';
+			case 'appOptions.validators.requiredField': return 'Este campo es requerido';
 			case 'appOptions.validators.email': return 'Correo electrónico inválido';
 			case 'appOptions.validators.minLength': return ({required Object min}) => 'Debe tener al menos ${min} caracteres';
 			case 'appOptions.validators.maxLength': return ({required Object max}) => 'Debe tener máximo ${max} caracteres';
@@ -1364,7 +1370,7 @@ extension on Translations {
 			case 'appOptions.validators.passwordConfirm': return 'La confirmación de la contraseña es requerida';
 			case 'appOptions.validators.passwordChanged': return 'Contraseña cambiada con éxito';
 			case 'appOptions.validators.passwordNotMatch': return 'Las contraseñas no coinciden';
-			case 'appOptions.deshabilitadoTemporalemnte': return 'Temporalmente deshabilitado';
+			case 'appOptions.deshabilitadoTemporalemnte': return 'Pendiente para la sigueinte actualización';
 			case 'avalonInfo.contactUs': return 'Contáctenos';
 			case 'avalonInfo.aboutUs': return 'Sobre Nosotros';
 			case 'avalonInfo.aboutDescription': return 'AVALON PLUS es una empresa líder en el conserjería médica integral internacional, fundada en Texas, formada por profesionales con más de 25 años de experiencia en las áreas de administración de cuentas hospitalarias, servicios médicos y seguros internacionales.\nEl Know-How de nuestro equipo de profesionales nos permite comprender las necesidades de nuestros clientes.';
@@ -1456,6 +1462,7 @@ extension on Translations {
 			case 'citasPage.citaEstado': return 'Estado de la cita';
 			case 'citasPage.historialEmpty': return 'No hay un historial de comentarios aún';
 			case 'citasPage.historialError': return 'Erroral cargar el historial de comentarios';
+			case 'citasPage.citaCreada': return 'Cita creada';
 			case 'comunicadospage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Noticia',
 				other: 'Noticias',
@@ -1521,6 +1528,8 @@ extension on Translations {
 			);
 			case 'membresiasPage.description': return 'Accede a nuestro plan de Membresía de Asistencia Médica en el extranjero, diseñado para brindarte la mejor atención médica disponible dentro de un marco rentable.';
 			case 'membresiasPage.description2': return 'Lista de historial de membresías actuales y vencidas';
+			case 'membresiasPage.loadingMembresias': return 'Cargando información';
+			case 'membresiasPage.noMembresias': return 'No hay membresías asignadas';
 			case 'metodosPagoPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Método de Pago',
 				other: 'Métodos de Pago',
@@ -1714,7 +1723,7 @@ extension on _TranslationsEn {
 			case 'appOptions.comentError': return 'Error sending comment';
 			case 'appOptions.comentSuccess': return 'Comment sent successfully';
 			case 'appOptions.comentEmpty': return 'Comment cannot be empty';
-			case 'appOptions.validators.required': return 'This field is required';
+			case 'appOptions.validators.requiredField': return 'This field is required';
 			case 'appOptions.validators.email': return 'Invalid email';
 			case 'appOptions.validators.minLength': return ({required Object min}) => 'Must have at least ${min} characters';
 			case 'appOptions.validators.maxLength': return ({required Object max}) => 'Must have a maximum of ${max} characters';
@@ -1729,7 +1738,7 @@ extension on _TranslationsEn {
 			case 'appOptions.validators.passwordConfirm': return 'Password confirmation is required';
 			case 'appOptions.validators.passwordChanged': return 'Password changed successfully';
 			case 'appOptions.validators.passwordNotMatch': return 'Passwords do not match';
-			case 'appOptions.deshabilitadoTemporalemnte': return 'Temporarily disabled';
+			case 'appOptions.deshabilitadoTemporalemnte': return 'Pending for the next update';
 			case 'avalonInfo.contactUs': return 'Contact Us';
 			case 'avalonInfo.aboutUs': return 'About Us';
 			case 'avalonInfo.aboutDescription': return 'AVALON PLUS is a leading international comprehensive medical concierge company, founded in Texas, made up of professionals with more than 25 years of experience in the areas of hospital account management, medical services and international insurance.\nThe Know-How of our team of professionals allows us to understand the needs of our clients.';
@@ -1821,6 +1830,7 @@ extension on _TranslationsEn {
 			case 'citasPage.citaEstado': return 'Appointment State';
 			case 'citasPage.historialEmpty': return 'No comment history yet';
 			case 'citasPage.historialError': return 'Error loading comment history';
+			case 'citasPage.citaCreada': return 'Appointment created';
 			case 'comunicadospage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'New',
 				other: 'News',
@@ -1886,6 +1896,8 @@ extension on _TranslationsEn {
 			);
 			case 'membresiasPage.description': return 'Access our Overseas Medical Assistance Membership plan, which is designed to provide you with the best medical care available within a cost-effective framework.';
 			case 'membresiasPage.description2': return 'List of current and expired membership history';
+			case 'membresiasPage.loadingMembresias': return 'Loading data';
+			case 'membresiasPage.noMembresias': return 'User has no memberships';
 			case 'metodosPagoPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Payment Method',
 				other: 'Payment Methods',

@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/core/config/responsive/responsive.dart';
 import 'package:avalon_app/core/config/router/app_routes_assets.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 
 import 'package:flutter/material.dart';
 
@@ -22,14 +25,14 @@ class MembresiaCard extends StatelessWidget {
             child: Container(
               constraints: const BoxConstraints(minHeight: 135),
               width: double.maxFinite,
-              child: const Card(
+              child: Card(
                 child: Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Cargando membresía...'),
+                      Text(apptexts.membresiasPage.loadingMembresias),
                     ],
                   ),
                 ),
@@ -48,13 +51,13 @@ class MembresiaCard extends StatelessWidget {
                   final appBloc = context.read<AppBloc>();
                   appBloc.add(AppGetMembresias(appBloc.state.user));
                 },
-                child: const Padding(
-                  padding: EdgeInsets.all(16.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('No hay membresías asignadas'),
+                      Text(apptexts.membresiasPage.noMembresias),
                     ],
                   ),
                 ),

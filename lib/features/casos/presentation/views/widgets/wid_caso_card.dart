@@ -11,9 +11,10 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'wid_title_description.dart';
 
 class CaseCard extends StatelessWidget {
-  const CaseCard({super.key, required this.caso});
+  const CaseCard({super.key, required this.caso, this.enable = true});
 
   final CasoEntity caso;
+  final bool enable;
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +29,17 @@ class CaseCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppLayoutConst.cardBorderRadius),
       ),
       child: ListTile(
-        onTap: () {
-          context.goNamed(
-            PAGES.detaleCaso.pageName,
-            pathParameters: {
-              'casoId': caso.id?.toString() ?? '',
-            },
-            extra: caso,
-          );
-        },
+        onTap: enable
+            ? () {
+                context.goNamed(
+                  PAGES.detaleCaso.pageName,
+                  pathParameters: {
+                    'casoId': caso.id?.toString() ?? '',
+                  },
+                  extra: caso,
+                );
+              }
+            : null,
         title: TitleDescripcion(
             title: apptexts.appOptions.cliente,
             value: caso.clienteDisplayName ?? ' - '),

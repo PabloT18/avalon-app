@@ -34,35 +34,39 @@ class NotficationRepositoryImpl implements NotficationRepository {
   /// aplica para los dos tipos
   @override
   Future<AuthorizationStatus> getStatus() async {
-    AuthorizationStatus authorizationStatus =
-        await _remotePushNotification.statusCheck();
+    try {
+      AuthorizationStatus authorizationStatus =
+          await _remotePushNotification.statusCheck();
 
-    authorizationStatus = await _remotePushNotification.requestPermission();
-
-    /// Si no estan derminoados los permisos se pide estabelcer al usuairo
-    if (authorizationStatus == AuthorizationStatus.notDetermined ||
-        authorizationStatus == AuthorizationStatus.denied) {
       authorizationStatus = await _remotePushNotification.requestPermission();
 
-      // return authorizationStatusRequest;
+      /// Si no estan derminoados los permisos se pide estabelcer al usuairo
+      if (authorizationStatus == AuthorizationStatus.notDetermined ||
+          authorizationStatus == AuthorizationStatus.denied) {
+        authorizationStatus = await _remotePushNotification.requestPermission();
+
+        // return authorizationStatusRequest;
+      }
+
+      /// si el estado acutal o despues de pedir perimisos es
+      /// [AuthorizationStatus.authorized] hya que esstableceer los metodos de
+      /// BACKGORUND
+      if (authorizationStatus == AuthorizationStatus.authorized) {
+        PushNotificationSourceFCM.setFBListeners();
+
+        tokenFCM = await _remotePushNotification.fcmToken();
+
+        await LocalNotifications.initializedLocalNotifications();
+
+        log("TOKEN FCM: $tokenFCM");
+
+        _setInitStetPrefefrecnes();
+      }
+
+      return authorizationStatus;
+    } catch (e) {
+      return AuthorizationStatus.notDetermined;
     }
-
-    /// si el estado acutal o despues de pedir perimisos es
-    /// [AuthorizationStatus.authorized] hya que esstableceer los metodos de
-    /// BACKGORUND
-    if (authorizationStatus == AuthorizationStatus.authorized) {
-      PushNotificationSourceFCM.setFBListeners();
-
-      tokenFCM = await _remotePushNotification.fcmToken();
-
-      await LocalNotifications.initializedLocalNotifications();
-
-      log("TOKEN FCM: $tokenFCM");
-
-      _setInitStetPrefefrecnes();
-    }
-
-    return authorizationStatus;
   }
 
   @override

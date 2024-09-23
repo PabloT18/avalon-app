@@ -1,4 +1,5 @@
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/features/citas/domain/models/requisitos_adicionales_entity.dart';
 import 'package:flutter/material.dart';
 
 import 'package:avalon_app/i18n/generated/translations.g.dart';

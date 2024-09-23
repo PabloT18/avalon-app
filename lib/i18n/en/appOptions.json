@@ -53,7 +53,7 @@
     "comentSuccess": "Comment sent successfully",
     "comentEmpty": "Comment cannot be empty",
     "validators": {
-        "required": "This field is required",
+        "requiredField": "This field is required",
         "email": "Invalid email",
         "minLength": "Must have at least {{min}} characters",
         "maxLength": "Must have a maximum of {{max}} characters",
@@ -69,5 +69,5 @@
         "passwordChanged": "Password changed successfully",
         "passwordNotMatch": "Passwords do not match"
     },
-    "deshabilitadoTemporalemnte": "Temporarily disabled"
+    "deshabilitadoTemporalemnte": "Pending for the next update"
 }

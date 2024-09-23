@@ -149,7 +149,7 @@ class EditAddressPageBody extends StatelessWidget {
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return apptexts.appOptions.validators.required;
+                return apptexts.appOptions.validators.requiredField;
               }
               return null;
             },
@@ -204,7 +204,7 @@ class EditAddressPageBody extends StatelessWidget {
                 isExpanded: false,
                 validator: (value) {
                   if (value == null || value == 0) {
-                    return apptexts.appOptions.validators.required;
+                    return apptexts.appOptions.validators.requiredField;
                   }
                   return null;
                 },
@@ -263,7 +263,7 @@ class EditAddressPageBody extends StatelessWidget {
                 isExpanded: false,
                 validator: (value) {
                   if (value == null || value == 0) {
-                    return apptexts.appOptions.validators.required;
+                    return apptexts.appOptions.validators.requiredField;
                   }
                   return null;
                 },

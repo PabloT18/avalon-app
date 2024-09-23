@@ -78,9 +78,6 @@ class ReclamacionDetalleHistoryPanel extends StatelessWidget {
                   userComent: userComent,
                 );
               }),
-              const SizedBox(
-                height: 53,
-              ),
             ],
           ],
         );
@@ -90,95 +87,3 @@ class ReclamacionDetalleHistoryPanel extends StatelessWidget {
     );
   }
 }
-
-// class ComentarioCard extends StatelessWidget {
-//   const ComentarioCard({
-//     super.key,
-//     required this.comentario,
-//   });
-
-//   final Comentario comentario;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final locale = TranslationProvider.of(context).locale;
-
-//     final user = context.read<AppBloc>().state.user;
-//     final userComent = user.id == comentario.usuarioComenta!.id;
-//     final responsive = ResponsiveCustom.of(context);
-//     return Padding(
-//       padding: EdgeInsets.only(
-//         left: userComent ? AppLayoutConst.paddingXL : AppLayoutConst.spaceZero,
-//         right: userComent ? AppLayoutConst.spaceZero : AppLayoutConst.paddingXL,
-//       ),
-//       child: Tooltip(
-//         message:
-//             '${apptexts.appOptions.fecha} ${UtilsFunctionsLogic.formatFechaLocal(comentario.createdDate!, locale.languageCode)}',
-//         child: Card(
-//           elevation: 1,
-//           shape: RoundedRectangleBorder(
-//             side: BorderSide(
-//               color: AppColors.secondaryBlue.withOpacity(0.4),
-//               width: 1,
-//             ),
-//             borderRadius: BorderRadius.circular(18),
-//           ),
-//           child: Padding(
-//             padding: EdgeInsets.only(
-//               left: userComent
-//                   ? AppLayoutConst.paddingL
-//                   : AppLayoutConst.paddingM,
-//               right: userComent
-//                   ? AppLayoutConst.paddingM
-//                   : AppLayoutConst.paddingL,
-//               bottom: AppLayoutConst.paddingM,
-//               top: AppLayoutConst.paddingM,
-//             ), // Agrega el padding similar a ListTile
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 if (!userComent)
-//                   Align(
-//                       alignment: userComent
-//                           ? Alignment.centerRight
-//                           : Alignment.centerLeft,
-//                       child: RichText(
-//                         text: TextSpan(
-//                           text: comentario.usuarioComenta!.fullName,
-//                           style: Theme.of(context)
-//                               .textTheme
-//                               .bodySmall!
-//                               .copyWith(fontWeight: FontWeight.bold),
-//                         ),
-//                       )),
-//                 RichText(
-//                   text: TextSpan(
-//                     text: comentario.contenido!,
-//                     style: Theme.of(context).textTheme.bodySmall!,
-//                   ),
-//                 ),
-//                 // if (comentario.imagenId != null)
-//                 //   FullScreenImageFromId(
-//                 //     key: Key(comentario.imagenId.toString()),
-//                 //     user: user,
-//                 //     imageCode: comentario.imagenId!,
-//                 //   ),
-//                 Align(
-//                   alignment: Alignment.centerRight,
-//                   child: Text(
-//                     UtilsFunctionsLogic.formatFechaHoraLocal(
-//                         comentario.createdDate, locale.languageCode),
-//                     style: const TextStyle(
-//                       fontSize: 10,
-//                       color: Colors.grey,
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

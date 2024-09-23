@@ -4,5 +4,7 @@
         "other": "Memberships"
     },
     "description": "Access our Overseas Medical Assistance Membership plan, which is designed to provide you with the best medical care available within a cost-effective framework.",
-    "description2": "List of current and expired membership history"
+    "description2": "List of current and expired membership history",
+    "loadingMembresias": "Loading data",
+    "noMembresias": "User has no memberships"
 }

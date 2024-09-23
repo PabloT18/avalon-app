@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
 import 'package:avalon_app/features/emergencias/emergencias.dart';
 import 'package:avalon_app/features/shared/functions/utils_functions.dart';
 import 'package:flutter/material.dart';
@@ -56,9 +57,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     /// Incio de [NotificationsBloc]
     ///
-    context.read<NotificationsBloc>().add(const InitiNotifications());
-
+    ///
     final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+    final notificacionesBloc = context.read<NotificationsBloc>();
+    notificacionesBloc.add(const InitiNotifications());
+
+    if (user.nombreUsuario != null) {
+      notificacionesBloc.add(SubscribeTopics([user.nombreUsuario!]));
+    }
 
     return MultiBlocProvider(
       providers: [
@@ -114,50 +120,56 @@ class HomePageView extends StatelessWidget {
         builder: (context, state) {
           return FloatingActionButton(
             mini: true,
-            // onPressed: state == 1
-            //     ? () {
-            //         context.goNamed(PAGES.crearCita.pageName);
-            //       }
-            //     : () {
-            //         UtilsFunctionsViews.showFlushBar(
-            //                 message:
-            //                     apptexts.appOptions.deshabilitadoTemporalemnte,
-            //                 isError: true)
-            //             .show(context);
-            //       },
+            onPressed: state == 1
+                ? () {
+                    context.goNamed(PAGES.crearCita.pageName);
+                  }
+                : state == 2
+                    ? () {
+                        context.goNamed(PAGES.crearEmergencia.pageName);
+                      }
+                    : () {
+                        UtilsFunctionsViews.showFlushBar(
+                                message: apptexts
+                                    .appOptions.deshabilitadoTemporalemnte,
+                                isError: true)
+                            .show(context);
+                      },
 
-            onPressed: () {
-              UtilsFunctionsViews.showFlushBar(
-                      message: apptexts.appOptions.deshabilitadoTemporalemnte,
-                      isError: true)
-                  .show(context);
-            },
+            // onPressed: () {
+            //   UtilsFunctionsViews.showFlushBar(
+            //           message: apptexts.appOptions.deshabilitadoTemporalemnte,
+            //           isError: true)
+            //       .show(context);
+            // },
             child: const Icon(Icons.add),
           );
         },
       ),
-      bottomNavigationBar: BlocBuilder<NavigationCubit, int>(
+      bottomNavigationBar: BlocBuilder<AppSettingsCubit, AppSettingsState>(
         builder: (context, state) {
-          return BottomNavigationBar(
-            currentIndex: state,
-            onTap: (index) {
-              navigationCubit.setPage(index);
-            },
-            items: [
-              BottomNavigationBarItem(
-                icon: const FaIcon(FontAwesomeIcons.fileMedical),
-                label: apptexts.reclamacionesPage.title(n: 2),
-              ),
-              BottomNavigationBarItem(
-                icon: const FaIcon(FontAwesomeIcons.calendarPlus),
-                label: apptexts.citasPage.title(n: 2),
-              ),
-              BottomNavigationBarItem(
-                icon: const FaIcon(FontAwesomeIcons.kitMedical),
-                label: apptexts.emergenciasPage.title(n: 2),
-              ),
-            ],
-          );
+          return BlocBuilder<NavigationCubit, int>(builder: (context, state) {
+            return BottomNavigationBar(
+              currentIndex: state,
+              onTap: (index) {
+                navigationCubit.setPage(index);
+              },
+              items: [
+                BottomNavigationBarItem(
+                  icon: const FaIcon(FontAwesomeIcons.fileMedical),
+                  label: apptexts.reclamacionesPage.title(n: 2),
+                ),
+                BottomNavigationBarItem(
+                  icon: const FaIcon(FontAwesomeIcons.calendarPlus),
+                  label: apptexts.citasPage.title(n: 2),
+                ),
+                BottomNavigationBarItem(
+                  icon: const FaIcon(FontAwesomeIcons.kitMedical),
+                  label: apptexts.emergenciasPage.title(n: 2),
+                ),
+              ],
+            );
+          });
         },
       ),
       body: PageView(

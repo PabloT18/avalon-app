@@ -67,6 +67,7 @@ class EmergenciaCard extends StatelessWidget {
                     children: [
                       if (!isClient)
                         TitleDescripcion(
+                          isSubdescription: true,
                           title: apptexts.appOptions.cliente,
                           value: emergenciaModel.clientePoliza!.displayName!,
                         ),

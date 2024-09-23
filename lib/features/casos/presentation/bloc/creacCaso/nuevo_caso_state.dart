@@ -10,7 +10,7 @@ class NuevoCasoState extends Equatable {
   final bool isSubmitting;
   final bool submitSuccess;
   final bool hasError;
-
+  final CasoEntity? casoCreado;
   const NuevoCasoState({
     required this.clientes,
     required this.polizas,
@@ -21,6 +21,7 @@ class NuevoCasoState extends Equatable {
     required this.isSubmitting,
     required this.submitSuccess,
     required this.hasError,
+    required this.casoCreado,
   });
 
   factory NuevoCasoState.initial() {
@@ -34,6 +35,7 @@ class NuevoCasoState extends Equatable {
       isSubmitting: false,
       submitSuccess: false,
       hasError: false,
+      casoCreado: null,
     );
   }
 
@@ -47,6 +49,7 @@ class NuevoCasoState extends Equatable {
     bool? isSubmitting,
     bool? submitSuccess,
     bool? hasError,
+    CasoEntity? casoCreado,
   }) {
     return NuevoCasoState(
       clientes: clientes ?? this.clientes,
@@ -58,6 +61,7 @@ class NuevoCasoState extends Equatable {
       isSubmitting: isSubmitting ?? this.isSubmitting,
       submitSuccess: submitSuccess ?? this.submitSuccess,
       hasError: hasError ?? this.hasError,
+      casoCreado: casoCreado ?? this.casoCreado,
     );
   }
 
@@ -72,5 +76,6 @@ class NuevoCasoState extends Equatable {
         isSubmitting,
         submitSuccess,
         hasError,
+        casoCreado,
       ];
 }

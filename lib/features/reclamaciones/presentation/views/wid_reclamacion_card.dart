@@ -66,6 +66,7 @@ class ReclamacionCard extends StatelessWidget {
                   children: [
                     if (!isClient)
                       TitleDescripcion(
+                        isSubdescription: true,
                         title: apptexts.appOptions.cliente,
                         value: reclamacion.clientePoliza!.displayName!,
                       ),

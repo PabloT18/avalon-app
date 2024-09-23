@@ -17,7 +17,6 @@ class ComentarioTextBox extends StatelessWidget {
     final cubit = context.read<ComentarioNuevCubit>();
     final TextEditingController messageController = TextEditingController();
 
-    cubit.textFieldFocusNode.unfocus();
     return BlocConsumer<ComentarioNuevCubit, ComentarioNuevState>(
       listener: (context, state) {
         if (state is ComentarioError) {
@@ -36,7 +35,6 @@ class ComentarioTextBox extends StatelessWidget {
         return FadeInUp(
           child: Container(
             padding: const EdgeInsets.only(bottom: 8),
-            color: Colors.white,
             child: Column(
               children: [
                 if (state is ComentarioImageSelected)

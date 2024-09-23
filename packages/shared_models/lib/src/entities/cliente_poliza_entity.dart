@@ -24,6 +24,12 @@ class ClientePoliza extends Equatable {
   final ClientePoliza? titular;
   final String? displayName;
 
+  String get nombrePoliza {
+    final polizaNombre = poliza?.nombre ?? '';
+    final tipoPoliza = tipo ?? '';
+    return '$polizaNombre $tipoPoliza'.trim();
+  }
+
   const ClientePoliza({
     this.createdBy,
     this.createdDate,

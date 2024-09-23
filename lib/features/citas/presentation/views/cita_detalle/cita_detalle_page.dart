@@ -87,77 +87,76 @@ class CitaDetalleView extends StatelessWidget {
                       citaId:
                           (citaDetalleBloc.state as CitaDetalleLoaded).cita.id!,
                     ),
-                child: Stack(
+                child: Column(
                   children: [
-                    BlocBuilder<CitaDetallePanelsCubit, CitaDetallePanelsState>(
-                      builder: (context, statePanels) {
-                        return SmartRefrehsCustom(
-                            key: const Key('__caso_detalle_historial_key__'),
-                            onRefresh: () async {
-                              citaDetalleBloc.add(const GetCitaHistorial());
-                              citaDetalleBloc.refreshController
-                                ..loadFailed()
-                                ..refreshCompleted();
-                            },
-                            refreshController:
-                                citaDetalleBloc.refreshController,
-                            child: SingleChildScrollView(
-                              child: Padding(
-                                padding: const EdgeInsets.all(
-                                    AppLayoutConst.paddingL),
-                                child: Column(
-                                  children: [
-                                    Hero(
-                                      tag: stateCitaDetalle.cita.hashCode,
-                                      child: CitaCard(
-                                        cita: stateCitaDetalle.cita,
-                                        isClient: user.isClient,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                        height: AppLayoutConst.spaceL),
-                                    Wrap(
-                                      alignment: WrapAlignment.spaceEvenly,
-                                      spacing: AppLayoutConst.spaceL,
-                                      runSpacing: AppLayoutConst.spaceL,
-                                      children: [
-                                        CitaOptionButton(
-                                            option: const CitaDetalleInfo(),
-                                            optionSelected: statePanels),
-                                        CitaOptionButton(
-                                            option:
-                                                const CitaDetalleHistorial(),
-                                            optionSelected: statePanels),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                        height: AppLayoutConst.spaceL),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: AppLayoutConst.spaceM),
-                                      child: statePanels.index == 0
-                                          ? CitaDetalleMorePanel(
-                                              citaMedica: stateCitaDetalle.cita)
-                                          : const CitaDetalleHistoryPanel(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ));
-                      },
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
+                    Expanded(
                       child: BlocBuilder<CitaDetallePanelsCubit,
                           CitaDetallePanelsState>(
-                        builder: (context, state) {
-                          if (state.index == 0) return const SizedBox();
-
-                          return const ComentarioCitaTextBox();
+                        builder: (context, statePanels) {
+                          return SmartRefrehsCustom(
+                              key: const Key('__caso_detalle_historial_key__'),
+                              onRefresh: () async {
+                                citaDetalleBloc.add(const GetCitaHistorial());
+                                citaDetalleBloc.refreshController
+                                  ..loadFailed()
+                                  ..refreshCompleted();
+                              },
+                              refreshController:
+                                  citaDetalleBloc.refreshController,
+                              child: SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(
+                                      AppLayoutConst.paddingL),
+                                  child: Column(
+                                    children: [
+                                      Hero(
+                                        tag: stateCitaDetalle.cita.hashCode,
+                                        child: CitaCard(
+                                          cita: stateCitaDetalle.cita,
+                                          isClient: user.isClient,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                          height: AppLayoutConst.spaceL),
+                                      Wrap(
+                                        alignment: WrapAlignment.spaceEvenly,
+                                        spacing: AppLayoutConst.spaceL,
+                                        runSpacing: AppLayoutConst.spaceL,
+                                        children: [
+                                          CitaOptionButton(
+                                              option: const CitaDetalleInfo(),
+                                              optionSelected: statePanels),
+                                          CitaOptionButton(
+                                              option:
+                                                  const CitaDetalleHistorial(),
+                                              optionSelected: statePanels),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                          height: AppLayoutConst.spaceL),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: AppLayoutConst.spaceM),
+                                        child: statePanels.index == 0
+                                            ? CitaDetalleMorePanel(
+                                                citaMedica:
+                                                    stateCitaDetalle.cita)
+                                            : const CitaDetalleHistoryPanel(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ));
                         },
                       ),
+                    ),
+                    BlocBuilder<CitaDetallePanelsCubit, CitaDetallePanelsState>(
+                      builder: (context, state) {
+                        if (state.index == 0) return const SizedBox();
+
+                        // return const ComentarioCitaTextBox();
+                        return const SafeArea(child: ComentarioCitaTextBox());
+                      },
                     ),
                   ],
                 )),

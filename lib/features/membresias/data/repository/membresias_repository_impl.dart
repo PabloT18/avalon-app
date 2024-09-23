@@ -1,5 +1,9 @@
 import 'package:avalon_app/core/config/remote/app_remote_config.dart';
+import 'package:avalon_app/core/error/exceptions/exceptions.dart';
+import 'package:avalon_app/core/error/failures/failures.dart';
 import 'package:avalon_app/features/membresias/domain/models/membresia_register_entity.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
+import 'package:dartz/dartz.dart';
 
 import '../../domain/repository/membresias_repository.dart';
 import '../models/membresias_response.dart';
@@ -26,9 +30,13 @@ class MembresiasRepositoryImpl implements MembresiasRepository {
       } else {
         throw Exception('Failed to load listado de membresias');
       }
-    } catch (e) {
-      print('Error fetching data: $e');
-      throw Exception('Error fetching data');
+    } on InternetAccessException {
+      rethrow;
+    } on ServerException catch (s) {
+      throw ServerException(
+          message: s.message ?? apptexts.appOptions.error_servers);
+    } on Exception {
+      throw ServerException(message: apptexts.appOptions.error_servers);
     }
   }
 }

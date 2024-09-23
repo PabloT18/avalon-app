@@ -31,6 +31,12 @@ class ComentarioNuevCubit extends Cubit<ComentarioNuevState> {
 
   late FocusNode textFieldFocusNode;
 
+  @override
+  Future<void> close() {
+    textFieldFocusNode.dispose();
+    return super.close();
+  }
+
   // Método para seleccionar una imagen
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();
@@ -47,9 +53,8 @@ class ComentarioNuevCubit extends Cubit<ComentarioNuevState> {
     File? image,
   }) async {
     final stateCurrent = state;
-    if (comentario.isEmpty && image == null) {
-      emit(const ComentarioError(
-          'Debe proporcionar un comentario o una imagen.'));
+    if (comentario.isEmpty) {
+      emit(const ComentarioError('Debe proporcionar un comentario'));
       return;
     }
 
@@ -58,7 +63,7 @@ class ComentarioNuevCubit extends Cubit<ComentarioNuevState> {
     final nombreDocumento = image != null ? image.path.split('/').last : '';
 
     // Llamada al repositorio para enviar el comentario
-    final response = await repository.sendComentario(
+    final response = await repository.sendComentarioReclamacion(
       user,
       reclamacionId,
       comentario,

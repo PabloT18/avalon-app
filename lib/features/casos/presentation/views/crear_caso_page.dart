@@ -16,36 +16,62 @@ class CrearCasoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(apptexts.casosPage.nuevoCaso(n: 1)),
+        elevation: 6,
+      ),
+      body: const CrearCasoPageView(),
+    );
+  }
+}
+
+class CrearCasoPageView extends StatelessWidget {
+  const CrearCasoPageView({
+    super.key,
+    this.fromAlert = false,
+  });
+  final bool fromAlert;
+
+  @override
+  Widget build(BuildContext context) {
     final user = (context.read<AppBloc>().state as AppAuthenticated).user;
 
     return BlocProvider(
       create: (context) => NuevoCasoBloc(
         user,
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(apptexts.casosPage.nuevoCaso(n: 1)),
-          elevation: 6,
-        ),
-        body: NuevoCasoForm(user: user),
+      child: NuevoCasoForm(
+        user: user,
+        fromAlert: fromAlert,
       ),
     );
   }
 }
 
 class NuevoCasoForm extends StatelessWidget {
-  const NuevoCasoForm({super.key, required this.user});
+  const NuevoCasoForm({
+    super.key,
+    required this.user,
+    this.fromAlert = false,
+  });
+
   final User user;
+
+  final bool fromAlert;
   @override
   Widget build(BuildContext context) {
     return BlocListener<NuevoCasoBloc, NuevoCasoState>(
       listener: (context, state) {
         if (state.submitSuccess) {
-          UtilsFunctionsViews.showFlushBar(
-            message: apptexts.casosPage.casoCreado(n: 1),
-            isError: false,
-          ).show(context);
-          // Navigator.of(context).pop();
+          if (fromAlert) {
+            Navigator.of(context).pop(state.casoCreado);
+          } else {
+            UtilsFunctionsViews.showFlushBar(
+              message: apptexts.casosPage.casoCreado(n: 1),
+              isError: false,
+            ).show(context);
+          }
         }
         if (state.hasError) {
           UtilsFunctionsViews.showFlushBar(
@@ -87,6 +113,7 @@ class NuevoCasoForm extends StatelessWidget {
                   },
                 ),
               ),
+
               const SizedBox(height: AppLayoutConst.spaceXL),
               // _buildSubmitButton(context),
             ],
@@ -133,7 +160,12 @@ class NuevoCasoForm extends StatelessWidget {
                 items: state.clientes
                     .map((cliente) => DropdownMenuItem(
                           value: cliente,
-                          child: Text(cliente.fullName),
+                          // child: Text(poliza.nombrePoliza ?? '-'),
+                          child: Text(
+                            (cliente.fullName),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
                         ))
                     .toList(),
                 onChanged: (cliente) {
@@ -143,6 +175,25 @@ class NuevoCasoForm extends StatelessWidget {
                         .read<NuevoCasoBloc>()
                         .add(SelectClienteEvent(cliente, cliente.id!));
                   }
+                },
+                selectedItemBuilder: (BuildContext context) {
+                  // Aquí se define cómo mostrar el elemento seleccionado
+                  return state.clientes.map<Widget>((UsrCliente cliente) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width *
+                          (fromAlert ? 0.45 : 0.75),
+                      child: Text(
+                        cliente.fullName,
+                        overflow:
+                            TextOverflow.ellipsis, // Evita el desbordamiento
+                        maxLines: 1, // Asegurarse que solo se muestre una línea
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    );
+                  }).toList();
                 },
                 value: state.selectedCliente,
               );
@@ -190,7 +241,12 @@ class NuevoCasoForm extends StatelessWidget {
                 items: state.polizas
                     .map((poliza) => DropdownMenuItem(
                           value: poliza,
-                          child: Text(poliza.displayName ?? '-'),
+                          // child: Text(poliza.nombrePoliza ?? '-'),
+                          child: Text(
+                            (poliza.nombrePoliza),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
                         ))
                     .toList(),
                 onChanged: (poliza) {
@@ -199,6 +255,25 @@ class NuevoCasoForm extends StatelessWidget {
                         .read<NuevoCasoBloc>()
                         .add(SelectPolizaEvent(poliza));
                   }
+                },
+                selectedItemBuilder: (BuildContext context) {
+                  // Aquí se define cómo mostrar el elemento seleccionado
+                  return state.polizas.map<Widget>((ClientePoliza poliza) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width *
+                          (fromAlert ? 0.45 : 0.75),
+                      child: Text(
+                        poliza.nombrePoliza,
+                        overflow:
+                            TextOverflow.ellipsis, // Evita el desbordamiento
+                        maxLines: 1, // Asegurarse que solo se muestre una línea
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    );
+                  }).toList();
                 },
                 value: state.selectedPoliza,
               );
@@ -234,7 +309,7 @@ class NuevoCasoForm extends StatelessWidget {
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return apptexts.appOptions.validators.required;
+                return apptexts.appOptions.validators.requiredField;
               }
               return null;
             },

@@ -28,6 +28,12 @@ class ComentarioNuevCubit extends Cubit<ComentarioNuevState> {
 
   late FocusNode textFieldFocusNode;
 
+  @override
+  Future<void> close() {
+    textFieldFocusNode.dispose();
+    return super.close();
+  }
+
   // Método para seleccionar una imagen
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();

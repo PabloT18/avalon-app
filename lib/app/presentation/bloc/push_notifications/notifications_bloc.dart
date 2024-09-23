@@ -90,7 +90,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
         final getUserActiveNotification =
             await notificationRepository.getUserActiveNotification();
         if (getUserActiveNotification == null || getUserActiveNotification) {
-          add(const SubscribeTopics(['todos', 'PTorres']));
+          add(const SubscribeTopics(['todos']));
           emit(const NotificationsAuthorized(userActiveNotifiaction: true));
         } else {
           emit(const NotificationsAuthorized(userActiveNotifiaction: false));

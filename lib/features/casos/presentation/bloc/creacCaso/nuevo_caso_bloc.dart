@@ -106,19 +106,22 @@ class NuevoCasoBloc extends Bloc<NuevoCasoEvent, NuevoCasoState> {
   Future<void> _onSubmitCaso(
       SubmitCasoEvent event, Emitter<NuevoCasoState> emit) async {
     if (formKey.currentState!.validate()) {
-      try {
-        emit(state.copyWith(isSubmitting: true));
-        final result = await casosRepository.crearCaso(
-          user,
-          observacionesController.text,
-          state.selectedPoliza!.id!,
-        );
-        observacionesController.clear();
-        emit(state.copyWith(
-            isSubmitting: false, submitSuccess: result.isRight()));
-      } catch (_) {
-        emit(state.copyWith(isSubmitting: false, submitSuccess: false));
-      }
+      emit(state.copyWith(isSubmitting: true));
+      final result = await casosRepository.crearCaso(
+        user,
+        observacionesController.text,
+        state.selectedPoliza!.id!,
+      );
+      observacionesController.clear();
+
+      result.fold(
+          (l) =>
+              emit(state.copyWith(isSubmitting: false, submitSuccess: false)),
+          (r) => emit(state.copyWith(
+                isSubmitting: false,
+                submitSuccess: true,
+                casoCreado: r,
+              )));
     }
   }
 

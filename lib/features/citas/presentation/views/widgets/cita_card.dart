@@ -87,6 +87,11 @@ class CitaCard extends StatelessWidget {
                       ),
                       TitleDescripcion(
                         isSubdescription: true,
+                        title: '${apptexts.casosPage.title(n: 1)} Id',
+                        value: cita.caso?.codigo ?? '',
+                      ),
+                      TitleDescripcion(
+                        isSubdescription: true,
                         title: '${apptexts.citasPage.title(n: 1)} Id',
                         value: cita.codigo!,
                       ),

@@ -140,25 +140,26 @@ class AppRouter {
                           ),
                       routes: const []),
                 ]),
+
             GoRoute(
-                path: PAGES.citas.pageName,
-                name: PAGES.citas.pageName,
-                pageBuilder: (context, state) => pageBuilderByPlatform(
-                      context,
-                      state,
-                      const CitasPage(),
-                    ),
-                routes: [
-                  GoRoute(
-                    path: PAGES.crearCita.pageName,
-                    name: PAGES.crearCita.pageName,
-                    pageBuilder: (context, state) => pageBuilderByPlatform(
-                      context,
-                      state,
-                      const CrearCitaPage(),
-                    ),
-                  ),
-                ]),
+              path: PAGES.crearCita.pageName,
+              name: PAGES.crearCita.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                const CrearCitaPage(),
+              ),
+            ),
+            GoRoute(
+              path: PAGES.crearEmergencia.pageName,
+              name: PAGES.crearEmergencia.pageName,
+              pageBuilder: (context, state) => pageBuilderByPlatform(
+                context,
+                state,
+                const CrearEmergenciaPage(),
+              ),
+            ),
+
             GoRoute(
               path: '${PAGES.detalleCita.pageName}/:citaId',
               name: PAGES.detalleCita.pageName,

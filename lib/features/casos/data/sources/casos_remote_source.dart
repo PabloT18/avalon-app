@@ -12,10 +12,10 @@ class CasosRemoteSource {
     String url;
 
     if (search == null) {
-      url = '/casos?page=$page&size=10&sortField=createdDate&sortOrder=desc';
+      url = '/casos?page=$page&size=100&sortField=createdDate&sortOrder=desc';
     } else {
       url =
-          '/casos?page=$page&size=10&busqueda=$search&sortField=createdDate&sortOrder=desc';
+          '/casos?page=$page&size=100&busqueda=$search&sortField=createdDate&sortOrder=desc';
     }
 
     try {
@@ -48,10 +48,10 @@ class CasosRemoteSource {
     String url;
     if (search == null) {
       url =
-          '/casos?page=$page&size=10&sortField=createdDate&sortOrder=desc&clientePolizaId=$clientePolizaId';
+          '/casos?page=$page&size=100&sortField=createdDate&sortOrder=desc&clientePolizaId=$clientePolizaId';
     } else {
       url =
-          '/casos?page=$page&size=10&busqueda=$search&sortField=createdDate&sortOrder=desc&clientePolizaId=$clientePolizaId';
+          '/casos?page=$page&size=100&busqueda=$search&sortField=createdDate&sortOrder=desc&clientePolizaId=$clientePolizaId';
     }
 
     try {

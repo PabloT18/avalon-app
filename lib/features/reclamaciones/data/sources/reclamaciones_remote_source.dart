@@ -17,10 +17,10 @@ class ReclamacionesRemoteSource {
 
     if (search == null) {
       url =
-          '/reclamaciones?casoId=$casoId&page=$page&size=10&sortField=createdDate&sortOrder=desc';
+          '/reclamaciones?casoId=$casoId&page=$page&size=100&sortField=createdDate&sortOrder=desc';
     } else {
       url =
-          '/reclamaciones?casoId=$casoId&page=$page&size=10&busqueda=$search&sortField=createdDate&sortOrder=desc';
+          '/reclamaciones?casoId=$casoId&page=$page&size=100&busqueda=$search&sortField=createdDate&sortOrder=desc';
     }
 
     try {

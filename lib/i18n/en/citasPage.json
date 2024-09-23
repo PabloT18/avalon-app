@@ -45,5 +45,6 @@
     "citaEnCaso": "Choose the case for the appointment",
     "citaEstado": "Appointment State",
     "historialEmpty": "No comment history yet",
-    "historialError": "Error loading comment history"
+    "historialError": "Error loading comment history",
+    "citaCreada": "Appointment created"
 }

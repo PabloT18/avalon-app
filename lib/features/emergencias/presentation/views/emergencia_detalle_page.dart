@@ -87,75 +87,75 @@ class EmergenciaDetalleView extends StatelessWidget {
                       user: user,
                       repository: blocObjet.emerRepository,
                     ),
-                child: Stack(
+                child: Column(
                   children: [
-                    BlocBuilder<DetallePanelsCubit, DetallePanelsState>(
-                      builder: (context, statePanels) {
-                        return SmartRefrehsCustom(
-                            key: const Key(
-                                '__emergencias_detalle_historial_key__'),
-                            enablePullDown: statePanels.index == 1,
-                            onRefresh: statePanels.index == 1
-                                ? () async {
-                                    blocObjet
-                                        .add(const GetEmergenciaHistorial());
-                                    blocObjet.refreshController
-                                      ..loadFailed()
-                                      ..refreshCompleted();
-                                  }
-                                : null,
-                            refreshController: blocObjet.refreshController,
-                            child: SingleChildScrollView(
-                              padding:
-                                  const EdgeInsets.all(AppLayoutConst.paddingL),
-                              child: Column(
-                                children: [
-                                  Hero(
-                                    tag: blocObjet.emergencia.hashCode,
-                                    child: EmergenciaCard(
-                                      emergenciaModel: state.emergenciaModel,
-                                      isClient: user.isClient,
-                                    ),
-                                  ),
-                                  const SizedBox(height: AppLayoutConst.spaceL),
-                                  Wrap(
-                                    alignment: WrapAlignment.spaceEvenly,
-                                    spacing: AppLayoutConst.spaceL,
-                                    runSpacing: AppLayoutConst.spaceL,
-                                    children: [
-                                      OptionButton(
-                                          option: const DetalleInfo(),
-                                          optionSelected: statePanels),
-                                      OptionButton(
-                                          option: const DetalleHistorial(),
-                                          optionSelected: statePanels),
-                                    ],
-                                  ),
-                                  const SizedBox(height: AppLayoutConst.spaceL),
-                                  Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: AppLayoutConst.spaceM),
-                                      child: statePanels.index == 0
-                                          ? DetalleMorePanel(
-                                              emergencia: state.emergenciaModel)
-                                          : const DetalleHistoryPanel()),
-                                ],
-                              ),
-                            ));
-                      },
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
+                    Expanded(
                       child:
                           BlocBuilder<DetallePanelsCubit, DetallePanelsState>(
                         builder: (context, statePanels) {
-                          if (statePanels.index == 0) return const SizedBox();
-
-                          return const ComentarioTextBox();
+                          return SmartRefrehsCustom(
+                              key: const Key(
+                                  '__emergencias_detalle_historial_key__'),
+                              enablePullDown: statePanels.index == 1,
+                              onRefresh: statePanels.index == 1
+                                  ? () async {
+                                      blocObjet
+                                          .add(const GetEmergenciaHistorial());
+                                      blocObjet.refreshController
+                                        ..loadFailed()
+                                        ..refreshCompleted();
+                                    }
+                                  : null,
+                              refreshController: blocObjet.refreshController,
+                              child: SingleChildScrollView(
+                                padding: const EdgeInsets.all(
+                                    AppLayoutConst.paddingL),
+                                child: Column(
+                                  children: [
+                                    Hero(
+                                      tag: blocObjet.emergencia.hashCode,
+                                      child: EmergenciaCard(
+                                        emergenciaModel: state.emergenciaModel,
+                                        isClient: user.isClient,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                        height: AppLayoutConst.spaceL),
+                                    Wrap(
+                                      alignment: WrapAlignment.spaceEvenly,
+                                      spacing: AppLayoutConst.spaceL,
+                                      runSpacing: AppLayoutConst.spaceL,
+                                      children: [
+                                        OptionButton(
+                                            option: const DetalleInfo(),
+                                            optionSelected: statePanels),
+                                        OptionButton(
+                                            option: const DetalleHistorial(),
+                                            optionSelected: statePanels),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                        height: AppLayoutConst.spaceL),
+                                    Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: AppLayoutConst.spaceM),
+                                        child: statePanels.index == 0
+                                            ? DetalleMorePanel(
+                                                emergencia:
+                                                    state.emergenciaModel)
+                                            : const DetalleHistoryPanel()),
+                                  ],
+                                ),
+                              ));
                         },
                       ),
+                    ),
+                    BlocBuilder<DetallePanelsCubit, DetallePanelsState>(
+                      builder: (context, statePanels) {
+                        if (statePanels.index == 0) return const SizedBox();
+
+                        return const SafeArea(child: ComentarioTextBox());
+                      },
                     ),
                   ],
                 )),

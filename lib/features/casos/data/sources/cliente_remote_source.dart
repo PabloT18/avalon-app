@@ -10,10 +10,10 @@ class ClienteRemoteSource {
     String url;
     if (search == null) {
       url =
-          '/clientes?estado=A&page=$page&size=10&sortField=createdDate&sortOrder=desc';
+          '/clientes?estado=A&page=$page&size=100&sortField=createdDate&sortOrder=desc';
     } else {
       url =
-          '/clientes?estado=A&page=$page&size=10&busqueda=$search&sortField=createdDate&sortOrder=desc';
+          '/clientes?estado=A&page=$page&size=100&busqueda=$search&sortField=createdDate&sortOrder=desc';
     }
     try {
       final response = await APPRemoteConfig.httpGet(
@@ -46,10 +46,10 @@ class ClienteRemoteSource {
     String url;
     if (search == null) {
       url =
-          '/clientes/$clienteId/clientesPolizas?page=$page&size=10&sortField=createdDate&sortOrder=desc';
+          '/clientes/$clienteId/clientesPolizas?page=$page&size=100&sortField=createdDate&sortOrder=desc';
     } else {
       url =
-          '/clientes/$clienteId/clientesPolizas?page=$page&size=10&busqueda=$search&sortField=createdDate&sortOrder=desc';
+          '/clientes/$clienteId/clientesPolizas?page=$page&size=100&busqueda=$search&sortField=createdDate&sortOrder=desc';
     }
     try {
       final response = await APPRemoteConfig.httpGet(

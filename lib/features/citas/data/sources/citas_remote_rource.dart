@@ -172,4 +172,82 @@ class CitasRemoteSource {
       throw Exception('Error sending comentario');
     }
   }
+
+  Future<CitaMedica> crearCita(
+    User user,
+    CitaMedica cita,
+    File? image, {
+    required String nombreDocumento,
+  }) async {
+    String url = '/citasMedicas';
+
+    final Map<String, dynamic> requestData = cita.toJsonCreate();
+    print(requestData);
+    Map<String, dynamic> comentarioData = {
+      "fechaTentativa": "2024-09-22",
+      "ciudadPreferencia": "Cuenca",
+      "padecimiento": "DESE APP",
+      "informacionAdicional": "DESE APP",
+      "otrosRequisitos": "fsa",
+      "clientePolizaId": 1302,
+      "casoId": 858,
+      "requisitosAdicionales": {
+        "VIAJES": false,
+        "HOSPEDAJE": false,
+        "SER_TRANSPORTE": false,
+        "AMB_TERRESTRE": false,
+        "AMB_AEREA": true,
+        "SILLA_RUEDAS": false,
+        "RECETA_MEDICA": false
+      }
+    };
+
+    // Prepare the FormData
+    FormData formData = FormData();
+
+    // Add the comentarioCitaMedica part with Content-Type application/json
+    formData.files.add(
+      MapEntry(
+        'citaMedica',
+        MultipartFile.fromString(
+          jsonEncode(requestData),
+          contentType: MediaType('application', 'json'),
+        ),
+      ),
+    );
+    // If an image is provided, add it to the form data
+    if (image != null) {
+      String fileName = image.path.split('/').last;
+      formData.files.add(
+        MapEntry(
+          'fotoCitaMedica',
+          await MultipartFile.fromFile(
+            image.path,
+            filename: fileName,
+            contentType:
+                MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+          ),
+        ),
+      );
+    }
+
+    try {
+      final response = await APPRemoteConfig.httpPost(
+        url: url,
+        data: formData,
+        token: user.token!,
+      );
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        // Assuming the response is a single CasoEntity in JSON format
+        final casoEntity = CitaMedica.fromJson(response.data);
+        return casoEntity;
+      } else {
+        throw Exception('Error al crear el caso');
+      }
+    } catch (e) {
+      print('Error creando caso: $e');
+      throw Exception('Error creando caso');
+    }
+  }
 }

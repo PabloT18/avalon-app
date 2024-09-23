@@ -5,7 +5,6 @@ import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/core/config/responsive/responsive_class.dart';
 import 'package:avalon_app/features/citas/presentation/bloc/cita_detalle/cita_detalle_bloc.dart';
 
-import 'package:avalon_app/features/shared/functions/utils_functions.dart';
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/loaders/loaders_widgets.dart';
 
@@ -75,9 +74,9 @@ class CitaDetalleHistoryPanel extends StatelessWidget {
                   userComent: userComent,
                 );
               }),
-              const SizedBox(
-                height: 53,
-              ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
             ],
           ],
         );

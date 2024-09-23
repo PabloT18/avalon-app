@@ -1,17 +1,23 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:avalon_app/core/error/failures/failures.dart';
 import 'package:avalon_app/features/casos/data/repository/casos_repository_impl.dart';
 import 'package:avalon_app/features/casos/domain/models/caso_entity.dart';
 import 'package:avalon_app/features/casos/domain/repository/casos_repository.dart';
 import 'package:avalon_app/features/citas/data/repository/citas_repository_impl.dart';
-import 'package:avalon_app/features/citas/domain/repository/citas_repository.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 
-import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_models/shared_models.dart';
+
+import '../../../domain/citas_domain.dart';
+import '../../../domain/models/requisitos_adicionales_entity.dart';
 
 part 'cita_nueva_event.dart';
 part 'cita_nueva_state.dart';
@@ -19,6 +25,11 @@ part 'cita_nueva_state.dart';
 class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
   CitaNuevaBloc(this._user, {this.caso}) : super(const CitaNuevaState()) {
     on<GetCasosCita>(_onGetCasosUser);
+    on<WaitForCreateCase>(_onWaitForCreateCase);
+    on<SelectCaso>(_onSelectCaso);
+    on<UpdateRequisitoAdicional>(_onUpdateRequisitoAdicional);
+    on<SubmitCitaEvent>(_onSubmitCitaEvent);
+
     // on<SelectCasoOption>(_onSelectCasoOption);
     // on<GetCitas>(_onGetCitas);
     // on<GetEmergencias>(_onGetEmergencias);
@@ -27,9 +38,20 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
 
     citasRepository = CitasRepositoryImpl();
     casosRepository = CasosRepositoryImpl();
+
     _page = 0;
 
     _pageCitas = 0;
+
+    birthDateController = TextEditingController();
+    detailPreferenceCity = TextEditingController();
+    detailHospital = TextEditingController();
+    detailPreferenceDoctor = TextEditingController();
+    detailPadecimeiento = TextEditingController();
+    detailAditionalInformation = TextEditingController();
+    detailOthersRequaimentes = TextEditingController();
+
+    add(const GetCasosCita());
   }
   final User _user;
   late int _page;
@@ -38,10 +60,33 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
   late RefreshController refreshController;
 
   late CitasRepository citasRepository;
-  // late EmergenciasRepository emergenciasRepository;
   late CasosRepository casosRepository;
 
   late int _pageCitas;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> get formKey => _formKey;
+
+  late TextEditingController birthDateController;
+  late TextEditingController detailPreferenceCity;
+  late TextEditingController detailHospital;
+  late TextEditingController detailPreferenceDoctor;
+  late TextEditingController detailPadecimeiento;
+  late TextEditingController detailAditionalInformation;
+  late TextEditingController detailOthersRequaimentes;
+
+  @override
+  Future<void> close() {
+    birthDateController.dispose();
+    detailPreferenceCity.dispose();
+    detailHospital.dispose();
+    detailPreferenceDoctor.dispose();
+    detailPadecimeiento.dispose();
+    detailAditionalInformation.dispose();
+    detailOthersRequaimentes.dispose();
+    refreshController.dispose();
+    return super.close();
+  }
 
   FutureOr<void> _onGetCasosUser(
       GetCasosCita event, Emitter<CitaNuevaState> emit) async {
@@ -57,13 +102,6 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
     // if (event.clientePolizaId == null) {
     casosResponse = await casosRepository.getCasosUser(_user,
         page: _page, search: null, update: false);
-    // } else {
-    //   casosResponse = await casosRepository.getCasosUserByPolizaId(_user,
-    //       page: _page,
-    //       search: null,
-    //       clientePolizaId: event.clientePolizaId!,
-    //       update: false);
-    // }
 
     casosResponse.fold(
       (failure) {
@@ -71,6 +109,96 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
       },
       (listadoCasos) {
         emit(CitaNuevaState(casos: listadoCasos));
+      },
+    );
+  }
+
+  FutureOr<void> _onWaitForCreateCase(
+      WaitForCreateCase event, Emitter<CitaNuevaState> emit) {
+    emit(state.copyWith(waitForCreateCase: true));
+  }
+
+  FutureOr<void> _onSelectCaso(
+      SelectCaso event, Emitter<CitaNuevaState> emit) async {
+    emit(state.copyWith(casoSeleccionado: event.caso));
+  }
+
+  FutureOr<void> _onUpdateRequisitoAdicional(
+      UpdateRequisitoAdicional event, Emitter<CitaNuevaState> emit) {
+    final updatedRequisitos = state.requisitosAdicionales.copyWith(
+      // Actualiza el campo correspondiente
+      ambTerrestre: event.field == 'ambTerrestre'
+          ? event.value
+          : state.requisitosAdicionales.ambTerrestre,
+      recetaMedica: event.field == 'recetaMedica'
+          ? event.value
+          : state.requisitosAdicionales.recetaMedica,
+      ambAerea: event.field == 'ambAerea'
+          ? event.value
+          : state.requisitosAdicionales.ambAerea,
+      sillaRuedas: event.field == 'sillaRuedas'
+          ? event.value
+          : state.requisitosAdicionales.sillaRuedas,
+      serTransporte: event.field == 'serTransporte'
+          ? event.value
+          : state.requisitosAdicionales.serTransporte,
+      viajes: event.field == 'viajes'
+          ? event.value
+          : state.requisitosAdicionales.viajes,
+      hospedaje: event.field == 'hospedaje'
+          ? event.value
+          : state.requisitosAdicionales.hospedaje,
+    );
+    emit(state.copyWith(requisitosAdicionales: updatedRequisitos));
+  }
+
+  Future<void> _onSubmitCitaEvent(
+      SubmitCitaEvent event, Emitter<CitaNuevaState> emit) async {
+    // Crear el objeto CitaMedica con los datos del formulario
+
+    final citaMedica = CitaMedica(
+      clientePoliza: state.casoSeleccionado!.clientePoliza,
+      caso: state.casoSeleccionado!,
+      // fechaTentativa:
+      // ateTime.parse(birthDateController.text),
+      fechaTentativa: DateFormat('dd/MM/yyyy').parse(birthDateController.text),
+      ciudadPreferencia: detailPreferenceCity.text,
+      padecimiento: detailPadecimeiento.text,
+      informacionAdicional: detailAditionalInformation.text,
+      otrosRequisitos: detailOthersRequaimentes.text,
+      requisitosAdicionales: state.requisitosAdicionales,
+    );
+    print(citaMedica);
+
+    final nombreDocumento =
+        event.image != null ? event.image!.path.split('/').last : '';
+
+    // // Llamar al repositorio para persistir la cita
+    Either<Failure, CitaMedica> result = await citasRepository.crearCita(
+      _user,
+      citaMedica,
+      image: event.image,
+      nombreDocumento: nombreDocumento,
+    );
+
+    result.fold(
+      (failure) {
+        // Maneja el error
+        emit(state.copyWith(message: failure.message));
+      },
+      (cita) {
+        birthDateController.clear();
+        detailPreferenceCity.clear();
+        detailHospital.clear();
+        detailPreferenceDoctor.clear();
+        detailPadecimeiento.clear();
+        detailAditionalInformation.clear();
+        detailOthersRequaimentes.clear();
+        // Maneja el éxito
+        emit(state.copyWith(
+          message: apptexts.citasPage.citaCreada,
+        ));
+        // Puedes navegar a otra pantalla o resetear el formulario
       },
     );
   }

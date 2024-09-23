@@ -82,9 +82,6 @@ class DetalleHistoryPanel extends StatelessWidget {
                   userComent: userComent,
                 );
               }),
-              const SizedBox(
-                height: 53,
-              ),
             ],
           ],
         );

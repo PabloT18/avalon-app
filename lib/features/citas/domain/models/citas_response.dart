@@ -4,8 +4,11 @@
 
 import 'dart:convert';
 
+import 'package:avalon_app/features/casos/casos.dart';
 import 'package:avalon_app/features/casos/data/models/casos_response.dart';
 import 'package:shared_models/shared_models.dart';
+
+import 'requisitos_adicionales_entity.dart';
 
 CitasMedicasResponse citasMedicasResponseFromJson(String str) =>
     CitasMedicasResponse.fromJson(json.decode(str));
@@ -50,7 +53,7 @@ class CitaMedica {
   final String? padecimiento;
   final String? informacionAdicional;
   final String? otrosRequisitos;
-  final CasoResponse? caso;
+  final CasoEntity? caso;
   final ClientePoliza? clientePoliza;
 
   final DateTime? fechaTentativa;
@@ -135,6 +138,34 @@ class CitaMedica {
             medicoCentroMedicoAseguradora?.toJson(),
         "requisitosAdicionales": requisitosAdicionales?.toJson(),
       };
+
+  Map<String, dynamic> toJsonCreate() {
+    if (medicoCentroMedicoAseguradora == null) {
+      return {
+        "fechaTentativa":
+            "${fechaTentativa!.year.toString().padLeft(4, '0')}-${fechaTentativa!.month.toString().padLeft(2, '0')}-${fechaTentativa!.day.toString().padLeft(2, '0')}",
+        "ciudadPreferencia": ciudadPreferencia,
+        "clientePolizaId": clientePoliza?.id,
+        "casoId": caso?.id,
+        "padecimiento": padecimiento,
+        "informacionAdicional": informacionAdicional,
+        "otrosRequisitos": otrosRequisitos,
+        "requisitosAdicionales": requisitosAdicionales?.toJson(),
+      };
+    }
+    return {
+      "fechaTentativa":
+          "${fechaTentativa!.year.toString().padLeft(4, '0')}-${fechaTentativa!.month.toString().padLeft(2, '0')}-${fechaTentativa!.day.toString().padLeft(2, '0')}",
+      "ciudadPreferencia": ciudadPreferencia,
+      "medicoCentroMedicoAseguradora": medicoCentroMedicoAseguradora?.id,
+      "clientePoliza": clientePoliza?.id,
+      "caso": caso?.id,
+      "padecimiento": padecimiento,
+      "informacionAdicional": informacionAdicional,
+      "otrosRequisitos": otrosRequisitos,
+      "requisitosAdicionales": requisitosAdicionales?.toJson(),
+    };
+  }
 }
 
 class MedicoCentroMedicoAseguradora {
@@ -409,46 +440,5 @@ class Medico {
         "urlImagen": urlImagen,
         "especialidad": especialidad?.toJson(),
         "nombreCompleto": nombreCompleto,
-      };
-}
-
-class RequisitosAdicionales {
-  final bool? ambTerrestre;
-  final bool? recetaMedica;
-  final bool? ambAerea;
-  final bool? sillaRuedas;
-  final bool? serTransporte;
-  final bool? viajes;
-  final bool? hospedaje;
-
-  RequisitosAdicionales({
-    this.ambTerrestre,
-    this.recetaMedica,
-    this.ambAerea,
-    this.sillaRuedas,
-    this.serTransporte,
-    this.viajes,
-    this.hospedaje,
-  });
-
-  factory RequisitosAdicionales.fromJson(Map<String, dynamic> json) =>
-      RequisitosAdicionales(
-        ambTerrestre: json["AMB_TERRESTRE"],
-        recetaMedica: json["RECETA_MEDICA"],
-        ambAerea: json["AMB_AEREA"],
-        sillaRuedas: json["SILLA_RUEDAS"],
-        serTransporte: json["SER_TRANSPORTE"],
-        viajes: json["VIAJES"],
-        hospedaje: json["HOSPEDAJE"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "AMB_TERRESTRE": ambTerrestre,
-        "RECETA_MEDICA": recetaMedica,
-        "AMB_AEREA": ambAerea,
-        "SILLA_RUEDAS": sillaRuedas,
-        "SER_TRANSPORTE": serTransporte,
-        "VIAJES": viajes,
-        "HOSPEDAJE": hospedaje,
       };
 }

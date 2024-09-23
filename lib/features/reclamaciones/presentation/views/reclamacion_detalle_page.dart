@@ -86,77 +86,76 @@ class ReclamacionDetalleView extends StatelessWidget {
                       user: user,
                       repository: blocObjet.repository,
                     ),
-                child: Stack(
+                child: Column(
                   children: [
-                    BlocBuilder<DetallePanelsCubit, DetallePanelsState>(
-                      builder: (context, statePanels) {
-                        return SmartRefrehsCustom(
-                            key: const Key(
-                                '__reclamacion_detalle_historial_key__'),
-                            enablePullDown: statePanels.index == 1,
-                            onRefresh: statePanels.index == 1
-                                ? () async {
-                                    blocObjet
-                                        .add(const GetReclamacionHistorial());
-                                    blocObjet.refreshController
-                                      ..loadFailed()
-                                      ..refreshCompleted();
-                                  }
-                                : null,
-                            refreshController: blocObjet.refreshController,
-                            child: SingleChildScrollView(
-                              padding:
-                                  const EdgeInsets.all(AppLayoutConst.paddingL),
-                              child: Column(
-                                children: [
-                                  Hero(
-                                    tag: blocObjet.reclamacion.hashCode,
-                                    child: ReclamacionCard(
-                                      reclamacion: state.reclamacion,
-                                      isClient: user.isClient,
-                                    ),
-                                  ),
-                                  const SizedBox(height: AppLayoutConst.spaceL),
-                                  Wrap(
-                                    alignment: WrapAlignment.spaceEvenly,
-                                    spacing: AppLayoutConst.spaceL,
-                                    runSpacing: AppLayoutConst.spaceL,
-                                    children: [
-                                      OptionReclamacionButton(
-                                          option: const DetalleInfo(),
-                                          optionSelected: statePanels),
-                                      OptionReclamacionButton(
-                                          option: const DetalleHistorial(),
-                                          optionSelected: statePanels),
-                                    ],
-                                  ),
-                                  const SizedBox(height: AppLayoutConst.spaceL),
-
-                                  Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: AppLayoutConst.spaceM),
-                                      child: statePanels.index == 0
-                                          ? ReclacmaionDetalleMorePanel(
-                                              reclamacion: state.reclamacion)
-                                          : const ReclamacionDetalleHistoryPanel()),
-                                  // const DetalleHistoryPanel(),
-                                ],
-                              ),
-                            ));
-                      },
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
+                    Expanded(
                       child:
                           BlocBuilder<DetallePanelsCubit, DetallePanelsState>(
                         builder: (context, statePanels) {
-                          if (statePanels.index == 0) return const SizedBox();
+                          return SmartRefrehsCustom(
+                              key: const Key(
+                                  '__reclamacion_detalle_historial_key__'),
+                              enablePullDown: statePanels.index == 1,
+                              onRefresh: statePanels.index == 1
+                                  ? () async {
+                                      blocObjet
+                                          .add(const GetReclamacionHistorial());
+                                      blocObjet.refreshController
+                                        ..loadFailed()
+                                        ..refreshCompleted();
+                                    }
+                                  : null,
+                              refreshController: blocObjet.refreshController,
+                              child: SingleChildScrollView(
+                                padding: const EdgeInsets.all(
+                                    AppLayoutConst.paddingL),
+                                child: Column(
+                                  children: [
+                                    Hero(
+                                      tag: blocObjet.reclamacion.hashCode,
+                                      child: ReclamacionCard(
+                                        reclamacion: state.reclamacion,
+                                        isClient: user.isClient,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                        height: AppLayoutConst.spaceL),
+                                    Wrap(
+                                      alignment: WrapAlignment.spaceEvenly,
+                                      spacing: AppLayoutConst.spaceL,
+                                      runSpacing: AppLayoutConst.spaceL,
+                                      children: [
+                                        OptionReclamacionButton(
+                                            option: const DetalleInfo(),
+                                            optionSelected: statePanels),
+                                        OptionReclamacionButton(
+                                            option: const DetalleHistorial(),
+                                            optionSelected: statePanels),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                        height: AppLayoutConst.spaceL),
 
-                          return const ComentarioTextBox();
+                                    Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: AppLayoutConst.spaceM),
+                                        child: statePanels.index == 0
+                                            ? ReclacmaionDetalleMorePanel(
+                                                reclamacion: state.reclamacion)
+                                            : const ReclamacionDetalleHistoryPanel()),
+                                    // const DetalleHistoryPanel(),
+                                  ],
+                                ),
+                              ));
                         },
                       ),
+                    ),
+                    BlocBuilder<DetallePanelsCubit, DetallePanelsState>(
+                      builder: (context, statePanels) {
+                        if (statePanels.index == 0) return const SizedBox();
+
+                        return const SafeArea(child: ComentarioTextBox());
+                      },
                     ),
                   ],
                 )),

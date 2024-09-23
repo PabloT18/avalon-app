@@ -21,7 +21,6 @@ class ComentarioCitaTextBox extends StatelessWidget {
     final cubit = context.read<ComentarioNuevCubit>();
     final TextEditingController messageController = TextEditingController();
 
-    cubit.textFieldFocusNode.unfocus();
     return BlocConsumer<ComentarioNuevCubit, ComentarioNuevState>(
       listener: (context, state) {
         if (state is ComentarioError) {
@@ -37,7 +36,7 @@ class ComentarioCitaTextBox extends StatelessWidget {
       builder: (context, state) {
         return FadeInUp(
           child: Container(
-            color: Colors.white,
+            // color: Colors.white,
             padding: const EdgeInsets.only(bottom: 8),
             child: Column(
               children: [
@@ -91,7 +90,7 @@ class ComentarioCitaTextBox extends StatelessWidget {
                     ],
                   ),
                 Container(
-                  padding: const EdgeInsets.only(top: 4.0, bottom: 5, left: 8),
+                  padding: const EdgeInsets.only(top: 4.0, left: 8),
                   decoration: BoxDecoration(
                     border:
                         Border(top: BorderSide(color: Colors.grey.shade300)),

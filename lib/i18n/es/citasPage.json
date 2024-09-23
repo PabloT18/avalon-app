@@ -45,5 +45,6 @@
     "citaEnCaso": "Escoje el caso para la cita médica",
     "citaEstado": "Estado de la cita",
     "historialEmpty": "No hay un historial de comentarios aún",
-    "historialError": "Erroral cargar el historial de comentarios"
+    "historialError": "Erroral cargar el historial de comentarios",
+    "citaCreada": "Cita creada"
 }
