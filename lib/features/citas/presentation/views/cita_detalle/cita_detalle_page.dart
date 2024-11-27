@@ -124,12 +124,18 @@ class CitaDetalleView extends StatelessWidget {
                                         runSpacing: AppLayoutConst.spaceL,
                                         children: [
                                           CitaOptionButton(
-                                              option: const CitaDetalleInfo(),
-                                              optionSelected: statePanels),
+                                            option: const CitaDetalleInfo(),
+                                            optionSelected: statePanels,
+                                            title: apptexts.citasPage
+                                                .details(n: 1),
+                                          ),
                                           CitaOptionButton(
-                                              option:
-                                                  const CitaDetalleHistorial(),
-                                              optionSelected: statePanels),
+                                            option:
+                                                const CitaDetalleHistorial(),
+                                            optionSelected: statePanels,
+                                            title: apptexts.citasPage
+                                                .historyTxt(n: 1),
+                                          ),
                                         ],
                                       ),
                                       const SizedBox(

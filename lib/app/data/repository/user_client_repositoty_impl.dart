@@ -11,18 +11,18 @@ class UserClientRepositoryImpl extends UserClientRepository {
 
   @override
   Future<bool> updateClientData(
-      {required User user, required String token}) async {
+      {required dynamic user, required String token}) async {
     if (user.userRol == UserRol.agente) {
       return _updateAgentetData(user: user, token: token);
     } else if (user.userRol == UserRol.asesor) {
       return _updateAsesorData(user: user, token: token);
     } else {
-      return _updateClient(user: user, token: token);
+      return _updateClient(user: user as UsrCliente, token: token);
     }
   }
 
   Future<bool> _updateClient(
-      {required User user, required String token}) async {
+      {required UsrCliente user, required String token}) async {
     final String url = '/clientes/${user.id}'; // Ajusta la URL según tu API
     final Map<String, dynamic> data = user.toJson();
 

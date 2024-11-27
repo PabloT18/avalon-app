@@ -2,6 +2,8 @@ import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/app/presentation/bloc/creationEntities/creation_cubit_cubit.dart';
 import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
+import 'package:avalon_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
 
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/loaders/loaders_widgets.dart';
@@ -9,10 +11,52 @@ import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custo
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_models/shared_models.dart';
 
 import '../bloc/reclamaciones_bloc.dart';
 import 'wid_reclamacion_card.dart';
+
+class ReclamacionesPage extends StatelessWidget {
+  const ReclamacionesPage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          apptexts.reclamacionesPage.title(n: 2),
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        elevation: 6,
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Cambia el color del icono de hamburguesa
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        mini: true,
+        onPressed: () {
+          context.goNamed(PAGES.crearReclamacion.pageName);
+        },
+        backgroundColor: AppColors.primaryBlue,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      body: BlocProvider(
+        create: (context) => ReclamacionesBloc(user),
+        child: const ReclamacionesPanel(),
+      ),
+    );
+  }
+}
 
 class ReclamacionesPanel extends StatelessWidget {
   const ReclamacionesPanel({
@@ -75,12 +119,13 @@ class ReclamacionesPanelView extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: AppLayoutConst.spaceM),
-                  Text(
-                    apptexts.reclamacionesPage.title(n: 2),
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  const SizedBox(height: AppLayoutConst.spaceL),
+                  // Text(
+                  //   apptexts.reclamacionesPage.title(n: 2),
+                  //   style: Theme.of(context).textTheme.titleSmall,
+                  // ),
+                  const SizedBox(height: AppLayoutConst.spaceS),
                   getChildByState(state, reclamacionesBloc, context),
+                  const SizedBox(height: AppLayoutConst.spaceL),
                 ],
               ),
             ),
@@ -92,6 +137,8 @@ class ReclamacionesPanelView extends StatelessWidget {
 
   Widget getChildByState(ReclamacionesState state,
       ReclamacionesBloc reclamacionesBloc, BuildContext context) {
+    final TextEditingController busquedaController = TextEditingController();
+
     return switch (state) {
       ReclamacionesInitial() =>
         const Center(child: CircularProgressIndicatorCustom()),
@@ -102,6 +149,22 @@ class ReclamacionesPanelView extends StatelessWidget {
           }),
       ReclamacionesLoaded() => Column(
           children: [
+            TextField(
+              controller: busquedaController,
+              decoration: InputDecoration(
+                hintText: apptexts.appOptions.search,
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    final query = busquedaController.text;
+                    if (query.isNotEmpty) {
+                      // Acción al presionar la lupa
+                      reclamacionesBloc.add(GetReclamaciones(search: query));
+                    }
+                  },
+                ),
+              ),
+            ),
             for (final recalmacion
                 in state.recalmaciones) // Repite los elementos 5 veces
               Hero(

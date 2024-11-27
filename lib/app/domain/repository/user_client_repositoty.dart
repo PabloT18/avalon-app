@@ -15,7 +15,7 @@ abstract class UserClientRepository {
 
   /// Actualiza los datos de un cliente (otro usuario).
   Future<bool> updateClientData({
-    required User user,
+    required dynamic user,
     required String token,
   });
 }

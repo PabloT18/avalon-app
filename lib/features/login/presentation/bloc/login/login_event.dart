@@ -29,3 +29,17 @@ class ChangePasswordEvent extends LoginEvent {
   @override
   List<Object> get props => [currentPassword, newPassword];
 }
+
+class ForgotPasswordIn extends LoginEvent {
+  const ForgotPasswordIn();
+}
+
+class ForgotPasswordVerify extends LoginEvent {
+  final String codigo;
+  final String newPassword;
+
+  const ForgotPasswordVerify(this.codigo, this.newPassword);
+
+  @override
+  List<Object> get props => [codigo, newPassword];
+}

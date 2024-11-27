@@ -80,8 +80,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     final currentState = state as AppAuthenticated;
     try {
-      final result =
-          await _getMembresias(event.user.id.toString(), event.user.token!);
+      final result = await _getMembresias.call(
+          event.user.id.toString(), event.user.token!);
       emit(currentState.copyWith(membresias: result));
     } catch (e) {
       emit(currentState.copyWith(membresias: []));

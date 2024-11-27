@@ -10,8 +10,19 @@ class MedicosRepositoryImpl implements MedicosRepository {
   MedicosRepositoryImpl();
 
   @override
-  Future<List<Medico>> getMedicos(User user) async {
-    const String url = '/medicos';
+  Future<List<Medico>> getMedicos(
+    User user, {
+    String? search,
+  }) async {
+    // const String url = '/medicos?size=10&busqueda=gener&sortField=createdDate&sortOrder=desc';
+    String url;
+
+    if (search == null) {
+      url = '/medicos?page=0&size=50&sortField=createdDate&sortOrder=desc';
+    } else {
+      url =
+          '/medicos?page=0&size=50&busqueda=$search&sortField=createdDate&sortOrder=desc';
+    }
 
     try {
       final response = await APPRemoteConfig.httpGet(

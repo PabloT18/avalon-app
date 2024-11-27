@@ -4,11 +4,9 @@ import 'package:avalon_app/features/membresias/membresias.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
-import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
+
 import 'package:avalon_app/core/config/router/app_routes_assets.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
-import 'package:animate_do/animate_do.dart';
-import 'package:dio/dio.dart';
 
 import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,9 +16,6 @@ class MembresiasPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<AppBloc>().state.user;
-    final responsive = ResponsiveCustom.of(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(apptexts.membresiasPage.membresia(n: 2)),
@@ -80,6 +75,10 @@ class MembresiasPage extends StatelessWidget {
           var singleChildScrollView = SingleChildScrollView(
               padding: const EdgeInsets.all(AppLayoutConst.paddingL),
               child: Column(children: [
+                // Text(
+                //   apptexts.membresiasPage.membresia(n: 2),
+                //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
+                // ),
                 _MemberCard(memship: state.membresias[0]),
                 for (int i = 1; i < state.membresias.length; i++)
                   Opacity(

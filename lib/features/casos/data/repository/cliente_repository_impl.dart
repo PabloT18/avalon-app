@@ -49,7 +49,8 @@ class ClientesRepositoryImpl extends ClientesRepository {
   }
 
   @override
-  Future<Either<Failure, List<User>>> getFamiliares(User user, int polizaId,
+  Future<Either<Failure, List<ClientePoliza>>> getFamiliares(
+      User user, int polizaId,
       {required int page, String? search, bool? update = false}) async {
     try {
       final familiares =

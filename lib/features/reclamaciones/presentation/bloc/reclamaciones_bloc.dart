@@ -28,6 +28,8 @@ class ReclamacionesBloc extends Bloc<ReclamacionesEvent, ReclamacionesState> {
 
   late int _pageCitas;
 
+  late String? search;
+
   @override
   Future<void> close() {
     refreshController.dispose();
@@ -38,12 +40,13 @@ class ReclamacionesBloc extends Bloc<ReclamacionesEvent, ReclamacionesState> {
       GetReclamaciones event, Emitter<ReclamacionesState> emit) async {
     emit(ReclamacionesInitial());
     _pageCitas = 0;
+    search = event.search;
 
     refreshController
       ..loadFailed()
       ..refreshCompleted();
-    final reclamaciones =
-        await reclamacioesRepository.getReclamaciones(_user, page: _pageCitas);
+    final reclamaciones = await reclamacioesRepository.getReclamaciones(_user,
+        page: _pageCitas, search: search);
 
     reclamaciones.fold((l) {
       emit(ReclamacionesError(l.message));
@@ -70,6 +73,7 @@ class ReclamacionesBloc extends Bloc<ReclamacionesEvent, ReclamacionesState> {
     final reclamaciones = await reclamacioesRepository.getReclamaciones(
       _user,
       page: _pageCitas + 1,
+      search: search,
     );
 
     reclamaciones.fold((l) {

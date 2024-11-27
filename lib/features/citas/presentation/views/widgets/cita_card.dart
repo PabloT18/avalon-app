@@ -72,12 +72,17 @@ class CitaCard extends StatelessWidget {
                         TitleDescripcion(
                           isSubdescription: true,
                           title: apptexts.appOptions.cliente,
-                          value: cita.clientePoliza!.displayName!,
+                          value: cita.clientePoliza!.cliente!.fullName,
                         ),
                       TitleDescripcion(
                         isSubdescription: true,
+                        title: apptexts.appOptions.cliente,
+                        value: cita.clientePoliza!.displayName!,
+                      ),
+                      TitleDescripcion(
+                        isSubdescription: true,
                         title: apptexts.appOptions.detalle(n: 1),
-                        value: cita.padecimiento!,
+                        value: cita.padecimiento ?? '',
                       ),
                       TitleDescripcion(
                         isSubdescription: true,
@@ -99,8 +104,8 @@ class CitaCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 10, // Tamaño del círculo
-                  height: 10,
+                  width: 12, // Tamaño del círculo
+                  height: 12,
                   decoration: BoxDecoration(
                     color:
                         UtilsFunctionsViews.getColorByState(cita.estado ?? ''),

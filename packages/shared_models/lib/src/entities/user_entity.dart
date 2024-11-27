@@ -28,9 +28,6 @@ class User extends Equatable {
 
   final int? rolId; // para actualizar solo el ID del rol
   final String? token;
-  // final DateTime? fechaNacimiento;
-  // final String? lugarNacimiento;
-  // final String? lugarResidencia;
 
   const User({
     this.createdBy,
@@ -55,11 +52,6 @@ class User extends Equatable {
     this.contraseniaTemporalModificada,
     this.numeroIdentificacion,
     this.tipoIdentificacion,
-
-    // this.contrasenia,
-    // this.fechaNacimiento,
-    // this.lugarNacimiento,
-    // this.lugarResidencia,
   });
 
   User copyWith({
@@ -82,9 +74,6 @@ class User extends Equatable {
     Rol? rol,
     int? rolId, // para actualizar solo el ID del rol
     String? token,
-    DateTime? fechaNacimiento,
-    String? lugarNacimiento,
-    String? lugarResidencia,
     String? contraseniaTemporal,
     bool? contraseniaTemporalModificada,
     String? numeroIdentificacion,
@@ -103,7 +92,6 @@ class User extends Equatable {
       correoElectronico: correoElectronico ?? this.correoElectronico,
       numeroTelefono: numeroTelefono ?? this.numeroTelefono,
       nombreUsuario: nombreUsuario ?? this.nombreUsuario,
-
       urlImagen: urlImagen ?? this.urlImagen,
       direccion: direccion ?? this.direccion,
       estado: estado ?? this.estado,
@@ -115,10 +103,6 @@ class User extends Equatable {
           contraseniaTemporalModificada ?? this.contraseniaTemporalModificada,
       numeroIdentificacion: numeroIdentificacion ?? this.numeroIdentificacion,
       tipoIdentificacion: tipoIdentificacion ?? this.tipoIdentificacion,
-      // fechaNacimiento: fechaNacimiento ?? this.fechaNacimiento,
-      // lugarNacimiento: lugarNacimiento ?? this.lugarNacimiento,
-      // lugarResidencia: lugarResidencia ?? this.lugarResidencia,
-// Nuevo campo
     );
   }
 
@@ -137,7 +121,6 @@ class User extends Equatable {
       correoElectronico: response.correoElectronico,
       numeroTelefono: response.numeroTelefono,
       nombreUsuario: response.nombreUsuario,
-
       urlImagen: response.urlImagen,
       direccion: response.direccion != null
           ? Direccion.fromJson(response.direccion!.toJson())
@@ -150,9 +133,6 @@ class User extends Equatable {
       contraseniaTemporalModificada: response.contraseniaTemporalModificada,
       numeroIdentificacion: response.contraseniaTemporal,
       tipoIdentificacion: response.contraseniaTemporal,
-      // fechaNacimiento: response.fechaNacimiento,
-      // lugarNacimiento: response.lugarNacimiento,
-      // lugarResidencia: response.lugarResidencia,
     );
   }
 
@@ -171,22 +151,16 @@ class User extends Equatable {
       'correoElectronico': correoElectronico,
       'numeroTelefono': numeroTelefono,
       'nombreUsuario': nombreUsuario,
-
       'urlImagen': urlImagen,
       'direccion': direccion?.toJson(),
       'estado': estado,
       'rol': rol?.toJson(),
       'rolId': rolId,
       'token': token,
-
       'contraseniaTemporal': contraseniaTemporal,
       'contraseniaTemporalModificada': contraseniaTemporalModificada,
       'numeroIdentificacion': numeroIdentificacion,
       'tipoIdentificacion': tipoIdentificacion,
-
-      // 'fechaNacimiento': fechaNacimiento?.toIso8601String(),
-      // 'lugarNacimiento': lugarNacimiento,
-      // 'lugarResidencia': lugarResidencia,
     };
   }
 
@@ -267,11 +241,6 @@ class User extends Equatable {
       return formatter.format(fecha);
     }
   }
-
-  // Ejemplo de uso:
-  // String get formattedFechaNacimiento => formatFecha(fechaNacimiento);
-  // String get formattedCreatedDate => formatFecha(createdDate);
-  // String get formattedLastModifiedDate => formatFecha(lastModifiedDate);
 
   bool get isAddressComplete => direccion?.isComplete ?? false;
 

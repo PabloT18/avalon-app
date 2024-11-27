@@ -1,7 +1,6 @@
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
-import 'package:avalon_app/features/citas/presentation/views/cita_detalle/cita_detalle_page.dart';
 
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';

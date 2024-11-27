@@ -16,6 +16,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LogIn>(_onLogIn);
     on<VerifyTwoFactorCode>(_onVerifyTwoFactorCode);
     on<ChangePasswordEvent>(_onChangePassword);
+    on<ForgotPasswordIn>(_onForgotPasswordIn);
+    on<ForgotPasswordVerify>(_onForgotPasswordVerify);
 
     _txtControllerContrasena = TextEditingController();
     _txtControllerCorreo = TextEditingController();
@@ -122,4 +124,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   String? validateCorreo(String? correo) =>
       UtilsFunctionsLogic.validateDataNull(correo, "UserName can not be empty");
+
+  FutureOr<void> _onForgotPasswordIn(
+      ForgotPasswordIn event, Emitter<LoginState> emit) {
+    emit(const LoginInitial());
+    emit(const LoginPasswordForgotRequest());
+  }
+
+  FutureOr<void> _onForgotPasswordVerify(
+      ForgotPasswordVerify event, Emitter<LoginState> emit) {}
 }

@@ -199,6 +199,7 @@ class UtilsFunctionsViews {
           fontWeight: FontWeight.bold,
         ),
         errorText: error,
+        errorMaxLines: 5,
         labelText: label,
         hintText: hint,
         prefixIcon: icon != null ? Icon(icon) : null,

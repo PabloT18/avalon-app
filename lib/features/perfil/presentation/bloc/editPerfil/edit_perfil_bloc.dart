@@ -26,14 +26,14 @@ class EditPerfilBloc extends Bloc<EditPerfilEvent, EditPerfilState> {
     _usernameController = TextEditingController(text: user.nombreUsuario);
     _phoneNumberController = TextEditingController(text: user.numeroTelefono);
 
-    if (user is UsrCliente) {
-      _birthDateController = TextEditingController(
-          text: (user as UsrCliente).formattedFechaNacimiento);
-      _birthPlaceController =
-          TextEditingController(text: (user as UsrCliente).lugarNacimiento);
-      _residenceController =
-          TextEditingController(text: (user as UsrCliente).lugarResidencia);
-    }
+    // if (user is UsrCliente) {
+    //   _birthDateController = TextEditingController(
+    //       text: (user as UsrCliente).formattedFechaNacimiento);
+    //   _birthPlaceController =
+    //       TextEditingController(text: (user as UsrCliente).lugarNacimiento);
+    //   _residenceController =
+    //       TextEditingController(text: (user as UsrCliente).lugarResidencia);
+    // }
     _statusController = TextEditingController(text: user.estado);
   }
 
@@ -73,21 +73,33 @@ class EditPerfilBloc extends Bloc<EditPerfilEvent, EditPerfilState> {
 
     if (formKey.currentState!.validate()) {
       try {
-        final updatedUser = user.copyWith(
-          rolId: user.rol?.id,
-          nombres: firstName.text,
-          nombresDos: secondName.text,
-          apellidos: firstLastName.text,
-          apellidosDos: secondLastName.text,
-          correoElectronico: _emailController.text,
-          numeroTelefono: _phoneNumberController.text,
-          lugarNacimiento: _birthPlaceController.text,
-          lugarResidencia: _residenceController.text,
-          // fechaNacimiento: _birthDateController.text,
-        );
-
+        User updateUser;
+        if (user is UsrCliente) {
+          updateUser = (user as UsrCliente).copyWith(
+            rolId: user.rol?.id,
+            nombres: firstName.text,
+            nombresDos: secondName.text,
+            apellidos: firstLastName.text,
+            apellidosDos: secondLastName.text,
+            correoElectronico: _emailController.text,
+            numeroTelefono: _phoneNumberController.text,
+            // lugarNacimiento: _birthPlaceController.text,
+            // lugarResidencia: _residenceController.text,
+            // fechaNacimiento: _birthDateController.text,
+          );
+        } else {
+          updateUser = user.copyWith(
+            rolId: user.rol?.id,
+            nombres: firstName.text,
+            nombresDos: secondName.text,
+            apellidos: firstLastName.text,
+            apellidosDos: secondLastName.text,
+            correoElectronico: _emailController.text,
+            numeroTelefono: _phoneNumberController.text,
+          );
+        }
         final response = await _userClientRepository.updateClientData(
-            user: updatedUser, token: user.token!);
+            user: updateUser, token: user.token!);
         print(response);
 
         emit(state.copyWith(

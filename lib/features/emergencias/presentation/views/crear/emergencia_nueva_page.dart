@@ -32,13 +32,13 @@ class CrearEmergenciaPage extends StatelessWidget {
         getPaisesUseCase: RepositoryProvider.of<GetPaisesUseCase>(context),
         getEstadosUseCase: RepositoryProvider.of<GetEstadosUseCase>(context),
       ),
-      child: const CrearCitaView(),
+      child: const CrearEmergenciaView(),
     );
   }
 }
 
-class CrearCitaView extends StatelessWidget {
-  const CrearCitaView({
+class CrearEmergenciaView extends StatelessWidget {
+  const CrearEmergenciaView({
     super.key,
   });
 
@@ -56,12 +56,12 @@ class CrearCitaView extends StatelessWidget {
           if (state.waitForCreateCase) {
             showAlertCreateDialog(context, emergenciaNuevabloc);
           }
-          if (state.citaCreada != null && !state.citaCreada!) {
+          if (state.emergenciaCreada != null && !state.emergenciaCreada!) {
             UtilsFunctionsViews.showFlushBar(
                     message: apptexts.reclamacionesPage.reclamacionCreadaError)
                 .show(context);
           }
-          if (state.citaCreada != null && state.citaCreada!) {
+          if (state.emergenciaCreada != null && state.emergenciaCreada!) {
             context.read<CreationCubit>().itemCreated(ItemType.emergencia);
             Navigator.of(context).pop();
           }
@@ -196,7 +196,7 @@ class FormNewEmergencia extends StatelessWidget {
           ),
           const SizedBox(height: AppLayoutConst.spaceM),
           Text(
-            apptexts.citasPage.nuevaCita,
+            apptexts.emergenciasPage.nuevaEmergencia,
             style: Theme.of(context).textTheme.titleSmall,
           ),
 

@@ -8,7 +8,7 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       // visualDensity: VisualDensity.adaptivePlatformDensity,
-      colorSchemeSeed: AppColors.primaryBlueMaterial,
+      colorSchemeSeed: AppColors.primaryBlue,
       fontFamily: 'Sora',
       expansionTileTheme: const ExpansionTileThemeData().copyWith(
           shape: const Border(), collapsedIconColor: AppColors.secondaryBlue),
@@ -31,7 +31,6 @@ class AppTheme {
           color: AppColors.primaryBlue,
           fontWeight: FontWeight.bold,
         ),
-
         bodyLarge: TextStyle(fontSize: 16, color: Colors.black),
         bodyMedium: TextStyle(fontSize: 14),
         bodySmall: TextStyle(fontSize: 12),
@@ -106,9 +105,13 @@ class AppTheme {
           fontFamily: 'Sora',
         ),
       ),
-      // appBarTheme: const AppBarTheme(
-      //     color: AppColors.primaryBlue,
-      //     iconTheme: IconThemeData(color: Colors.white)),
+      appBarTheme: const AppBarTheme(
+          color: AppColors.primaryBlue,
+          titleTextStyle: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
+          iconTheme: IconThemeData(color: Colors.white)),
       // fontFamily: 'Sora',
       // splashColor: AppColors.primaryBlue.withOpacity(0.05),
       // cardTheme: const CardTheme().copyWith(

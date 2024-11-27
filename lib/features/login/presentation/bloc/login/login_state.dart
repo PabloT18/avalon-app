@@ -40,3 +40,7 @@ final class LoginPasswordChangeRequired extends LoginState {
   const LoginPasswordChangeRequired(this.message);
   final String message;
 }
+
+final class LoginPasswordForgotRequest extends LoginState {
+  const LoginPasswordForgotRequest();
+}

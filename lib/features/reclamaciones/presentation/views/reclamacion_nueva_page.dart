@@ -197,7 +197,7 @@ class FormNewReclamacion extends StatelessWidget {
           ),
           const SizedBox(height: AppLayoutConst.spaceM),
           Text(
-            apptexts.citasPage.nuevaCita,
+            apptexts.reclamacionesPage.nuevaReclamacion,
             style: Theme.of(context).textTheme.titleSmall,
           ),
 

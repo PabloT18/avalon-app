@@ -142,34 +142,64 @@ class AppRouter {
                 ]),
 
             GoRoute(
-              path: PAGES.crearCita.pageName,
-              name: PAGES.crearCita.pageName,
+                path: PAGES.citas.pageName,
+                name: PAGES.citas.pageName,
+                pageBuilder: (context, state) => pageBuilderByPlatform(
+                      context,
+                      state,
+                      const CitasPage(),
+                    ),
+                routes: [
+                  GoRoute(
+                    path: PAGES.crearCita.pageName,
+                    name: PAGES.crearCita.pageName,
+                    pageBuilder: (context, state) => pageBuilderByPlatform(
+                      context,
+                      state,
+                      const CrearCitaPage(),
+                    ),
+                  ),
+                ]),
+            GoRoute(
+              path: PAGES.emergencia.pageName,
+              name: PAGES.emergencia.pageName,
               pageBuilder: (context, state) => pageBuilderByPlatform(
                 context,
                 state,
-                const CrearCitaPage(),
+                const EmergenciasPage(),
               ),
+              routes: [
+                GoRoute(
+                  path: PAGES.crearEmergencia.pageName,
+                  name: PAGES.crearEmergencia.pageName,
+                  pageBuilder: (context, state) => pageBuilderByPlatform(
+                    context,
+                    state,
+                    const CrearEmergenciaPage(),
+                  ),
+                ),
+              ],
             ),
             GoRoute(
-              path: PAGES.crearEmergencia.pageName,
-              name: PAGES.crearEmergencia.pageName,
+              path: PAGES.reclamaciones.pageName,
+              name: PAGES.reclamaciones.pageName,
               pageBuilder: (context, state) => pageBuilderByPlatform(
                 context,
                 state,
-                const CrearEmergenciaPage(),
+                const ReclamacionesPage(),
               ),
+              routes: [
+                GoRoute(
+                  path: PAGES.crearReclamacion.pageName,
+                  name: PAGES.crearReclamacion.pageName,
+                  pageBuilder: (context, state) => pageBuilderByPlatform(
+                    context,
+                    state,
+                    const CrearReclamacionPage(),
+                  ),
+                ),
+              ],
             ),
-
-            GoRoute(
-              path: PAGES.crearReclamacion.pageName,
-              name: PAGES.crearReclamacion.pageName,
-              pageBuilder: (context, state) => pageBuilderByPlatform(
-                context,
-                state,
-                const CrearReclamacionPage(),
-              ),
-            ),
-
             GoRoute(
               path: '${PAGES.detalleCita.pageName}/:citaId',
               name: PAGES.detalleCita.pageName,

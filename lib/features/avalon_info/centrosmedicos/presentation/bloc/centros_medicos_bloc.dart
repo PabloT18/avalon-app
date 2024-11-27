@@ -32,7 +32,7 @@ class CentrosMedicosBloc
   }
 
   FutureOr<void> _onGetCentrosMedicos(
-      CentrosMedicosEvent event, Emitter<CentrosMedicosState> emit) async {
+      GetCentrosMedicos event, Emitter<CentrosMedicosState> emit) async {
     emit(CentrosMedicosLoading());
 
     refreshController
@@ -40,7 +40,8 @@ class CentrosMedicosBloc
       ..refreshCompleted();
 
     try {
-      final List<CentroMedico> medicosList = await repository.getMedicos(user);
+      final List<CentroMedico> medicosList =
+          await repository.getMedicos(user, search: event.search);
       if (medicosList.isEmpty) {
         emit(CentrosMedicosError(apptexts.centrosMedicos.noData));
       } else {

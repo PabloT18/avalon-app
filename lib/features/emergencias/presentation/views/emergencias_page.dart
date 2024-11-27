@@ -4,6 +4,8 @@ import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/app/presentation/bloc/creationEntities/creation_cubit_cubit.dart';
 import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
+import 'package:avalon_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
 
 import 'package:avalon_app/features/emergencias/emergencias.dart';
 import 'package:avalon_app/features/emergencias/presentation/views/wid_emergencia_card.dart';
@@ -13,10 +15,55 @@ import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custo
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:shared_models/shared_models.dart';
 
 import '../bloc/emergencias_bloc.dart';
+
+class EmergenciasPage extends StatelessWidget {
+  const EmergenciasPage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final user = (context.read<AppBloc>().state as AppAuthenticated).user;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          apptexts.emergenciasPage.title(n: 2),
+        ),
+        elevation: 6,
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Cambia el color del icono de hamburguesa
+        ),
+      ),
+      // floatingActionButton: FloatingActionButton(
+      // onPressed: () {
+      //   context.goNamed(PAGES.crearCaso.pageName);
+      // },
+      // child: const Icon(Icons.add),
+      // ),
+      floatingActionButton: FloatingActionButton(
+        mini: true,
+        onPressed: () {
+          context.goNamed(PAGES.crearEmergencia.pageName);
+        },
+        backgroundColor: AppColors.primaryBlue,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      body: BlocProvider(
+        create: (context) => EmergenciasBloc(user),
+        child: const EmergenciaPanel(),
+      ),
+    );
+  }
+}
 
 class EmergenciaPanel extends StatelessWidget {
   const EmergenciaPanel({
@@ -70,12 +117,13 @@ class EmergenciasPanelView extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: AppLayoutConst.spaceM),
-                  Text(
-                    apptexts.emergenciasPage.title(n: 2),
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
+                  // Text(
+                  //   apptexts.emergenciasPage.title(n: 2),
+                  //   style: Theme.of(context).textTheme.titleSmall,
+                  // ),
                   const SizedBox(height: AppLayoutConst.spaceL),
                   getChildByState(state, emergenciaBloc, context, user),
+                  const SizedBox(height: AppLayoutConst.spaceL),
                 ],
               ),
             ),

@@ -8,8 +8,21 @@ import '../models/centros_medicos_response.dart';
 
 class CentrosmedicosRepositoryImpl implements CentrosmedicosRepository {
   @override
-  Future<List<CentroMedico>> getMedicos(User user) async {
-    const String url = '/centrosMedicos';
+  Future<List<CentroMedico>> getMedicos(
+    User user, {
+    String? search,
+  }) async {
+    // const String url = '/centrosMedicos';
+
+    String url;
+
+    if (search == null) {
+      url =
+          '/centrosMedicos?page=0&size=50&sortField=createdDate&sortOrder=desc';
+    } else {
+      url =
+          '/centrosMedicos?page=0&size=50&busqueda=$search&sortField=createdDate&sortOrder=desc';
+    }
 
     try {
       final response = await APPRemoteConfig.httpGet(

@@ -8,5 +8,7 @@ sealed class CitasEvent extends Equatable {
 }
 
 class GetCitas extends CitasEvent {
-  const GetCitas();
+  const GetCitas({this.search});
+
+  final String? search;
 }

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 610 (305 per locale)
+/// Strings: 634 (317 per locale)
 ///
-/// Built on 2024-09-23 at 05:59 UTC
+/// Built on 2024-11-26 at 21:01 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -209,7 +209,14 @@ class _TranslationsAppOptionsEs {
 	String get save => 'Guardar';
 	String get crate => 'Crear';
 	String get cancel => 'Cancelar';
+	String get search => 'Buscar';
+	String get ingreseUsuario => 'Ingrese su usuario';
+	String get ingreseCorre => 'Ingrese su correo';
+	String get notEmptyCorreo => 'El correo no puede estar vacío';
+	String get notValidCorreo => 'Correo inválido';
+	String get notEmptyPassword => 'La contraseña no puede estar vacía';
 	String get changePassword => 'Cambiar Contraseña';
+	String get restartPassword => 'Recuperar Contraseña';
 	String get newPassword => 'Nueva Contraseña';
 	String get confirmPassword => 'Confirmar Contraseña';
 	String get passwordNotMatch => 'Las contraseñas no coinciden';
@@ -219,6 +226,7 @@ class _TranslationsAppOptionsEs {
 	String get verificationCode => 'Código de Verificación';
 	String get ingresarCode => 'Ingresar Código';
 	String get verificar => 'Verificar';
+	String get verificarText => 'Codigo de verificación enviado a su correo';
 	String get passwordDebil => 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número';
 	String get historialEmpty => 'No hay un historial de comentarios aún';
 	String get historialError => 'Erroral cargar el historial de comentarios';
@@ -322,6 +330,14 @@ class _TranslationsCitasPageEs {
 	String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 		one: 'Más Detalle',
 		other: 'Más Detalles',
+	);
+	String details({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Detalle',
+		other: 'Detalles',
+	);
+	String historyTxt({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Historial',
+		other: 'Historiales',
 	);
 	String get detailFechaTentativa => 'Fecha Tentativa';
 	String get detailPreferenceCity => 'Ciudad de preferencia';
@@ -826,7 +842,14 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override String get save => 'Save';
 	@override String get crate => 'Create';
 	@override String get cancel => 'Cancel';
+	@override String get search => 'Search';
+	@override String get ingreseUsuario => 'Enter your username';
+	@override String get ingreseCorre => 'Enter your email';
+	@override String get notEmptyCorreo => 'Email cannot be empty';
+	@override String get notValidCorreo => 'Invalid email';
+	@override String get notEmptyPassword => 'Password cannot be empty';
 	@override String get changePassword => 'Change Password';
+	@override String get restartPassword => 'Recover Password';
 	@override String get newPassword => 'New Password';
 	@override String get confirmPassword => 'Confirm Password';
 	@override String get passwordNotMatch => 'Passwords do not match';
@@ -836,6 +859,7 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override String get verificationCode => 'Verification Code';
 	@override String get ingresarCode => 'Enter Code';
 	@override String get verificar => 'Verify';
+	@override String get verificarText => 'Verification code sent to your email';
 	@override String get passwordDebil => 'The password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number';
 	@override String get historialEmpty => 'No comment history yet';
 	@override String get historialError => 'Error loading comment history';
@@ -939,6 +963,14 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 	@override String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 		one: 'More Detail',
 		other: 'More Details',
+	);
+	@override String details({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Detail',
+		other: 'Details',
+	);
+	@override String historyTxt({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'History',
+		other: 'Histories',
 	);
 	@override String get detailFechaTentativa => 'Tentative Date';
 	@override String get detailPreferenceCity => 'Preferred City';
@@ -1400,7 +1432,14 @@ extension on Translations {
 			case 'appOptions.save': return 'Guardar';
 			case 'appOptions.crate': return 'Crear';
 			case 'appOptions.cancel': return 'Cancelar';
+			case 'appOptions.search': return 'Buscar';
+			case 'appOptions.ingreseUsuario': return 'Ingrese su usuario';
+			case 'appOptions.ingreseCorre': return 'Ingrese su correo';
+			case 'appOptions.notEmptyCorreo': return 'El correo no puede estar vacío';
+			case 'appOptions.notValidCorreo': return 'Correo inválido';
+			case 'appOptions.notEmptyPassword': return 'La contraseña no puede estar vacía';
 			case 'appOptions.changePassword': return 'Cambiar Contraseña';
+			case 'appOptions.restartPassword': return 'Recuperar Contraseña';
 			case 'appOptions.newPassword': return 'Nueva Contraseña';
 			case 'appOptions.confirmPassword': return 'Confirmar Contraseña';
 			case 'appOptions.passwordNotMatch': return 'Las contraseñas no coinciden';
@@ -1410,6 +1449,7 @@ extension on Translations {
 			case 'appOptions.verificationCode': return 'Código de Verificación';
 			case 'appOptions.ingresarCode': return 'Ingresar Código';
 			case 'appOptions.verificar': return 'Verificar';
+			case 'appOptions.verificarText': return 'Codigo de verificación enviado a su correo';
 			case 'appOptions.passwordDebil': return 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número';
 			case 'appOptions.historialEmpty': return 'No hay un historial de comentarios aún';
 			case 'appOptions.historialError': return 'Erroral cargar el historial de comentarios';
@@ -1494,6 +1534,14 @@ extension on Translations {
 			case 'citasPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Más Detalle',
 				other: 'Más Detalles',
+			);
+			case 'citasPage.details': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Detalle',
+				other: 'Detalles',
+			);
+			case 'citasPage.historyTxt': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Historial',
+				other: 'Historiales',
 			);
 			case 'citasPage.detailFechaTentativa': return 'Fecha Tentativa';
 			case 'citasPage.detailPreferenceCity': return 'Ciudad de preferencia';
@@ -1789,7 +1837,14 @@ extension on _TranslationsEn {
 			case 'appOptions.save': return 'Save';
 			case 'appOptions.crate': return 'Create';
 			case 'appOptions.cancel': return 'Cancel';
+			case 'appOptions.search': return 'Search';
+			case 'appOptions.ingreseUsuario': return 'Enter your username';
+			case 'appOptions.ingreseCorre': return 'Enter your email';
+			case 'appOptions.notEmptyCorreo': return 'Email cannot be empty';
+			case 'appOptions.notValidCorreo': return 'Invalid email';
+			case 'appOptions.notEmptyPassword': return 'Password cannot be empty';
 			case 'appOptions.changePassword': return 'Change Password';
+			case 'appOptions.restartPassword': return 'Recover Password';
 			case 'appOptions.newPassword': return 'New Password';
 			case 'appOptions.confirmPassword': return 'Confirm Password';
 			case 'appOptions.passwordNotMatch': return 'Passwords do not match';
@@ -1799,6 +1854,7 @@ extension on _TranslationsEn {
 			case 'appOptions.verificationCode': return 'Verification Code';
 			case 'appOptions.ingresarCode': return 'Enter Code';
 			case 'appOptions.verificar': return 'Verify';
+			case 'appOptions.verificarText': return 'Verification code sent to your email';
 			case 'appOptions.passwordDebil': return 'The password must have at least 8 characters, one uppercase letter, one lowercase letter, and one number';
 			case 'appOptions.historialEmpty': return 'No comment history yet';
 			case 'appOptions.historialError': return 'Error loading comment history';
@@ -1883,6 +1939,14 @@ extension on _TranslationsEn {
 			case 'citasPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'More Detail',
 				other: 'More Details',
+			);
+			case 'citasPage.details': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Detail',
+				other: 'Details',
+			);
+			case 'citasPage.historyTxt': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'History',
+				other: 'Histories',
 			);
 			case 'citasPage.detailFechaTentativa': return 'Tentative Date';
 			case 'citasPage.detailPreferenceCity': return 'Preferred City';

@@ -20,7 +20,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:avalon_app/core/config/responsive/responsive_class.dart';
 import 'package:avalon_app/core/config/router/app_routes_assets.dart';
 
+import '../bloc/cubit/reset_password_cubit.dart';
 import '../bloc/login/login_bloc.dart';
+import 'change_psw_firts_time.dart';
+import 'forget_psw.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -89,14 +92,11 @@ class _LoginFormComponents extends StatelessWidget {
       if (state is LoginPasswordChangeRequired) {
         _showChangePasswordDialog(context, loginBloc);
       }
+      if (state is LoginPasswordForgotRequest) {
+        _showForgotPasswordDialog(context, loginBloc);
+      }
       if (state is LoginSucces) {
         AppRouter.router.go(PAGES.home.pagePath);
-        // if (state.message.contains('cliente')) {
-        // AppRouter.router.go(PAGES.home.pagePath);
-
-        // } else if (state.message.contains('asesor')) {
-        //   AppRouter.router.go(PAGES.home.pagePath);
-        // }
       }
 
       if (state is LoginError) {
@@ -131,7 +131,7 @@ class _LoginFormComponents extends StatelessWidget {
                     validator: loginBloc.validateCorreo,
                     textCapitalization: TextCapitalization.none,
                     decoration: UtilsFunctionsViews.buildInputDecoration(
-                      label: 'Enter your username',
+                      label: apptexts.appOptions.ingreseUsuario,
                       hint: 'jperez',
                       icon: Icons.mail,
                     ),
@@ -160,6 +160,15 @@ class _LoginFormComponents extends StatelessWidget {
               backgroundColor: Colors.transparent,
               onPrimary: Colors.white,
             ),
+          CustomButton(
+            onPressed: () {
+              loginBloc.add(const ForgotPasswordIn());
+            },
+            title: 'Forgot password?',
+            backgroundColor: Colors.transparent,
+            shadowColor: Colors.transparent,
+            onPrimary: Colors.white,
+          ),
           SizedBox(height: responsive.hp(5)),
         ],
       );
@@ -173,10 +182,24 @@ class _LoginFormComponents extends StatelessWidget {
         final TextEditingController codigoController = TextEditingController();
         return AlertDialog(
           title: Text(apptexts.appOptions.verificationCode),
-          content: TextField(
-            controller: codigoController,
-            decoration:
-                InputDecoration(hintText: apptexts.appOptions.ingresarCode),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: codigoController,
+                keyboardType: TextInputType.number,
+                decoration:
+                    InputDecoration(hintText: apptexts.appOptions.ingresarCode),
+              ),
+              Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppLayoutConst.paddingM,
+                  ).copyWith(top: AppLayoutConst.paddingM),
+                  child: Text(
+                    apptexts.appOptions.verificarText,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  )),
+            ],
           ),
           actions: [
             TextButton(
@@ -202,6 +225,23 @@ class _LoginFormComponents extends StatelessWidget {
         builder: (context) {
           return AlertChangePassword(
             loginBloc: loginBloc,
+          );
+        });
+  }
+
+  void _showForgotPasswordDialog(
+    BuildContext context,
+    LoginBloc loginBloc,
+  ) async {
+    await showDialog(
+        context: context,
+        builder: (context) {
+          return BlocProvider(
+            create: (context) =>
+                ResetPasswordCubit(context.read<AuthenticationRepository>()),
+            child: ForgotPassword(
+              loginBloc: loginBloc,
+            ),
           );
         });
   }
@@ -280,187 +320,6 @@ class _PasswordFieldState extends State<PasswordField> {
       onFieldSubmitted: (_) {
         FocusScope.of(context).unfocus();
       },
-    );
-  }
-}
-
-class AlertChangePassword extends StatelessWidget {
-  const AlertChangePassword({
-    super.key,
-    required this.loginBloc,
-  });
-
-  final LoginBloc loginBloc;
-  @override
-  Widget build(BuildContext context) {
-    final currentPasswordController = TextEditingController();
-    final newPasswordController = TextEditingController();
-    final repeatPasswordController = TextEditingController();
-    return AlertDialog(
-      title: Text(apptexts.appOptions.changePassword),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            controller: currentPasswordController,
-            decoration: InputDecoration(
-              labelText: apptexts.appOptions.currentPassword,
-            ),
-            // obscureText: true,
-          ),
-          const SizedBox(
-            height: AppLayoutConst.spaceL,
-          ),
-          // TextField(
-          //   controller: newPasswordController,
-          //   decoration: const InputDecoration(labelText: 'Nueva contraseña'),
-          //   obscureText: true,
-          // ),
-          PasswordFieldController(
-            controller: newPasswordController,
-            label: apptexts.appOptions.newPassword,
-          ),
-          const SizedBox(
-            height: AppLayoutConst.spaceL,
-          ),
-          PasswordFieldController(
-            controller: repeatPasswordController,
-            label: apptexts.appOptions.confirmPassword,
-          ),
-          // const SizedBox(
-          //   height: AppLayoutConst.spaceL,
-          // ),
-          // TextField(
-          //   controller: repeatPasswordController,
-          //   decoration:
-          //       const InputDecoration(labelText: 'Repetir nueva contraseña'),
-          //   obscureText: true,
-          // ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(apptexts.appOptions.cancel),
-        ),
-        TextButton(
-          onPressed: () {
-            final currentPassword = currentPasswordController.text;
-            final newPassword = newPasswordController.text;
-            final repeatPassword = repeatPasswordController.text;
-
-            if (_validatePasswords(context, newPassword, repeatPassword)) {
-              loginBloc.add(
-                ChangePasswordEvent(currentPassword, newPassword),
-              );
-              Navigator.of(context).pop();
-            }
-          },
-          child: Text(apptexts.appOptions.continuar),
-        ),
-      ],
-    );
-  }
-
-  bool _validatePasswords(
-      BuildContext context, String newPassword, String repeatPassword) {
-    final passwordRegExp =
-        RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$');
-
-    if (newPassword != repeatPassword) {
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //     const SnackBar(content: Text("Las contraseñas no coinciden")));
-
-      UtilsFunctionsViews.showFlushBar(
-        message: apptexts.appOptions.passwordNotMatch,
-      ).show(context);
-      return false;
-    }
-
-    if (!passwordRegExp.hasMatch(newPassword)) {
-      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      //   content: Text(
-      //       "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número"),
-      // ));
-      UtilsFunctionsViews.showFlushBar(
-        message: apptexts.appOptions.passwordDebil,
-      ).show(context);
-      return false;
-    }
-
-    return true;
-  }
-}
-
-class PasswordFieldController extends StatefulWidget {
-  const PasswordFieldController({
-    super.key,
-    required this.controller,
-    required this.label,
-  });
-
-  final TextEditingController controller;
-  final String label;
-
-  @override
-  State<PasswordFieldController> createState() =>
-      _PasswordFieldStateController();
-}
-
-class _PasswordFieldStateController extends State<PasswordFieldController> {
-  bool _isPasswordVisible = false;
-  Timer? _visibilityTimer;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _visibilityTimer?.cancel();
-    super.dispose();
-  }
-
-  void _togglePasswordVisibility() {
-    setState(() {
-      _isPasswordVisible = !_isPasswordVisible;
-    });
-    if (_isPasswordVisible) {
-      // Si la contraseña es visible, comienza un temporizador para ocultarla después de un tiempo
-      _visibilityTimer
-          ?.cancel(); // Cancela cualquier temporizador anterior si existe
-      _visibilityTimer = Timer(const Duration(seconds: 3), () {
-        // Oculta la contraseña después de 5 segundos
-        setState(() {
-          _isPasswordVisible = false;
-        });
-      });
-    } else {
-      // Si la contraseña se va a ocultar, no es necesario un temporizador
-      _visibilityTimer?.cancel();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      keyboardType: TextInputType.visiblePassword,
-      obscureText: !_isPasswordVisible,
-      controller: widget.controller,
-      decoration: UtilsFunctionsViews.buildInputDecoration(
-        label: widget.label,
-        hint: '****',
-        // icon: Icons.lock,
-        suffixIcon: IconButton(
-          icon: Icon(
-            _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-            color: _isPasswordVisible ? Colors.black : null,
-          ),
-          onPressed:
-              _togglePasswordVisibility, // Cambia el estado de visibilidad cuando se presiona
-        ),
-      ),
     );
   }
 }

@@ -43,7 +43,8 @@ class CitasBloc extends Bloc<CitasEvent, CitasState> {
     refreshController
       ..loadFailed()
       ..refreshCompleted();
-    final citas = await citasRepository.getCitas(_user, page: _pageCitas);
+    final citas = await citasRepository.getCitas(_user,
+        page: _pageCitas, search: event.search);
 
     citas.fold((l) {
       emit(CitasError(l.message));

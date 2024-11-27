@@ -76,7 +76,8 @@ class ClienteRemoteSource {
     }
   }
 
-  Future<List<User>> getFamiliaresByPlozizaClienteId(User user, int polizaId,
+  Future<List<ClientePoliza>> getFamiliaresByPlozizaClienteId(
+      User user, int polizaId,
       {required int page, String? search, bool? update = false}) async {
     String url;
     if (search == null) {
@@ -100,8 +101,9 @@ class ClienteRemoteSource {
         }
 
         // Mapear directamente la lista a objetos ClientePolizaResponse
-        final clientePolizas =
-            clientePolizasJson.map((json) => User.fromJson(json)).toList();
+        final clientePolizas = clientePolizasJson
+            .map((json) => ClientePolizaResponse.fromJson(json))
+            .toList();
 
         return clientePolizas;
         // final responseService =

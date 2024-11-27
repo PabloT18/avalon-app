@@ -108,7 +108,7 @@ class DrawerCustom extends StatelessWidget {
         .indexWhere((option) => option.routeName == indexInitialName);
 
     return NavigationDrawer(
-      indicatorColor: AppColors.secondaryBlue.withOpacity(0.2),
+      indicatorColor: AppColors.secondaryBlue.withOpacity(0.6),
       backgroundColor: AppColors.white,
       selectedIndex: index,
       onDestinationSelected: (destination) {

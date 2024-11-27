@@ -6,11 +6,10 @@ import 'package:avalon_app/features/shared/functions/fun_views.dart';
 import 'package:avalon_app/features/shared/widgets/fields/editable_date_description.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
+
 import 'package:shared_models/shared_models.dart';
 
 import '../../../shared/widgets/fields/editable_text_description.dart';
@@ -47,12 +46,12 @@ class EditPerfilPageBody extends StatelessWidget {
         if (state.updateSuccess != null) {
           if (state.updateSuccess! && !state.isUpdating) {
             // context.read<AppBloc>().add();
-            // Navigator.of(context).pop();
-            UtilsFunctionsViews.showFlushBar(
-              message: apptexts.perfilPage.successUpdateUserAddress,
-              positionOffset: responsive.hp(8),
-              isError: false,
-            ).show(context);
+            Navigator.of(context).pop();
+            // UtilsFunctionsViews.showFlushBar(
+            //   message: apptexts.perfilPage.successUpdateUserAddress,
+            //   positionOffset: responsive.hp(8),
+            //   isError: false,
+            // ).show(context);
             context.read<AppBloc>().add(const AppUpdateUser());
           } else if (!state.isUpdating) {
             UtilsFunctionsViews.showFlushBar(
@@ -93,16 +92,16 @@ class EditPerfilPageBody extends StatelessWidget {
                   apptexts.perfilPage.correo, editPerfilBloc.emailController),
               EditableTextDescription(apptexts.perfilPage.phone,
                   editPerfilBloc.phoneNumberController),
-              if (user.isClient) ...[
-                EditableTextDescription(apptexts.perfilPage.placeOfBirth,
-                    editPerfilBloc.birthPlaceController),
-                EditableTextDescription(apptexts.perfilPage.placeOfResidence,
-                    editPerfilBloc.residenceController),
-                EditableDateDescription(
-                  label: apptexts.perfilPage.dob,
-                  dateTextController: editPerfilBloc.birthDateController,
-                ),
-              ],
+              // if (user.isClient) ...[
+              //   EditableTextDescription(apptexts.perfilPage.placeOfBirth,
+              //       editPerfilBloc.birthPlaceController),
+              //   EditableTextDescription(apptexts.perfilPage.placeOfResidence,
+              //       editPerfilBloc.residenceController),
+              //   EditableDateDescription(
+              //     label: apptexts.perfilPage.dob,
+              //     dateTextController: editPerfilBloc.birthDateController,
+              //   ),
+              // ],
               const SizedBox(height: 20),
               Center(
                 child: ElevatedButton(

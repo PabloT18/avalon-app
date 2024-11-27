@@ -126,11 +126,17 @@ class ReclamacionDetalleView extends StatelessWidget {
                                       runSpacing: AppLayoutConst.spaceL,
                                       children: [
                                         OptionReclamacionButton(
-                                            option: const DetalleInfo(),
-                                            optionSelected: statePanels),
+                                          option: const DetalleInfo(),
+                                          optionSelected: statePanels,
+                                          title:
+                                              apptexts.citasPage.details(n: 1),
+                                        ),
                                         OptionReclamacionButton(
-                                            option: const DetalleHistorial(),
-                                            optionSelected: statePanels),
+                                          option: const DetalleHistorial(),
+                                          optionSelected: statePanels,
+                                          title: apptexts.citasPage
+                                              .historyTxt(n: 1),
+                                        ),
                                       ],
                                     ),
                                     const SizedBox(
@@ -168,29 +174,47 @@ class ReclamacionDetalleView extends StatelessWidget {
 
 class OptionReclamacionButton extends StatelessWidget {
   const OptionReclamacionButton(
-      {super.key, required this.option, required this.optionSelected});
+      {super.key,
+      required this.option,
+      required this.optionSelected,
+      required this.title});
 
   final DetallePanelsState option;
   final DetallePanelsState? optionSelected;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      key: Key(option.toString()),
-      heroTag: null,
-      onPressed: () {
-        if (option == optionSelected) {
-          return;
-        } else {
-          context.read<DetallePanelsCubit>().togglePanel(option);
-        }
-      },
-      elevation: option == optionSelected ? 8 : 1,
-      backgroundColor: option == optionSelected ? null : null,
-      foregroundColor:
-          option == optionSelected ? AppColors.primaryBlue : Colors.black45,
-      child: iconByOption(),
-    );
+    return Column(mainAxisSize: MainAxisSize.min, children: [
+      FloatingActionButton(
+        key: Key(option.toString()),
+        heroTag: null,
+        onPressed: () {
+          if (option == optionSelected) {
+            return;
+          } else {
+            context.read<DetallePanelsCubit>().togglePanel(option);
+          }
+        },
+        elevation: option == optionSelected ? 8 : 1,
+        // backgroundColor: option == optionSelected ?
+        //null : null,
+        backgroundColor: AppColors.primaryBlue,
+
+        // foregroundColor:
+        // option == optionSelected ? AppColors.primaryBlue : Colors.black45,
+        foregroundColor:
+            option == optionSelected ? AppColors.white : Colors.white30,
+        child: iconByOption(),
+      ),
+      Text(
+        title,
+        style: TextStyle(
+            fontSize: 12,
+            fontWeight:
+                option == optionSelected ? FontWeight.bold : FontWeight.normal),
+      ),
+    ]);
   }
 
   Widget iconByOption() {

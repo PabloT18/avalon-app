@@ -21,7 +21,7 @@ class FamiliaresState extends Equatable {
   final bool isLoadingPolizas;
   final bool hasError;
 
-  final List<User>? familiares;
+  final List<ClientePoliza>? familiares;
 
   factory FamiliaresState.initial() {
     return const FamiliaresState(
@@ -44,7 +44,7 @@ class FamiliaresState extends Equatable {
     bool? isLoading,
     bool? isLoadingPolizas,
     bool? hasError,
-    List<User>? familiares,
+    List<ClientePoliza>? familiares,
   }) {
     return FamiliaresState(
       clientes: clientes ?? this.clientes,

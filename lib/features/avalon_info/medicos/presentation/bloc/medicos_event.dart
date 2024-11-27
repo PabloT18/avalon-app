@@ -8,5 +8,7 @@ sealed class MedicosEvent extends Equatable {
 }
 
 class GetMedicos extends MedicosEvent {
-  const GetMedicos();
+  const GetMedicos({this.search});
+
+  final String? search;
 }

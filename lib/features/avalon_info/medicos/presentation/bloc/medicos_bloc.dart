@@ -39,7 +39,8 @@ class MedicosBloc extends Bloc<MedicosEvent, MedicosState> {
       ..refreshCompleted();
 
     try {
-      final List<Medico> medicosList = await repository.getMedicos(user);
+      final List<Medico> medicosList =
+          await repository.getMedicos(user, search: event.search);
       if (medicosList.isEmpty) {
         emit(MedicosError(apptexts.medicosPage.noData));
       } else {

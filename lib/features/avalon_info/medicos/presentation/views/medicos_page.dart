@@ -63,6 +63,8 @@ class MedicosPageView extends StatelessWidget {
   }
 
   Widget getChildByState(MedicosState state, medicosBloc) {
+    final TextEditingController busquedaController = TextEditingController();
+
     return switch (state) {
       MedicosLoading() => const Center(child: CircularProgressIndicator()),
       MedicosError() => MessageError(
@@ -71,7 +73,25 @@ class MedicosPageView extends StatelessWidget {
             medicosBloc.add(const GetMedicos());
           }),
       MedicosLoaded() => ListView(
+          padding: const EdgeInsets.all(AppLayoutConst.paddingM),
           children: [
+            const SizedBox(height: AppLayoutConst.spaceS),
+            TextField(
+              controller: busquedaController,
+              decoration: InputDecoration(
+                hintText: apptexts.appOptions.search,
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    final query = busquedaController.text;
+                    if (query.isNotEmpty) {
+                      // Acción al presionar la lupa
+                      medicosBloc.add(GetMedicos(search: query));
+                    }
+                  },
+                ),
+              ),
+            ),
             for (final medico in state.medicos)
               Card(
                 shape: RoundedRectangleBorder(

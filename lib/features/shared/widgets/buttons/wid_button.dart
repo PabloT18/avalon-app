@@ -8,12 +8,14 @@ class CustomButton extends StatelessWidget {
     this.shape,
     this.backgroundColor,
     this.onPrimary,
+    this.shadowColor = AppColors.secondaryBlue,
   });
 
   final VoidCallback? onPressed;
   final String title;
   final Color? onPrimary;
   final Color? backgroundColor;
+  final Color? shadowColor;
   final RoundedRectangleBorder? shape;
 
   @override
@@ -24,7 +26,7 @@ class CustomButton extends StatelessWidget {
         foregroundColor: onPrimary,
         backgroundColor: backgroundColor,
         minimumSize: const Size(160, 40),
-        shadowColor: AppColors.secondaryBlue,
+        shadowColor: shadowColor,
         shape: shape ??
             RoundedRectangleBorder(
                 borderRadius:

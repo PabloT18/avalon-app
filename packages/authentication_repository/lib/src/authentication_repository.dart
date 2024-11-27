@@ -52,7 +52,7 @@ class AuthenticationRepository {
       // Aquí podrías hacer una llamada a un endpoint que valide el token TODO; validae token
 
       // Verificar si hay un usuario autenticado en caché
-      if (currentUser.isEmpty) {
+      if (currentUserValidate.isEmpty) {
         return User.empty; // No hay usuario autenticado
       }
 
@@ -73,10 +73,63 @@ class AuthenticationRepository {
         final userData = userResponse.data;
 
         final UserResponse userResponseData = UserResponse.fromJson(userData);
-        final User updatedUser = User.fromUsuarioResponse(
-            userResponseData, currentUserValidate.token!);
-        // Guardar el usuario actualizado en caché
+        final rolId = userData['rol']['id'];
+        User updatedUser;
+        switch (rolId) {
+          case 3: // Cliente
+            // Consumir el servicio adicional para obtener más detalles del cliente
+            final urlClientDetails = '/clientes/${currentUserValidate.id}';
+            final clientResponse = await dio.get(
+              urlClientDetails,
+              options: Options(
+                  headers: {'Authorization': currentUserValidate.token}),
+            );
+
+            if (clientResponse.statusCode != 200) {
+              throw const LogInWithEmailAndPasswordFailure(
+                  message: "Error al obtener datos del cliente");
+            }
+
+            // Parseamos los datos adicionales del cliente
+            final clientData = clientResponse.data;
+            final UsrClienteResponse userClientData =
+                UsrClienteResponse.fromJson(clientData);
+            updatedUser = UsrCliente.fromUsuarioResponse(
+                userClientData, currentUserValidate.token!);
+            break;
+
+          case 4: // Agente
+            // Consumir el servicio adicional para obtener más detalles del agente
+            final urlAgenteDetails = '/agentes/$currentUserValidate.id';
+            final agentResponse = await dio.get(
+              urlAgenteDetails,
+              options: Options(
+                  headers: {'Authorization': currentUserValidate.token}),
+            );
+
+            if (agentResponse.statusCode != 200) {
+              throw const LogInWithEmailAndPasswordFailure(
+                  message: "Error al obtener datos del agente");
+            }
+
+            // Parseamos los datos adicionales del agente
+            final agentData = agentResponse.data;
+            final UsrAgenteResponse userAgentData =
+                UsrAgenteResponse.fromJson(agentData);
+            updatedUser = UsrAgente.fromUsuarioResponse(
+                userAgentData, currentUserValidate.token!);
+            break;
+          case 2:
+            updatedUser = User.fromUsuarioResponse(userResponseData,
+                currentUserValidate.token!); // Devuelve un User genérico
+            break;
+          default:
+            updatedUser = User.fromUsuarioResponse(userResponseData,
+                currentUserValidate.token!); // Devuelve un User genérico
+        }
+
         await _cache.write(key: userCacheKey, value: updatedUser.toJson());
+
         return updatedUser; // Retornar el usuario actualizado
       } catch (e) {
         // Si hay un error al obtener los datos actualizados, retornar el usuario en caché
@@ -173,8 +226,11 @@ class AuthenticationRepository {
       return loginData;
     } on DioException catch (dioError) {
       throw LogInWithEmailAndPasswordFailure(
-          message: dioError.response?.data['message'] ??
-              "Error en la red o del servidor");
+          message: dioError.response?.data['message'] == null
+              ? "Error en la red o del servidor"
+              : dioError.response?.data['message']! == 'Credenciales inválidas'
+                  ? 'Invalid username or password'
+                  : dioError.response?.data['message']!);
     } catch (e) {
       throw const LogInWithEmailAndPasswordFailure(
           message: "Error desconocido durante el inicio de sesión");
@@ -347,6 +403,63 @@ class AuthenticationRepository {
       // Manejar cualquier otro error
       throw const LogInWithEmailAndPasswordFailure(
           message: "Error inesperado durante el cambio de contraseña");
+    }
+  }
+
+  Future<void> requesResetPsw(String email) async {
+    try {
+      const urlVerify = '/sendCodeByMail';
+      final data = {'correoElectronico': email};
+      final response = await dio.post(
+        urlVerify,
+        data: data,
+      );
+
+      if (response.statusCode != 200 || !response.data['success']) {
+        throw LogInWithEmailAndPasswordFailure.fromCode('user-not-found');
+      }
+
+      // Si es exitoso, cargar los detalles del usuario
+    } on DioException catch (_) {
+      throw LogInWithEmailAndPasswordFailure.fromCode('user-not-found');
+    } catch (e) {
+      throw const LogInWithEmailAndPasswordFailure(
+          message: "Error desconocido durante la verificación");
+    }
+  }
+
+  Future<void> restartPassword(String correoElectronico, String codigo2FA,
+      String contraseniaNueva) async {
+    try {
+      const urlVerify = '/restart-password';
+      final data = {
+        'correoElectronico': correoElectronico,
+        'codigo2FA': codigo2FA,
+        'contraseniaNueva': contraseniaNueva
+      };
+      final response = await dio.post(
+        urlVerify,
+        data: data,
+      );
+
+      if (response.statusCode != 200 || !response.data['success']) {
+        throw LogInWithEmailAndPasswordFailure(
+          message:
+              response.data['message'] ?? 'Error al reiniciar la contraseñaaa',
+        );
+      }
+
+      // Si es exitoso, cargar los detalles del usuario
+    } on LogInWithEmailAndPasswordFailure {
+      rethrow;
+    } on DioException catch (_) {
+      throw const LogInWithEmailAndPasswordFailure(
+        message: 'Error al reiniciar la contraseña',
+      );
+    } catch (e) {
+      throw const LogInWithEmailAndPasswordFailure(
+        message: 'Error al reiniciar la contraseña',
+      );
     }
   }
 

@@ -15,6 +15,14 @@
         "one": "Más Detalle",
         "other": "Más Detalles"
     },
+    "details": {
+        "one": "Detalle",
+        "other": "Detalles"
+    },
+    "historyTxt": {
+        "one": "Historial",
+        "other": "Historiales"
+    },
     "detailFechaTentativa": "Fecha Tentativa",
     "detailPreferenceCity": "Ciudad de preferencia",
     "detailAseguradoraName": "Aseguradora",

@@ -8,7 +8,8 @@ sealed class ReclamacionesEvent extends Equatable {
 }
 
 class GetReclamaciones extends ReclamacionesEvent {
-  const GetReclamaciones();
+  const GetReclamaciones({this.search});
+  final String? search;
 }
 
 class GetReclamacionesNextPage extends ReclamacionesEvent {

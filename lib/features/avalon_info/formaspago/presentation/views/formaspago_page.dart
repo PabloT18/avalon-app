@@ -70,6 +70,7 @@ class FormasPagoPageView extends StatelessWidget {
             formasPagoBloc.add(const GetMetodosPagoEvent());
           }),
       FormasPagoLoaded() => ListView(
+          padding: const EdgeInsets.all(AppLayoutConst.paddingM),
           children: [
             for (final metodoPago in state.metodosPago)
               Card(

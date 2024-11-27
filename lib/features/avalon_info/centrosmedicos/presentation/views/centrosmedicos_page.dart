@@ -62,6 +62,8 @@ class CentrosMedicosPageView extends StatelessWidget {
 
   Widget getChildByState(
       CentrosMedicosState state, BuildContext context, centrosMedicosBloc) {
+    final TextEditingController busquedaController = TextEditingController();
+
     return switch (state) {
       CentrosMedicosLoading() =>
         const Center(child: CircularProgressIndicator()),
@@ -71,7 +73,25 @@ class CentrosMedicosPageView extends StatelessWidget {
             centrosMedicosBloc.add(const GetCentrosMedicos());
           }),
       CentrosMedicosLoaded() => ListView(
+          padding: const EdgeInsets.all(AppLayoutConst.paddingM),
           children: [
+            const SizedBox(height: AppLayoutConst.spaceS),
+            TextField(
+              controller: busquedaController,
+              decoration: InputDecoration(
+                hintText: apptexts.appOptions.search,
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    final query = busquedaController.text;
+                    if (query.isNotEmpty) {
+                      // Acción al presionar la lupa
+                      centrosMedicosBloc.add(GetCentrosMedicos(search: query));
+                    }
+                  },
+                ),
+              ),
+            ),
             for (final centromedico in state.centrosMedicos)
               Card(
                 shape: RoundedRectangleBorder(

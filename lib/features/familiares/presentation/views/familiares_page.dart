@@ -1,18 +1,16 @@
-import 'package:avalon_app/app/data/sources/local/enviroment.dart';
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
-import 'package:avalon_app/features/casos/data/sources/cliente_remote_source.dart';
+
 import 'package:avalon_app/features/familiares/presentation/bloc/bloc/familiares_bloc.dart';
-import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
+import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
+
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import 'package:shared_models/shared_models.dart';
 
 class FamiliaresPage extends StatelessWidget {
@@ -33,6 +31,7 @@ class FamiliaresPage extends StatelessWidget {
             title: Text(apptexts.familiaresPage.title(n: 1)),
             elevation: 6,
           ),
+          drawer: DrawerCustom(indexInitialName: PAGES.familiares.pageName),
           body: FamiliaresBody(
             user: user,
           ),
@@ -65,17 +64,18 @@ class FamiliaresBody extends StatelessWidget {
               if (state.familiares != null && state.familiares!.isEmpty)
                 Text(apptexts.familiaresPage.noFamily),
               if (state.familiares != null && state.familiares!.isNotEmpty)
-                ...state.familiares!.map((familiar) => Card(
+                ...state.familiares!.map((clientePolizaFamiliar) => Card(
                       clipBehavior: Clip.hardEdge,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ListTile(
-                            title: Text(familiar.fullName),
+                            title: Text(
+                                clientePolizaFamiliar.displayName ?? ' - '),
                             // subtitle: Text(
-                            //    familiar.par),
+                            //    clientePolizaFamiliar.par),
                           ),
-                          // if (familiar['urlImagen'] != null)
+                          // if (clientePolizaFamiliar['urlImagen'] != null)
                           //   Image.network(
                           //     familiar['urlImagen'],
                           //     fit: BoxFit.cover,
@@ -86,8 +86,11 @@ class FamiliaresBody extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(familiar.correoElectronico ?? ' - '),
-                                Text(familiar.correoElectronico ?? ' - '),
+                                Text(clientePolizaFamiliar.cliente!.fullName),
+                                Text(clientePolizaFamiliar.parentesco ?? ' - '),
+                                Text(clientePolizaFamiliar.tipo ?? ' - '),
+                                Text(clientePolizaFamiliar.numeroCertificado ??
+                                    ' - '),
                               ],
                             ),
                           ),
