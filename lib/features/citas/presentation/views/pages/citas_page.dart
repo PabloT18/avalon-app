@@ -99,6 +99,9 @@ class CitasPanelView extends StatelessWidget {
             onRefresh: () async {
               citasBloc.add(const GetCitas());
             },
+            enablePullDown: true,
+            enablePullUp: true,
+            onLoading: () => citasBloc.add(const GetCitasNextPage()),
             refreshController: citasBloc.refreshController,
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(AppLayoutConst.paddingL),
@@ -140,6 +143,15 @@ class CitasPanelView extends StatelessWidget {
           children: [
             TextField(
               controller: busquedaController,
+              onEditingComplete: () {
+                final query = busquedaController.text;
+                if (query.isNotEmpty) {
+                  // Acción al presionar la lupa
+                  citasBloc.add(GetCitas(search: query));
+                } else {
+                  citasBloc.add(const GetCitas());
+                }
+              },
               decoration: InputDecoration(
                 hintText: apptexts.appOptions.search,
                 suffixIcon: IconButton(
@@ -149,6 +161,8 @@ class CitasPanelView extends StatelessWidget {
                     if (query.isNotEmpty) {
                       // Acción al presionar la lupa
                       citasBloc.add(GetCitas(search: query));
+                    } else {
+                      citasBloc.add(const GetCitas());
                     }
                   },
                 ),

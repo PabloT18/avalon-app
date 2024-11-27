@@ -1,6 +1,8 @@
 class AppLayoutConst {
   // const AppLayoutConst._();
 
+  static const double dotSize = 12;
+
   /// Desktop screen >= 900px
   static const double kmovilwidth = 500.0;
   static const double ktabletwidth = 920.0;

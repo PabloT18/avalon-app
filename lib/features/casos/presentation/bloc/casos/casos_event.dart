@@ -10,9 +10,11 @@ sealed class CasosEvent extends Equatable {
 class GetCasosUser extends CasosEvent {
   const GetCasosUser({
     this.clientePolizaId,
+    this.search,
   });
 
   final int? clientePolizaId;
+  final String? search;
 }
 
 class GetCasosUserNextPage extends CasosEvent {

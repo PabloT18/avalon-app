@@ -18,7 +18,6 @@ import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/app/presentation/bloc/app_cycle/app_lifecycle_cubit.dart';
 
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
-
 import '../../../shared/widgets/wid_drawer.dart';
 import '../cubit/home_navigation_cubit.dart';
 
@@ -146,7 +145,7 @@ class HomePageView extends StatelessWidget {
                   icon: FontAwesomeIcons.kitMedical,
                   title: apptexts.emergenciasPage.title(n: 2),
                   onTap: () {
-                    // context.goNamed(PAGES.e.pageName);
+                    context.goNamed(PAGES.emergencia.pageName);
                   },
                 ),
               ],
@@ -220,11 +219,13 @@ class HomeOption extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.onTap,
+    this.color,
   });
 
   final String title;
   final IconData icon;
   final VoidCallback onTap;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -243,6 +244,7 @@ class HomeOption extends StatelessWidget {
                 leading: FaIcon(
                   icon,
                   size: responsive.dp(5),
+                  color: color,
                 ),
                 title: Text(
                   title,

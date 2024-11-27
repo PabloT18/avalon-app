@@ -16,6 +16,7 @@ class CitasBloc extends Bloc<CitasEvent, CitasState> {
     this._user,
   ) : super(CitasInitial()) {
     on<GetCitas>(_onGetCitas);
+    on<GetCitasNextPage>(_onGetCitasNextPage);
 
     refreshController = RefreshController(initialRefresh: false);
 
@@ -31,6 +32,8 @@ class CitasBloc extends Bloc<CitasEvent, CitasState> {
 
   late int _pageCitas;
 
+  late String? search;
+
   @override
   Future<void> close() {
     refreshController.dispose();
@@ -40,11 +43,13 @@ class CitasBloc extends Bloc<CitasEvent, CitasState> {
   FutureOr<void> _onGetCitas(GetCitas event, Emitter<CitasState> emit) async {
     emit(CitasInitial());
 
+    _pageCitas = 0;
+    search = event.search;
     refreshController
       ..loadFailed()
       ..refreshCompleted();
-    final citas = await citasRepository.getCitas(_user,
-        page: _pageCitas, search: event.search);
+    final citas =
+        await citasRepository.getCitas(_user, page: _pageCitas, search: search);
 
     citas.fold((l) {
       emit(CitasError(l.message));
@@ -54,6 +59,40 @@ class CitasBloc extends Bloc<CitasEvent, CitasState> {
       } else {
         emit(CitasLoaded(citas));
       }
+    });
+  }
+
+  FutureOr<void> _onGetCitasNextPage(
+      GetCitasNextPage event, Emitter<CitasState> emit) async {
+    if (state is! CitasLoaded) return;
+
+    List<CitaMedica> listadoNew = [];
+    listadoNew.addAll((state as CitasLoaded).citas);
+
+    refreshController.requestLoading();
+
+    final reclamaciones = await citasRepository.getCitas(
+      _user,
+      page: _pageCitas + 1,
+      search: search,
+    );
+
+    reclamaciones.fold((l) {
+      if (state is CitasLoaded) {
+        refreshController.loadFailed();
+        return;
+      } else {
+        refreshController.loadFailed();
+      }
+    }, (reclamaciones) {
+      _pageCitas = _pageCitas + 1;
+      if (reclamaciones.isNotEmpty) {
+        listadoNew.addAll(reclamaciones);
+        refreshController.loadComplete();
+      } else {
+        refreshController.loadNoData();
+      }
+      emit((state as CitasLoaded).copyWith(citas: listadoNew));
     });
   }
 }

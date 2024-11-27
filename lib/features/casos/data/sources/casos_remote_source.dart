@@ -12,10 +12,10 @@ class CasosRemoteSource {
     String url;
 
     if (search == null) {
-      url = '/casos?page=$page&size=100&sortField=createdDate&sortOrder=desc';
+      url = '/casos?page=$page&size=5&sortField=createdDate&sortOrder=desc';
     } else {
       url =
-          '/casos?page=$page&size=100&busqueda=$search&sortField=createdDate&sortOrder=desc';
+          '/casos?page=$page&size=5&busqueda=$search&sortField=createdDate&sortOrder=desc';
     }
 
     try {

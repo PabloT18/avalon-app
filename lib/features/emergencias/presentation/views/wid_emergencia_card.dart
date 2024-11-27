@@ -69,8 +69,14 @@ class EmergenciaCard extends StatelessWidget {
                         TitleDescripcion(
                           isSubdescription: true,
                           title: apptexts.appOptions.cliente,
-                          value: emergenciaModel.clientePoliza!.displayName!,
+                          value:
+                              emergenciaModel.clientePoliza!.cliente!.fullName,
                         ),
+                      TitleDescripcion(
+                        isSubdescription: true,
+                        title: apptexts.appOptions.cliente,
+                        value: emergenciaModel.clientePoliza!.displayName!,
+                      ),
                       TitleDescripcion(
                         isSubdescription: true,
                         title: apptexts.emergenciasPage.sintomas,
@@ -96,8 +102,8 @@ class EmergenciaCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 10, // Tamaño del círculo
-                  height: 10,
+                  width: AppLayoutConst.dotSize, // Tamaño del círculo
+                  height: AppLayoutConst.dotSize,
                   decoration: BoxDecoration(
                     color: getColorByState(emergenciaModel.estado ?? ''),
                     shape: BoxShape.circle,

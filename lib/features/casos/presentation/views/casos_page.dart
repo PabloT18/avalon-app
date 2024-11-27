@@ -1,6 +1,8 @@
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
+import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
 
 import 'package:avalon_app/core/config/router/app_routes_pages.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
 
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
@@ -45,7 +47,12 @@ class CasosPageView extends StatelessWidget {
         onPressed: () {
           context.goNamed(PAGES.crearCaso.pageName);
         },
-        child: const Icon(Icons.add),
+        mini: true,
+        backgroundColor: AppColors.primaryBlue,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
       drawer: DrawerCustom(indexInitialName: PAGES.casos.pageName),
       body: BlocBuilder<CasosBloc, CasosState>(
@@ -67,6 +74,8 @@ class CasosPageView extends StatelessWidget {
   }
 
   Widget getChildByState(CasosState state, medicosBloc, BuildContext context) {
+    final TextEditingController busquedaController = TextEditingController();
+
     return switch (state) {
       CasosInitial() => const Center(child: CircularProgressIndicator()),
       CasosError() => MessageError(
@@ -75,7 +84,25 @@ class CasosPageView extends StatelessWidget {
             medicosBloc.add(const GetCasosUser());
           }),
       CasosLoaded() => ListView(
+          padding: const EdgeInsets.all(AppLayoutConst.paddingL),
           children: [
+            TextField(
+              controller: busquedaController,
+              decoration: InputDecoration(
+                hintText: apptexts.appOptions.search,
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    final query = busquedaController.text;
+                    if (query.isNotEmpty) {
+                      // Acción al presionar la lupa
+                      medicosBloc.add(GetCasosUser(search: query));
+                    }
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: AppLayoutConst.spaceS),
             for (final caso in state.casos)
               Hero(
                 tag: caso.hashCode,

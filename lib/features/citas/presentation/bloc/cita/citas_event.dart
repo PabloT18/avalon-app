@@ -12,3 +12,7 @@ class GetCitas extends CitasEvent {
 
   final String? search;
 }
+
+class GetCitasNextPage extends CitasEvent {
+  const GetCitasNextPage();
+}

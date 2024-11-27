@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/app/presentation/bloc/creationEntities/creation_cubit_cubit.dart';
 import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
@@ -107,6 +105,9 @@ class EmergenciasPanelView extends StatelessWidget {
             onRefresh: () async {
               emergenciaBloc.add(const GetEmergencias());
             },
+            enablePullDown: true,
+            enablePullUp: true,
+            onLoading: () => emergenciaBloc.add(const GetEmergenciasNextPage()),
             refreshController: emergenciaBloc.refreshController,
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(AppLayoutConst.paddingL),
@@ -121,7 +122,7 @@ class EmergenciasPanelView extends StatelessWidget {
                   //   apptexts.emergenciasPage.title(n: 2),
                   //   style: Theme.of(context).textTheme.titleSmall,
                   // ),
-                  const SizedBox(height: AppLayoutConst.spaceL),
+
                   getChildByState(state, emergenciaBloc, context, user),
                   const SizedBox(height: AppLayoutConst.spaceL),
                 ],
@@ -135,6 +136,8 @@ class EmergenciasPanelView extends StatelessWidget {
 
   Widget getChildByState(EmergenciasState state, EmergenciasBloc emergenciaBloc,
       BuildContext context, User user) {
+    final TextEditingController busquedaController = TextEditingController();
+
     return switch (state) {
       EmergenciasInitial() =>
         const Center(child: CircularProgressIndicatorCustom()),
@@ -145,6 +148,34 @@ class EmergenciasPanelView extends StatelessWidget {
           }),
       EmergenciasLoaded() => Column(
           children: [
+            TextField(
+              controller: busquedaController,
+              onEditingComplete: () {
+                final query = busquedaController.text;
+                if (query.isNotEmpty) {
+                  // Acción al presionar la lupa
+                  emergenciaBloc.add(GetEmergencias(search: query));
+                } else {
+                  emergenciaBloc.add(const GetEmergencias());
+                }
+              },
+              decoration: InputDecoration(
+                hintText: apptexts.appOptions.search,
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    final query = busquedaController.text;
+                    if (query.isNotEmpty) {
+                      // Acción al presionar la lupa
+                      emergenciaBloc.add(GetEmergencias(search: query));
+                    } else {
+                      emergenciaBloc.add(const GetEmergencias());
+                    }
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: AppLayoutConst.spaceS),
             for (final emergencia
                 in state.emergencias) // Repite los elementos 5 veces
               Hero(

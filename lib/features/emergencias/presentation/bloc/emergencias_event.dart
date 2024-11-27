@@ -8,5 +8,10 @@ sealed class EmergenciasEvent extends Equatable {
 }
 
 class GetEmergencias extends EmergenciasEvent {
-  const GetEmergencias();
+  const GetEmergencias({this.search});
+  final String? search;
+}
+
+class GetEmergenciasNextPage extends EmergenciasEvent {
+  const GetEmergenciasNextPage();
 }

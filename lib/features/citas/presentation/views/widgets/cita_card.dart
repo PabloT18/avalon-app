@@ -104,8 +104,8 @@ class CitaCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 12, // Tamaño del círculo
-                  height: 12,
+                  width: AppLayoutConst.dotSize, // Tamaño del círculo
+                  height: AppLayoutConst.dotSize,
                   decoration: BoxDecoration(
                     color:
                         UtilsFunctionsViews.getColorByState(cita.estado ?? ''),

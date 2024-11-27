@@ -171,6 +171,98 @@ class SegurosBody extends StatelessWidget {
       ),
     );
   }
+}
+
+class PoloziaCard extends StatelessWidget {
+  const PoloziaCard(
+      {super.key,
+      required this.clientePoliza,
+      required this.isClient,
+      this.navigatePush = false});
+
+  final ClientePoliza clientePoliza;
+  final bool isClient;
+  final bool navigatePush;
+
+  @override
+  Widget build(BuildContext context) {
+    final locale = TranslationProvider.of(context).locale;
+
+    return Card(
+      elevation: 1,
+      clipBehavior: Clip.hardEdge,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: AppColors.secondaryBlue.withOpacity(0.4),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(AppLayoutConst.cardBorderRadius),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppLayoutConst.cardBorderRadius),
+        child: InkWell(
+          onTap: () {
+            // _showPolizaDetails(context, clientePoliza);
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 16.0,
+                vertical: 8.0), // Agrega el padding similar a ListTile
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (!isClient)
+                        TitleDescripcion(
+                          isSubdescription: true,
+                          title: apptexts.appOptions.cliente,
+                          value: clientePoliza.cliente!.fullName,
+                        ),
+                      TitleDescripcion(
+                        isSubdescription: true,
+                        title: apptexts.appOptions.detalle(n: 1),
+                        value: clientePoliza.displayName ?? ' ',
+                      ),
+                      TitleDescripcion(
+                        isSubdescription: true,
+                        title: apptexts.citasPage.estados,
+                        value: UtilsFunctionsViews.getStateStrinByState(
+                            clientePoliza.estado ?? ''),
+                      ),
+                      TitleDescripcion(
+                        isSubdescription: true,
+                        title: apptexts.segurosPage.initDate,
+                        value: UtilsFunctionsLogic.formatFechaLocal(
+                            clientePoliza.fechaInicio!, locale.languageCode),
+                      ),
+                      TitleDescripcion(
+                        isSubdescription: true,
+                        title: apptexts.segurosPage.endDate,
+                        value: UtilsFunctionsLogic.formatFechaLocal(
+                            clientePoliza.fechaInicio!, locale.languageCode),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  width: 10, // Tamaño del círculo
+                  height: 10,
+                  decoration: BoxDecoration(
+                    color: UtilsFunctionsViews.getColorByState(
+                        clientePoliza.estado ?? ''),
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   void _showPolizaDetails(BuildContext context, dynamic poliza) {
     showDialog(
@@ -242,115 +334,6 @@ class SegurosBody extends StatelessWidget {
           ],
         );
       },
-    );
-  }
-}
-
-class PoloziaCard extends StatelessWidget {
-  const PoloziaCard(
-      {super.key,
-      required this.clientePoliza,
-      required this.isClient,
-      this.navigatePush = false});
-
-  final ClientePoliza clientePoliza;
-  final bool isClient;
-  final bool navigatePush;
-
-  @override
-  Widget build(BuildContext context) {
-    final locale = TranslationProvider.of(context).locale;
-
-    return Card(
-      elevation: 1,
-      clipBehavior: Clip.hardEdge,
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: AppColors.secondaryBlue.withOpacity(0.4),
-          width: 1,
-        ),
-        borderRadius: BorderRadius.circular(AppLayoutConst.cardBorderRadius),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppLayoutConst.cardBorderRadius),
-        child: InkWell(
-          // onTap: () {
-          //   if (!navigatePush) {
-          //     context.goNamed(
-          //       PAGES.detalleCita.pageName,
-          //       pathParameters: {
-          //         'citaId': clientePoliza.id?.toString() ?? '',
-          //       },
-          //       extra: clientePoliza,
-          //     );
-          //   } else {
-          //     context.pushNamed(
-          //       PAGES.detalleCita.pageName,
-          //       pathParameters: {
-          //         'citaId': clientePoliza.id?.toString() ?? '',
-          //       },
-          //       extra: clientePoliza,
-          //     );
-          //   }
-          // },
-
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 8.0), // Agrega el padding similar a ListTile
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (!isClient)
-                        TitleDescripcion(
-                          isSubdescription: true,
-                          title: apptexts.appOptions.cliente,
-                          value: clientePoliza.displayName!,
-                        ),
-                      TitleDescripcion(
-                        isSubdescription: true,
-                        title: apptexts.appOptions.detalle(n: 1),
-                        value: clientePoliza.displayName ?? ' ',
-                      ),
-                      TitleDescripcion(
-                        isSubdescription: true,
-                        title: apptexts.citasPage.estados,
-                        value: UtilsFunctionsViews.getStateStrinByState(
-                            clientePoliza.estado ?? ''),
-                      ),
-                      TitleDescripcion(
-                        isSubdescription: true,
-                        title: apptexts.segurosPage.initDate,
-                        value: UtilsFunctionsLogic.formatFechaLocal(
-                            clientePoliza.fechaInicio!, locale.languageCode),
-                      ),
-                      TitleDescripcion(
-                        isSubdescription: true,
-                        title: apptexts.segurosPage.endDate,
-                        value: UtilsFunctionsLogic.formatFechaLocal(
-                            clientePoliza.fechaInicio!, locale.languageCode),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: 10, // Tamaño del círculo
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: UtilsFunctionsViews.getColorByState(
-                        clientePoliza.estado ?? ''),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

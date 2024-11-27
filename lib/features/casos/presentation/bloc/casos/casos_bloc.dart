@@ -39,6 +39,7 @@ class CasosBloc extends Bloc<CasosEvent, CasosState> {
   FutureOr<void> _onGetCasosUser(
       GetCasosUser event, Emitter<CasosState> emit) async {
     _page = 0;
+    _search = event.search;
 
     emit(CasosInitial());
 

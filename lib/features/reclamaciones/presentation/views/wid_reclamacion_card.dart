@@ -99,8 +99,8 @@ class ReclamacionCard extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 10, // Tamaño del círculo
-                height: 10,
+                width: AppLayoutConst.dotSize, // Tamaño del círculo
+                height: AppLayoutConst.dotSize,
                 decoration: BoxDecoration(
                   color: getColorByState(reclamacion.estado ?? ''),
                   shape: BoxShape.circle,

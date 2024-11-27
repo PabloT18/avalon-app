@@ -98,17 +98,25 @@ class DetalleCasoView extends StatelessWidget {
                   runSpacing: AppLayoutConst.spaceL,
                   children: [
                     CaseOption(
-                        option: CasoOption.caso,
-                        optionSelected: state.optionSelected),
+                      option: CasoOption.caso,
+                      optionSelected: state.optionSelected,
+                      title: '',
+                    ),
                     CaseOption(
-                        option: CasoOption.citas,
-                        optionSelected: state.optionSelected),
+                      option: CasoOption.citas,
+                      optionSelected: state.optionSelected,
+                      title: '',
+                    ),
                     CaseOption(
-                        option: CasoOption.reembolso,
-                        optionSelected: state.optionSelected),
+                      option: CasoOption.reembolso,
+                      optionSelected: state.optionSelected,
+                      title: '',
+                    ),
                     CaseOption(
-                        option: CasoOption.emergencia,
-                        optionSelected: state.optionSelected),
+                      option: CasoOption.emergencia,
+                      optionSelected: state.optionSelected,
+                      title: '',
+                    ),
                   ],
                 );
               },
@@ -144,28 +152,47 @@ class DetalleCasoView extends StatelessWidget {
 
 class CaseOption extends StatelessWidget {
   const CaseOption(
-      {super.key, required this.option, required this.optionSelected});
+      {super.key,
+      required this.option,
+      required this.optionSelected,
+      required this.title});
 
   final CasoOption option;
   final CasoOption? optionSelected;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      key: Key(option.toString()),
-      heroTag: null,
-      onPressed: () {
-        if (option == optionSelected) {
-          return;
-        } else {
-          context.read<DetalleCasoBloc>().add(SelectCasoOption(option));
-        }
-      },
-      elevation: option == optionSelected ? 8 : 1,
-      backgroundColor: option == optionSelected ? null : null,
-      foregroundColor:
-          option == optionSelected ? AppColors.primaryBlue : Colors.black45,
-      child: iconByOption(),
+    return Column(
+      children: [
+        FloatingActionButton(
+          key: Key(option.toString()),
+          heroTag: null,
+          onPressed: () {
+            if (option == optionSelected) {
+              return;
+            } else {
+              context.read<DetalleCasoBloc>().add(SelectCasoOption(option));
+            }
+          },
+          elevation: option == optionSelected ? 8 : 1,
+          // backgroundColor: option == optionSelected ? null : null,
+          // foregroundColor:
+          //     option == optionSelected ? AppColors.primaryBlue : Colors.black45,
+          backgroundColor: AppColors.primaryBlue,
+          foregroundColor:
+              option == optionSelected ? AppColors.white : Colors.white30,
+          child: iconByOption(),
+        ),
+        Text(
+          title,
+          style: TextStyle(
+              fontSize: 12,
+              fontWeight: option == optionSelected
+                  ? FontWeight.bold
+                  : FontWeight.normal),
+        ),
+      ],
     );
   }
 

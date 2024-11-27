@@ -123,7 +123,6 @@ class ReclamacionesPanelView extends StatelessWidget {
                   //   apptexts.reclamacionesPage.title(n: 2),
                   //   style: Theme.of(context).textTheme.titleSmall,
                   // ),
-                  const SizedBox(height: AppLayoutConst.spaceS),
                   getChildByState(state, reclamacionesBloc, context),
                   const SizedBox(height: AppLayoutConst.spaceL),
                 ],
@@ -151,6 +150,15 @@ class ReclamacionesPanelView extends StatelessWidget {
           children: [
             TextField(
               controller: busquedaController,
+              onEditingComplete: () {
+                final query = busquedaController.text;
+                if (query.isNotEmpty) {
+                  // Acción al presionar la lupa
+                  reclamacionesBloc.add(GetReclamaciones(search: query));
+                } else {
+                  reclamacionesBloc.add(const GetReclamaciones());
+                }
+              },
               decoration: InputDecoration(
                 hintText: apptexts.appOptions.search,
                 suffixIcon: IconButton(
@@ -160,11 +168,14 @@ class ReclamacionesPanelView extends StatelessWidget {
                     if (query.isNotEmpty) {
                       // Acción al presionar la lupa
                       reclamacionesBloc.add(GetReclamaciones(search: query));
+                    } else {
+                      reclamacionesBloc.add(const GetReclamaciones());
                     }
                   },
                 ),
               ),
             ),
+            const SizedBox(height: AppLayoutConst.spaceS),
             for (final recalmacion
                 in state.recalmaciones) // Repite los elementos 5 veces
               Hero(
