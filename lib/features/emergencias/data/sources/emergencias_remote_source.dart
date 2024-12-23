@@ -110,6 +110,7 @@ class EmergenciasRemoteSource {
     required int emergenciaId,
     required String comentario,
     File? image,
+    File? pdf,
     required String nombreDocumento,
   }) async {
     String url = '/comentariosEmergencias';
@@ -121,39 +122,57 @@ class EmergenciasRemoteSource {
       "usuarioComentaId": user.id,
       "estado": "A",
       "nombreDocumento": nombreDocumento,
+      "tipoDocumento": pdf != null ? "PDF" : "IMAGEN",
     };
 
     // Prepare the FormData
     FormData formData = FormData();
-
-    // Add the comentarioCitaMedica part with Content-Type application/json
-    formData.files.add(
-      MapEntry(
-        'comentarioEmergencia',
-        MultipartFile.fromString(
-          jsonEncode(comentarioData),
-          contentType: MediaType('application', 'json'),
-        ),
-      ),
-    );
-
-    // If an image is provided, add it to the form data
-    if (image != null) {
-      String fileName = image.path.split('/').last;
+    try {
+      // Add the comentarioCitaMedica part with Content-Type application/json
       formData.files.add(
         MapEntry(
-          'fotoComentarioEmergencia',
-          await MultipartFile.fromFile(
-            image.path,
-            filename: fileName,
-            contentType:
-                MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+          'comentarioEmergencia',
+          MultipartFile.fromString(
+            jsonEncode(comentarioData),
+            contentType: MediaType('application', 'json'),
           ),
         ),
       );
-    }
 
-    try {
+      // If an image is provided, add it to the form data
+      if (image != null) {
+        String fileName = image.path.split('/').last;
+        formData.files.add(
+          MapEntry(
+            'fotoComentarioEmergencia',
+            await MultipartFile.fromFile(
+              image.path,
+              filename: fileName,
+              contentType:
+                  MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+            ),
+          ),
+        );
+      }
+
+      // PDF (opcional)
+      if (pdf != null) {
+        // Por ejemplo, si quieres llamarlo 'pdfEmergencia':
+        final String pdfName = nombreDocumento.replaceAll('.jpg', '.pdf');
+        // O ajusta para que sea algo más dinámico
+
+        formData.files.add(
+          MapEntry(
+            'fotoComentarioEmergencia',
+            await MultipartFile.fromFile(
+              pdf.path,
+              filename: pdfName,
+              contentType: MediaType('application', 'pdf'),
+            ),
+          ),
+        );
+      }
+
       final response = await APPRemoteConfig.httpPost(
         url: url,
         data: formData,
@@ -173,8 +192,8 @@ class EmergenciasRemoteSource {
     }
   }
 
-  Future<EmergenciaModel> crearEmergencia(
-      User user, EmergenciaModel emergencia, File? image,
+  Future<EmergenciaModel> crearEmergencia(User user, EmergenciaModel emergencia,
+      File? image, File? pdf, // Nuevo parámetro para PDF
       {required String nombreDocumento}) async {
     String url = '/emergencias';
 
@@ -182,8 +201,12 @@ class EmergenciasRemoteSource {
     final Map<String, dynamic> docuemntoName = {
       "nombreDocumento": nombreDocumento,
     };
+    final Map<String, dynamic> tipoDocumento = {
+      "tipoDocumento": pdf != null ? "PDF" : "IMAGEN",
+    };
 
     requestData.addEntries(docuemntoName.entries);
+    requestData.addEntries(tipoDocumento.entries);
     // Prepare the FormData
     FormData formData = FormData();
     try {
@@ -210,6 +233,24 @@ class EmergenciasRemoteSource {
               image.path,
               filename: fileName,
               contentType: MediaType('image', fileType),
+            ),
+          ),
+        );
+      }
+
+      // PDF (opcional)
+      if (pdf != null) {
+        // Por ejemplo, si quieres llamarlo 'pdfEmergencia':
+        final String pdfName = nombreDocumento.replaceAll('.jpg', '.pdf');
+        // O ajusta para que sea algo más dinámico
+
+        formData.files.add(
+          MapEntry(
+            'fotoEmergencia',
+            await MultipartFile.fromFile(
+              pdf.path,
+              filename: pdfName,
+              contentType: MediaType('application', 'pdf'),
             ),
           ),
         );

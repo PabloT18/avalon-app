@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:avalon_app/features/emergencias/emergencias.dart';
 import 'package:avalon_app/features/user_features.dart';
 import 'package:equatable/equatable.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'package:shared_models/shared_models.dart';
 
@@ -51,6 +53,7 @@ class ComentarioNuevCubit extends Cubit<ComentarioNuevState> {
   Future<void> sendComentario({
     required String comentario,
     File? image,
+    File? pdf,
   }) async {
     final stateCurrent = state;
     if (comentario.isEmpty) {
@@ -60,7 +63,11 @@ class ComentarioNuevCubit extends Cubit<ComentarioNuevState> {
 
     emit(ComentarioSending());
 
-    final nombreDocumento = image != null ? image.path.split('/').last : '';
+    final nombreDocumento = image != null
+        ? image.path.split('/').last
+        : pdf != null
+            ? pdf.path.split('/').last
+            : '';
 
     // Llamada al repositorio para enviar el comentario
     final response = await repository.sendComentarioReclamacion(
@@ -68,6 +75,7 @@ class ComentarioNuevCubit extends Cubit<ComentarioNuevState> {
       reclamacionId,
       comentario,
       image: image,
+      pdf: pdf,
       nombreDocumento: nombreDocumento,
     );
 
@@ -82,6 +90,49 @@ class ComentarioNuevCubit extends Cubit<ComentarioNuevState> {
 
   // Método para eliminar la imagen seleccionada
   void removeImage() {
+    emit(ComentarioInitial()); // Volvemos al estado inicial sin imagen
+  }
+
+  FutureOr<void> onPdfSelected() async {
+    // Usamos file_picker para seleccionar PDF
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'], // Solo PDF
+    );
+
+    if (result != null && result.files.isNotEmpty) {
+      // final pickedFile = result.files.single;
+      // if (pickedFile.path != null) {
+      //   // Convertimos a File
+      //   final File pdfFile = File(pickedFile.path!);
+      //   // Actualizamos state
+      //   emit(ComentarioPDFSelected(pdf: pdfFile));
+      // }
+
+      final pickedFile = result.files.single;
+      if (pickedFile.path != null) {
+        try {
+          // 1. Obtenemos la ruta del archivo temporal de FilePicker
+          final File originalFile = File(pickedFile.path!);
+
+          // 2. Creamos un nuevo archivo en la carpeta temporal de la app
+          final tempDir = await getTemporaryDirectory();
+          final newPath = '${tempDir.path}/${pickedFile.name}';
+          // pickedFile.name => "id.pdf", por ejemplo
+
+          // 3. Copiamos el archivo a la nueva ubicación
+          final File copiedFile = await originalFile.copy(newPath);
+
+          // 4. Actualizamos el estado con la nueva ruta (copiedFile.path)
+          emit(ComentarioPDFSelected(pdf: copiedFile));
+        } catch (e) {
+          print('Error copiando el PDF: $e');
+        }
+      }
+    }
+  }
+
+  FutureOr<void> onRemovePdf() {
     emit(ComentarioInitial()); // Volvemos al estado inicial sin imagen
   }
 }

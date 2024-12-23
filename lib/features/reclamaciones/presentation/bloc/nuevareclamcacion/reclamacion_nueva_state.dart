@@ -13,6 +13,7 @@ class ReclamacionNuevaState extends Equatable {
     this.tipoAdmSeleccionado,
     this.reclamacionCreada,
     this.image,
+    this.pdf,
   });
   final List<CasoEntity>? casos;
   final String? message;
@@ -25,6 +26,7 @@ class ReclamacionNuevaState extends Equatable {
   final bool? reclamacionCreada;
 
   final File? image;
+  final File? pdf;
 
   String get tipoAdm => tipoAdmSeleccionado ?? '';
 
@@ -37,7 +39,9 @@ class ReclamacionNuevaState extends Equatable {
     String? tipoAdmSeleccionado,
     bool? reclamacionCreada,
     File? image,
+    File? pdf,
     bool removeImage = false,
+    bool removePdf = false, // <--- Para indicar si queremos remover el PDF
   }) {
     return ReclamacionNuevaState(
       casos: casos ?? this.casos,
@@ -48,6 +52,7 @@ class ReclamacionNuevaState extends Equatable {
       tipoAdmSeleccionado: tipoAdmSeleccionado ?? this.tipoAdmSeleccionado,
       reclamacionCreada: reclamacionCreada,
       image: removeImage ? null : image ?? this.image,
+      pdf: removePdf ? null : pdf ?? this.pdf,
     );
   }
 
@@ -61,5 +66,6 @@ class ReclamacionNuevaState extends Equatable {
         tipoAdmSeleccionado,
         reclamacionCreada,
         image,
+        pdf,
       ];
 }

@@ -55,8 +55,11 @@ class CitaMedica {
   final String? otrosRequisitos;
   final CasoEntity? caso;
   final ClientePoliza? clientePoliza;
+  final Direccion? direccion;
 
+  final String? tipoCitaMedica;
   final DateTime? fechaTentativa;
+  final DateTime? fechaTentativaHasta;
   final int? imagenId;
   final String? estado;
   final MedicoCentroMedicoAseguradora? medicoCentroMedicoAseguradora;
@@ -73,7 +76,10 @@ class CitaMedica {
     this.padecimiento,
     this.informacionAdicional,
     this.otrosRequisitos,
+    this.direccion,
+    this.tipoCitaMedica,
     this.fechaTentativa,
+    this.fechaTentativaHasta,
     this.imagenId,
     this.estado,
     this.caso,
@@ -97,6 +103,10 @@ class CitaMedica {
         padecimiento: json["padecimiento"],
         informacionAdicional: json["informacionAdicional"],
         otrosRequisitos: json["otrosRequisitos"],
+        direccion: json["direccion"] == null
+            ? null
+            : Direccion.fromJson(json["direccion"]),
+        tipoCitaMedica: json["tipoCitaMedica"],
         fechaTentativa: json["fechaTentativa"] == null
             ? null
             : DateTime.parse(json["fechaTentativa"]),
@@ -128,8 +138,11 @@ class CitaMedica {
         "padecimiento": padecimiento,
         "informacionAdicional": informacionAdicional,
         "otrosRequisitos": otrosRequisitos,
+        "tipoCitaMedica": tipoCitaMedica,
         "fechaTentativa":
             "${fechaTentativa!.year.toString().padLeft(4, '0')}-${fechaTentativa!.month.toString().padLeft(2, '0')}-${fechaTentativa!.day.toString().padLeft(2, '0')}",
+        "fechaTentativaHasta":
+            "${fechaTentativaHasta!.year.toString().padLeft(4, '0')}-${fechaTentativaHasta!.month.toString().padLeft(2, '0')}-${fechaTentativaHasta!.day.toString().padLeft(2, '0')}",
         "imagenId": imagenId,
         "estado": estado,
         "caso": caso?.toJson(),
@@ -142,8 +155,11 @@ class CitaMedica {
   Map<String, dynamic> toJsonCreate() {
     if (medicoCentroMedicoAseguradora == null) {
       return {
+        "tipoCitaMedica": tipoCitaMedica,
         "fechaTentativa":
             "${fechaTentativa!.year.toString().padLeft(4, '0')}-${fechaTentativa!.month.toString().padLeft(2, '0')}-${fechaTentativa!.day.toString().padLeft(2, '0')}",
+        "fechaTentativaHasta":
+            "${fechaTentativaHasta!.year.toString().padLeft(4, '0')}-${fechaTentativaHasta!.month.toString().padLeft(2, '0')}-${fechaTentativaHasta!.day.toString().padLeft(2, '0')}",
         "ciudadPreferencia": ciudadPreferencia,
         "clientePolizaId": clientePoliza?.id,
         "casoId": caso?.id,
@@ -151,14 +167,19 @@ class CitaMedica {
         "informacionAdicional": informacionAdicional,
         "otrosRequisitos": otrosRequisitos,
         "requisitosAdicionales": requisitosAdicionales?.toJson(),
+        "direccion": direccion?.toJson(),
       };
     }
     return {
+      "tipoCitaMedica": tipoCitaMedica,
       "fechaTentativa":
           "${fechaTentativa!.year.toString().padLeft(4, '0')}-${fechaTentativa!.month.toString().padLeft(2, '0')}-${fechaTentativa!.day.toString().padLeft(2, '0')}",
+      "fechaTentativaHasta":
+          "${fechaTentativaHasta!.year.toString().padLeft(4, '0')}-${fechaTentativaHasta!.month.toString().padLeft(2, '0')}-${fechaTentativaHasta!.day.toString().padLeft(2, '0')}",
       "ciudadPreferencia": ciudadPreferencia,
       "medicoCentroMedicoAseguradora": medicoCentroMedicoAseguradora?.id,
       "clientePolizaId": clientePoliza?.id,
+      "direccion": direccion?.toJson(),
       "casoId": caso?.id,
       "padecimiento": padecimiento,
       "informacionAdicional": informacionAdicional,
@@ -276,42 +297,6 @@ class Aseguradora {
         "estado": estado,
         "descripcion": descripcion,
         "direccion": direccion?.toJson(),
-      };
-}
-
-class Direccion {
-  final String? direccionUno;
-  final String? direccionDos;
-  final String? ciudad;
-  final String? codigoPostal;
-  final Pais? pais;
-  final Estado? state;
-
-  Direccion({
-    this.direccionUno,
-    this.direccionDos,
-    this.ciudad,
-    this.codigoPostal,
-    this.pais,
-    this.state,
-  });
-
-  factory Direccion.fromJson(Map<String, dynamic> json) => Direccion(
-        direccionUno: json["direccionUno"],
-        direccionDos: json["direccionDos"],
-        ciudad: json["ciudad"],
-        codigoPostal: json["codigoPostal"],
-        pais: json["pais"] == null ? null : Pais.fromJson(json["pais"]),
-        state: json["state"] == null ? null : Estado.fromJson(json["state"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "direccionUno": direccionUno,
-        "direccionDos": direccionDos,
-        "ciudad": ciudad,
-        "codigoPostal": codigoPostal,
-        "pais": pais?.toJson(),
-        "state": state?.toJson(),
       };
 }
 

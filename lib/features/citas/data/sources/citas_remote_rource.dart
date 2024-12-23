@@ -107,6 +107,7 @@ class CitasRemoteSource {
     required int citaId,
     required String comentario,
     File? image,
+    File? pdf,
     required String nombreDocumento,
   }) async {
     String url = '/comentariosCitasMedicas';
@@ -118,39 +119,56 @@ class CitasRemoteSource {
       "usuarioComentaId": user.id,
       "estado": "A",
       "nombreDocumento": nombreDocumento,
+      "tipoDocumento": pdf != null ? "PDF" : "IMAGEN",
     };
 
     // Prepare the FormData
     FormData formData = FormData();
-
-    // Add the comentarioCitaMedica part with Content-Type application/json
-    formData.files.add(
-      MapEntry(
-        'comentarioCitaMedica',
-        MultipartFile.fromString(
-          jsonEncode(comentarioData),
-          contentType: MediaType('application', 'json'),
-        ),
-      ),
-    );
-
-    // If an image is provided, add it to the form data
-    if (image != null) {
-      String fileName = image.path.split('/').last;
+    try {
+      // Add the comentarioCitaMedica part with Content-Type application/json
       formData.files.add(
         MapEntry(
-          'fotoComentarioCitaMedica',
-          await MultipartFile.fromFile(
-            image.path,
-            filename: fileName,
-            contentType:
-                MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+          'comentarioCitaMedica',
+          MultipartFile.fromString(
+            jsonEncode(comentarioData),
+            contentType: MediaType('application', 'json'),
           ),
         ),
       );
-    }
 
-    try {
+      // If an image is provided, add it to the form data
+      if (image != null) {
+        String fileName = image.path.split('/').last;
+        formData.files.add(
+          MapEntry(
+            'fotoComentarioCitaMedica',
+            await MultipartFile.fromFile(
+              image.path,
+              filename: fileName,
+              contentType:
+                  MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+            ),
+          ),
+        );
+      }
+      // PDF (opcional)
+      if (pdf != null) {
+        // Por ejemplo, si quieres llamarlo 'pdfEmergencia':
+        final String pdfName = nombreDocumento.replaceAll('.jpg', '.pdf');
+        // O ajusta para que sea algo más dinámico
+
+        formData.files.add(
+          MapEntry(
+            'fotoComentarioCitaMedica',
+            await MultipartFile.fromFile(
+              pdf.path,
+              filename: pdfName,
+              contentType: MediaType('application', 'pdf'),
+            ),
+          ),
+        );
+      }
+
       final response = await APPRemoteConfig.httpPost(
         url: url,
         data: formData,
@@ -172,7 +190,10 @@ class CitasRemoteSource {
   Future<CitaMedica> crearCita(
     User user,
     CitaMedica cita,
-    File? image, {
+    File? image,
+    File? pdf, // Nuevo parámetro para PDF
+
+    {
     required String nombreDocumento,
   }) async {
     String url = '/citasMedicas';
@@ -182,8 +203,13 @@ class CitasRemoteSource {
     final Map<String, dynamic> docuemntoName = {
       "nombreDocumento": nombreDocumento,
     };
+    final Map<String, dynamic> tipoDocumento = {
+      "tipoDocumento": pdf != null ? "PDF" : "IMAGEN",
+    };
 
     requestData.addEntries(docuemntoName.entries);
+    requestData.addEntries(tipoDocumento.entries);
+
     // Prepare the FormData
     FormData formData = FormData();
 
@@ -216,6 +242,24 @@ class CitasRemoteSource {
       );
     }
 
+    // PDF (opcional)
+    if (pdf != null) {
+      // Por ejemplo, si quieres llamarlo 'pdfEmergencia':
+      final String pdfName = nombreDocumento.replaceAll('.jpg', '.pdf');
+      // O ajusta para que sea algo más dinámico
+
+      formData.files.add(
+        MapEntry(
+          'fotoCitaMedica',
+          await MultipartFile.fromFile(
+            pdf.path,
+            filename: pdfName,
+            contentType: MediaType('application', 'pdf'),
+          ),
+        ),
+      );
+    }
+
     try {
       final response = await APPRemoteConfig.httpPost(
         url: url,
@@ -228,10 +272,10 @@ class CitasRemoteSource {
         final casoEntity = CitaMedica.fromJson(response.data);
         return casoEntity;
       } else {
-        throw Exception('Error al crear el caso');
+        throw Exception('Error al crear el cita medica');
       }
     } catch (e) {
-      throw Exception('Error creando caso');
+      throw Exception('Error creando cita medica');
     }
   }
 }

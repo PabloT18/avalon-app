@@ -57,3 +57,11 @@ class ImageSelected extends EmergenciaNuevaEvent {
 class RemoveImage extends EmergenciaNuevaEvent {
   const RemoveImage();
 }
+
+class PdfSelected extends EmergenciaNuevaEvent {
+  const PdfSelected();
+}
+
+class RemovePdf extends EmergenciaNuevaEvent {
+  const RemovePdf();
+}

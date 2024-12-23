@@ -12,6 +12,11 @@
         "one": "Comentario",
         "other": "Comentarios"
     },
+    "attachments": {
+        "one": "Adjunto",
+        "other": "Adjuntos"
+    },
+    "diagnostico_sintonomas": "Diagnóstico/síntoma",
     "codigo": "Código",
     "fecha": "Fecha",
     "noData": "No hay información cargada",

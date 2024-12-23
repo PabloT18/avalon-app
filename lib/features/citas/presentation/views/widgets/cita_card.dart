@@ -68,7 +68,7 @@ class CitaCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (!isClient)
+                      if (isClient)
                         TitleDescripcion(
                           isSubdescription: true,
                           title: apptexts.appOptions.cliente,
@@ -76,12 +76,12 @@ class CitaCard extends StatelessWidget {
                         ),
                       TitleDescripcion(
                         isSubdescription: true,
-                        title: apptexts.appOptions.cliente,
+                        title: apptexts.segurosPage.polizaSeguros(n: 1),
                         value: cita.clientePoliza!.displayName!,
                       ),
                       TitleDescripcion(
                         isSubdescription: true,
-                        title: apptexts.appOptions.detalle(n: 1),
+                        title: apptexts.appOptions.diagnostico_sintonomas,
                         value: cita.padecimiento ?? '',
                       ),
                       TitleDescripcion(

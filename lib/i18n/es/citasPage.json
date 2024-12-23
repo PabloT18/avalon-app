@@ -24,6 +24,17 @@
         "other": "Historiales"
     },
     "detailFechaTentativa": "Fecha Tentativa",
+    "detailFechaTentativaDesde": "Fecha Tentativa Desde",
+    "detailFechaTentativaHasta": "Fecha Tentativa Hasta",
+    "tipoCita": "Tipo de Cita Médica",
+    "tiposCita": {
+        "presencial": "Cita Presencial",
+        "telematica": "Cita Telemática",
+        "segundaOp": "Segunda Opinión Médica",
+        "ciriguia": "Cirugía Ambulatoria",
+        "internamiento": "Cirugía Internamiento",
+        "seguimiento": "Cita Seguimiento"
+    },
     "detailPreferenceCity": "Ciudad de preferencia",
     "detailAseguradoraName": "Aseguradora",
     "detailHospital": "Hospital",

@@ -24,6 +24,17 @@
         "other": "Histories"
     },
     "detailFechaTentativa": "Tentative Date",
+    "detailFechaTentativaDesde": "Tentative Date From",
+    "detailFechaTentativaHasta": "Tentative Date To",
+    "tipoCita": "Type of Medical Appointment",
+    "tiposCita": {
+        "presencial": "In-Person Appointment",
+        "telematica": "Telemedicine Appointment",
+        "segundaOp": "Second Medical Opinion",
+        "ciriguia": "Outpatient Surgery",
+        "internamiento": "Inpatient Surgery",
+        "seguimiento": "Follow Appointment"
+    },
     "detailPreferenceCity": "Preferred City",
     "detailAseguradoraName": "Insurance Company",
     "detailHospital": "Hospital",

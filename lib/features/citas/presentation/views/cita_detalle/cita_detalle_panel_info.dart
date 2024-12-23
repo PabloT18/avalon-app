@@ -77,7 +77,7 @@ class CitaDetalleMorePanel extends StatelessWidget {
             label: apptexts.citasPage.detailOthersRequaimentes,
             value: citaMedica.otrosRequisitos),
         if (citaMedica.imagenId != null)
-          DetailPhoto(
+          DetailPhotoFile(
             imageCode: citaMedica.imagenId!,
             user: user,
           ),

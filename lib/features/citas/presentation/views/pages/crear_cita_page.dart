@@ -11,6 +11,7 @@ import 'package:avalon_app/features/user_features.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../shared/widgets/fields/editable_date_description.dart';
 import '../../../../shared/widgets/fields/editable_text_area_description.dart';
@@ -191,11 +192,12 @@ class FormNewCita extends StatelessWidget {
             apptexts.citasPage.nuevaCita,
             style: Theme.of(context).textTheme.titleSmall,
           ),
-          EditableDateDescription(
-            label: apptexts.citasPage.detailFechaTentativa,
-            dateTextController: cerarCitaBloc.birthDateController,
-            disablePastDates: true,
+
+          TipoCitaMedica(
+            cerarCitaBloc: cerarCitaBloc,
           ),
+          FechasCitaNueva(cerarCitaBloc: cerarCitaBloc),
+
           EditableTextDescription(
             apptexts.citasPage.detailPreferenceCity,
             cerarCitaBloc.detailPreferenceCity,
@@ -224,7 +226,25 @@ class FormNewCita extends StatelessWidget {
             cerarCitaBloc.detailOthersRequaimentes,
             beNull: true,
           ),
-          const ImageSelccion(),
+          const SizedBox(height: AppLayoutConst.spaceM),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              apptexts.appOptions.attachments(n: 2),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const Wrap(
+            crossAxisAlignment: WrapCrossAlignment.start,
+            spacing: 20,
+            children: [
+              ImageSelccion(),
+              PdfSeleccion(),
+            ],
+          ),
           ElevatedButton(
             onPressed: () {
               if (cerarCitaBloc.formKey.currentState!.validate()) {
@@ -240,6 +260,131 @@ class FormNewCita extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class TipoCitaMedica extends StatelessWidget {
+  const TipoCitaMedica({super.key, required this.cerarCitaBloc});
+
+  final CitaNuevaBloc cerarCitaBloc;
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Map<String, dynamic>> tipoCitaOptions = [
+      {"id": "PRESENCIAL", "nombre": apptexts.citasPage.tiposCita.presencial},
+      {"id": "TELEMATICA", "nombre": apptexts.citasPage.tiposCita.telematica},
+      {
+        "id": "SEGUNDA_OPINION",
+        "nombre": apptexts.citasPage.tiposCita.segundaOp
+      },
+      {
+        "id": "CIRUGIA_AMBULATORIA",
+        "nombre": apptexts.citasPage.tiposCita.ciriguia
+      },
+      {
+        "id": "CIRUGIA_INTERNAMIENTO",
+        "nombre": apptexts.citasPage.tiposCita.internamiento
+      },
+      {"id": "SEGUIMIENTO", "nombre": apptexts.citasPage.tiposCita.seguimiento},
+    ];
+
+    final String? tipoSelected =
+        context.select((CitaNuevaBloc bloc) => bloc.state.tipoCita);
+
+    return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${apptexts.citasPage.tipoCita} *',
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: AppLayoutConst.spaceM),
+            DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                isDense: true,
+              ),
+              menuMaxHeight: 500,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+              ),
+              value: tipoSelected,
+              items: tipoCitaOptions.map((op) {
+                return DropdownMenuItem<String>(
+                  value: op["id"],
+                  child: Text(op["nombre"]),
+                );
+              }).toList(),
+              onChanged: (value) {
+                if (value != null) {
+                  cerarCitaBloc.add(UpdateSelectedTipoCita(value));
+                }
+              },
+              isExpanded: false,
+              validator: (value) {
+                if (value == null || value == 0) {
+                  return apptexts.appOptions.validators.requiredField;
+                }
+                return null;
+              },
+            ),
+          ],
+        ));
+  }
+}
+
+class FechasCitaNueva extends StatefulWidget {
+  const FechasCitaNueva({
+    super.key,
+    required this.cerarCitaBloc,
+  });
+
+  final CitaNuevaBloc cerarCitaBloc;
+
+  @override
+  State<FechasCitaNueva> createState() => _FechasCitaNuevaState();
+}
+
+class _FechasCitaNuevaState extends State<FechasCitaNueva> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        EditableDateDescription(
+          label: '${apptexts.citasPage.detailFechaTentativaDesde} *',
+          dateTextController: widget.cerarCitaBloc.dateFrom,
+          disablePastDates: true,
+          onFieldSubmitted: (p0) {
+            setState(() {
+              widget.cerarCitaBloc.dateTo.text =
+                  widget.cerarCitaBloc.dateFrom.text;
+            });
+          },
+        ),
+        EditableDateDescription(
+          label: apptexts.citasPage.detailFechaTentativaHasta,
+          dateTextController: widget.cerarCitaBloc.dateTo,
+          disablePastDates: true,
+          minSelectedDate: _tryParseDate(widget.cerarCitaBloc.dateFrom.text),
+        ),
+      ],
+    );
+  }
+
+  DateTime? _tryParseDate(String? rawDate) {
+    if (rawDate == null || rawDate.isEmpty) return null;
+    try {
+      return DateFormat('dd/MM/yyyy').parse(rawDate);
+    } catch (_) {
+      return null;
+    }
   }
 }
 
@@ -334,86 +479,184 @@ class ImageSelccion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final image = context.select((CitaNuevaBloc bloc) => bloc.state.image);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(width: double.infinity),
-          Text(
-            apptexts.citasPage.detalleFoto,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+    final pdfState = context.select((CitaNuevaBloc bloc) => bloc.state.pdf);
+
+    return Opacity(
+      opacity: pdfState == null ? 1 : 0.2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              apptexts.citasPage.detalleFoto,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: AppLayoutConst.spaceM,
-          ),
-          if (image == null)
-            Card(
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                  onTap: () => context.read<CitaNuevaBloc>().add(
-                        const ImageSelected(),
+            const SizedBox(
+              height: AppLayoutConst.spaceM,
+            ),
+            if (image == null)
+              Card(
+                clipBehavior: Clip.hardEdge,
+                child: InkWell(
+                    onTap: () => context.read<CitaNuevaBloc>().add(
+                          const ImageSelected(),
+                        ),
+                    child: const SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Icon(
+                        Icons.photo,
+                        size: 50,
                       ),
+                    )),
+              ),
+            if (image != null)
+              Stack(
+                children: [
+                  // Imagen seleccionada
+                  GestureDetector(
+                    onTap: () {
+                      UtilsFunctionsViews.showFullScreenImage(
+                        image,
+                        context,
+                      ); // Llamamos a la función para mostrar la imagen en un dialogo
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(8.0),
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: FileImage(image),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Botón de eliminar (X) en la esquina superior derecha
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        context.read<CitaNuevaBloc>().add(const RemoveImage());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(2.0),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PdfSeleccion extends StatelessWidget {
+  const PdfSeleccion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final pdf = context.select((CitaNuevaBloc bloc) => bloc.state.pdf);
+    final imageState = context.select((CitaNuevaBloc bloc) => bloc.state.image);
+
+    return Opacity(
+      opacity: imageState == null ? 1 : 0.2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'PDF', // O usa tu apptexts...
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: AppLayoutConst.spaceM),
+            if (pdf == null)
+              Card(
+                child: InkWell(
+                  onTap: () {
+                    // Disparamos evento para abrir FilePicker
+                    context.read<CitaNuevaBloc>().add(const PdfSelected());
+                  },
                   child: const SizedBox(
                     width: 100,
                     height: 100,
                     child: Icon(
-                      Icons.photo,
+                      Icons.picture_as_pdf,
                       size: 50,
                     ),
-                  )),
-            ),
-          if (image != null)
-            Stack(
-              children: [
-                // Imagen seleccionada
-                GestureDetector(
-                  onTap: () {
-                    UtilsFunctionsViews.showFullScreenImage(
-                      image,
-                      context,
-                    ); // Llamamos a la función para mostrar la imagen en un dialogo
-                  },
-                  child: Container(
+                  ),
+                ),
+              )
+            else
+              Stack(
+                children: [
+                  // Muestra algo como un ícono o nombre del archivo
+                  Container(
                     margin: const EdgeInsets.all(8.0),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: FileImage(image),
-                        fit: BoxFit.cover,
+                    width: 200,
+                    height: 50,
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.grey.shade200,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.picture_as_pdf, color: Colors.red),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            pdf.path.split('/').last,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Botón de eliminar
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        context.read<CitaNuevaBloc>().add(const RemovePdf());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(2.0),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          size: 16,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                // Botón de eliminar (X) en la esquina superior derecha
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: GestureDetector(
-                    onTap: () {
-                      context.read<CitaNuevaBloc>().add(const RemoveImage());
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(2.0),
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.close,
-                        size: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-        ],
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }

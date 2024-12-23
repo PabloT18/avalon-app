@@ -129,6 +129,6 @@ class NuevoCasoBloc extends Bloc<NuevoCasoEvent, NuevoCasoState> {
       SetuserAscleinte event, Emitter<NuevoCasoState> emit) {
     emit(state
         .copyWith(clientes: [event.cliente], selectedCliente: event.cliente));
-    // add(SelectClienteEvent(event.cliente, event.cliente.id!));
+    add(SelectClienteEvent(event.cliente, event.cliente.id!));
   }
 }

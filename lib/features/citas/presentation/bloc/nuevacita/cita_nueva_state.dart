@@ -7,8 +7,14 @@ class CitaNuevaState extends Equatable {
     this.casoSeleccionado,
     this.isLoading = false,
     this.waitForCreateCase = false,
+    this.tipoCita,
+    this.paises = const [],
+    this.selectedCountryId,
+    this.estados = const [],
+    this.selectedEstadoId,
     RequisitosAdicionales? requisitosAdicionales,
     this.image,
+    this.pdf,
     this.citaCreada,
   }) : requisitosAdicionales = requisitosAdicionales ??
             const RequisitosAdicionales(
@@ -28,7 +34,16 @@ class CitaNuevaState extends Equatable {
   final bool waitForCreateCase;
   final RequisitosAdicionales requisitosAdicionales;
 
+  final String? tipoCita;
+  // Nuevos campos para países y estados
+  final List<Pais> paises;
+  final int? selectedCountryId;
+  final List<Estado> estados;
+  final int? selectedEstadoId;
+
   final File? image;
+  final File? pdf;
+
   final bool? citaCreada;
 
   CitaNuevaState copyWith({
@@ -38,8 +53,15 @@ class CitaNuevaState extends Equatable {
     bool? isLoading,
     bool? waitForCreateCase,
     RequisitosAdicionales? requisitosAdicionales,
+    String? tipoCita,
+    List<Pais>? paises,
+    int? selectedCountryId,
+    List<Estado>? estados,
+    int? selectedEstadoId,
     File? image,
     bool removeImage = false,
+    File? pdf,
+    bool removePdf = false,
     bool? citaCreada,
   }) {
     return CitaNuevaState(
@@ -50,7 +72,13 @@ class CitaNuevaState extends Equatable {
       waitForCreateCase: waitForCreateCase ?? false,
       requisitosAdicionales:
           requisitosAdicionales ?? this.requisitosAdicionales,
+      tipoCita: tipoCita ?? this.tipoCita,
+      paises: paises ?? this.paises,
+      selectedCountryId: selectedCountryId ?? this.selectedCountryId,
+      estados: estados ?? this.estados,
+      selectedEstadoId: selectedEstadoId ?? this.selectedEstadoId,
       image: removeImage ? null : image ?? this.image,
+      pdf: removePdf ? null : pdf ?? this.pdf,
       citaCreada: citaCreada ?? this.citaCreada,
     );
   }
@@ -63,7 +91,13 @@ class CitaNuevaState extends Equatable {
         isLoading,
         waitForCreateCase,
         requisitosAdicionales,
+        tipoCita,
+        paises,
+        selectedCountryId,
+        estados,
+        selectedEstadoId,
         image,
+        pdf,
         citaCreada,
       ];
 }

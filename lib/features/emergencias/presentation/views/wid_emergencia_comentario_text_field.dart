@@ -1,4 +1,7 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:avalon_app/core/config/responsive/responsive_class.dart';
+import 'package:avalon_app/core/config/responsive/responsive_wid.dart';
+import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:avalon_app/features/emergencias/presentation/bloc/detalle/emergencia_detalle_bloc.dart';
 import 'package:avalon_app/features/shared/functions/fun_views.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
@@ -16,7 +19,7 @@ class ComentarioTextBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ComentarioNuevCubit>();
     final TextEditingController messageController = TextEditingController();
-
+    final responsive = ResponsiveCustom.of(context);
     return BlocConsumer<ComentarioNuevCubit, ComentarioNuevState>(
       listener: (context, state) {
         if (state is ComentarioError) {
@@ -86,6 +89,60 @@ class ComentarioTextBox extends StatelessWidget {
                       ),
                     ],
                   ),
+                if (state is ComentarioPDFSelected)
+                  Stack(
+                    children: [
+                      // Imagen seleccionada
+                      SizedBox(
+                        width: responsive.wp(50),
+                        child: Card(
+                          margin: const EdgeInsets.all(8.0),
+
+                          // width: 150,
+                          // height: 40,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.picture_as_pdf,
+                                  color: Colors.red, size: 40),
+                              const SizedBox(width: 20),
+                              // Muestra el nombre del PDF, si existe
+                              Text(
+                                state.pdf.path.split('/').last,
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(fontSize: 10),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // Botón de eliminar (X) en la esquina superior derecha
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            context
+                                .read<ComentarioNuevCubit>()
+                                .removeImage(); // Llamada para eliminar la imagen
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(2.0),
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.close,
+                              size: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 Container(
                   padding: const EdgeInsets.only(top: 4.0, bottom: 5, left: 8),
                   decoration: BoxDecoration(
@@ -94,25 +151,50 @@ class ComentarioTextBox extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
+                      // Caja con borde y el TextField adentro
                       Expanded(
-                        child: TextField(
-                          controller: messageController,
-                          focusNode: cubit.textFieldFocusNode,
-                          maxLines:
-                              3, // Hace que el TextField sea dinámico en líneas
-                          minLines: 1, // Mínimo 1 línea
-                          autocorrect: true,
-                          // focusNode: textFieldFocusNode,
-                          decoration: InputDecoration(
-                            hintText: apptexts.appOptions.comentMessage,
-                            isDense: true,
-                            suffixIcon: IconButton(
-                              icon: const Icon(Icons.photo),
-                              onPressed: () => cubit.pickImage(),
-                            ),
+                        child: Container(
+                          // Bordes y color (si quieres)
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: AppColors.secondaryBlue),
+                          ),
+                          // padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  controller: messageController,
+                                  focusNode: cubit.textFieldFocusNode,
+                                  minLines: 1,
+                                  maxLines: 3, // Hasta 3 líneas3
+                                  autocorrect: true,
+                                  decoration: InputDecoration(
+                                    hintText: apptexts.appOptions.comentMessage,
+                                    border:
+                                        InputBorder.none, // Sin borde interno
+                                    //  border: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    isDense: true,
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.photo),
+                                onPressed: () => cubit.pickImage(),
+                              ),
+
+                              // Ícono "archivo" (si deseas)
+                              IconButton(
+                                icon: const Icon(Icons.attach_file),
+                                onPressed: () => cubit.onPdfSelected(),
+                              ),
+                            ],
                           ),
                         ),
                       ),
+
                       IconButton(
                         icon: const Icon(Icons.send),
                         onPressed: () {
@@ -124,6 +206,9 @@ class ComentarioTextBox extends StatelessWidget {
                             comentario: messageController.text,
                             image: (state is ComentarioImageSelected)
                                 ? state.image
+                                : null,
+                            pdf: (state is ComentarioPDFSelected)
+                                ? state.pdf
                                 : null,
                           );
                         },

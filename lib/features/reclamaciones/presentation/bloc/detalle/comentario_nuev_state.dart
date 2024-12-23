@@ -18,6 +18,15 @@ class ComentarioImageSelected extends ComentarioNuevState {
   List<Object?> get props => [image];
 }
 
+class ComentarioPDFSelected extends ComentarioNuevState {
+  final File pdf;
+
+  const ComentarioPDFSelected({required this.pdf});
+
+  @override
+  List<Object?> get props => [pdf];
+}
+
 class ComentarioSending extends ComentarioNuevState {}
 
 class ComentarioSent extends ComentarioNuevState {}

@@ -109,6 +109,7 @@ class ReclamacionesRemoteSource {
     required int reclamcionId,
     required String comentario,
     File? image,
+    File? pdf,
     required String nombreDocumento,
   }) async {
     String url = '/comentarios';
@@ -120,39 +121,54 @@ class ReclamacionesRemoteSource {
       "usuarioComentaId": user.id,
       "estado": "A",
       "nombreDocumento": nombreDocumento,
+      "tipoDocumento": pdf != null ? "PDF" : "IMAGEN",
     };
 
     // Prepare the FormData
     FormData formData = FormData();
-
-    // Add the comentarioCitaMedica part with Content-Type application/json
-    formData.files.add(
-      MapEntry(
-        'comentarioReclamacion',
-        MultipartFile.fromString(
-          jsonEncode(comentarioData),
-          contentType: MediaType('application', 'json'),
-        ),
-      ),
-    );
-
-    // If an image is provided, add it to the form data
-    if (image != null) {
-      String fileName = image.path.split('/').last;
+    try {
+      // Add the comentarioCitaMedica part with Content-Type application/json
       formData.files.add(
         MapEntry(
-          'fotoComentarioReclamacion',
-          await MultipartFile.fromFile(
-            image.path,
-            filename: fileName,
-            contentType:
-                MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+          'comentarioReclamacion',
+          MultipartFile.fromString(
+            jsonEncode(comentarioData),
+            contentType: MediaType('application', 'json'),
           ),
         ),
       );
-    }
 
-    try {
+      // If an image is provided, add it to the form data
+      if (image != null) {
+        String fileName = image.path.split('/').last;
+        formData.files.add(
+          MapEntry(
+            'fotoComentarioReclamacion',
+            await MultipartFile.fromFile(
+              image.path,
+              filename: fileName,
+              contentType:
+                  MediaType('image', lookupMimeType(image.path)!.split('/')[1]),
+            ),
+          ),
+        );
+      }
+      if (pdf != null) {
+        // Por ejemplo, si quieres llamarlo 'pdfEmergencia':
+        final String pdfName = nombreDocumento.replaceAll('.jpg', '.pdf');
+        // O ajusta para que sea algo más dinámico
+
+        formData.files.add(
+          MapEntry(
+            'fotoComentarioReclamacion',
+            await MultipartFile.fromFile(
+              pdf.path,
+              filename: pdfName,
+              contentType: MediaType('application', 'pdf'),
+            ),
+          ),
+        );
+      }
       final response = await APPRemoteConfig.httpPost(
         url: url,
         data: formData,
@@ -173,7 +189,10 @@ class ReclamacionesRemoteSource {
   }
 
   Future<ReclamacionModel> crearReclamacion(
-      User user, ReclamacionModel reclamacion, File? image,
+      User user,
+      ReclamacionModel reclamacion,
+      File? image,
+      File? pdf, // Nuevo parámetro para PDF
       {required String nombreDocumento}) async {
     String url = '/reclamaciones';
 
@@ -181,8 +200,14 @@ class ReclamacionesRemoteSource {
     final Map<String, dynamic> docuemntoName = {
       "nombreDocumento": nombreDocumento,
     };
+
+    final Map<String, dynamic> tipoDocumento = {
+      "tipoDocumento": pdf != null ? "PDF" : "IMAGEN",
+    };
     try {
       requestData.addEntries(docuemntoName.entries);
+      requestData.addEntries(tipoDocumento.entries);
+
       FormData formData = FormData();
 
       // Add the comentarioCitaMedica part with Content-Type application/json
@@ -213,6 +238,23 @@ class ReclamacionesRemoteSource {
         );
       }
 
+      // PDF (opcional)
+      if (pdf != null) {
+        // Por ejemplo, si quieres llamarlo 'pdfEmergencia':
+        final String pdfName = nombreDocumento.replaceAll('.jpg', '.pdf');
+        // O ajusta para que sea algo más dinámico
+
+        formData.files.add(
+          MapEntry(
+            'fotoReclamo',
+            await MultipartFile.fromFile(
+              pdf.path,
+              filename: pdfName,
+              contentType: MediaType('application', 'pdf'),
+            ),
+          ),
+        );
+      }
       final response = await APPRemoteConfig.httpPost(
         url: url,
         data: formData,

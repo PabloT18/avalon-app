@@ -13,6 +13,7 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -41,9 +42,10 @@ class EmergenciaNuevaBloc
 
     on<ImageSelected>(_onImageSelected);
     on<RemoveImage>(_onRemoveImage);
-    // on<SelectCasoOption>(_onSelectCasoOption);
-    // on<GetCitas>(_onGetCitas);
-    // on<GetEmergencias>(_onGetEmergencias);
+
+    // <--- Eventos para PDF
+    on<PdfSelected>(_onPdfSelected);
+    on<RemovePdf>(_onRemovePdf);
 
     refreshController = RefreshController(initialRefresh: false);
 
@@ -189,14 +191,20 @@ class EmergenciaNuevaBloc
     );
     final dateimage =
         '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}';
-    final nombreDocumento = state.image != null
-        ? '${_user.id}_${dateimage}_${state.image!.path.split('/').last}'
-        : '';
+    String nombreDocumento = '';
+    if (state.image != null) {
+      nombreDocumento =
+          '${_user.id}_${dateimage}_${state.image!.path.split('/').last}';
+    } else if (state.pdf != null) {
+      nombreDocumento =
+          '${_user.id}_${dateimage}_${state.pdf!.path.split('/').last}';
+    }
 
     final result = await emergenciasRepo.createEmergencia(
       _user,
       emergencia,
       image: state.image,
+      pdf: state.pdf,
       nombreDocumento: nombreDocumento,
     );
     result.fold(
@@ -225,7 +233,8 @@ class EmergenciaNuevaBloc
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      emit(state.copyWith(image: File(pickedFile.path)));
+      emit(state.copyWith(
+          image: File(pickedFile.path), pdf: null, removePdf: true));
     }
   }
 
@@ -235,5 +244,34 @@ class EmergenciaNuevaBloc
       image: null,
       removeImage: true,
     ));
+  }
+
+  FutureOr<void> _onPdfSelected(
+      PdfSelected event, Emitter<EmergenciaNuevaState> emit) async {
+    // Usamos file_picker para seleccionar PDF
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'], // Solo PDF
+    );
+
+    if (result != null && result.files.isNotEmpty) {
+      final pickedFile = result.files.single;
+      if (pickedFile.path != null) {
+        // Convertimos a File
+        final File pdfFile = File(pickedFile.path!);
+        // Actualizamos state
+        emit(state.copyWith(
+          pdf: pdfFile,
+          image: null,
+          removeImage: true,
+        ));
+      }
+    }
+  }
+
+  FutureOr<void> _onRemovePdf(
+      RemovePdf event, Emitter<EmergenciaNuevaState> emit) {
+    // Removemos el PDF
+    emit(state.copyWith(removePdf: true));
   }
 }

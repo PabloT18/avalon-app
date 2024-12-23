@@ -28,9 +28,13 @@ abstract class EmergenciasRepository {
 
   Future<Either<Failure, List<Comentario>>> sendComentario(
       User user, int emergenciaId, String comentario,
-      {File? image, required String nombreDocumento});
+      {File? image,
+      File? pdf, // Nuevo parámetro para PDF
+      required String nombreDocumento});
 
   Future<Either<Failure, EmergenciaModel>> createEmergencia(
       User user, EmergenciaModel emergencia,
-      {File? image, required String nombreDocumento});
+      {File? image,
+      File? pdf, // Nuevo parámetro para PDF
+      required String nombreDocumento});
 }

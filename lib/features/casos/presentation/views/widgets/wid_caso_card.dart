@@ -48,7 +48,7 @@ class CaseCard extends StatelessWidget {
           children: [
             TitleDescripcion(
                 isSubdescription: true,
-                title: apptexts.appOptions.detalle(n: 1),
+                title: apptexts.appOptions.diagnostico_sintonomas,
                 value: caso.observaciones ?? ' - '),
             TitleDescripcion(
                 isSubdescription: true,

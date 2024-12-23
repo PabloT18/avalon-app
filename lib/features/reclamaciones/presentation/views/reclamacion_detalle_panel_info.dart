@@ -78,7 +78,7 @@ class ReclacmaionDetalleMorePanel extends StatelessWidget {
         //     label: apptexts.reclamacionesPage.detailOthersRequaimentes,
         //     value: reclamacion.otrosRequisitos),
         if (reclamacion.imagenId != null)
-          DetailPhoto(
+          DetailPhotoFile(
             imageCode: reclamacion.imagenId!,
             user: user,
           ),

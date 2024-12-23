@@ -1,7 +1,7 @@
 {
     "title": {
-        "one": "Reclamación",
-        "other": "Reclamaciones"
+        "one": "Reembolso",
+        "other": "Reembolsos"
     },
     "reclamacionDetalle": {
         "one": "Detalle de Reembolso",
@@ -36,13 +36,13 @@
     "estadoCerrado": "Cerrado",
     "estadoGestionando": "Gestionando",
     "estadoPorGestionar": "Por Gestionar",
-    "nuevaReclamacion": "Nueva Reclamación",
-    "reclamacionSinCaso": "Reclamación sin caso",
+    "nuevaReclamacion": "Nueva Reembolso",
+    "reclamacionSinCaso": "Reembolso sin caso",
     "creaCasoReclamacion": "Crea un caso para el reembolso",
     "reclamacionEnCaso": "Escoje el caso para el reembolso",
     "reclamacionEstado": "Estado del el reembolso",
     "historialEmpty": "No hay un historial de comentarios aún",
     "historialError": "Error al cargar el historial de comentarios",
-    "reclamacionCreada": "Reclamación creada",
+    "reclamacionCreada": "Reembolso creada",
     "reclamacionCreadaError": "Error al crear el reembolso"
 }

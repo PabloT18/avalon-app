@@ -211,6 +211,14 @@ class FormNewEmergencia extends StatelessWidget {
             emergenciaNuevabloc.detailAditionalInformation,
           ),
           // Campos de dirección
+
+          _buildDropdownCountryField(emergenciaNuevabloc),
+          // Dropdown de estado
+          _buildDropdownStateField(emergenciaNuevabloc),
+          EditableTextDescription(
+            apptexts.perfilPage.city,
+            emergenciaNuevabloc.detailCiudad,
+          ),
           EditableTextDescription(
             apptexts.perfilPage.addressMain,
             emergenciaNuevabloc.detailDireccionUno,
@@ -221,19 +229,31 @@ class FormNewEmergencia extends StatelessWidget {
             beNull: true,
           ),
           EditableTextDescription(
-            apptexts.perfilPage.city,
-            emergenciaNuevabloc.detailCiudad,
-          ),
-          EditableTextDescription(
             apptexts.perfilPage.zipCode,
             emergenciaNuevabloc.detailCodigoPostal,
             beNull: true,
           ),
           // Dropdown de país
-          _buildDropdownCountryField(emergenciaNuevabloc),
-          // Dropdown de estado
-          _buildDropdownStateField(emergenciaNuevabloc),
-          const ImageSelccion(),
+
+          const SizedBox(height: AppLayoutConst.spaceM),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              apptexts.appOptions.attachments(n: 2),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const Wrap(
+            crossAxisAlignment: WrapCrossAlignment.start,
+            spacing: 20,
+            children: [
+              ImageSelccion(),
+              PdfSeleccion(),
+            ],
+          ),
           const SizedBox(height: AppLayoutConst.spaceM),
           ElevatedButton(
             onPressed: () {
@@ -266,7 +286,7 @@ class FormNewEmergencia extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                apptexts.perfilPage.country,
+                '${apptexts.perfilPage.country}:',
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -323,7 +343,7 @@ class FormNewEmergencia extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                apptexts.perfilPage.state,
+                '${apptexts.perfilPage.state}:',
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
@@ -376,88 +396,192 @@ class ImageSelccion extends StatelessWidget {
   Widget build(BuildContext context) {
     final image =
         context.select((EmergenciaNuevaBloc bloc) => bloc.state.image);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(width: double.infinity),
-          Text(
-            apptexts.citasPage.detalleFoto,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
+    final pdfState =
+        context.select((EmergenciaNuevaBloc bloc) => bloc.state.pdf);
+
+    return Opacity(
+      opacity: pdfState == null ? 1 : 0.2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              apptexts.citasPage.detalleFoto,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: AppLayoutConst.spaceM,
-          ),
-          if (image == null)
-            Card(
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                  onTap: () => context.read<EmergenciaNuevaBloc>().add(
-                        const ImageSelected(),
+            const SizedBox(
+              height: AppLayoutConst.spaceM,
+            ),
+            if (image == null)
+              Card(
+                clipBehavior: Clip.hardEdge,
+                child: InkWell(
+                    onTap: () => context.read<EmergenciaNuevaBloc>().add(
+                          const ImageSelected(),
+                        ),
+                    child: const SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Icon(
+                        Icons.photo,
+                        size: 50,
                       ),
+                    )),
+              ),
+            if (image != null)
+              Stack(
+                children: [
+                  // Imagen seleccionada
+                  GestureDetector(
+                    onTap: () {
+                      UtilsFunctionsViews.showFullScreenImage(
+                        image,
+                        context,
+                      ); // Llamamos a la función para mostrar la imagen en un dialogo
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(8.0),
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: FileImage(image),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Botón de eliminar (X) en la esquina superior derecha
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        context
+                            .read<EmergenciaNuevaBloc>()
+                            .add(const RemoveImage());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(2.0),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PdfSeleccion extends StatelessWidget {
+  const PdfSeleccion({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final pdf = context.select((EmergenciaNuevaBloc bloc) => bloc.state.pdf);
+    final imageState =
+        context.select((EmergenciaNuevaBloc bloc) => bloc.state.image);
+
+    return Opacity(
+      opacity: imageState == null ? 1 : 0.2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'PDF', // O usa tu apptexts...
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: AppLayoutConst.spaceM),
+            if (pdf == null)
+              Card(
+                child: InkWell(
+                  onTap: () {
+                    // Disparamos evento para abrir FilePicker
+                    context
+                        .read<EmergenciaNuevaBloc>()
+                        .add(const PdfSelected());
+                  },
                   child: const SizedBox(
                     width: 100,
                     height: 100,
                     child: Icon(
-                      Icons.photo,
+                      Icons.picture_as_pdf,
                       size: 50,
                     ),
-                  )),
-            ),
-          if (image != null)
-            Stack(
-              children: [
-                // Imagen seleccionada
-                GestureDetector(
-                  onTap: () {
-                    UtilsFunctionsViews.showFullScreenImage(
-                      image,
-                      context,
-                    ); // Llamamos a la función para mostrar la imagen en un dialogo
-                  },
-                  child: Container(
+                  ),
+                ),
+              )
+            else
+              Stack(
+                children: [
+                  // Muestra algo como un ícono o nombre del archivo
+                  Container(
                     margin: const EdgeInsets.all(8.0),
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: FileImage(image),
-                        fit: BoxFit.cover,
+                    width: 200,
+                    height: 50,
+                    padding: const EdgeInsets.all(8.0),
+                    color: Colors.grey.shade200,
+                    child: Row(
+                      children: [
+                        const Icon(Icons.picture_as_pdf, color: Colors.red),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            pdf.path.split('/').last,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Botón de eliminar
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: GestureDetector(
+                      onTap: () {
+                        context
+                            .read<EmergenciaNuevaBloc>()
+                            .add(const RemovePdf());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(2.0),
+                        decoration: const BoxDecoration(
+                          color: Colors.red,
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.close,
+                          size: 16,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                // Botón de eliminar (X) en la esquina superior derecha
-                Positioned(
-                  right: 0,
-                  top: 0,
-                  child: GestureDetector(
-                    onTap: () {
-                      context
-                          .read<EmergenciaNuevaBloc>()
-                          .add(const RemoveImage());
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(2.0),
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.close,
-                        size: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-        ],
+                ],
+              ),
+          ],
+        ),
       ),
     );
   }

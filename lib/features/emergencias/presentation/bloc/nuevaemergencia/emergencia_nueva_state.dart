@@ -12,6 +12,7 @@ class EmergenciaNuevaState extends Equatable {
     this.estados = const [],
     this.selectedEstadoId,
     this.image,
+    this.pdf,
     this.emergenciaCreada,
   });
   final List<CasoEntity>? casos;
@@ -28,6 +29,7 @@ class EmergenciaNuevaState extends Equatable {
   final int? selectedEstadoId;
 
   final File? image;
+  final File? pdf;
   final bool? emergenciaCreada;
 
   EmergenciaNuevaState copyWith({
@@ -41,6 +43,8 @@ class EmergenciaNuevaState extends Equatable {
     List<Estado>? estados,
     int? selectedEstadoId,
     File? image,
+    File? pdf,
+    bool removePdf = false, // <--- Para indicar si queremos remover el PDF
     bool removeImage = false,
     bool? citaCreada,
   }) {
@@ -55,7 +59,8 @@ class EmergenciaNuevaState extends Equatable {
       estados: estados ?? this.estados,
       selectedEstadoId: selectedEstadoId ?? this.selectedEstadoId,
       image: removeImage ? null : image ?? this.image,
-      emergenciaCreada: citaCreada ?? this.emergenciaCreada,
+      pdf: removePdf ? null : pdf ?? this.pdf,
+      emergenciaCreada: citaCreada ?? emergenciaCreada,
     );
   }
 
@@ -71,6 +76,7 @@ class EmergenciaNuevaState extends Equatable {
         estados,
         selectedEstadoId,
         image,
+        pdf,
         emergenciaCreada,
       ];
 }

@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 634 (317 per locale)
+/// Strings: 658 (329 per locale)
 ///
-/// Built on 2024-12-23 at 00:02 UTC
+/// Built on 2024-12-23 at 10:17 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -186,6 +186,11 @@ class _TranslationsAppOptionsEs {
 		one: 'Comentario',
 		other: 'Comentarios',
 	);
+	String attachments({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Adjunto',
+		other: 'Adjuntos',
+	);
+	String get diagnostico_sintonomas => 'Diagnóstico/síntoma';
 	String get codigo => 'Código';
 	String get fecha => 'Fecha';
 	String get noData => 'No hay información cargada';
@@ -340,6 +345,10 @@ class _TranslationsCitasPageEs {
 		other: 'Historiales',
 	);
 	String get detailFechaTentativa => 'Fecha Tentativa';
+	String get detailFechaTentativaDesde => 'Fecha Tentativa Desde';
+	String get detailFechaTentativaHasta => 'Fecha Tentativa Hasta';
+	String get tipoCita => 'Tipo de Cita Médica';
+	late final _TranslationsCitasPageTiposCitaEs tiposCita = _TranslationsCitasPageTiposCitaEs._(_root);
 	String get detailPreferenceCity => 'Ciudad de preferencia';
 	String get detailAseguradoraName => 'Aseguradora';
 	String get detailHospital => 'Hospital';
@@ -585,8 +594,8 @@ class _TranslationsReclamacionesPageEs {
 
 	// Translations
 	String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-		one: 'Reclamación',
-		other: 'Reclamaciones',
+		one: 'Reembolso',
+		other: 'Reembolsos',
 	);
 	String reclamacionDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 		one: 'Detalle de Reembolso',
@@ -618,14 +627,14 @@ class _TranslationsReclamacionesPageEs {
 	String get estadoCerrado => 'Cerrado';
 	String get estadoGestionando => 'Gestionando';
 	String get estadoPorGestionar => 'Por Gestionar';
-	String get nuevaReclamacion => 'Nueva Reclamación';
-	String get reclamacionSinCaso => 'Reclamación sin caso';
+	String get nuevaReclamacion => 'Nueva Reembolso';
+	String get reclamacionSinCaso => 'Reembolso sin caso';
 	String get creaCasoReclamacion => 'Crea un caso para el reembolso';
 	String get reclamacionEnCaso => 'Escoje el caso para el reembolso';
 	String get reclamacionEstado => 'Estado del el reembolso';
 	String get historialEmpty => 'No hay un historial de comentarios aún';
 	String get historialError => 'Error al cargar el historial de comentarios';
-	String get reclamacionCreada => 'Reclamación creada';
+	String get reclamacionCreada => 'Reembolso creada';
 	String get reclamacionCreadaError => 'Error al crear el reembolso';
 }
 
@@ -715,6 +724,21 @@ class _TranslationsAvalonInfoDetailsEs {
 	String get experts => 'Expertos en facturación y contención costos';
 	String get offices => 'Oficinas y operaciones en Houston';
 	String get lead => 'TPA Líder en consejería médica integral internacional';
+}
+
+// Path: citasPage.tiposCita
+class _TranslationsCitasPageTiposCitaEs {
+	_TranslationsCitasPageTiposCitaEs._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get presencial => 'Cita Presencial';
+	String get telematica => 'Cita Telemática';
+	String get segundaOp => 'Segunda Opinión Médica';
+	String get ciriguia => 'Cirugía Ambulatoria';
+	String get internamiento => 'Cirugía Internamiento';
+	String get seguimiento => 'Cita Seguimiento';
 }
 
 // Path: citasPage.aditionalRequaimentes
@@ -819,6 +843,11 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 		one: 'Comment',
 		other: 'Comments',
 	);
+	@override String attachments({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Attachment',
+		other: 'Attachments',
+	);
+	@override String get diagnostico_sintonomas => 'Diagnosis/symptom';
 	@override String get codigo => 'Code';
 	@override String get fecha => 'Date';
 	@override String get noData => 'No data loaded';
@@ -973,6 +1002,10 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 		other: 'Histories',
 	);
 	@override String get detailFechaTentativa => 'Tentative Date';
+	@override String get detailFechaTentativaDesde => 'Tentative Date From';
+	@override String get detailFechaTentativaHasta => 'Tentative Date To';
+	@override String get tipoCita => 'Type of Medical Appointment';
+	@override late final _TranslationsCitasPageTiposCitaEn tiposCita = _TranslationsCitasPageTiposCitaEn._(_root);
 	@override String get detailPreferenceCity => 'Preferred City';
 	@override String get detailAseguradoraName => 'Insurance Company';
 	@override String get detailHospital => 'Hospital';
@@ -1350,6 +1383,21 @@ class _TranslationsAvalonInfoDetailsEn implements _TranslationsAvalonInfoDetails
 	@override String get lead => 'TPA leader in international medical concierge services';
 }
 
+// Path: citasPage.tiposCita
+class _TranslationsCitasPageTiposCitaEn implements _TranslationsCitasPageTiposCitaEs {
+	_TranslationsCitasPageTiposCitaEn._(this._root);
+
+	@override final _TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get presencial => 'In-Person Appointment';
+	@override String get telematica => 'Telemedicine Appointment';
+	@override String get segundaOp => 'Second Medical Opinion';
+	@override String get ciriguia => 'Outpatient Surgery';
+	@override String get internamiento => 'Inpatient Surgery';
+	@override String get seguimiento => 'Follow Appointment';
+}
+
 // Path: citasPage.aditionalRequaimentes
 class _TranslationsCitasPageAditionalRequaimentesEn implements _TranslationsCitasPageAditionalRequaimentesEs {
 	_TranslationsCitasPageAditionalRequaimentesEn._(this._root);
@@ -1409,6 +1457,11 @@ extension on Translations {
 				one: 'Comentario',
 				other: 'Comentarios',
 			);
+			case 'appOptions.attachments': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Adjunto',
+				other: 'Adjuntos',
+			);
+			case 'appOptions.diagnostico_sintonomas': return 'Diagnóstico/síntoma';
 			case 'appOptions.codigo': return 'Código';
 			case 'appOptions.fecha': return 'Fecha';
 			case 'appOptions.noData': return 'No hay información cargada';
@@ -1544,6 +1597,15 @@ extension on Translations {
 				other: 'Historiales',
 			);
 			case 'citasPage.detailFechaTentativa': return 'Fecha Tentativa';
+			case 'citasPage.detailFechaTentativaDesde': return 'Fecha Tentativa Desde';
+			case 'citasPage.detailFechaTentativaHasta': return 'Fecha Tentativa Hasta';
+			case 'citasPage.tipoCita': return 'Tipo de Cita Médica';
+			case 'citasPage.tiposCita.presencial': return 'Cita Presencial';
+			case 'citasPage.tiposCita.telematica': return 'Cita Telemática';
+			case 'citasPage.tiposCita.segundaOp': return 'Segunda Opinión Médica';
+			case 'citasPage.tiposCita.ciriguia': return 'Cirugía Ambulatoria';
+			case 'citasPage.tiposCita.internamiento': return 'Cirugía Internamiento';
+			case 'citasPage.tiposCita.seguimiento': return 'Cita Seguimiento';
 			case 'citasPage.detailPreferenceCity': return 'Ciudad de preferencia';
 			case 'citasPage.detailAseguradoraName': return 'Aseguradora';
 			case 'citasPage.detailHospital': return 'Hospital';
@@ -1708,8 +1770,8 @@ extension on Translations {
 			case 'preferenciasPage.permisos.camara': return 'Cámara';
 			case 'preferenciasPage.permisos.almacenamiento': return 'Almacenamiento';
 			case 'reclamacionesPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-				one: 'Reclamación',
-				other: 'Reclamaciones',
+				one: 'Reembolso',
+				other: 'Reembolsos',
 			);
 			case 'reclamacionesPage.reclamacionDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Detalle de Reembolso',
@@ -1742,14 +1804,14 @@ extension on Translations {
 			case 'reclamacionesPage.estadoCerrado': return 'Cerrado';
 			case 'reclamacionesPage.estadoGestionando': return 'Gestionando';
 			case 'reclamacionesPage.estadoPorGestionar': return 'Por Gestionar';
-			case 'reclamacionesPage.nuevaReclamacion': return 'Nueva Reclamación';
-			case 'reclamacionesPage.reclamacionSinCaso': return 'Reclamación sin caso';
+			case 'reclamacionesPage.nuevaReclamacion': return 'Nueva Reembolso';
+			case 'reclamacionesPage.reclamacionSinCaso': return 'Reembolso sin caso';
 			case 'reclamacionesPage.creaCasoReclamacion': return 'Crea un caso para el reembolso';
 			case 'reclamacionesPage.reclamacionEnCaso': return 'Escoje el caso para el reembolso';
 			case 'reclamacionesPage.reclamacionEstado': return 'Estado del el reembolso';
 			case 'reclamacionesPage.historialEmpty': return 'No hay un historial de comentarios aún';
 			case 'reclamacionesPage.historialError': return 'Error al cargar el historial de comentarios';
-			case 'reclamacionesPage.reclamacionCreada': return 'Reclamación creada';
+			case 'reclamacionesPage.reclamacionCreada': return 'Reembolso creada';
 			case 'reclamacionesPage.reclamacionCreadaError': return 'Error al crear el reembolso';
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Seguro',
@@ -1814,6 +1876,11 @@ extension on _TranslationsEn {
 				one: 'Comment',
 				other: 'Comments',
 			);
+			case 'appOptions.attachments': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Attachment',
+				other: 'Attachments',
+			);
+			case 'appOptions.diagnostico_sintonomas': return 'Diagnosis/symptom';
 			case 'appOptions.codigo': return 'Code';
 			case 'appOptions.fecha': return 'Date';
 			case 'appOptions.noData': return 'No data loaded';
@@ -1949,6 +2016,15 @@ extension on _TranslationsEn {
 				other: 'Histories',
 			);
 			case 'citasPage.detailFechaTentativa': return 'Tentative Date';
+			case 'citasPage.detailFechaTentativaDesde': return 'Tentative Date From';
+			case 'citasPage.detailFechaTentativaHasta': return 'Tentative Date To';
+			case 'citasPage.tipoCita': return 'Type of Medical Appointment';
+			case 'citasPage.tiposCita.presencial': return 'In-Person Appointment';
+			case 'citasPage.tiposCita.telematica': return 'Telemedicine Appointment';
+			case 'citasPage.tiposCita.segundaOp': return 'Second Medical Opinion';
+			case 'citasPage.tiposCita.ciriguia': return 'Outpatient Surgery';
+			case 'citasPage.tiposCita.internamiento': return 'Inpatient Surgery';
+			case 'citasPage.tiposCita.seguimiento': return 'Follow Appointment';
 			case 'citasPage.detailPreferenceCity': return 'Preferred City';
 			case 'citasPage.detailAseguradoraName': return 'Insurance Company';
 			case 'citasPage.detailHospital': return 'Hospital';

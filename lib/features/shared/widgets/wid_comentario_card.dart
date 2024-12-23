@@ -75,6 +75,12 @@ class ComentarioCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall!,
                   ),
                 ),
+                if (comentario.imagenId != null)
+                  DetailPhotoFile(
+                    imageCode: comentario.imagenId!,
+                    title: false,
+                    user: user,
+                  ),
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -86,12 +92,6 @@ class ComentarioCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (comentario.imagenId != null)
-                  DetailPhoto(
-                    imageCode: comentario.imagenId!,
-                    title: false,
-                    user: user,
-                  ),
               ],
             ),
           ),

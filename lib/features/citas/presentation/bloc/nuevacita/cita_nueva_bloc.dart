@@ -10,6 +10,7 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,15 +29,17 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
     on<GetCasosCita>(_onGetCasosUser);
     on<WaitForCreateCase>(_onWaitForCreateCase);
     on<SelectCaso>(_onSelectCaso);
+
     on<UpdateRequisitoAdicional>(_onUpdateRequisitoAdicional);
+    on<UpdateSelectedTipoCita>(_onUpdateSelectedTipoCita);
     on<SubmitCitaEvent>(_onSubmitCitaEvent);
 
     on<ImageSelected>(_onImageSelected);
     on<RemoveImage>(_onRemoveImage);
 
-    // on<SelectCasoOption>(_onSelectCasoOption);
-    // on<GetCitas>(_onGetCitas);
-    // on<GetEmergencias>(_onGetEmergencias);
+    // <--- Eventos para PDF
+    on<PdfSelected>(_onPdfSelected);
+    on<RemovePdf>(_onRemovePdf);
 
     refreshController = RefreshController(initialRefresh: false);
 
@@ -47,7 +50,8 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
 
     _pageCitas = 0;
 
-    birthDateController = TextEditingController();
+    dateFrom = TextEditingController();
+    dateTo = TextEditingController();
     detailPreferenceCity = TextEditingController();
     detailHospital = TextEditingController();
     detailPreferenceDoctor = TextEditingController();
@@ -71,7 +75,9 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   GlobalKey<FormState> get formKey => _formKey;
 
-  late TextEditingController birthDateController;
+  late TextEditingController dateFrom;
+  late TextEditingController dateTo;
+
   late TextEditingController detailPreferenceCity;
   late TextEditingController detailHospital;
   late TextEditingController detailPreferenceDoctor;
@@ -79,9 +85,16 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
   late TextEditingController detailAditionalInformation;
   late TextEditingController detailOthersRequaimentes;
 
+  final TextEditingController detailDireccionUno = TextEditingController();
+  final TextEditingController detailDireccionDos = TextEditingController();
+  final TextEditingController detailCiudad = TextEditingController();
+  final TextEditingController detailCodigoPostal = TextEditingController();
+
   @override
   Future<void> close() {
-    birthDateController.dispose();
+    dateFrom.dispose();
+    dateTo.dispose();
+
     detailPreferenceCity.dispose();
     detailHospital.dispose();
     detailPreferenceDoctor.dispose();
@@ -165,9 +178,19 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
     final citaMedica = CitaMedica(
       clientePoliza: state.casoSeleccionado!.clientePoliza,
       caso: state.casoSeleccionado!,
+      tipoCitaMedica: state.tipoCita,
+      direccion: Direccion(
+        direccionUno: detailDireccionUno.text,
+        direccionDos: detailDireccionDos.text,
+        // ciudad: detailPreferenceCity.text,
+        // codigoPostal: detailCodigoPostal.text,
+        // pais: state.paises.firstWhere((p) => p.id == state.selectedCountryId),
+        // estado: state.estados.firstWhere((e) => e.id == state.selectedEstadoId),
+      ),
       // fechaTentativa:
       // ateTime.parse(birthDateController.text),
-      fechaTentativa: DateFormat('dd/MM/yyyy').parse(birthDateController.text),
+      fechaTentativa: DateFormat('dd/MM/yyyy').parse(dateFrom.text),
+      fechaTentativaHasta: DateFormat('dd/MM/yyyy').parse(dateTo.text),
       ciudadPreferencia: detailPreferenceCity.text,
       padecimiento: detailPadecimeiento.text,
       informacionAdicional: detailAditionalInformation.text,
@@ -180,14 +203,20 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
 
     final dateimage =
         '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}';
-    final nombreDocumento = state.image != null
-        ? '${_user.id}_${dateimage}_${state.image!.path.split('/').last}'
-        : '';
+    String nombreDocumento = '';
+    if (state.image != null) {
+      nombreDocumento =
+          '${_user.id}_${dateimage}_${state.image!.path.split('/').last}';
+    } else if (state.pdf != null) {
+      nombreDocumento =
+          '${_user.id}_${dateimage}_${state.pdf!.path.split('/').last}';
+    }
 
     // // Llamar al repositorio para persistir la cita
     Either<Failure, CitaMedica> result = await citasRepository.crearCita(
       _user,
       citaMedica,
+      pdf: state.pdf,
       image: state.image,
       nombreDocumento: nombreDocumento,
     );
@@ -202,7 +231,8 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
         ));
       },
       (cita) {
-        birthDateController.clear();
+        dateFrom.clear();
+        dateTo.clear();
         detailPreferenceCity.clear();
         detailHospital.clear();
         detailPreferenceDoctor.clear();
@@ -226,7 +256,8 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      emit(state.copyWith(image: File(pickedFile.path)));
+      emit(state.copyWith(
+          image: File(pickedFile.path), pdf: null, removePdf: true));
     }
   }
 
@@ -236,5 +267,38 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
       image: null,
       removeImage: true,
     ));
+  }
+
+  FutureOr<void> _onPdfSelected(
+      PdfSelected event, Emitter<CitaNuevaState> emit) async {
+    // Usamos file_picker para seleccionar PDF
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'], // Solo PDF
+    );
+
+    if (result != null && result.files.isNotEmpty) {
+      final pickedFile = result.files.single;
+      if (pickedFile.path != null) {
+        // Convertimos a File
+        final File pdfFile = File(pickedFile.path!);
+        // Actualizamos state
+        emit(state.copyWith(
+          pdf: pdfFile,
+          image: null,
+          removeImage: true,
+        ));
+      }
+    }
+  }
+
+  FutureOr<void> _onRemovePdf(RemovePdf event, Emitter<CitaNuevaState> emit) {
+    // Removemos el PDF
+    emit(state.copyWith(removePdf: true));
+  }
+
+  FutureOr<void> _onUpdateSelectedTipoCita(
+      UpdateSelectedTipoCita event, Emitter<CitaNuevaState> emit) {
+    emit(state.copyWith(tipoCita: event.tipoCita));
   }
 }

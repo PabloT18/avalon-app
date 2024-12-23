@@ -77,13 +77,17 @@ class ReclamacionesRepositoryImpl implements ReclamacionesRepository {
   @override
   Future<Either<Failure, List<Comentario>>> sendComentarioReclamacion(
       User user, int reclamacionId, String comentario,
-      {File? image, required String nombreDocumento}) async {
+      {File? image,
+      File? pdf, // Nuevo parámetro para PDF
+
+      required String nombreDocumento}) async {
     try {
       await remoteSource.sendComentario(
         user: user,
         reclamcionId: reclamacionId,
         comentario: comentario,
         image: image,
+        pdf: pdf,
         nombreDocumento: nombreDocumento,
       );
       return const Right([]);
@@ -97,12 +101,16 @@ class ReclamacionesRepositoryImpl implements ReclamacionesRepository {
   @override
   Future<Either<Failure, ReclamacionModel>> createReclamacion(
       User user, ReclamacionModel reclamacion,
-      {File? image, required String nombreDocumento}) async {
+      {File? image,
+      File? pdf, // Nuevo parámetro para PDF
+
+      required String nombreDocumento}) async {
     try {
       final casosList = await remoteSource.crearReclamacion(
         user,
         reclamacion,
         image,
+        pdf,
         nombreDocumento: nombreDocumento,
       );
       return Right(casosList);

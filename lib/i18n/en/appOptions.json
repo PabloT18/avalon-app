@@ -12,6 +12,11 @@
         "one": "Comment",
         "other": "Comments"
     },
+    "attachments": {
+        "one": "Attachment",
+        "other": "Attachments"
+    },
+    "diagnostico_sintonomas": "Diagnosis/symptom",
     "codigo": "Code",
     "fecha": "Date",
     "noData": "No data loaded",

@@ -45,3 +45,11 @@ class ImageSelected extends ReclamacionNuevaEvent {
 class RemoveImage extends ReclamacionNuevaEvent {
   const RemoveImage();
 }
+
+class PdfSelected extends ReclamacionNuevaEvent {
+  const PdfSelected();
+}
+
+class RemovePdf extends ReclamacionNuevaEvent {
+  const RemovePdf();
+}

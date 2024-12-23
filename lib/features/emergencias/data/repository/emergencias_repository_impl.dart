@@ -74,13 +74,16 @@ class EmergenciasRepositoryImpl implements EmergenciasRepository {
   @override
   Future<Either<Failure, List<Comentario>>> sendComentario(
       User user, int emergenciaId, String comentario,
-      {File? image, required String nombreDocumento}) async {
+      {File? image,
+      File? pdf, // Nuevo parámetro para PDF
+      required String nombreDocumento}) async {
     try {
       await remoteSource.sendComentario(
         user: user,
         emergenciaId: emergenciaId,
         comentario: comentario,
         image: image,
+        pdf: pdf,
         nombreDocumento: nombreDocumento,
       );
       return const Right([]);
@@ -94,12 +97,15 @@ class EmergenciasRepositoryImpl implements EmergenciasRepository {
   @override
   Future<Either<Failure, EmergenciaModel>> createEmergencia(
       User user, EmergenciaModel emergencia,
-      {File? image, required String nombreDocumento}) async {
+      {File? image,
+      File? pdf, // Nuevo parámetro para PDF
+      required String nombreDocumento}) async {
     try {
       final casosList = await remoteSource.crearEmergencia(
         user,
         emergencia,
         image,
+        pdf,
         nombreDocumento: nombreDocumento,
       );
       return Right(casosList);

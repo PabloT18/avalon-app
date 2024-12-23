@@ -73,7 +73,7 @@ class DetalleMorePanel extends StatelessWidget {
         //     label: apptexts.citasPage.detailOthersRequaimentes,
         //     value: emergencia.otrosRequisitos),
         if (emergencia.imagenId != null)
-          DetailPhoto(
+          DetailPhotoFile(
             imageCode: emergencia.imagenId!,
             user: user,
           ),

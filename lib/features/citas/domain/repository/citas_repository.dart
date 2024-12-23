@@ -28,8 +28,12 @@ abstract class CitasRepository {
 
   Future<Either<Failure, List<Comentario>>> sendComentario(
       User user, int citaId, String comentario,
-      {File? image, required String nombreDocumento});
+      {File? image,
+      File? pdf, // Nuevo parámetro para PDF
+      required String nombreDocumento});
 
   Future<Either<Failure, CitaMedica>> crearCita(User user, CitaMedica cita,
-      {File? image, required String nombreDocumento});
+      {File? image,
+      File? pdf, // Nuevo parámetro para PDF
+      required String nombreDocumento});
 }

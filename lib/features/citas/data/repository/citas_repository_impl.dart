@@ -74,13 +74,17 @@ class CitasRepositoryImpl implements CitasRepository {
   @override
   Future<Either<Failure, List<Comentario>>> sendComentario(
       User user, int citaId, String comentario,
-      {File? image, required String nombreDocumento}) async {
+      {File? image,
+      File? pdf, // Nuevo parámetro para PDF
+
+      required String nombreDocumento}) async {
     try {
       await remoteSource.sendComentario(
         user: user,
         citaId: citaId,
         comentario: comentario,
         image: image,
+        pdf: pdf,
         nombreDocumento: nombreDocumento,
       );
       return const Right([]);
@@ -93,12 +97,16 @@ class CitasRepositoryImpl implements CitasRepository {
 
   @override
   Future<Either<Failure, CitaMedica>> crearCita(User user, CitaMedica cita,
-      {File? image, required String nombreDocumento}) async {
+      {File? image,
+      File? pdf, // Nuevo parámetro para PDF
+
+      required String nombreDocumento}) async {
     try {
       final casosList = await remoteSource.crearCita(
         user,
         cita,
         image,
+        pdf,
         nombreDocumento: nombreDocumento,
       );
       return Right(casosList);
