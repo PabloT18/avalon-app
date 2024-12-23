@@ -4,6 +4,7 @@ import 'package:avalon_app/core/config/router/app_router.dart';
 import 'package:avalon_app/core/config/theme/app_colors.dart';
 import 'package:avalon_app/features/shared/widgets/alerts/alert_message_error.dart';
 import 'package:avalon_app/features/shared/widgets/refresher/smart_refresh_custom.dart';
+import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
@@ -41,7 +42,7 @@ class FormasPagoPageView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Formaspago'),
+        title: Text(apptexts.metodosPagoPage.title(n: 1)),
         elevation: 6,
       ),
       drawer: DrawerCustom(indexInitialName: PAGES.formasPago.pageName),

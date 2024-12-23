@@ -38,7 +38,7 @@ class PreferenciasPage extends StatelessWidget {
             const SizedBox(height: AppLayoutConst.spaceL),
             const PermisosPreferences(),
             const SizedBox(height: AppLayoutConst.spaceL),
-            const Noticicaiones(),
+            // const Noticicaiones(),
           ],
         ),
       ),
@@ -81,16 +81,16 @@ class PermisosPreferences extends StatelessWidget {
                 context.read<PermissionsBloc>().requestCameraPermission();
               },
             ),
-            CheckboxListTile(
-              value: state.pthotoLibraryGranted,
-              title: Text(apptexts.preferenciasPage.permisos.almacenamiento),
-              // subtitle: Text('${state.pthotoLibrary}'),
-              onChanged: (_) {
-                context
-                    .read<PermissionsBloc>()
-                    .requestPthotoLibraryPermission();
-              },
-            ),
+            // CheckboxListTile(
+            //   value: state.pthotoLibraryGranted,
+            //   title: Text(apptexts.preferenciasPage.permisos.almacenamiento),
+            //   // subtitle: Text('${state.pthotoLibrary}'),
+            //   onChanged: (_) {
+            //     context
+            //         .read<PermissionsBloc>()
+            //         .requestPthotoLibraryPermission();
+            //   },
+            // ),
             CheckboxListTile(
               value: state.notificationGranted,
               title: Text(apptexts.preferenciasPage.permisos.notificaciones),

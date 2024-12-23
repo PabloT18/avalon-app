@@ -5,8 +5,11 @@ import 'package:avalon_app/features/shared/widgets/wid_drawer.dart';
 import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import '../bloc/noticias_bloc.dart';
 
 class ComunicadosPage extends StatefulWidget {
   const ComunicadosPage({super.key});
@@ -51,98 +54,101 @@ class _ComunicadosPageState extends State<ComunicadosPage> {
   Widget build(BuildContext context) {
     final refreshController = RefreshController(initialRefresh: false);
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(apptexts.comunicadospage.title(n: 2)),
-          elevation: 6,
-        ),
-        drawer: DrawerCustom(indexInitialName: PAGES.noticias.pageName),
-        body: FutureBuilder<List<dynamic>>(
-          future: _futureNotificaciones,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _futureNotificaciones = fetchNotificaciones();
-                  });
-                },
-                child: const Center(
-                  child: Card(
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child:
-                          Text('Problemas de conexión. Toca para reintentar'),
-                    ),
-                  ),
-                ),
-              );
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _futureNotificaciones = fetchNotificaciones();
-                  });
-                },
-                child: const Center(
-                  child: Card(
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Text(
-                          'No se encontraron notificaciones. Toca para reintentar'),
-                    ),
-                  ),
-                ),
-              );
-            } else {
-              final notificaciones = snapshot.data!;
-              return SmartRefrehsCustom(
-                key: const Key('__noticias_list_key__'),
-                onRefresh: () async {
-                  await Future.delayed(const Duration(seconds: 1));
-                  setState(() {
-                    _futureNotificaciones = fetchNotificaciones();
-                  });
-                  refreshController
-                    ..refreshCompleted()
-                    ..loadComplete();
-                },
-                refreshController: refreshController,
-                child: ListView.builder(
-                  itemCount: notificaciones.length,
-                  itemBuilder: (context, index) {
-                    final notificacion = notificaciones[index];
-                    return Card(
-                      clipBehavior: Clip.hardEdge,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text(notificacion['asunto']),
-                            subtitle: Text(notificacion['mensaje']),
-                            leading: const CircleAvatar(
-                                backgroundImage:
-                                    AssetImage(AppAssets.isotipo1)),
-                          ),
-                          // if (notificacion['tipoNotificacion']['descripcion'] !=
-                          //     null)
-                          //   Padding(
-                          //     padding: const EdgeInsets.all(8.0),
-                          //     child: Text(
-                          //       'Tipo: ${notificacion['tipoNotificacion']['descripcion']}',
-                          //       style: const TextStyle(fontWeight: FontWeight.bold),
-                          //     ),
-                          //   ),
-                        ],
-                      ),
-                    );
+    return BlocProvider(
+      create: (context) => NoticiasBloc(),
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text(apptexts.comunicadospage.title(n: 2)),
+            elevation: 6,
+          ),
+          drawer: DrawerCustom(indexInitialName: PAGES.noticias.pageName),
+          body: FutureBuilder<List<dynamic>>(
+            future: _futureNotificaciones,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _futureNotificaciones = fetchNotificaciones();
+                    });
                   },
-                ),
-              );
-            }
-          },
-        ));
+                  child: const Center(
+                    child: Card(
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child:
+                            Text('Problemas de conexión. Toca para reintentar'),
+                      ),
+                    ),
+                  ),
+                );
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _futureNotificaciones = fetchNotificaciones();
+                    });
+                  },
+                  child: const Center(
+                    child: Card(
+                      child: Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                            'No se encontraron notificaciones. Toca para reintentar'),
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                final notificaciones = snapshot.data!;
+                return SmartRefrehsCustom(
+                  key: const Key('__noticias_list_key__'),
+                  onRefresh: () async {
+                    await Future.delayed(const Duration(seconds: 1));
+                    setState(() {
+                      _futureNotificaciones = fetchNotificaciones();
+                    });
+                    refreshController
+                      ..refreshCompleted()
+                      ..loadComplete();
+                  },
+                  refreshController: refreshController,
+                  child: ListView.builder(
+                    itemCount: notificaciones.length,
+                    itemBuilder: (context, index) {
+                      final notificacion = notificaciones[index];
+                      return Card(
+                        clipBehavior: Clip.hardEdge,
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Text(notificacion['asunto']),
+                              subtitle: Text(notificacion['mensaje']),
+                              leading: const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage(AppAssets.isotipo1)),
+                            ),
+                            // if (notificacion['tipoNotificacion']['descripcion'] !=
+                            //     null)
+                            //   Padding(
+                            //     padding: const EdgeInsets.all(8.0),
+                            //     child: Text(
+                            //       'Tipo: ${notificacion['tipoNotificacion']['descripcion']}',
+                            //       style: const TextStyle(fontWeight: FontWeight.bold),
+                            //     ),
+                            //   ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }
+            },
+          )),
+    );
   }
 
   void _showNotificacionDetails(BuildContext context, dynamic notificacion) {

@@ -43,7 +43,7 @@ class DetalleHistoryPanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              apptexts.emergenciasPage.historial(n: 2),
+              apptexts.emergenciasPage.historial(n: 1),
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),

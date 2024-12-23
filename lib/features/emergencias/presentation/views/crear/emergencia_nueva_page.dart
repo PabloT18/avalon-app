@@ -45,7 +45,7 @@ class CrearEmergenciaView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final emergenciaNuevabloc = context.read<EmergenciaNuevaBloc>();
-    // emergenciaNuevabloc.add(const GetCasosCita());
+
     return Scaffold(
       appBar: AppBar(
         title: Text(apptexts.emergenciasPage.nuevaEmergencia),
@@ -97,6 +97,8 @@ class CrearEmergenciaView extends StatelessWidget {
                                       .emergenciasPage.creaCasoEmergencia)),
                             ),
                             const SizedBox(height: AppLayoutConst.spaceS),
+                            //   ],
+                            // )
                             Text(
                               apptexts.emergenciasPage.emergenciaEnCaso,
                               style: Theme.of(context).textTheme.titleSmall,

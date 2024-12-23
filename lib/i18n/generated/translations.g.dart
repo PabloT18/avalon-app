@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 634 (317 per locale)
 ///
-/// Built on 2024-11-26 at 21:01 UTC
+/// Built on 2024-12-23 at 00:02 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -324,7 +324,7 @@ class _TranslationsCitasPageEs {
 		other: 'Detalles Citas Médicas',
 	);
 	String historial({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-		one: 'Historial de Citas',
+		one: 'Historial de Cita',
 		other: 'Historial de Citas',
 	);
 	String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
@@ -394,7 +394,7 @@ class _TranslationsEmergenciasPageEs {
 		other: 'Detalles de Emergencia',
 	);
 	String historial({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-		one: 'Historial de Emergencia',
+		one: 'Historial de la Emergencia',
 		other: 'Historial de Emergencias',
 	);
 	String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
@@ -567,7 +567,7 @@ class _TranslationsPreferenciasPageEs {
 	String get preferenciasTitle => 'Preferencias';
 	String get preferenciasUser => 'Preferencias de usuario';
 	String get notificaciones => 'Preferencias de Notificaciones';
-	String get notificacionesPermiso => 'Recivir notificaciones AvalonPlus';
+	String get notificacionesPermiso => 'Recivir notificaciones Avalon Plus';
 	String get idioma => 'Idioma';
 	String get title => 'Ajustes';
 	String get spanish => 'Español';
@@ -585,16 +585,16 @@ class _TranslationsReclamacionesPageEs {
 
 	// Translations
 	String title({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-		one: 'Recalmación',
-		other: 'Recalmaciones',
+		one: 'Reclamación',
+		other: 'Reclamaciones',
 	);
 	String reclamacionDetalle({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-		one: 'Detalle Reclamación',
-		other: 'Detalles Reclamaciones',
+		one: 'Detalle de Reembolso',
+		other: 'Detalles de Reembolsos',
 	);
 	String historial({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-		one: 'Historial de Reclamaciones',
-		other: 'Historial de Reclamaciones',
+		one: 'Historial de Reembolsos',
+		other: 'Historial de Reembolsos',
 	);
 	String moreDetails({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 		one: 'Más Detalle',
@@ -613,20 +613,20 @@ class _TranslationsReclamacionesPageEs {
 	String get detailAditionalRequaimentes => 'Requerimientos adicionales';
 	String get detailOthersRequaimentes => 'Otros requerimientos';
 	String get detalleFoto => 'Foto';
-	String get estados => 'Estados de las reclamaciones';
-	String get estado => 'Estado de las reclamación';
+	String get estados => 'Estados del reembolso';
+	String get estado => 'Estado del reembolso';
 	String get estadoCerrado => 'Cerrado';
 	String get estadoGestionando => 'Gestionando';
 	String get estadoPorGestionar => 'Por Gestionar';
 	String get nuevaReclamacion => 'Nueva Reclamación';
 	String get reclamacionSinCaso => 'Reclamación sin caso';
-	String get creaCasoReclamacion => 'Crea un caso para la reclamación';
-	String get reclamacionEnCaso => 'Escoje el caso para la reclamación';
-	String get reclamacionEstado => 'Estado de la reclamación';
+	String get creaCasoReclamacion => 'Crea un caso para el reembolso';
+	String get reclamacionEnCaso => 'Escoje el caso para el reembolso';
+	String get reclamacionEstado => 'Estado del el reembolso';
 	String get historialEmpty => 'No hay un historial de comentarios aún';
 	String get historialError => 'Error al cargar el historial de comentarios';
 	String get reclamacionCreada => 'Reclamación creada';
-	String get reclamacionCreadaError => 'Error al crear la reclamación';
+	String get reclamacionCreadaError => 'Error al crear el reembolso';
 }
 
 // Path: segurosPage
@@ -1200,7 +1200,7 @@ class _TranslationsPreferenciasPageEn implements _TranslationsPreferenciasPageEs
 	@override String get preferenciasTitle => 'Preferences';
 	@override String get preferenciasUser => 'User Preferences';
 	@override String get notificaciones => 'Notification Preferences';
-	@override String get notificacionesPermiso => 'Receive AvalonPlus notifications';
+	@override String get notificacionesPermiso => 'Receive Avalon Plus notifications';
 	@override String get idioma => 'Language';
 	@override String get title => 'Settings';
 	@override String get spanish => 'Spanish';
@@ -1528,7 +1528,7 @@ extension on Translations {
 				other: 'Detalles Citas Médicas',
 			);
 			case 'citasPage.historial': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-				one: 'Historial de Citas',
+				one: 'Historial de Cita',
 				other: 'Historial de Citas',
 			);
 			case 'citasPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
@@ -1586,7 +1586,7 @@ extension on Translations {
 				other: 'Detalles de Emergencia',
 			);
 			case 'emergenciasPage.historial': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-				one: 'Historial de Emergencia',
+				one: 'Historial de la Emergencia',
 				other: 'Historial de Emergencias',
 			);
 			case 'emergenciasPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
@@ -1696,7 +1696,7 @@ extension on Translations {
 			case 'preferenciasPage.preferenciasTitle': return 'Preferencias';
 			case 'preferenciasPage.preferenciasUser': return 'Preferencias de usuario';
 			case 'preferenciasPage.notificaciones': return 'Preferencias de Notificaciones';
-			case 'preferenciasPage.notificacionesPermiso': return 'Recivir notificaciones AvalonPlus';
+			case 'preferenciasPage.notificacionesPermiso': return 'Recivir notificaciones Avalon Plus';
 			case 'preferenciasPage.idioma': return 'Idioma';
 			case 'preferenciasPage.title': return 'Ajustes';
 			case 'preferenciasPage.spanish': return 'Español';
@@ -1708,16 +1708,16 @@ extension on Translations {
 			case 'preferenciasPage.permisos.camara': return 'Cámara';
 			case 'preferenciasPage.permisos.almacenamiento': return 'Almacenamiento';
 			case 'reclamacionesPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-				one: 'Recalmación',
-				other: 'Recalmaciones',
+				one: 'Reclamación',
+				other: 'Reclamaciones',
 			);
 			case 'reclamacionesPage.reclamacionDetalle': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-				one: 'Detalle Reclamación',
-				other: 'Detalles Reclamaciones',
+				one: 'Detalle de Reembolso',
+				other: 'Detalles de Reembolsos',
 			);
 			case 'reclamacionesPage.historial': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-				one: 'Historial de Reclamaciones',
-				other: 'Historial de Reclamaciones',
+				one: 'Historial de Reembolsos',
+				other: 'Historial de Reembolsos',
 			);
 			case 'reclamacionesPage.moreDetails': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Más Detalle',
@@ -1737,20 +1737,20 @@ extension on Translations {
 			case 'reclamacionesPage.detailAditionalRequaimentes': return 'Requerimientos adicionales';
 			case 'reclamacionesPage.detailOthersRequaimentes': return 'Otros requerimientos';
 			case 'reclamacionesPage.detalleFoto': return 'Foto';
-			case 'reclamacionesPage.estados': return 'Estados de las reclamaciones';
-			case 'reclamacionesPage.estado': return 'Estado de las reclamación';
+			case 'reclamacionesPage.estados': return 'Estados del reembolso';
+			case 'reclamacionesPage.estado': return 'Estado del reembolso';
 			case 'reclamacionesPage.estadoCerrado': return 'Cerrado';
 			case 'reclamacionesPage.estadoGestionando': return 'Gestionando';
 			case 'reclamacionesPage.estadoPorGestionar': return 'Por Gestionar';
 			case 'reclamacionesPage.nuevaReclamacion': return 'Nueva Reclamación';
 			case 'reclamacionesPage.reclamacionSinCaso': return 'Reclamación sin caso';
-			case 'reclamacionesPage.creaCasoReclamacion': return 'Crea un caso para la reclamación';
-			case 'reclamacionesPage.reclamacionEnCaso': return 'Escoje el caso para la reclamación';
-			case 'reclamacionesPage.reclamacionEstado': return 'Estado de la reclamación';
+			case 'reclamacionesPage.creaCasoReclamacion': return 'Crea un caso para el reembolso';
+			case 'reclamacionesPage.reclamacionEnCaso': return 'Escoje el caso para el reembolso';
+			case 'reclamacionesPage.reclamacionEstado': return 'Estado del el reembolso';
 			case 'reclamacionesPage.historialEmpty': return 'No hay un historial de comentarios aún';
 			case 'reclamacionesPage.historialError': return 'Error al cargar el historial de comentarios';
 			case 'reclamacionesPage.reclamacionCreada': return 'Reclamación creada';
-			case 'reclamacionesPage.reclamacionCreadaError': return 'Error al crear la reclamación';
+			case 'reclamacionesPage.reclamacionCreadaError': return 'Error al crear el reembolso';
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Seguro',
 				other: 'Seguros',
@@ -2101,7 +2101,7 @@ extension on _TranslationsEn {
 			case 'preferenciasPage.preferenciasTitle': return 'Preferences';
 			case 'preferenciasPage.preferenciasUser': return 'User Preferences';
 			case 'preferenciasPage.notificaciones': return 'Notification Preferences';
-			case 'preferenciasPage.notificacionesPermiso': return 'Receive AvalonPlus notifications';
+			case 'preferenciasPage.notificacionesPermiso': return 'Receive Avalon Plus notifications';
 			case 'preferenciasPage.idioma': return 'Language';
 			case 'preferenciasPage.title': return 'Settings';
 			case 'preferenciasPage.spanish': return 'Spanish';

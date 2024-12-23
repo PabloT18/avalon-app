@@ -152,6 +152,7 @@ class NuevoCasoForm extends StatelessWidget {
                   isDense: true,
                 ),
                 menuMaxHeight: 500,
+                isExpanded: true,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.normal,
@@ -232,6 +233,7 @@ class NuevoCasoForm extends StatelessWidget {
                   labelText: apptexts.segurosPage.polizaSeguros(n: 1),
                   isDense: true,
                 ),
+                isExpanded: true,
                 menuMaxHeight: 500,
                 style: const TextStyle(
                   fontSize: 16,

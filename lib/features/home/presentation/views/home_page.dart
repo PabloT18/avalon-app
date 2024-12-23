@@ -88,7 +88,7 @@ class HomePageView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text(
-              'AvalonPlus',
+              'Avalon Plus',
               style: TextStyle(
                 // color: AppColors.primaryBlue,
                 color: Colors.white,
@@ -146,6 +146,13 @@ class HomePageView extends StatelessWidget {
                   title: apptexts.emergenciasPage.title(n: 2),
                   onTap: () {
                     context.goNamed(PAGES.emergencia.pageName);
+                  },
+                ),
+                HomeOption(
+                  icon: FontAwesomeIcons.newspaper,
+                  title: apptexts.comunicadospage.title(n: 2),
+                  onTap: () {
+                    context.goNamed(PAGES.noticias.pageName);
                   },
                 ),
               ],

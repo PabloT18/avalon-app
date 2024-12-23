@@ -19,7 +19,7 @@ class AboutusPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AvalonPLus'),
+        title: const Text('Avalon Plus'),
         elevation: 6,
       ),
       drawer: DrawerCustom(indexInitialName: PAGES.aboutus.pageName),

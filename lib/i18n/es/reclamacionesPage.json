@@ -4,12 +4,12 @@
         "other": "Reclamaciones"
     },
     "reclamacionDetalle": {
-        "one": "Detalle Reclamación",
-        "other": "Detalles Reclamaciones"
+        "one": "Detalle de Reembolso",
+        "other": "Detalles de Reembolsos"
     },
     "historial": {
-        "one": "Historial de Reclamaciones",
-        "other": "Historial de Reclamaciones"
+        "one": "Historial de Reembolsos",
+        "other": "Historial de Reembolsos"
     },
     "moreDetails": {
         "one": "Más Detalle",
@@ -31,18 +31,18 @@
     "detailAditionalRequaimentes": "Requerimientos adicionales",
     "detailOthersRequaimentes": "Otros requerimientos",
     "detalleFoto": "Foto",
-    "estados": "Estados de las reclamaciones",
-    "estado": "Estado de las reclamación",
+    "estados": "Estados del reembolso",
+    "estado": "Estado del reembolso",
     "estadoCerrado": "Cerrado",
     "estadoGestionando": "Gestionando",
     "estadoPorGestionar": "Por Gestionar",
     "nuevaReclamacion": "Nueva Reclamación",
     "reclamacionSinCaso": "Reclamación sin caso",
-    "creaCasoReclamacion": "Crea un caso para la reclamación",
-    "reclamacionEnCaso": "Escoje el caso para la reclamación",
-    "reclamacionEstado": "Estado de la reclamación",
+    "creaCasoReclamacion": "Crea un caso para el reembolso",
+    "reclamacionEnCaso": "Escoje el caso para el reembolso",
+    "reclamacionEstado": "Estado del el reembolso",
     "historialEmpty": "No hay un historial de comentarios aún",
     "historialError": "Error al cargar el historial de comentarios",
     "reclamacionCreada": "Reclamación creada",
-    "reclamacionCreadaError": "Error al crear la reclamación"
+    "reclamacionCreadaError": "Error al crear el reembolso"
 }
