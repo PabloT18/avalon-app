@@ -87,7 +87,7 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: true,
-      title: 'AvalonPlus',
+      title: 'Avalon Plus',
       routerConfig: AppRouter.router,
       locale: TranslationProvider.of(context).flutterLocale,
       localizationsDelegates: const [
