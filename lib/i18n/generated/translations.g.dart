@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 668 (334 per locale)
+/// Strings: 670 (335 per locale)
 ///
-/// Built on 2025-01-15 at 08:24 UTC
+/// Built on 2025-02-04 at 20:38 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -615,6 +615,7 @@ class _TranslationsReclamacionesPageEs {
 		other: 'Más Detalles',
 	);
 	String get reclamcionDate => 'Fecha';
+	String get reclamcionDateTentativa => 'Fecha Tentativa';
 	String get tipoAdministacion => 'Tipo de Administración';
 	late final _TranslationsReclamacionesPageTiposAdministacionEs tiposAdministacion = _TranslationsReclamacionesPageTiposAdministacionEs._(_root);
 	String get detailPreferenceCity => 'Ciudad de preferencia';
@@ -739,11 +740,11 @@ class _TranslationsCitasPageTiposCitaEs {
 
 	// Translations
 	String get presencial => 'Cita Presencial';
-	String get telematica => 'Cita Telemática';
+	String get telematica => 'Cita Virtual';
+	String get seguimiento => 'Cita Seguimiento';
 	String get segundaOp => 'Segunda Opinión Médica';
 	String get ciriguia => 'Cirugía Ambulatoria';
 	String get internamiento => 'Cirugía Internamiento';
-	String get seguimiento => 'Cita Seguimiento';
 }
 
 // Path: citasPage.aditionalRequaimentes
@@ -1277,6 +1278,7 @@ class _TranslationsReclamacionesPageEn implements _TranslationsReclamacionesPage
 		other: 'More Details',
 	);
 	@override String get reclamcionDate => 'Date';
+	@override String get reclamcionDateTentativa => 'Tentative Date';
 	@override String get tipoAdministacion => 'Administration Type';
 	@override late final _TranslationsReclamacionesPageTiposAdministacionEn tiposAdministacion = _TranslationsReclamacionesPageTiposAdministacionEn._(_root);
 	@override String get detailPreferenceCity => 'Preferred City';
@@ -1401,7 +1403,7 @@ class _TranslationsCitasPageTiposCitaEn implements _TranslationsCitasPageTiposCi
 
 	// Translations
 	@override String get presencial => 'In-Person Appointment';
-	@override String get telematica => 'Telemedicine Appointment';
+	@override String get telematica => 'Virtual Appointment';
 	@override String get segundaOp => 'Second Medical Opinion';
 	@override String get ciriguia => 'Outpatient Surgery';
 	@override String get internamiento => 'Inpatient Surgery';
@@ -1615,11 +1617,11 @@ extension on Translations {
 			case 'citasPage.detailFechaTentativaHasta': return 'Fecha Tentativa Hasta';
 			case 'citasPage.tipoCita': return 'Tipo de Cita Médica';
 			case 'citasPage.tiposCita.presencial': return 'Cita Presencial';
-			case 'citasPage.tiposCita.telematica': return 'Cita Telemática';
+			case 'citasPage.tiposCita.telematica': return 'Cita Virtual';
+			case 'citasPage.tiposCita.seguimiento': return 'Cita Seguimiento';
 			case 'citasPage.tiposCita.segundaOp': return 'Segunda Opinión Médica';
 			case 'citasPage.tiposCita.ciriguia': return 'Cirugía Ambulatoria';
 			case 'citasPage.tiposCita.internamiento': return 'Cirugía Internamiento';
-			case 'citasPage.tiposCita.seguimiento': return 'Cita Seguimiento';
 			case 'citasPage.detailPreferenceCity': return 'Ciudad de preferencia';
 			case 'citasPage.detailAseguradoraName': return 'Aseguradora';
 			case 'citasPage.detailHospital': return 'Hospital';
@@ -1801,6 +1803,7 @@ extension on Translations {
 				other: 'Más Detalles',
 			);
 			case 'reclamacionesPage.reclamcionDate': return 'Fecha';
+			case 'reclamacionesPage.reclamcionDateTentativa': return 'Fecha Tentativa';
 			case 'reclamacionesPage.tipoAdministacion': return 'Tipo de Administración';
 			case 'reclamacionesPage.tiposAdministacion.tipoEmergencia': return 'Emergencia';
 			case 'reclamacionesPage.tiposAdministacion.tipoProgramada': return 'Programada';
@@ -2039,7 +2042,7 @@ extension on _TranslationsEn {
 			case 'citasPage.detailFechaTentativaHasta': return 'Tentative Date To';
 			case 'citasPage.tipoCita': return 'Type of Medical Appointment';
 			case 'citasPage.tiposCita.presencial': return 'In-Person Appointment';
-			case 'citasPage.tiposCita.telematica': return 'Telemedicine Appointment';
+			case 'citasPage.tiposCita.telematica': return 'Virtual Appointment';
 			case 'citasPage.tiposCita.segundaOp': return 'Second Medical Opinion';
 			case 'citasPage.tiposCita.ciriguia': return 'Outpatient Surgery';
 			case 'citasPage.tiposCita.internamiento': return 'Inpatient Surgery';
@@ -2225,6 +2228,7 @@ extension on _TranslationsEn {
 				other: 'More Details',
 			);
 			case 'reclamacionesPage.reclamcionDate': return 'Date';
+			case 'reclamacionesPage.reclamcionDateTentativa': return 'Tentative Date';
 			case 'reclamacionesPage.tipoAdministacion': return 'Administration Type';
 			case 'reclamacionesPage.tiposAdministacion.tipoEmergencia': return 'Emergency';
 			case 'reclamacionesPage.tiposAdministacion.tipoProgramada': return 'Scheduled';

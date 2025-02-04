@@ -44,15 +44,20 @@ class EmergenciasPage extends StatelessWidget {
       // },
       // child: const Icon(Icons.add),
       // ),
-      floatingActionButton: FloatingActionButton(
-        mini: true,
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           context.goNamed(PAGES.crearEmergencia.pageName);
         },
         backgroundColor: AppColors.primaryBlue,
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
+        // label: const Icon(
+        //   Icons.add,
+        //   color: Colors.white,
+        // ),
+        label: Text(
+          apptexts.emergenciasPage.nuevaEmergencia,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
         ),
       ),
       body: BlocProvider(
@@ -124,7 +129,7 @@ class EmergenciasPanelView extends StatelessWidget {
                   // ),
 
                   getChildByState(state, emergenciaBloc, context, user),
-                  const SizedBox(height: AppLayoutConst.spaceL),
+                  // const SizedBox(height: AppLayoutConst.spaceL),
                 ],
               ),
             ),
@@ -186,7 +191,7 @@ class EmergenciasPanelView extends StatelessWidget {
                   isClient: user.isClient,
                 ),
               ),
-            const SizedBox(height: AppLayoutConst.spaceXL),
+            // const SizedBox(height: AppLayoutConst.spaceXL),
           ],
         ),
     };

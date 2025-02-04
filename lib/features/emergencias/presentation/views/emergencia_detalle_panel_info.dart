@@ -31,6 +31,8 @@ class DetalleMorePanel extends StatelessWidget {
         DetalleClientePoliza(
           emergencia: emergencia,
         ),
+        const SizedBox(height: AppLayoutConst.spaceM),
+
         Text(
           apptexts.emergenciasPage.moreDetails(n: 2),
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -174,11 +176,17 @@ class DetalleClientePoliza extends StatelessWidget {
           color: AppColors.secondaryBlue.withOpacity(0.5),
         ),
         DetailFormField(
+            padding: AppLayoutConst.spaceS,
             colorGray: true,
             value: emergencia.clientePoliza!.cliente!.nombreUsuario),
         DetailFormField(
-            colorGray: true, value: emergencia.clientePoliza!.displayName),
-        DetailFormField(colorGray: true, value: emergencia.caso!.displayName),
+            padding: AppLayoutConst.spaceS,
+            colorGray: true,
+            value: emergencia.clientePoliza!.displayName),
+        DetailFormField(
+            padding: AppLayoutConst.spaceS,
+            colorGray: true,
+            value: emergencia.caso!.displayName),
       ],
     );
   }

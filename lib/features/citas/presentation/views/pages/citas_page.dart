@@ -35,16 +35,21 @@ class CitasPage extends StatelessWidget {
             ),
             elevation: 6,
           ),
-          floatingActionButton: FloatingActionButton(
-            mini: true,
+          floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
               context.goNamed(PAGES.crearCita.pageName);
             },
             // focusColor: Colors.white,
             backgroundColor: AppColors.primaryBlue,
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
+            // child: const Icon(
+            //   Icons.add,
+            //   color: Colors.white,
+            // ),
+            label: Text(
+              apptexts.citasPage.nuevaCita,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
           body: BlocProvider(
@@ -116,9 +121,9 @@ class CitasPanelView extends StatelessWidget {
                   //   apptexts.citasPage.title(n: 2),
                   //   style: Theme.of(context).textTheme.titleSmall,
                   // ),
-                  const SizedBox(height: AppLayoutConst.spaceS),
+
                   getChildByState(state, citasBloc, context, user),
-                  const SizedBox(height: AppLayoutConst.spaceL),
+                  // const SizedBox(height: AppLayoutConst.spaceL),
                 ],
               ),
             ),
@@ -178,7 +183,7 @@ class CitasPanelView extends StatelessWidget {
                   isClient: user.isClient,
                 ),
               ),
-            const SizedBox(height: AppLayoutConst.spaceXL),
+            // const SizedBox(height: AppLayoutConst.spaceXL),
           ],
         ),
     };

@@ -16,6 +16,7 @@
         "other": "Más Detalles"
     },
     "reclamcionDate": "Fecha",
+    "reclamcionDateTentativa": "Fecha Tentativa",
     "tipoAdministacion": "Tipo de Administración",
     "tiposAdministacion": {
         "tipoEmergencia": "Emergencia",

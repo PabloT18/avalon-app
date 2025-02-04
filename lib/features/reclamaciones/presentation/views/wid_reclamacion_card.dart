@@ -70,11 +70,11 @@ class ReclamacionCard extends StatelessWidget {
                         title: apptexts.appOptions.cliente,
                         value: reclamacion.clientePoliza!.cliente!.fullName,
                       ),
-                    TitleDescripcion(
-                      isSubdescription: true,
-                      title: apptexts.appOptions.cliente,
-                      value: reclamacion.clientePoliza!.displayName!,
-                    ),
+                    // TitleDescripcion(
+                    //   isSubdescription: true,
+                    //   title: apptexts.appOptions.cliente,
+                    //   value: reclamacion.clientePoliza!.displayName!,
+                    // ),
                     TitleDescripcion(
                       isSubdescription: true,
                       title: apptexts.reclamacionesPage.detailPadecimiento,
@@ -85,11 +85,11 @@ class ReclamacionCard extends StatelessWidget {
                       title: apptexts.reclamacionesPage.estado,
                       value: getStateStrinByState(reclamacion.estado ?? ''),
                     ),
-                    TitleDescripcion(
-                      isSubdescription: true,
-                      title: '${apptexts.casosPage.title(n: 1)} Id',
-                      value: reclamacion.caso?.codigo ?? '',
-                    ),
+                    // TitleDescripcion(
+                    //   isSubdescription: true,
+                    //   title: '${apptexts.casosPage.title(n: 1)} Id',
+                    //   value: reclamacion.caso?.codigo ?? '',
+                    // ),
                     TitleDescripcion(
                       isSubdescription: true,
                       title: '${apptexts.reclamacionesPage.title(n: 1)} Id',

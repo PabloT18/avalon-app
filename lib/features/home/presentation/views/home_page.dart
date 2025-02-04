@@ -131,35 +131,6 @@ class HomePageView extends StatelessWidget {
             padding: const EdgeInsets.all(AppLayoutConst.paddingL),
             child: Column(
               children: [
-                HomeOption(
-                  icon: FontAwesomeIcons.fileMedical,
-                  title: apptexts.reclamacionesPage.title(n: 2),
-                  onTap: () {
-                    context.goNamed(PAGES.reclamaciones.pageName);
-                  },
-                ),
-                HomeOption(
-                  icon: FontAwesomeIcons.calendarPlus,
-                  title: apptexts.citasPage.title(n: 2),
-                  onTap: () {
-                    context.goNamed(PAGES.citas.pageName);
-                  },
-                ),
-                HomeOption(
-                  icon: FontAwesomeIcons.kitMedical,
-                  title: apptexts.emergenciasPage.title(n: 2),
-                  onTap: () {
-                    context.goNamed(PAGES.emergencia.pageName);
-                  },
-                ),
-                HomeOption(
-                  icon: FontAwesomeIcons.newspaper,
-                  title: apptexts.comunicadospage.title(n: 2),
-                  onTap: () {
-                    context.goNamed(PAGES.noticias.pageName);
-                  },
-                ),
-                SizedBox(height: responsive.dp(4)),
                 Opacity(
                   opacity: 0.7,
                   child: Column(
@@ -181,6 +152,38 @@ class HomePageView extends StatelessWidget {
                     ],
                   ),
                 ),
+                SizedBox(height: responsive.dp(5)),
+
+                HomeOption(
+                  icon: FontAwesomeIcons.kitMedical,
+                  title: apptexts.emergenciasPage.title(n: 2),
+                  onTap: () {
+                    context.goNamed(PAGES.emergencia.pageName);
+                  },
+                ),
+                HomeOption(
+                  icon: FontAwesomeIcons.calendarPlus,
+                  title: apptexts.citasPage.title(n: 2),
+                  onTap: () {
+                    context.goNamed(PAGES.citas.pageName);
+                  },
+                ),
+                HomeOption(
+                  icon: FontAwesomeIcons.fileMedical,
+                  title: apptexts.reclamacionesPage.title(n: 2),
+                  onTap: () {
+                    context.goNamed(PAGES.reclamaciones.pageName);
+                  },
+                ),
+                HomeOption(
+                  icon: FontAwesomeIcons.newspaper,
+                  title: apptexts.comunicadospage.title(n: 2),
+                  onTap: () {
+                    context.goNamed(PAGES.noticias.pageName);
+                  },
+                ),
+                // SizedBox(height: responsive.dp(40)),
+                // const Spacer(),
               ],
             ),
           ),

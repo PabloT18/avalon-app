@@ -39,15 +39,21 @@ class ReclamacionesPage extends StatelessWidget {
           color: Colors.white, // Cambia el color del icono de hamburguesa
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        mini: true,
+      floatingActionButton: FloatingActionButton.extended(
+        // mini: true,
         onPressed: () {
           context.goNamed(PAGES.crearReclamacion.pageName);
         },
         backgroundColor: AppColors.primaryBlue,
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
+        // child: const Icon(
+        //   Icons.add,
+        //   color: Colors.white,
+        // ),
+        label: Text(
+          apptexts.reclamacionesPage.nuevaReclamacion,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
         ),
       ),
       body: BlocProvider(
@@ -124,7 +130,7 @@ class ReclamacionesPanelView extends StatelessWidget {
                   //   style: Theme.of(context).textTheme.titleSmall,
                   // ),
                   getChildByState(state, reclamacionesBloc, context),
-                  const SizedBox(height: AppLayoutConst.spaceL),
+                  // const SizedBox(height: AppLayoutConst.spaceL),
                 ],
               ),
             ),
@@ -185,7 +191,7 @@ class ReclamacionesPanelView extends StatelessWidget {
                     reclamacion: recalmacion,
                     isClient: user.isClient,
                   )),
-            const SizedBox(height: AppLayoutConst.spaceXL),
+            // const SizedBox(height: AppLayoutConst.spaceXL),
           ],
         ),
     };

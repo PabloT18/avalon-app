@@ -191,17 +191,8 @@ class _DetailPhotoState extends State<DetailPhotoFile> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.title) ...[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  apptexts.appOptions.attachments(n: 1),
-                ),
-                // IconButton(
-                //   icon: const Icon(Icons.save_alt),
-                //   onPressed: _saveImage, // Guarda la imagen al hacer clic
-                // ),
-              ],
+            Text(
+              apptexts.appOptions.attachments(n: 1),
             ),
             const SizedBox(height: AppLayoutConst.spaceM),
           ],

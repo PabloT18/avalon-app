@@ -108,8 +108,6 @@ extension AppPageExtension on PAGES {
         return "/centrosMedicos";
       case PAGES.aboutus:
         return "/aboutus";
-      default:
-        return "/";
     }
   }
 
@@ -183,8 +181,6 @@ extension AppPageExtension on PAGES {
         return "centrosMedicos";
       case PAGES.aboutus:
         return "aboutus";
-      default:
-        return 'loading';
     }
   }
 }

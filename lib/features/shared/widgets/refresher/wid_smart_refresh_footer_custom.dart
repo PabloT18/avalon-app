@@ -9,6 +9,7 @@ class CustomFooterSmartRefrsh extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomFooter(
+      height: 100,
       builder: (BuildContext context, LoadStatus? mode) {
         Widget body;
         if (mode == LoadStatus.idle || mode == LoadStatus.canLoading) {
@@ -32,9 +33,11 @@ class CustomFooterSmartRefrsh extends StatelessWidget {
               : Container();
         }
         return Container(
-          margin: const EdgeInsets.only(bottom: 10),
-          height: 55.0,
-          child: Center(child: body),
+          // margin: const EdgeInsets.only(bottom: 60),
+
+          // height: 55.0,
+          alignment: Alignment.topCenter,
+          child: body,
         );
       },
     );

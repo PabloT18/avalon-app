@@ -29,6 +29,10 @@ class ReclacmaionDetalleMorePanel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        DetalleClientePoliza(
+          reclamacion: reclamacion,
+        ),
+        const SizedBox(height: AppLayoutConst.spaceM),
         Text(
           apptexts.reclamacionesPage.moreDetails(n: 2),
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -44,35 +48,63 @@ class ReclacmaionDetalleMorePanel extends StatelessWidget {
         ),
 
         DetailFormField(
-            label: apptexts.reclamacionesPage.detailPadecimientoDiagnostico,
-            value: reclamacion.padecimientoDiagnostico),
-        DetailFormField(
-            label: apptexts.reclamacionesPage.detailAditionalInformation,
-            value: reclamacion.infoAdicional),
-        DetailFormField(
-            label: apptexts.reclamacionesPage.tipoAdministacion,
-            value: reclamacion.tipoAdm),
-        DetailFormField(
-          label: apptexts.reclamacionesPage.reclamcionDate,
-          value: UtilsFunctionsLogic.formatFechaLocal(
-              reclamacion.fechaServicio, locale.languageCode),
-        ),
-
-        DetailFormField(
+            colorGray: true,
             label: apptexts.reclamacionesPage.detailAseguradoraName,
             value: reclamacion.clientePoliza?.poliza?.aseguradora?.nombre),
         DetailFormField(
-            label: apptexts.segurosPage.polizaSeguros(n: 1),
-            value: reclamacion.clientePoliza?.poliza?.nombre),
+            colorGray: true,
+            label: apptexts.reclamacionesPage.reclamcionDateTentativa,
+            value: reclamacion.fechaServicio != null
+                ? UtilsFunctionsLogic.formatFechaLocal(
+                    reclamacion.fechaServicio!, locale.languageCode)
+                : ' - '),
         DetailFormField(
-          label: apptexts.reclamacionesPage.detailHospital,
+          colorGray: true,
+          label: apptexts.citasPage.detailHospital,
           value:
               reclamacion.medicoCentroMedicoAseguradora?.centroMedico?.nombre,
         ),
         DetailFormField(
-            label: apptexts.reclamacionesPage.detailPreferenceDoctor,
+            colorGray: true,
+            label: apptexts.citasPage.detailPreferenceDoctor,
             value: reclamacion
                 .medicoCentroMedicoAseguradora?.medico?.nombreCompleto),
+
+        DetailFormField(
+            colorGray: true,
+            label: apptexts.reclamacionesPage.tipoAdministacion,
+            value: getTipoAdmi(reclamacion.tipoAdm)),
+
+        DetailFormField(
+            colorGray: true,
+            label: apptexts.appOptions.diagnostico_sintonomas,
+            value: reclamacion.padecimientoDiagnostico),
+        DetailFormField(
+            colorGray: true,
+            label: apptexts.reclamacionesPage.detailAditionalInformation,
+            value: reclamacion.infoAdicional),
+
+        // DetailFormField(
+        //   label: apptexts.reclamacionesPage.reclamcionDate,
+        //   value: UtilsFunctionsLogic.formatFechaLocal(
+        //       reclamacion.fechaServicio, locale.languageCode),
+        // ),
+
+        // DetailFormField(
+        //     label: apptexts.reclamacionesPage.detailAseguradoraName,
+        //     value: reclamacion.clientePoliza?.poliza?.aseguradora?.nombre),
+        // DetailFormField(
+        //     label: apptexts.segurosPage.polizaSeguros(n: 1),
+        //     value: reclamacion.clientePoliza?.poliza?.nombre),
+        // DetailFormField(
+        //   label: apptexts.reclamacionesPage.detailHospital,
+        //   value:
+        //       reclamacion.medicoCentroMedicoAseguradora?.centroMedico?.nombre,
+        // ),
+        // DetailFormField(
+        //     label: apptexts.reclamacionesPage.detailPreferenceDoctor,
+        //     value: reclamacion
+        //         .medicoCentroMedicoAseguradora?.medico?.nombreCompleto),
 
         // DetailFormField(
         //     label: apptexts.reclamacionesPage.detailOthersRequaimentes,
@@ -83,6 +115,60 @@ class ReclacmaionDetalleMorePanel extends StatelessWidget {
             user: user,
           ),
         const SizedBox(height: AppLayoutConst.spaceXL),
+      ],
+    );
+  }
+
+  String getTipoAdmi(String? tipoAd) {
+    if (tipoAd == null) {
+      return '-';
+    } else if (tipoAd == 'PROGRAMADA') {
+      return apptexts.reclamacionesPage.tiposAdministacion.tipoProgramada;
+    } else if (tipoAd == 'EMERGENCIA') {
+      return apptexts.reclamacionesPage.tiposAdministacion.tipoEmergencia;
+    } else {
+      return ' - ';
+    }
+  }
+}
+
+class DetalleClientePoliza extends StatelessWidget {
+  const DetalleClientePoliza({
+    super.key,
+    required this.reclamacion,
+  });
+
+  final ReclamacionModel reclamacion;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          apptexts.segurosPage.polizaSeguros(n: 1),
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(
+            vertical: AppLayoutConst.marginXS,
+          ).copyWith(bottom: AppLayoutConst.marginM),
+          height: 1,
+          color: AppColors.secondaryBlue.withOpacity(0.5),
+        ),
+        DetailFormField(
+            padding: AppLayoutConst.spaceS,
+            colorGray: true,
+            value: reclamacion.clientePoliza!.cliente!.nombreUsuario),
+        DetailFormField(
+            padding: AppLayoutConst.spaceS,
+            colorGray: true,
+            value: reclamacion.clientePoliza!.displayName),
+        DetailFormField(
+            padding: AppLayoutConst.spaceS,
+            colorGray: true,
+            value: reclamacion.caso!.displayName),
       ],
     );
   }

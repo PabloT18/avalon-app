@@ -68,17 +68,17 @@ class CitaCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (isClient)
+                      if (!isClient)
                         TitleDescripcion(
                           isSubdescription: true,
                           title: apptexts.appOptions.cliente,
                           value: cita.clientePoliza!.cliente!.fullName,
                         ),
-                      TitleDescripcion(
-                        isSubdescription: true,
-                        title: apptexts.segurosPage.polizaSeguros(n: 1),
-                        value: cita.clientePoliza!.displayName!,
-                      ),
+                      // TitleDescripcion(
+                      //   isSubdescription: true,
+                      //   title: apptexts.segurosPage.polizaSeguros(n: 1),
+                      //   value: cita.clientePoliza!.displayName!,
+                      // ),
                       TitleDescripcion(
                         isSubdescription: true,
                         title: apptexts.appOptions.diagnostico_sintonomas,
@@ -90,14 +90,14 @@ class CitaCard extends StatelessWidget {
                         value: UtilsFunctionsViews.getStateStrinByState(
                             cita.estado ?? ''),
                       ),
+                      // TitleDescripcion(
+                      //   isSubdescription: true,
+                      //   title: '${apptexts.casosPage.title(n: 1)} Id',
+                      //   value: cita.caso?.codigo ?? '',
+                      // ),
                       TitleDescripcion(
                         isSubdescription: true,
-                        title: '${apptexts.casosPage.title(n: 1)} Id',
-                        value: cita.caso?.codigo ?? '',
-                      ),
-                      TitleDescripcion(
-                        isSubdescription: true,
-                        title: '${apptexts.citasPage.title(n: 1)} Id',
+                        title: apptexts.citasPage.title(n: 1),
                         value: cita.codigo!,
                       ),
                     ],

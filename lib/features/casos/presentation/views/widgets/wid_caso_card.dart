@@ -46,6 +46,9 @@ class CaseCard extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: AppLayoutConst.spaceM,
+            ),
             TitleDescripcion(
                 isSubdescription: true,
                 title: apptexts.appOptions.diagnostico_sintonomas,
@@ -64,7 +67,6 @@ class CaseCard extends StatelessWidget {
     );
   }
 }
-
 
 // class CaseCard extends StatelessWidget {
 //   const CaseCard({super.key, required this.caso});

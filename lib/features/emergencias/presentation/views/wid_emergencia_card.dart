@@ -1,3 +1,4 @@
+import 'package:avalon_app/features/shared/functions/fun_views.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
@@ -95,8 +96,8 @@ class EmergenciaCard extends StatelessWidget {
                       TitleDescripcion(
                         isSubdescription: true,
                         title: apptexts.emergenciasPage.estado,
-                        value:
-                            getStateStrinByState(emergenciaModel.estado ?? ''),
+                        value: UtilsFunctionsViews.getStateStrinByState(
+                            emergenciaModel.estado ?? ''),
                       ),
                       TitleDescripcion(
                         isSubdescription: true,
@@ -115,7 +116,8 @@ class EmergenciaCard extends StatelessWidget {
                   width: AppLayoutConst.dotSize, // Tamaño del círculo
                   height: AppLayoutConst.dotSize,
                   decoration: BoxDecoration(
-                    color: getColorByState(emergenciaModel.estado ?? ''),
+                    color: UtilsFunctionsViews.getColorByState(
+                        emergenciaModel.estado ?? ''),
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -125,31 +127,5 @@ class EmergenciaCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Color getColorByState(String state) {
-    switch (state.toUpperCase()) {
-      case 'CERRADO' || "C":
-        return Colors.red;
-      case 'GESTIONANDO' || "G":
-        return Colors.blue;
-      case 'POR GESTIONAR' || "P" || "N":
-        return Colors.green;
-      default:
-        return Colors.grey;
-    }
-  }
-
-  String getStateStrinByState(String state) {
-    switch (state.toUpperCase()) {
-      case 'CERRADO' || "C":
-        return apptexts.citasPage.estadoCerrado;
-      case 'GESTIONANDO' || "G":
-        return apptexts.citasPage.estadoGestionando;
-      case 'POR GESTIONAR' || "P" || "N":
-        return apptexts.citasPage.estadoPorGestionar;
-      default:
-        return ' - ';
-    }
   }
 }

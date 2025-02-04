@@ -7,16 +7,18 @@ class DetailFormField extends StatelessWidget {
     this.label,
     this.value,
     this.colorGray = false,
+    this.padding = AppLayoutConst.marginM,
   });
 
   final String? label;
   final String? value;
   final bool colorGray;
+  final double padding;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding: EdgeInsets.symmetric(vertical: padding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

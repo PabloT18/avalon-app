@@ -28,11 +28,12 @@ class SmartRefrehsCustom extends StatelessWidget {
       enablePullUp: enablePullUp,
       controller: refreshController,
       header: WaterDropMaterialHeader(
-        backgroundColor: AppColors.primaryBlue.withOpacity(0.7),
+        backgroundColor: AppColors.primaryBlue.withValues(alpha: 0.7),
       ),
       onRefresh: onRefresh,
       onLoading: onLoading,
       footer: const CustomFooterSmartRefrsh(),
+
       child: child,
     );
   }
