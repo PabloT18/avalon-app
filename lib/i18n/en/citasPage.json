@@ -29,7 +29,7 @@
     "tipoCita": "Type of Medical Appointment",
     "tiposCita": {
         "presencial": "In-Person Appointment",
-        "telematica": "Telemedicine Appointment",
+        "telematica": "Virtual Appointment",
         "segundaOp": "Second Medical Opinion",
         "ciriguia": "Outpatient Surgery",
         "internamiento": "Inpatient Surgery",
@@ -39,7 +39,8 @@
     "detailAseguradoraName": "Insurance Company",
     "detailHospital": "Hospital",
     "detailPreferenceDoctor": "Preferred Doctor",
-    "detailPadecimeiento": "Condition",
+    "detailPadecimiento": "Condition",
+    "detailPadecimientoDiagnostico": "Condition/Diagnosis",
     "detailAditionalInformation": "Additional Information",
     "detailAditionalRequaimentes": "Additional Requirements",
     "aditionalRequaimentes": {

@@ -12,9 +12,9 @@ class ConstHiveBox {
   static const kHomeMainPanelIndex = 'kHomeMainPanelIndex';
   static const kHomeFavoritePanel = 'kHomeFavoritePanel';
 
-  static const kUserCredentials = 'userCredentials';
+  static const kUserCredentials2 = 'userCredentials';
 
-  static const kUserModel = 'userModel';
+  static const kUserModel2 = 'userModel';
 
   static const kUserNotificationPrefeerences = 'userNotificationPrefeerences';
   static const kUserNotificationTopics = 'userNotificationTopics';

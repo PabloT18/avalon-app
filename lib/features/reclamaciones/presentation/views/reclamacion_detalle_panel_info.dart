@@ -44,7 +44,7 @@ class ReclacmaionDetalleMorePanel extends StatelessWidget {
         ),
 
         DetailFormField(
-            label: apptexts.reclamacionesPage.detailPadecimeientoDiagnostico,
+            label: apptexts.reclamacionesPage.detailPadecimientoDiagnostico,
             value: reclamacion.padecimientoDiagnostico),
         DetailFormField(
             label: apptexts.reclamacionesPage.detailAditionalInformation,

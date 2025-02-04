@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 658 (329 per locale)
+/// Strings: 668 (334 per locale)
 ///
-/// Built on 2024-12-23 at 10:17 UTC
+/// Built on 2025-01-15 at 08:24 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -256,6 +256,10 @@ class _TranslationsAvalonInfoEs {
 	String get services => 'Servicios.';
 	String get servicesDescription => 'Contamos con un equipo de profesionales, multilingüe y multicultural, con una basta experiencia en la administración y solución integral de casos médicos complejos alrededor del mundo.';
 	late final _TranslationsAvalonInfoDetailsEs details = _TranslationsAvalonInfoDetailsEs._(_root);
+	String get telefono => 'Número telefónico';
+	String get fax => 'Fax';
+	String get email => 'Email';
+	String get slogan => 'Tu acompañante médico en el extranjero';
 }
 
 // Path: casosPage
@@ -353,7 +357,8 @@ class _TranslationsCitasPageEs {
 	String get detailAseguradoraName => 'Aseguradora';
 	String get detailHospital => 'Hospital';
 	String get detailPreferenceDoctor => 'Doctor de preferencia';
-	String get detailPadecimeiento => 'Padecimeiento';
+	String get detailPadecimiento => 'Padecimiento';
+	String get detailPadecimientoDiagnostico => 'Padecimiento/Diagnóstico';
 	String get detailAditionalInformation => 'Información adicional';
 	String get detailAditionalRequaimentes => 'Requerimientos adicionales';
 	late final _TranslationsCitasPageAditionalRequaimentesEs aditionalRequaimentes = _TranslationsCitasPageAditionalRequaimentesEs._(_root);
@@ -417,8 +422,8 @@ class _TranslationsEmergenciasPageEs {
 	String get detailAseguradoraName => 'Aseguradora';
 	String get detailHospital => 'Hospital';
 	String get detailPreferenceDoctor => 'Doctor de preferencia';
-	String get detailPadecimeiento => 'Padecimeiento';
-	String get detailPadecimeientoDiagnostico => 'Padecimeiento/Diagnóstico';
+	String get detailPadecimiento => 'Padecimiento';
+	String get detailPadecimientoDiagnostico => 'Padecimiento/Diagnóstico';
 	String get detailAditionalInformation => 'Información adicional';
 	String get detailAditionalRequaimentes => 'Requerimientos adicionales';
 	String get detailOthersRequaimentes => 'Otros requerimientos';
@@ -616,8 +621,8 @@ class _TranslationsReclamacionesPageEs {
 	String get detailAseguradoraName => 'Aseguradora';
 	String get detailHospital => 'Hospital';
 	String get detailPreferenceDoctor => 'Doctor de preferencia';
-	String get detailPadecimeiento => 'Padecimeiento';
-	String get detailPadecimeientoDiagnostico => 'Padecimeiento/Diagnóstico';
+	String get detailPadecimiento => 'Padecimiento';
+	String get detailPadecimientoDiagnostico => 'Padecimiento/Diagnóstico';
 	String get detailAditionalInformation => 'Información adicional';
 	String get detailAditionalRequaimentes => 'Requerimientos adicionales';
 	String get detailOthersRequaimentes => 'Otros requerimientos';
@@ -910,9 +915,13 @@ class _TranslationsAvalonInfoEn implements _TranslationsAvalonInfoEs {
 	@override String get contactUs => 'Contact Us';
 	@override String get aboutUs => 'About Us';
 	@override String get aboutDescription => 'AVALON PLUS is a leading international comprehensive medical concierge company, founded in Texas, made up of professionals with more than 25 years of experience in the areas of hospital account management, medical services and international insurance.\nThe Know-How of our team of professionals allows us to understand the needs of our clients.';
-	@override String get services => 'Services.';
+	@override String get services => 'Services';
 	@override String get servicesDescription => 'We have a multilingual and multicultural team of professionals, with extensive experience in the administration and comprehensive solution of complex medical cases around the world.';
 	@override late final _TranslationsAvalonInfoDetailsEn details = _TranslationsAvalonInfoDetailsEn._(_root);
+	@override String get telefono => 'Phone';
+	@override String get fax => 'Fax';
+	@override String get email => 'Email';
+	@override String get slogan => 'Your medical companion abroad';
 }
 
 // Path: casosPage
@@ -1010,7 +1019,8 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 	@override String get detailAseguradoraName => 'Insurance Company';
 	@override String get detailHospital => 'Hospital';
 	@override String get detailPreferenceDoctor => 'Preferred Doctor';
-	@override String get detailPadecimeiento => 'Condition';
+	@override String get detailPadecimiento => 'Condition';
+	@override String get detailPadecimientoDiagnostico => 'Condition/Diagnosis';
 	@override String get detailAditionalInformation => 'Additional Information';
 	@override String get detailAditionalRequaimentes => 'Additional Requirements';
 	@override late final _TranslationsCitasPageAditionalRequaimentesEn aditionalRequaimentes = _TranslationsCitasPageAditionalRequaimentesEn._(_root);
@@ -1074,8 +1084,8 @@ class _TranslationsEmergenciasPageEn implements _TranslationsEmergenciasPageEs {
 	@override String get detailAseguradoraName => 'Insurance';
 	@override String get detailHospital => 'Hospital';
 	@override String get detailPreferenceDoctor => 'Preferred Doctor';
-	@override String get detailPadecimeiento => 'Condition';
-	@override String get detailPadecimeientoDiagnostico => 'Condition/Diagnosis';
+	@override String get detailPadecimiento => 'Condition';
+	@override String get detailPadecimientoDiagnostico => 'Condition/Diagnosis';
 	@override String get detailAditionalInformation => 'Additional Information';
 	@override String get detailAditionalRequaimentes => 'Additional Requirements';
 	@override String get detailOthersRequaimentes => 'Other Requirements';
@@ -1273,8 +1283,8 @@ class _TranslationsReclamacionesPageEn implements _TranslationsReclamacionesPage
 	@override String get detailAseguradoraName => 'Insurance Company';
 	@override String get detailHospital => 'Hospital';
 	@override String get detailPreferenceDoctor => 'Preferred Doctor';
-	@override String get detailPadecimeiento => 'Condition';
-	@override String get detailPadecimeientoDiagnostico => 'Condition/Diagnosis';
+	@override String get detailPadecimiento => 'Condition';
+	@override String get detailPadecimientoDiagnostico => 'Condition/Diagnosis';
 	@override String get detailAditionalInformation => 'Additional Information';
 	@override String get detailAditionalRequaimentes => 'Additional Requirements';
 	@override String get detailOthersRequaimentes => 'Other Requirements';
@@ -1535,6 +1545,10 @@ extension on Translations {
 			case 'avalonInfo.details.experts': return 'Expertos en facturación y contención costos';
 			case 'avalonInfo.details.offices': return 'Oficinas y operaciones en Houston';
 			case 'avalonInfo.details.lead': return 'TPA Líder en consejería médica integral internacional';
+			case 'avalonInfo.telefono': return 'Número telefónico';
+			case 'avalonInfo.fax': return 'Fax';
+			case 'avalonInfo.email': return 'Email';
+			case 'avalonInfo.slogan': return 'Tu acompañante médico en el extranjero';
 			case 'casosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Caso',
 				other: 'Casos',
@@ -1610,7 +1624,8 @@ extension on Translations {
 			case 'citasPage.detailAseguradoraName': return 'Aseguradora';
 			case 'citasPage.detailHospital': return 'Hospital';
 			case 'citasPage.detailPreferenceDoctor': return 'Doctor de preferencia';
-			case 'citasPage.detailPadecimeiento': return 'Padecimeiento';
+			case 'citasPage.detailPadecimiento': return 'Padecimiento';
+			case 'citasPage.detailPadecimientoDiagnostico': return 'Padecimiento/Diagnóstico';
 			case 'citasPage.detailAditionalInformation': return 'Información adicional';
 			case 'citasPage.detailAditionalRequaimentes': return 'Requerimientos adicionales';
 			case 'citasPage.aditionalRequaimentes.ambulanciaTerrestre': return 'Ambulancia Terrestre';
@@ -1662,8 +1677,8 @@ extension on Translations {
 			case 'emergenciasPage.detailAseguradoraName': return 'Aseguradora';
 			case 'emergenciasPage.detailHospital': return 'Hospital';
 			case 'emergenciasPage.detailPreferenceDoctor': return 'Doctor de preferencia';
-			case 'emergenciasPage.detailPadecimeiento': return 'Padecimeiento';
-			case 'emergenciasPage.detailPadecimeientoDiagnostico': return 'Padecimeiento/Diagnóstico';
+			case 'emergenciasPage.detailPadecimiento': return 'Padecimiento';
+			case 'emergenciasPage.detailPadecimientoDiagnostico': return 'Padecimiento/Diagnóstico';
 			case 'emergenciasPage.detailAditionalInformation': return 'Información adicional';
 			case 'emergenciasPage.detailAditionalRequaimentes': return 'Requerimientos adicionales';
 			case 'emergenciasPage.detailOthersRequaimentes': return 'Otros requerimientos';
@@ -1793,8 +1808,8 @@ extension on Translations {
 			case 'reclamacionesPage.detailAseguradoraName': return 'Aseguradora';
 			case 'reclamacionesPage.detailHospital': return 'Hospital';
 			case 'reclamacionesPage.detailPreferenceDoctor': return 'Doctor de preferencia';
-			case 'reclamacionesPage.detailPadecimeiento': return 'Padecimeiento';
-			case 'reclamacionesPage.detailPadecimeientoDiagnostico': return 'Padecimeiento/Diagnóstico';
+			case 'reclamacionesPage.detailPadecimiento': return 'Padecimiento';
+			case 'reclamacionesPage.detailPadecimientoDiagnostico': return 'Padecimiento/Diagnóstico';
 			case 'reclamacionesPage.detailAditionalInformation': return 'Información adicional';
 			case 'reclamacionesPage.detailAditionalRequaimentes': return 'Requerimientos adicionales';
 			case 'reclamacionesPage.detailOthersRequaimentes': return 'Otros requerimientos';
@@ -1948,12 +1963,16 @@ extension on _TranslationsEn {
 			case 'avalonInfo.contactUs': return 'Contact Us';
 			case 'avalonInfo.aboutUs': return 'About Us';
 			case 'avalonInfo.aboutDescription': return 'AVALON PLUS is a leading international comprehensive medical concierge company, founded in Texas, made up of professionals with more than 25 years of experience in the areas of hospital account management, medical services and international insurance.\nThe Know-How of our team of professionals allows us to understand the needs of our clients.';
-			case 'avalonInfo.services': return 'Services.';
+			case 'avalonInfo.services': return 'Services';
 			case 'avalonInfo.servicesDescription': return 'We have a multilingual and multicultural team of professionals, with extensive experience in the administration and comprehensive solution of complex medical cases around the world.';
 			case 'avalonInfo.details.experience': return 'Years of proven experience';
 			case 'avalonInfo.details.experts': return 'Experts in billing and cost containment';
 			case 'avalonInfo.details.offices': return 'Headquarters located in Houston, Texas';
 			case 'avalonInfo.details.lead': return 'TPA leader in international medical concierge services';
+			case 'avalonInfo.telefono': return 'Phone';
+			case 'avalonInfo.fax': return 'Fax';
+			case 'avalonInfo.email': return 'Email';
+			case 'avalonInfo.slogan': return 'Your medical companion abroad';
 			case 'casosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Case',
 				other: 'Cases',
@@ -2029,7 +2048,8 @@ extension on _TranslationsEn {
 			case 'citasPage.detailAseguradoraName': return 'Insurance Company';
 			case 'citasPage.detailHospital': return 'Hospital';
 			case 'citasPage.detailPreferenceDoctor': return 'Preferred Doctor';
-			case 'citasPage.detailPadecimeiento': return 'Condition';
+			case 'citasPage.detailPadecimiento': return 'Condition';
+			case 'citasPage.detailPadecimientoDiagnostico': return 'Condition/Diagnosis';
 			case 'citasPage.detailAditionalInformation': return 'Additional Information';
 			case 'citasPage.detailAditionalRequaimentes': return 'Additional Requirements';
 			case 'citasPage.aditionalRequaimentes.ambulanciaTerrestre': return 'Ground Ambulance';
@@ -2081,8 +2101,8 @@ extension on _TranslationsEn {
 			case 'emergenciasPage.detailAseguradoraName': return 'Insurance';
 			case 'emergenciasPage.detailHospital': return 'Hospital';
 			case 'emergenciasPage.detailPreferenceDoctor': return 'Preferred Doctor';
-			case 'emergenciasPage.detailPadecimeiento': return 'Condition';
-			case 'emergenciasPage.detailPadecimeientoDiagnostico': return 'Condition/Diagnosis';
+			case 'emergenciasPage.detailPadecimiento': return 'Condition';
+			case 'emergenciasPage.detailPadecimientoDiagnostico': return 'Condition/Diagnosis';
 			case 'emergenciasPage.detailAditionalInformation': return 'Additional Information';
 			case 'emergenciasPage.detailAditionalRequaimentes': return 'Additional Requirements';
 			case 'emergenciasPage.detailOthersRequaimentes': return 'Other Requirements';
@@ -2212,8 +2232,8 @@ extension on _TranslationsEn {
 			case 'reclamacionesPage.detailAseguradoraName': return 'Insurance Company';
 			case 'reclamacionesPage.detailHospital': return 'Hospital';
 			case 'reclamacionesPage.detailPreferenceDoctor': return 'Preferred Doctor';
-			case 'reclamacionesPage.detailPadecimeiento': return 'Condition';
-			case 'reclamacionesPage.detailPadecimeientoDiagnostico': return 'Condition/Diagnosis';
+			case 'reclamacionesPage.detailPadecimiento': return 'Condition';
+			case 'reclamacionesPage.detailPadecimientoDiagnostico': return 'Condition/Diagnosis';
 			case 'reclamacionesPage.detailAditionalInformation': return 'Additional Information';
 			case 'reclamacionesPage.detailAditionalRequaimentes': return 'Additional Requirements';
 			case 'reclamacionesPage.detailOthersRequaimentes': return 'Other Requirements';

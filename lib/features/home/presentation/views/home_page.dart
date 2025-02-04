@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:animate_do/animate_do.dart';
 import 'package:avalon_app/app/presentation/bloc/settings_cubit/app_settings_cubit.dart';
 import 'package:avalon_app/core/config/responsive/responsive_class.dart';
+import 'package:avalon_app/core/config/router/app_routes_assets.dart';
 
 import 'package:flutter/material.dart';
 
@@ -83,6 +84,8 @@ class HomePageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final navigationCubit = context.read<NavigationCubit>();
+
+    final responsive = ResponsiveCustom.of(context);
     return BlocBuilder<AppSettingsCubit, AppSettingsState>(
       builder: (context, state) {
         return Scaffold(
@@ -123,6 +126,7 @@ class HomePageView extends StatelessWidget {
             indexInitialName: PAGES.home.pageName,
             isInHome: true,
           ),
+
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(AppLayoutConst.paddingL),
             child: Column(
@@ -154,6 +158,28 @@ class HomePageView extends StatelessWidget {
                   onTap: () {
                     context.goNamed(PAGES.noticias.pageName);
                   },
+                ),
+                SizedBox(height: responsive.dp(4)),
+                Opacity(
+                  opacity: 0.7,
+                  child: Column(
+                    children: [
+                      ZoomIn(
+                        duration: const Duration(milliseconds: 2000),
+                        child: Image.asset(
+                          AppAssets.logotipo4,
+                        ),
+                      ),
+                      FadeInUp(
+                        duration: const Duration(milliseconds: 2000),
+                        child: Text(
+                          apptexts.avalonInfo.slogan,
+                          style: Theme.of(context).textTheme.titleMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

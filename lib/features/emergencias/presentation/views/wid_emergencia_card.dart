@@ -72,11 +72,21 @@ class EmergenciaCard extends StatelessWidget {
                           value:
                               emergenciaModel.clientePoliza!.cliente!.fullName,
                         ),
-                      TitleDescripcion(
-                        isSubdescription: true,
-                        title: apptexts.appOptions.cliente,
-                        value: emergenciaModel.clientePoliza!.displayName!,
-                      ),
+                      // TitleDescripcion(
+                      //   isSubdescription: true,
+                      //   title: apptexts.casosPage.title(n: 1),
+                      //   value: emergenciaModel.caso!.codigo!,
+                      // ),
+                      // TitleDescripcion(
+                      //   isSubdescription: true,
+                      //   title: apptexts.emergenciasPage.title(n: 1),
+                      //   value: emergenciaModel.codigo!,
+                      // ),
+                      // TitleDescripcion(
+                      //   isSubdescription: true,
+                      //   title: apptexts.appOptions.cliente,
+                      //   value: emergenciaModel.clientePoliza!.displayName!,
+                      // ),
                       TitleDescripcion(
                         isSubdescription: true,
                         title: apptexts.emergenciasPage.sintomas,
@@ -84,13 +94,13 @@ class EmergenciaCard extends StatelessWidget {
                       ),
                       TitleDescripcion(
                         isSubdescription: true,
-                        title: apptexts.citasPage.estados,
+                        title: apptexts.emergenciasPage.estado,
                         value:
                             getStateStrinByState(emergenciaModel.estado ?? ''),
                       ),
                       TitleDescripcion(
                         isSubdescription: true,
-                        title: '${apptexts.emergenciasPage.title(n: 1)} Id',
+                        title: apptexts.emergenciasPage.title(n: 1),
                         value: emergenciaModel.codigo!,
                       ),
                       // TitleDescripcion(

@@ -181,6 +181,7 @@ class EmergenciasPanelView extends StatelessWidget {
               Hero(
                 tag: emergencia.hashCode,
                 child: EmergenciaCard(
+                  navigatePush: true,
                   emergenciaModel: emergencia,
                   isClient: user.isClient,
                 ),

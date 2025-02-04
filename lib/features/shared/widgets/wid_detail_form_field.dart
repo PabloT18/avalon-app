@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class DetailFormField extends StatelessWidget {
   const DetailFormField({
     super.key,
-    required this.label,
+    this.label,
     this.value,
+    this.colorGray = false,
   });
 
-  final String label;
+  final String? label;
   final String? value;
+  final bool colorGray;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +20,12 @@ class DetailFormField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            label,
-          ),
-          const SizedBox(height: AppLayoutConst.spaceM),
+          if (label != null) ...[
+            Text(
+              label!,
+            ),
+            const SizedBox(height: AppLayoutConst.spaceM),
+          ],
           TextFormField(
             initialValue: value ?? ' - ',
             enabled: false,
@@ -29,7 +33,9 @@ class DetailFormField extends StatelessWidget {
               border: OutlineInputBorder(),
               isDense: true,
             ),
-            style: Theme.of(context).textTheme.bodyMedium!,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: colorGray ? Colors.black54 : null,
+                ),
           ),
         ],
       ),

@@ -8,6 +8,7 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class UtilsFunctionsViews {
   static Future<void> showInfoStatesTypesDialog(BuildContext context) async {
@@ -139,6 +140,26 @@ class UtilsFunctionsViews {
     )) {
       throw 'Could not launch $url';
     }
+  }
+
+  // Función para iniciar la llamada
+  static Future<void> makePhoneCall(String phoneNumber) async {
+    final Uri telUri = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(telUri)) {
+      await launchUrl(telUri);
+    } else {
+      throw 'No se pudo iniciar la llamada al número $phoneNumber';
+    }
+  }
+
+  // Función para abrir la aplicación de correo con un destinatario, asunto y cuerpo opcionales
+
+// Función auxiliar para codificar los parámetros de la query
+  static String? _encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
   }
 
   static Flushbar<dynamic> showFlushBar({

@@ -181,6 +181,7 @@ class ReclamacionesPanelView extends StatelessWidget {
               Hero(
                   tag: recalmacion.hashCode,
                   child: ReclamacionCard(
+                    navigatePush: true,
                     reclamacion: recalmacion,
                     isClient: user.isClient,
                   )),

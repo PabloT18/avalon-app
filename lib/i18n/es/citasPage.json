@@ -29,17 +29,18 @@
     "tipoCita": "Tipo de Cita Médica",
     "tiposCita": {
         "presencial": "Cita Presencial",
-        "telematica": "Cita Telemática",
+        "telematica": "Cita Virtual",
+        "seguimiento": "Cita Seguimiento",
         "segundaOp": "Segunda Opinión Médica",
         "ciriguia": "Cirugía Ambulatoria",
-        "internamiento": "Cirugía Internamiento",
-        "seguimiento": "Cita Seguimiento"
+        "internamiento": "Cirugía Internamiento"
     },
     "detailPreferenceCity": "Ciudad de preferencia",
     "detailAseguradoraName": "Aseguradora",
     "detailHospital": "Hospital",
     "detailPreferenceDoctor": "Doctor de preferencia",
-    "detailPadecimeiento": "Padecimeiento",
+    "detailPadecimiento": "Padecimiento",
+    "detailPadecimientoDiagnostico": "Padecimiento/Diagnóstico",
     "detailAditionalInformation": "Información adicional",
     "detailAditionalRequaimentes": "Requerimientos adicionales",
     "aditionalRequaimentes": {

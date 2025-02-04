@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:avalon_app/app/domain/usecases/general_uc/app_general_uses_cases.dart';
 import 'package:avalon_app/core/error/failures/failures.dart';
 import 'package:avalon_app/features/casos/data/repository/casos_repository_impl.dart';
 import 'package:avalon_app/features/casos/domain/models/caso_entity.dart';
@@ -25,13 +26,23 @@ part 'cita_nueva_event.dart';
 part 'cita_nueva_state.dart';
 
 class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
-  CitaNuevaBloc(this._user, {this.caso}) : super(const CitaNuevaState()) {
+  CitaNuevaBloc(
+    this._user, {
+    required this.getPaisesUseCase,
+    required this.getEstadosUseCase,
+    this.caso,
+  }) : super(const CitaNuevaState()) {
     on<GetCasosCita>(_onGetCasosUser);
     on<WaitForCreateCase>(_onWaitForCreateCase);
     on<SelectCaso>(_onSelectCaso);
 
     on<UpdateRequisitoAdicional>(_onUpdateRequisitoAdicional);
     on<UpdateSelectedTipoCita>(_onUpdateSelectedTipoCita);
+
+    on<LoadPaisesEvent>(_onLoadPaises);
+    on<UpdateSelectedCountryEvent>(_onUpdateSelectedCountry);
+    on<UpdateSelectedEstadoEvent>(_onUpdateSelectedEstado);
+
     on<SubmitCitaEvent>(_onSubmitCitaEvent);
 
     on<ImageSelected>(_onImageSelected);
@@ -55,11 +66,12 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
     detailPreferenceCity = TextEditingController();
     detailHospital = TextEditingController();
     detailPreferenceDoctor = TextEditingController();
-    detailPadecimeiento = TextEditingController();
+    detailPadecimiento = TextEditingController();
     detailAditionalInformation = TextEditingController();
     detailOthersRequaimentes = TextEditingController();
 
     add(const GetCasosCita());
+    add(const LoadPaisesEvent());
   }
   final User _user;
   late int _page;
@@ -69,6 +81,9 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
 
   late CitasRepository citasRepository;
   late CasosRepository casosRepository;
+
+  final GetPaisesUseCase getPaisesUseCase;
+  final GetEstadosUseCase getEstadosUseCase;
 
   late int _pageCitas;
 
@@ -81,7 +96,7 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
   late TextEditingController detailPreferenceCity;
   late TextEditingController detailHospital;
   late TextEditingController detailPreferenceDoctor;
-  late TextEditingController detailPadecimeiento;
+  late TextEditingController detailPadecimiento;
   late TextEditingController detailAditionalInformation;
   late TextEditingController detailOthersRequaimentes;
 
@@ -98,10 +113,15 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
     detailPreferenceCity.dispose();
     detailHospital.dispose();
     detailPreferenceDoctor.dispose();
-    detailPadecimeiento.dispose();
+    detailPadecimiento.dispose();
     detailAditionalInformation.dispose();
     detailOthersRequaimentes.dispose();
     refreshController.dispose();
+
+    detailDireccionUno.dispose();
+    detailDireccionDos.dispose();
+    detailCiudad.dispose();
+    detailCodigoPostal.dispose();
     return super.close();
   }
 
@@ -169,6 +189,40 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
     emit(state.copyWith(requisitosAdicionales: updatedRequisitos));
   }
 
+  FutureOr<void> _onLoadPaises(
+      LoadPaisesEvent event, Emitter<CitaNuevaState> emit) async {
+    try {
+      final paises = await getPaisesUseCase.call(_user.token!);
+      emit(state.copyWith(paises: paises));
+    } catch (e) {
+      emit(state.copyWith(message: 'Error al cargar los países'));
+    }
+  }
+
+  FutureOr<void> _onUpdateSelectedCountry(
+      UpdateSelectedCountryEvent event, Emitter<CitaNuevaState> emit) async {
+    emit(state.copyWith(
+      selectedCountryId: event.countryId,
+      selectedEstadoId: null,
+      estados: [],
+    ));
+
+    try {
+      final estados = await getEstadosUseCase.call(
+        paisId: event.countryId,
+        token: _user.token!,
+      );
+      emit(state.copyWith(estados: estados));
+    } catch (e) {
+      emit(state.copyWith(message: 'Error al cargar los estados'));
+    }
+  }
+
+  FutureOr<void> _onUpdateSelectedEstado(
+      UpdateSelectedEstadoEvent event, Emitter<CitaNuevaState> emit) {
+    emit(state.copyWith(selectedEstadoId: event.estadoId));
+  }
+
   Future<void> _onSubmitCitaEvent(
       SubmitCitaEvent event, Emitter<CitaNuevaState> emit) async {
     // Crear el objeto CitaMedica con los datos del formulario
@@ -182,17 +236,17 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
       direccion: Direccion(
         direccionUno: detailDireccionUno.text,
         direccionDos: detailDireccionDos.text,
-        // ciudad: detailPreferenceCity.text,
-        // codigoPostal: detailCodigoPostal.text,
-        // pais: state.paises.firstWhere((p) => p.id == state.selectedCountryId),
-        // estado: state.estados.firstWhere((e) => e.id == state.selectedEstadoId),
+        ciudad: detailCiudad.text,
+        codigoPostal: detailCodigoPostal.text,
+        pais: state.paises.firstWhere((p) => p.id == state.selectedCountryId),
+        estado: state.estados.firstWhere((e) => e.id == state.selectedEstadoId),
       ),
       // fechaTentativa:
       // ateTime.parse(birthDateController.text),
       fechaTentativa: DateFormat('dd/MM/yyyy').parse(dateFrom.text),
       fechaTentativaHasta: DateFormat('dd/MM/yyyy').parse(dateTo.text),
       ciudadPreferencia: detailPreferenceCity.text,
-      padecimiento: detailPadecimeiento.text,
+      padecimiento: detailPadecimiento.text,
       informacionAdicional: detailAditionalInformation.text,
       otrosRequisitos: detailOthersRequaimentes.text,
       requisitosAdicionales: state.requisitosAdicionales,
@@ -236,7 +290,7 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
         detailPreferenceCity.clear();
         detailHospital.clear();
         detailPreferenceDoctor.clear();
-        detailPadecimeiento.clear();
+        detailPadecimiento.clear();
         detailAditionalInformation.clear();
         detailOthersRequaimentes.clear();
         // Maneja el éxito

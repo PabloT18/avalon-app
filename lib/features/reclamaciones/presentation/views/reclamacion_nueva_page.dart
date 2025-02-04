@@ -202,8 +202,8 @@ class FormNewReclamacion extends StatelessWidget {
           ),
 
           EditableTextAreaDescription(
-            apptexts.reclamacionesPage.detailPadecimeientoDiagnostico,
-            reclamacionNuevaBloc.detailPadecimeiento,
+            apptexts.reclamacionesPage.detailPadecimientoDiagnostico,
+            reclamacionNuevaBloc.detailPadecimiento,
           ),
           EditableTextAreaDescription(
             apptexts.reclamacionesPage.detailAditionalInformation,

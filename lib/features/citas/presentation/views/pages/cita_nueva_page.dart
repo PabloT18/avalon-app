@@ -1,3 +1,4 @@
+import 'package:avalon_app/app/domain/usecases/general_uc/app_general_uses_cases.dart';
 import 'package:avalon_app/app/presentation/bloc/app/app_bloc.dart';
 import 'package:avalon_app/app/presentation/bloc/creationEntities/creation_cubit_cubit.dart';
 import 'package:avalon_app/core/config/responsive/responsive_layouts.dart';
@@ -12,6 +13,7 @@ import 'package:avalon_app/i18n/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_models/shared_models.dart';
 
 import '../../../../shared/widgets/fields/editable_date_description.dart';
 import '../../../../shared/widgets/fields/editable_text_area_description.dart';
@@ -26,7 +28,11 @@ class CrearCitaPage extends StatelessWidget {
     final user = (context.read<AppBloc>().state as AppAuthenticated).user;
 
     return BlocProvider(
-      create: (context) => CitaNuevaBloc(user),
+      create: (context) => CitaNuevaBloc(
+        user,
+        getPaisesUseCase: RepositoryProvider.of<GetPaisesUseCase>(context),
+        getEstadosUseCase: RepositoryProvider.of<GetEstadosUseCase>(context),
+      ),
       child: const CrearCitaView(),
     );
   }
@@ -213,8 +219,8 @@ class FormNewCita extends StatelessWidget {
           //   beNull: true,
           // ),
           EditableTextAreaDescription(
-            apptexts.citasPage.detailPadecimeiento,
-            cerarCitaBloc.detailPadecimeiento,
+            apptexts.citasPage.detailPadecimiento,
+            cerarCitaBloc.detailPadecimiento,
           ),
           EditableTextAreaDescription(
             apptexts.citasPage.detailAditionalInformation,
@@ -224,6 +230,31 @@ class FormNewCita extends StatelessWidget {
           EditableTextAreaDescription(
             apptexts.citasPage.detailOthersRequaimentes,
             cerarCitaBloc.detailOthersRequaimentes,
+            beNull: true,
+          ),
+
+          //// ADREES
+          ///
+          const Divider(),
+          _buildDropdownCountryField(cerarCitaBloc),
+          // Dropdown de estado
+          _buildDropdownStateField(cerarCitaBloc),
+          EditableTextDescription(
+            apptexts.perfilPage.city,
+            cerarCitaBloc.detailCiudad,
+          ),
+          EditableTextDescription(
+            apptexts.perfilPage.addressMain,
+            cerarCitaBloc.detailDireccionUno,
+          ),
+          EditableTextDescription(
+            apptexts.perfilPage.addressSecondary,
+            cerarCitaBloc.detailDireccionDos,
+            beNull: true,
+          ),
+          EditableTextDescription(
+            apptexts.perfilPage.zipCode,
+            cerarCitaBloc.detailCodigoPostal,
             beNull: true,
           ),
           const SizedBox(height: AppLayoutConst.spaceM),
@@ -261,6 +292,120 @@ class FormNewCita extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildDropdownCountryField(CitaNuevaBloc bloc) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: BlocBuilder<CitaNuevaBloc, CitaNuevaState>(
+        buildWhen: (previous, current) =>
+            previous.paises != current.paises ||
+            previous.selectedCountryId != current.selectedCountryId,
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${apptexts.perfilPage.country}:',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: AppLayoutConst.spaceM),
+              DropdownButtonFormField<int>(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                ),
+                menuMaxHeight: 500,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                ),
+                value: state.selectedCountryId,
+                items: state.paises
+                    .map((Pais pais) => DropdownMenuItem<int>(
+                          value: pais.id!,
+                          child: Text(pais.nombre ?? '-'),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    bloc.add(UpdateSelectedCountryEvent(value));
+                  }
+                },
+                isExpanded: false,
+                validator: (value) {
+                  if (value == null || value == 0) {
+                    return apptexts.appOptions.validators.requiredField;
+                  }
+                  return null;
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildDropdownStateField(CitaNuevaBloc bloc) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: BlocBuilder<CitaNuevaBloc, CitaNuevaState>(
+        buildWhen: (previous, current) =>
+            previous.estados != current.estados ||
+            previous.selectedEstadoId != current.selectedEstadoId,
+        builder: (context, state) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${apptexts.perfilPage.state}:',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: AppLayoutConst.spaceM),
+              DropdownButtonFormField<int>(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                ),
+                menuMaxHeight: 500,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.black,
+                ),
+                value: state.selectedEstadoId,
+                items: state.estados
+                    .map((Estado estado) => DropdownMenuItem<int>(
+                          value: estado.id!,
+                          child: Text(estado.nombre ?? '-'),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  if (value != null) {
+                    bloc.add(UpdateSelectedEstadoEvent(value));
+                  }
+                },
+                isExpanded: false,
+                validator: (value) {
+                  if (value == null || value == 0) {
+                    return apptexts.appOptions.validators.requiredField;
+                  }
+                  return null;
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
 }
 
 class TipoCitaMedica extends StatelessWidget {
@@ -273,19 +418,12 @@ class TipoCitaMedica extends StatelessWidget {
     final List<Map<String, dynamic>> tipoCitaOptions = [
       {"id": "PRESENCIAL", "nombre": apptexts.citasPage.tiposCita.presencial},
       {"id": "TELEMATICA", "nombre": apptexts.citasPage.tiposCita.telematica},
+      {"id": "SEGUIMIENTO", "nombre": apptexts.citasPage.tiposCita.seguimiento},
       {
         "id": "SEGUNDA_OPINION",
         "nombre": apptexts.citasPage.tiposCita.segundaOp
       },
-      {
-        "id": "CIRUGIA_AMBULATORIA",
-        "nombre": apptexts.citasPage.tiposCita.ciriguia
-      },
-      {
-        "id": "CIRUGIA_INTERNAMIENTO",
-        "nombre": apptexts.citasPage.tiposCita.internamiento
-      },
-      {"id": "SEGUIMIENTO", "nombre": apptexts.citasPage.tiposCita.seguimiento},
+     
     ];
 
     final String? tipoSelected =

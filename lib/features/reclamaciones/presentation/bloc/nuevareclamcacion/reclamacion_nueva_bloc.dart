@@ -47,7 +47,7 @@ class ReclamacionNuevaBloc
 
     _pageCitas = 0;
 
-    detailPadecimeiento = TextEditingController();
+    detailPadecimiento = TextEditingController();
     detailAditionalInformation = TextEditingController();
 
     dateController = TextEditingController();
@@ -69,7 +69,7 @@ class ReclamacionNuevaBloc
   GlobalKey<FormState> get formKey => _formKey;
 
   // Controladores de texto para los campos de dirección
-  late TextEditingController detailPadecimeiento;
+  late TextEditingController detailPadecimiento;
   late TextEditingController detailAditionalInformation;
 
   late TextEditingController dateController;
@@ -77,7 +77,7 @@ class ReclamacionNuevaBloc
   @override
   Future<void> close() {
     refreshController.dispose();
-    detailPadecimeiento.dispose();
+    detailPadecimiento.dispose();
     detailAditionalInformation.dispose();
 
     dateController.dispose();
@@ -134,7 +134,7 @@ class ReclamacionNuevaBloc
       clientePoliza: state.casoSeleccionado!.clientePoliza,
       fechaServicio: DateFormat('dd/MM/yyyy').parse(dateController.text),
       tipoAdm: state.tipoAdmSeleccionado,
-      padecimientoDiagnostico: detailPadecimeiento.text,
+      padecimientoDiagnostico: detailPadecimiento.text,
       infoAdicional: detailAditionalInformation.text,
       // Otros campos necesarios...
     );

@@ -9,5 +9,9 @@
         "experts": "Expertos en facturación y contención costos",
         "offices": "Oficinas y operaciones en Houston",
         "lead": "TPA Líder en consejería médica integral internacional"
-    }
+    },
+    "telefono": "Número telefónico",
+    "fax": "Fax",
+    "email": "Email",
+    "slogan": "Tu acompañante médico en el extranjero"
 }

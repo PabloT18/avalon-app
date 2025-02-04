@@ -34,7 +34,7 @@ class AuthenticationRepository {
   final StreamController<User> _userController =
       StreamController<User>.broadcast();
 
-  Stream<User> get user2 => _userController.stream;
+  // Stream<User> get user2 => _userController.stream;
 
   Stream<User> get user {
     return Stream.value(User.empty);

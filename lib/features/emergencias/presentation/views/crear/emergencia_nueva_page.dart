@@ -204,13 +204,14 @@ class FormNewEmergencia extends StatelessWidget {
 
           EditableTextAreaDescription(
             apptexts.emergenciasPage.diagnostico,
-            emergenciaNuevabloc.detailPadecimeiento,
+            emergenciaNuevabloc.detailPadecimiento,
           ),
           EditableTextAreaDescription(
             apptexts.emergenciasPage.sintomas,
             emergenciaNuevabloc.detailAditionalInformation,
           ),
           // Campos de dirección
+          const Divider(),
 
           _buildDropdownCountryField(emergenciaNuevabloc),
           // Dropdown de estado

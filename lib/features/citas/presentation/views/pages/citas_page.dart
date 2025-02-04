@@ -173,6 +173,7 @@ class CitasPanelView extends StatelessWidget {
               Hero(
                 tag: cita.hashCode,
                 child: CitaCard(
+                  navigatePush: true,
                   cita: cita,
                   isClient: user.isClient,
                 ),

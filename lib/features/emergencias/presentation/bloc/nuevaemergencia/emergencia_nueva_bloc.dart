@@ -80,7 +80,7 @@ class EmergenciaNuevaBloc
   final TextEditingController detailDireccionDos = TextEditingController();
   final TextEditingController detailCiudad = TextEditingController();
   final TextEditingController detailCodigoPostal = TextEditingController();
-  final TextEditingController detailPadecimeiento = TextEditingController();
+  final TextEditingController detailPadecimiento = TextEditingController();
   final TextEditingController detailAditionalInformation =
       TextEditingController();
 
@@ -91,7 +91,7 @@ class EmergenciaNuevaBloc
     detailDireccionDos.dispose();
     detailCiudad.dispose();
     detailCodigoPostal.dispose();
-    detailPadecimeiento.dispose();
+    detailPadecimiento.dispose();
     detailAditionalInformation.dispose();
     return super.close();
   }
@@ -177,7 +177,7 @@ class EmergenciaNuevaBloc
     final emergencia = EmergenciaModel(
       caso: state.casoSeleccionado!,
       clientePoliza: state.casoSeleccionado!.clientePoliza,
-      diagnostico: detailPadecimeiento.text,
+      diagnostico: detailPadecimiento.text,
       sintomas: detailAditionalInformation.text,
       direccion: Direccion(
         direccionUno: detailDireccionUno.text,
