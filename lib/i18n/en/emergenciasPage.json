@@ -38,8 +38,8 @@
     "creaCasoEmergencia": "Create a Case for the Emergency",
     "emergenciaEnCaso": "Choose the Case for the Emergency",
     "emergenciaEstado": "Emergency State",
-    "historialEmpty": "No comment history yet",
-    "historialError": "Error loading comment history",
+    "historialEmpty": "There are no follow-up comments yet",
+    "historialError": "Error loading the follow-up history",
     "tipoAdministacion": "Type of Administration",
     "emergenciaCreada": "Emergency created"
 }

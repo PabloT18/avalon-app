@@ -19,9 +19,9 @@
         "one": "Detalle",
         "other": "Detalles"
     },
-    "historyTxt": {
-        "one": "Historial",
-        "other": "Historiales"
+    "seguimiento": {
+        "one": "Seguimiento",
+        "other": "Seguimientos"
     },
     "detailFechaTentativa": "Fecha Tentativa",
     "detailFechaTentativaDesde": "Fecha Tentativa Desde",
@@ -64,7 +64,7 @@
     "creaCasoCita": "Crea un caso para la cita médica",
     "citaEnCaso": "Escoje el caso para la cita médica",
     "citaEstado": "Estado de la cita",
-    "historialEmpty": "No hay un historial de comentarios aún",
-    "historialError": "Erroral cargar el historial de comentarios",
+    "historialEmpty": "No hay comentarios de seguimiento aún",
+    "historialError": "Erroral cargar el historial de seguimiento",
     "citaCreada": "Cita creada"
 }

@@ -136,7 +136,7 @@ class EmergenciaDetalleView extends StatelessWidget {
                                           option: const DetalleHistorial(),
                                           optionSelected: statePanels,
                                           title: apptexts.citasPage
-                                              .historyTxt(n: 1),
+                                              .seguimiento(n: 1),
                                         ),
                                       ],
                                     ),

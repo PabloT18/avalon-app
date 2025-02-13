@@ -19,9 +19,9 @@
         "one": "Detail",
         "other": "Details"
     },
-    "historyTxt": {
-        "one": "History",
-        "other": "Histories"
+    "seguimiento": {
+        "one": "Follow-up",
+        "other": "Follow-ups"
     },
     "detailFechaTentativa": "Tentative Date",
     "detailFechaTentativaDesde": "Tentative Date From",
@@ -64,7 +64,7 @@
     "creaCasoCita": "Create a case for the appointment",
     "citaEnCaso": "Choose the case for the appointment",
     "citaEstado": "Appointment State",
-    "historialEmpty": "No comment history yet",
-    "historialError": "Error loading comment history",
+    "historialEmpty": "There are no follow-up comments yet",
+    "historialError": "Error loading the follow-up history",
     "citaCreada": "Appointment created"
 }

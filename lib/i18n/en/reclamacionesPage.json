@@ -42,8 +42,8 @@
     "creaCasoReclamacion": "Create a Case for the Claim",
     "reclamacionEnCaso": "Choose the Case for the Claim",
     "reclamacionEstado": "Claim Status",
-    "historialEmpty": "No comment history yet",
-    "historialError": "Error loading comment history",
+    "historialEmpty": "There are no follow-up comments yet",
+    "historialError": "Error loading the follow-up history",
     "reclamacionCreada": "Claim created",
     "reclamacionCreadaError": "Error creating claim"
 }

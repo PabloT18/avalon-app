@@ -423,7 +423,6 @@ class TipoCitaMedica extends StatelessWidget {
         "id": "SEGUNDA_OPINION",
         "nombre": apptexts.citasPage.tiposCita.segundaOp
       },
-     
     ];
 
     final String? tipoSelected =

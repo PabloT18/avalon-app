@@ -38,8 +38,8 @@
     "creaCasoEmergencia": "Crea un caso para la emergencia",
     "emergenciaEnCaso": "Escoje el caso para la emergencia",
     "emergenciaEstado": "Estado de la emergencia",
-    "historialEmpty": "No hay un historial de comentarios aún",
-    "historialError": "Error al cargar el historial de comentarios",
+    "historialEmpty": "No hay comentarios de seguimiento aún",
+    "historialError": "Erroral cargar el historial de seguimiento",
     "tipoAdministacion": "Tipo de Administración",
     "emergenciaCreada": "Emergencia creada"
 }

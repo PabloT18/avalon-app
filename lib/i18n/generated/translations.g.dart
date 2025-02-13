@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 676 (338 per locale)
 ///
-/// Built on 2025-02-13 at 16:41 UTC
+/// Built on 2025-02-13 at 17:01 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -346,9 +346,9 @@ class _TranslationsCitasPageEs {
 		one: 'Detalle',
 		other: 'Detalles',
 	);
-	String historyTxt({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-		one: 'Historial',
-		other: 'Historiales',
+	String seguimiento({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Seguimiento',
+		other: 'Seguimientos',
 	);
 	String get detailFechaTentativa => 'Fecha Tentativa';
 	String get detailFechaTentativaDesde => 'Fecha Tentativa Desde';
@@ -376,8 +376,8 @@ class _TranslationsCitasPageEs {
 	String get creaCasoCita => 'Crea un caso para la cita médica';
 	String get citaEnCaso => 'Escoje el caso para la cita médica';
 	String get citaEstado => 'Estado de la cita';
-	String get historialEmpty => 'No hay un historial de comentarios aún';
-	String get historialError => 'Erroral cargar el historial de comentarios';
+	String get historialEmpty => 'No hay comentarios de seguimiento aún';
+	String get historialError => 'Erroral cargar el historial de seguimiento';
 	String get citaCreada => 'Cita creada';
 }
 
@@ -440,8 +440,8 @@ class _TranslationsEmergenciasPageEs {
 	String get creaCasoEmergencia => 'Crea un caso para la emergencia';
 	String get emergenciaEnCaso => 'Escoje el caso para la emergencia';
 	String get emergenciaEstado => 'Estado de la emergencia';
-	String get historialEmpty => 'No hay un historial de comentarios aún';
-	String get historialError => 'Error al cargar el historial de comentarios';
+	String get historialEmpty => 'No hay comentarios de seguimiento aún';
+	String get historialError => 'Erroral cargar el historial de seguimiento';
 	String get tipoAdministacion => 'Tipo de Administración';
 	String get emergenciaCreada => 'Emergencia creada';
 }
@@ -635,13 +635,13 @@ class _TranslationsReclamacionesPageEs {
 	String get estadoCerrado => 'Cerrado';
 	String get estadoGestionando => 'Gestionando';
 	String get estadoPorGestionar => 'Por Gestionar';
-	String get nuevaReclamacion => 'Nueva Reembolso';
+	String get nuevaReclamacion => 'Nuevo Reembolso';
 	String get reclamacionSinCaso => 'Reembolso sin caso';
 	String get creaCasoReclamacion => 'Crea un caso para el reembolso';
 	String get reclamacionEnCaso => 'Escoje el caso para el reembolso';
 	String get reclamacionEstado => 'Estado del el reembolso';
-	String get historialEmpty => 'No hay un historial de comentarios aún';
-	String get historialError => 'Error al cargar el historial de comentarios';
+	String get historialEmpty => 'No hay comentarios de seguimiento aún';
+	String get historialError => 'Erroral cargar el historial de seguimiento';
 	String get reclamacionCreada => 'Reembolso creada';
 	String get reclamacionCreadaError => 'Error al crear el reembolso';
 }
@@ -1022,9 +1022,9 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 		one: 'Detail',
 		other: 'Details',
 	);
-	@override String historyTxt({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
-		one: 'History',
-		other: 'Histories',
+	@override String seguimiento({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Follow-up',
+		other: 'Follow-ups',
 	);
 	@override String get detailFechaTentativa => 'Tentative Date';
 	@override String get detailFechaTentativaDesde => 'Tentative Date From';
@@ -1052,8 +1052,8 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 	@override String get creaCasoCita => 'Create a case for the appointment';
 	@override String get citaEnCaso => 'Choose the case for the appointment';
 	@override String get citaEstado => 'Appointment State';
-	@override String get historialEmpty => 'No comment history yet';
-	@override String get historialError => 'Error loading comment history';
+	@override String get historialEmpty => 'There are no follow-up comments yet';
+	@override String get historialError => 'Error loading the follow-up history';
 	@override String get citaCreada => 'Appointment created';
 }
 
@@ -1116,8 +1116,8 @@ class _TranslationsEmergenciasPageEn implements _TranslationsEmergenciasPageEs {
 	@override String get creaCasoEmergencia => 'Create a Case for the Emergency';
 	@override String get emergenciaEnCaso => 'Choose the Case for the Emergency';
 	@override String get emergenciaEstado => 'Emergency State';
-	@override String get historialEmpty => 'No comment history yet';
-	@override String get historialError => 'Error loading comment history';
+	@override String get historialEmpty => 'There are no follow-up comments yet';
+	@override String get historialError => 'Error loading the follow-up history';
 	@override String get tipoAdministacion => 'Type of Administration';
 	@override String get emergenciaCreada => 'Emergency created';
 }
@@ -1316,8 +1316,8 @@ class _TranslationsReclamacionesPageEn implements _TranslationsReclamacionesPage
 	@override String get creaCasoReclamacion => 'Create a Case for the Claim';
 	@override String get reclamacionEnCaso => 'Choose the Case for the Claim';
 	@override String get reclamacionEstado => 'Claim Status';
-	@override String get historialEmpty => 'No comment history yet';
-	@override String get historialError => 'Error loading comment history';
+	@override String get historialEmpty => 'There are no follow-up comments yet';
+	@override String get historialError => 'Error loading the follow-up history';
 	@override String get reclamacionCreada => 'Claim created';
 	@override String get reclamacionCreadaError => 'Error creating claim';
 }
@@ -1637,9 +1637,9 @@ extension on Translations {
 				one: 'Detalle',
 				other: 'Detalles',
 			);
-			case 'citasPage.historyTxt': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
-				one: 'Historial',
-				other: 'Historiales',
+			case 'citasPage.seguimiento': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Seguimiento',
+				other: 'Seguimientos',
 			);
 			case 'citasPage.detailFechaTentativa': return 'Fecha Tentativa';
 			case 'citasPage.detailFechaTentativaDesde': return 'Fecha Tentativa Desde';
@@ -1678,8 +1678,8 @@ extension on Translations {
 			case 'citasPage.creaCasoCita': return 'Crea un caso para la cita médica';
 			case 'citasPage.citaEnCaso': return 'Escoje el caso para la cita médica';
 			case 'citasPage.citaEstado': return 'Estado de la cita';
-			case 'citasPage.historialEmpty': return 'No hay un historial de comentarios aún';
-			case 'citasPage.historialError': return 'Erroral cargar el historial de comentarios';
+			case 'citasPage.historialEmpty': return 'No hay comentarios de seguimiento aún';
+			case 'citasPage.historialError': return 'Erroral cargar el historial de seguimiento';
 			case 'citasPage.citaCreada': return 'Cita creada';
 			case 'comunicadospage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Noticia',
@@ -1724,8 +1724,8 @@ extension on Translations {
 			case 'emergenciasPage.creaCasoEmergencia': return 'Crea un caso para la emergencia';
 			case 'emergenciasPage.emergenciaEnCaso': return 'Escoje el caso para la emergencia';
 			case 'emergenciasPage.emergenciaEstado': return 'Estado de la emergencia';
-			case 'emergenciasPage.historialEmpty': return 'No hay un historial de comentarios aún';
-			case 'emergenciasPage.historialError': return 'Error al cargar el historial de comentarios';
+			case 'emergenciasPage.historialEmpty': return 'No hay comentarios de seguimiento aún';
+			case 'emergenciasPage.historialError': return 'Erroral cargar el historial de seguimiento';
 			case 'emergenciasPage.tipoAdministacion': return 'Tipo de Administración';
 			case 'emergenciasPage.emergenciaCreada': return 'Emergencia creada';
 			case 'familiaresPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
@@ -1851,13 +1851,13 @@ extension on Translations {
 			case 'reclamacionesPage.estadoCerrado': return 'Cerrado';
 			case 'reclamacionesPage.estadoGestionando': return 'Gestionando';
 			case 'reclamacionesPage.estadoPorGestionar': return 'Por Gestionar';
-			case 'reclamacionesPage.nuevaReclamacion': return 'Nueva Reembolso';
+			case 'reclamacionesPage.nuevaReclamacion': return 'Nuevo Reembolso';
 			case 'reclamacionesPage.reclamacionSinCaso': return 'Reembolso sin caso';
 			case 'reclamacionesPage.creaCasoReclamacion': return 'Crea un caso para el reembolso';
 			case 'reclamacionesPage.reclamacionEnCaso': return 'Escoje el caso para el reembolso';
 			case 'reclamacionesPage.reclamacionEstado': return 'Estado del el reembolso';
-			case 'reclamacionesPage.historialEmpty': return 'No hay un historial de comentarios aún';
-			case 'reclamacionesPage.historialError': return 'Error al cargar el historial de comentarios';
+			case 'reclamacionesPage.historialEmpty': return 'No hay comentarios de seguimiento aún';
+			case 'reclamacionesPage.historialError': return 'Erroral cargar el historial de seguimiento';
 			case 'reclamacionesPage.reclamacionCreada': return 'Reembolso creada';
 			case 'reclamacionesPage.reclamacionCreadaError': return 'Error al crear el reembolso';
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
@@ -2065,9 +2065,9 @@ extension on _TranslationsEn {
 				one: 'Detail',
 				other: 'Details',
 			);
-			case 'citasPage.historyTxt': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
-				one: 'History',
-				other: 'Histories',
+			case 'citasPage.seguimiento': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Follow-up',
+				other: 'Follow-ups',
 			);
 			case 'citasPage.detailFechaTentativa': return 'Tentative Date';
 			case 'citasPage.detailFechaTentativaDesde': return 'Tentative Date From';
@@ -2106,8 +2106,8 @@ extension on _TranslationsEn {
 			case 'citasPage.creaCasoCita': return 'Create a case for the appointment';
 			case 'citasPage.citaEnCaso': return 'Choose the case for the appointment';
 			case 'citasPage.citaEstado': return 'Appointment State';
-			case 'citasPage.historialEmpty': return 'No comment history yet';
-			case 'citasPage.historialError': return 'Error loading comment history';
+			case 'citasPage.historialEmpty': return 'There are no follow-up comments yet';
+			case 'citasPage.historialError': return 'Error loading the follow-up history';
 			case 'citasPage.citaCreada': return 'Appointment created';
 			case 'comunicadospage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'New',
@@ -2152,8 +2152,8 @@ extension on _TranslationsEn {
 			case 'emergenciasPage.creaCasoEmergencia': return 'Create a Case for the Emergency';
 			case 'emergenciasPage.emergenciaEnCaso': return 'Choose the Case for the Emergency';
 			case 'emergenciasPage.emergenciaEstado': return 'Emergency State';
-			case 'emergenciasPage.historialEmpty': return 'No comment history yet';
-			case 'emergenciasPage.historialError': return 'Error loading comment history';
+			case 'emergenciasPage.historialEmpty': return 'There are no follow-up comments yet';
+			case 'emergenciasPage.historialError': return 'Error loading the follow-up history';
 			case 'emergenciasPage.tipoAdministacion': return 'Type of Administration';
 			case 'emergenciasPage.emergenciaCreada': return 'Emergency created';
 			case 'familiaresPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
@@ -2284,8 +2284,8 @@ extension on _TranslationsEn {
 			case 'reclamacionesPage.creaCasoReclamacion': return 'Create a Case for the Claim';
 			case 'reclamacionesPage.reclamacionEnCaso': return 'Choose the Case for the Claim';
 			case 'reclamacionesPage.reclamacionEstado': return 'Claim Status';
-			case 'reclamacionesPage.historialEmpty': return 'No comment history yet';
-			case 'reclamacionesPage.historialError': return 'Error loading comment history';
+			case 'reclamacionesPage.historialEmpty': return 'There are no follow-up comments yet';
+			case 'reclamacionesPage.historialError': return 'Error loading the follow-up history';
 			case 'reclamacionesPage.reclamacionCreada': return 'Claim created';
 			case 'reclamacionesPage.reclamacionCreadaError': return 'Error creating claim';
 			case 'segurosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
