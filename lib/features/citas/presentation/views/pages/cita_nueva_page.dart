@@ -219,8 +219,8 @@ class FormNewCita extends StatelessWidget {
           //   beNull: true,
           // ),
           EditableTextAreaDescription(
-            apptexts.citasPage.detailPadecimiento,
-            cerarCitaBloc.detailPadecimiento,
+            apptexts.citasPage.detailSintoma,
+            cerarCitaBloc.detailSintoma,
           ),
           EditableTextAreaDescription(
             apptexts.citasPage.detailAditionalInformation,

@@ -81,7 +81,7 @@ class CitaCard extends StatelessWidget {
                       // ),
                       TitleDescripcion(
                         isSubdescription: true,
-                        title: apptexts.appOptions.diagnostico_sintonomas,
+                        title: apptexts.citasPage.detailSintoma,
                         value: cita.padecimiento ?? '',
                       ),
                       TitleDescripcion(

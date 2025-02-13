@@ -19,14 +19,15 @@
     "reclamcionDateTentativa": "Tentative Date",
     "tipoAdministacion": "Administration Type",
     "tiposAdministacion": {
-        "tipoEmergencia": "Emergency",
-        "tipoProgramada": "Scheduled"
+        "tipoEmergenciaa": "Emergency",
+        "tipoProgramada": "Scheduled Event",
+        "tipoNoProgramada": "Unscheduled Event"
     },
     "detailPreferenceCity": "Preferred City",
     "detailAseguradoraName": "Insurance Company",
     "detailHospital": "Hospital",
     "detailPreferenceDoctor": "Preferred Doctor",
-    "detailPadecimiento": "Condition",
+    "detailPadecimientoo": "Condition",
     "detailPadecimientoDiagnostico": "Condition/Diagnosis",
     "detailAditionalInformation": "Additional Information",
     "detailAditionalRequaimentes": "Additional Requirements",

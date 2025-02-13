@@ -13,6 +13,8 @@ import 'package:avalon_app/core/config/theme/app_colors.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/nuevareclamcacion/reclamacion_nueva_bloc.dart';
+
 class ReclacmaionDetalleMorePanel extends StatelessWidget {
   const ReclacmaionDetalleMorePanel({
     super.key,
@@ -53,7 +55,7 @@ class ReclacmaionDetalleMorePanel extends StatelessWidget {
             value: reclamacion.clientePoliza?.poliza?.aseguradora?.nombre),
         DetailFormField(
             colorGray: true,
-            label: apptexts.reclamacionesPage.reclamcionDateTentativa,
+            label: apptexts.reclamacionesPage.reclamcionDate,
             value: reclamacion.fechaServicio != null
                 ? UtilsFunctionsLogic.formatFechaLocal(
                     reclamacion.fechaServicio!, locale.languageCode)
@@ -77,7 +79,7 @@ class ReclacmaionDetalleMorePanel extends StatelessWidget {
 
         DetailFormField(
             colorGray: true,
-            label: apptexts.appOptions.diagnostico_sintonomas,
+            label: apptexts.reclamacionesPage.detailPadecimientoDiagnostico,
             value: reclamacion.padecimientoDiagnostico),
         DetailFormField(
             colorGray: true,
@@ -122,10 +124,12 @@ class ReclacmaionDetalleMorePanel extends StatelessWidget {
   String getTipoAdmi(String? tipoAd) {
     if (tipoAd == null) {
       return '-';
-    } else if (tipoAd == 'PROGRAMADA') {
+    } else if (tipoAd == tipoProgramada) {
       return apptexts.reclamacionesPage.tiposAdministacion.tipoProgramada;
-    } else if (tipoAd == 'EMERGENCIA') {
-      return apptexts.reclamacionesPage.tiposAdministacion.tipoEmergencia;
+    } else if (tipoAd == tipoEmergencia) {
+      return apptexts.reclamacionesPage.tiposAdministacion.tipoEmergenciaa;
+    } else if (tipoAd == tipoNoProgramada) {
+      return apptexts.reclamacionesPage.tiposAdministacion.tipoNoProgramada;
     } else {
       return ' - ';
     }

@@ -210,10 +210,12 @@ class FormNewReclamacion extends StatelessWidget {
             reclamacionNuevaBloc.detailAditionalInformation,
           ),
           EditableDateDescription(
-            label: apptexts.citasPage.detailFechaTentativa,
+            label: apptexts.reclamacionesPage.reclamcionDate,
             dateTextController: reclamacionNuevaBloc.dateController,
           ),
-
+          const SizedBox(
+            height: AppLayoutConst.spaceM,
+          ),
           // Campos de dirección
           // Agrega el DropdownButtonFormField aquí
           _buildTipoAdmDropdown(reclamacionNuevaBloc),
@@ -265,13 +267,17 @@ class FormNewReclamacion extends StatelessWidget {
 
   Widget _buildTipoAdmDropdown(ReclamacionNuevaBloc bloc) {
     final List<Map<String, String>> tiposAdm = [
-      {
-        'value': tipoEmergencia,
-        'label': apptexts.reclamacionesPage.tiposAdministacion.tipoEmergencia,
-      },
+      // {
+      //   'value': tipoEmergencia,
+      //   'label': apptexts.reclamacionesPage.tiposAdministacion.tipoEmergencia,
+      // },
       {
         'value': tipoProgramada,
         'label': apptexts.reclamacionesPage.tiposAdministacion.tipoProgramada,
+      },
+      {
+        'value': tipoNoProgramada,
+        'label': apptexts.reclamacionesPage.tiposAdministacion.tipoNoProgramada,
       },
     ];
     return Padding(

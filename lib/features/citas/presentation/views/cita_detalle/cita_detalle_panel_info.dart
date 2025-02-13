@@ -86,7 +86,7 @@ class CitaDetalleMorePanel extends StatelessWidget {
                 .medicoCentroMedicoAseguradora?.medico?.nombreCompleto),
         DetailFormField(
             colorGray: true,
-            label: apptexts.citasPage.detailPadecimiento,
+            label: apptexts.citasPage.detailSintoma,
             value: citaMedica.padecimiento),
         DetailFormField(
             colorGray: true,

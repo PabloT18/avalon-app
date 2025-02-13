@@ -77,7 +77,8 @@ class ReclamacionCard extends StatelessWidget {
                     // ),
                     TitleDescripcion(
                       isSubdescription: true,
-                      title: apptexts.reclamacionesPage.detailPadecimiento,
+                      title: apptexts
+                          .reclamacionesPage.detailPadecimientoDiagnostico,
                       value: reclamacion.padecimientoDiagnostico!,
                     ),
                     TitleDescripcion(

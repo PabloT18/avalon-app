@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 676 (338 per locale)
+/// Strings: 680 (340 per locale)
 ///
-/// Built on 2025-02-13 at 17:01 UTC
+/// Built on 2025-02-13 at 17:30 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -359,7 +359,8 @@ class _TranslationsCitasPageEs {
 	String get detailAseguradoraName => 'Aseguradora';
 	String get detailHospital => 'Hospital';
 	String get detailPreferenceDoctor => 'Doctor de preferencia';
-	String get detailPadecimiento => 'Padecimiento';
+	String get detailPadecimientoo => 'Padecimiento';
+	String get detailSintoma => 'Síntoma';
 	String get detailPadecimientoDiagnostico => 'Padecimiento/Diagnóstico';
 	String get detailAditionalInformation => 'Información adicional';
 	String get detailAditionalRequaimentes => 'Requerimientos adicionales';
@@ -624,7 +625,7 @@ class _TranslationsReclamacionesPageEs {
 	String get detailAseguradoraName => 'Aseguradora';
 	String get detailHospital => 'Hospital';
 	String get detailPreferenceDoctor => 'Doctor de preferencia';
-	String get detailPadecimiento => 'Padecimiento';
+	String get detailPadecimientoo => 'Padecimiento';
 	String get detailPadecimientoDiagnostico => 'Padecimiento/Diagnóstico';
 	String get detailAditionalInformation => 'Información adicional';
 	String get detailAditionalRequaimentes => 'Requerimientos adicionales';
@@ -796,8 +797,9 @@ class _TranslationsReclamacionesPageTiposAdministacionEs {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get tipoEmergencia => 'Emergencia';
-	String get tipoProgramada => 'Programada';
+	String get tipoEmergenciaa => 'Emergencia';
+	String get tipoProgramada => 'Evento programado';
+	String get tipoNoProgramada => 'Evento No programado';
 }
 
 // Path: <root>
@@ -1035,7 +1037,8 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 	@override String get detailAseguradoraName => 'Insurance Company';
 	@override String get detailHospital => 'Hospital';
 	@override String get detailPreferenceDoctor => 'Preferred Doctor';
-	@override String get detailPadecimiento => 'Condition';
+	@override String get detailPadecimientoo => 'Condition';
+	@override String get detailSintoma => 'Symptom';
 	@override String get detailPadecimientoDiagnostico => 'Condition/Diagnosis';
 	@override String get detailAditionalInformation => 'Additional Information';
 	@override String get detailAditionalRequaimentes => 'Additional Requirements';
@@ -1300,7 +1303,7 @@ class _TranslationsReclamacionesPageEn implements _TranslationsReclamacionesPage
 	@override String get detailAseguradoraName => 'Insurance Company';
 	@override String get detailHospital => 'Hospital';
 	@override String get detailPreferenceDoctor => 'Preferred Doctor';
-	@override String get detailPadecimiento => 'Condition';
+	@override String get detailPadecimientoo => 'Condition';
 	@override String get detailPadecimientoDiagnostico => 'Condition/Diagnosis';
 	@override String get detailAditionalInformation => 'Additional Information';
 	@override String get detailAditionalRequaimentes => 'Additional Requirements';
@@ -1472,8 +1475,9 @@ class _TranslationsReclamacionesPageTiposAdministacionEn implements _Translation
 	@override final _TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String get tipoEmergencia => 'Emergency';
-	@override String get tipoProgramada => 'Scheduled';
+	@override String get tipoEmergenciaa => 'Emergency';
+	@override String get tipoProgramada => 'Scheduled Event';
+	@override String get tipoNoProgramada => 'Unscheduled Event';
 }
 
 /// Flat map(s) containing all translations.
@@ -1655,7 +1659,8 @@ extension on Translations {
 			case 'citasPage.detailAseguradoraName': return 'Aseguradora';
 			case 'citasPage.detailHospital': return 'Hospital';
 			case 'citasPage.detailPreferenceDoctor': return 'Doctor de preferencia';
-			case 'citasPage.detailPadecimiento': return 'Padecimiento';
+			case 'citasPage.detailPadecimientoo': return 'Padecimiento';
+			case 'citasPage.detailSintoma': return 'Síntoma';
 			case 'citasPage.detailPadecimientoDiagnostico': return 'Padecimiento/Diagnóstico';
 			case 'citasPage.detailAditionalInformation': return 'Información adicional';
 			case 'citasPage.detailAditionalRequaimentes': return 'Requerimientos adicionales';
@@ -1834,13 +1839,14 @@ extension on Translations {
 			case 'reclamacionesPage.reclamcionDate': return 'Fecha';
 			case 'reclamacionesPage.reclamcionDateTentativa': return 'Fecha Tentativa';
 			case 'reclamacionesPage.tipoAdministacion': return 'Tipo de Administración';
-			case 'reclamacionesPage.tiposAdministacion.tipoEmergencia': return 'Emergencia';
-			case 'reclamacionesPage.tiposAdministacion.tipoProgramada': return 'Programada';
+			case 'reclamacionesPage.tiposAdministacion.tipoEmergenciaa': return 'Emergencia';
+			case 'reclamacionesPage.tiposAdministacion.tipoProgramada': return 'Evento programado';
+			case 'reclamacionesPage.tiposAdministacion.tipoNoProgramada': return 'Evento No programado';
 			case 'reclamacionesPage.detailPreferenceCity': return 'Ciudad de preferencia';
 			case 'reclamacionesPage.detailAseguradoraName': return 'Aseguradora';
 			case 'reclamacionesPage.detailHospital': return 'Hospital';
 			case 'reclamacionesPage.detailPreferenceDoctor': return 'Doctor de preferencia';
-			case 'reclamacionesPage.detailPadecimiento': return 'Padecimiento';
+			case 'reclamacionesPage.detailPadecimientoo': return 'Padecimiento';
 			case 'reclamacionesPage.detailPadecimientoDiagnostico': return 'Padecimiento/Diagnóstico';
 			case 'reclamacionesPage.detailAditionalInformation': return 'Información adicional';
 			case 'reclamacionesPage.detailAditionalRequaimentes': return 'Requerimientos adicionales';
@@ -2083,7 +2089,8 @@ extension on _TranslationsEn {
 			case 'citasPage.detailAseguradoraName': return 'Insurance Company';
 			case 'citasPage.detailHospital': return 'Hospital';
 			case 'citasPage.detailPreferenceDoctor': return 'Preferred Doctor';
-			case 'citasPage.detailPadecimiento': return 'Condition';
+			case 'citasPage.detailPadecimientoo': return 'Condition';
+			case 'citasPage.detailSintoma': return 'Symptom';
 			case 'citasPage.detailPadecimientoDiagnostico': return 'Condition/Diagnosis';
 			case 'citasPage.detailAditionalInformation': return 'Additional Information';
 			case 'citasPage.detailAditionalRequaimentes': return 'Additional Requirements';
@@ -2262,13 +2269,14 @@ extension on _TranslationsEn {
 			case 'reclamacionesPage.reclamcionDate': return 'Date';
 			case 'reclamacionesPage.reclamcionDateTentativa': return 'Tentative Date';
 			case 'reclamacionesPage.tipoAdministacion': return 'Administration Type';
-			case 'reclamacionesPage.tiposAdministacion.tipoEmergencia': return 'Emergency';
-			case 'reclamacionesPage.tiposAdministacion.tipoProgramada': return 'Scheduled';
+			case 'reclamacionesPage.tiposAdministacion.tipoEmergenciaa': return 'Emergency';
+			case 'reclamacionesPage.tiposAdministacion.tipoProgramada': return 'Scheduled Event';
+			case 'reclamacionesPage.tiposAdministacion.tipoNoProgramada': return 'Unscheduled Event';
 			case 'reclamacionesPage.detailPreferenceCity': return 'Preferred City';
 			case 'reclamacionesPage.detailAseguradoraName': return 'Insurance Company';
 			case 'reclamacionesPage.detailHospital': return 'Hospital';
 			case 'reclamacionesPage.detailPreferenceDoctor': return 'Preferred Doctor';
-			case 'reclamacionesPage.detailPadecimiento': return 'Condition';
+			case 'reclamacionesPage.detailPadecimientoo': return 'Condition';
 			case 'reclamacionesPage.detailPadecimientoDiagnostico': return 'Condition/Diagnosis';
 			case 'reclamacionesPage.detailAditionalInformation': return 'Additional Information';
 			case 'reclamacionesPage.detailAditionalRequaimentes': return 'Additional Requirements';

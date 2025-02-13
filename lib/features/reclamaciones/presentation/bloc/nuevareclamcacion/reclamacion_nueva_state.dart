@@ -2,6 +2,7 @@ part of 'reclamacion_nueva_bloc.dart';
 
 const String tipoEmergencia = 'EMERGENCIA';
 const String tipoProgramada = 'PROGRAMADA';
+const String tipoNoProgramada = 'NO-PROGRAMADA';
 
 class ReclamacionNuevaState extends Equatable {
   const ReclamacionNuevaState({

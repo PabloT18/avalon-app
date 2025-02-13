@@ -66,7 +66,7 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
     detailPreferenceCity = TextEditingController();
     detailHospital = TextEditingController();
     detailPreferenceDoctor = TextEditingController();
-    detailPadecimiento = TextEditingController();
+    detailSintoma = TextEditingController();
     detailAditionalInformation = TextEditingController();
     detailOthersRequaimentes = TextEditingController();
 
@@ -96,7 +96,7 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
   late TextEditingController detailPreferenceCity;
   late TextEditingController detailHospital;
   late TextEditingController detailPreferenceDoctor;
-  late TextEditingController detailPadecimiento;
+  late TextEditingController detailSintoma;
   late TextEditingController detailAditionalInformation;
   late TextEditingController detailOthersRequaimentes;
 
@@ -113,7 +113,7 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
     detailPreferenceCity.dispose();
     detailHospital.dispose();
     detailPreferenceDoctor.dispose();
-    detailPadecimiento.dispose();
+    detailSintoma.dispose();
     detailAditionalInformation.dispose();
     detailOthersRequaimentes.dispose();
     refreshController.dispose();
@@ -246,7 +246,7 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
       fechaTentativa: DateFormat('dd/MM/yyyy').parse(dateFrom.text),
       fechaTentativaHasta: DateFormat('dd/MM/yyyy').parse(dateTo.text),
       ciudadPreferencia: detailPreferenceCity.text,
-      padecimiento: detailPadecimiento.text,
+      padecimiento: detailSintoma.text,
       informacionAdicional: detailAditionalInformation.text,
       otrosRequisitos: detailOthersRequaimentes.text,
       requisitosAdicionales: state.requisitosAdicionales,
@@ -290,7 +290,7 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
         detailPreferenceCity.clear();
         detailHospital.clear();
         detailPreferenceDoctor.clear();
-        detailPadecimiento.clear();
+        detailSintoma.clear();
         detailAditionalInformation.clear();
         detailOthersRequaimentes.clear();
         // Maneja el éxito
