@@ -13,5 +13,10 @@
     "telefono": "Phone",
     "fax": "Fax",
     "email": "Email",
-    "slogan": "Your medical companion abroad"
+    "slogan": "Your medical companion abroad",
+    "intro": {
+        "title": "We are here to help you!",
+        "description": "At Avalon Plus, we are committed to providing you with the best support and assistance for all your travels and medical needs. If you have any questions, requests, or need more information about our services, do not hesitate to contact us. Our team is available to guide you, resolve your doubts, and ensure that you receive the care you deserve."
+    },
+    "contactones_pregunta": "How can we help you today?"
 }

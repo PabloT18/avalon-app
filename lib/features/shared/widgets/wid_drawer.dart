@@ -69,11 +69,11 @@ class DrawerCustom extends StatelessWidget {
           icon: Icons.local_hospital_rounded,
           isUserOption: false,
           routeName: PAGES.centrosMedicos.pageName),
-      DrawerOption(
-          label: apptexts.metodosPagoPage.title(n: 2),
-          icon: Icons.question_answer,
-          isUserOption: false,
-          routeName: PAGES.formasPago.pageName),
+      // DrawerOption(
+      //     label: apptexts.metodosPagoPage.title(n: 2),
+      //     icon: Icons.question_answer,
+      //     isUserOption: false,
+      //     routeName: PAGES.formasPago.pageName),
       DrawerOption(
           label: apptexts.preferenciasPage.preferenciasUser,
           icon: Icons.settings,

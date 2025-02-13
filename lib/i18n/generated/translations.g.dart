@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 670 (335 per locale)
+/// Strings: 676 (338 per locale)
 ///
-/// Built on 2025-02-04 at 20:38 UTC
+/// Built on 2025-02-13 at 16:41 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -260,6 +260,8 @@ class _TranslationsAvalonInfoEs {
 	String get fax => 'Fax';
 	String get email => 'Email';
 	String get slogan => 'Tu acompañante médico en el extranjero';
+	late final _TranslationsAvalonInfoIntroEs intro = _TranslationsAvalonInfoIntroEs._(_root);
+	String get contactones_pregunta => '¿Cómo podemos ayudarte hoy?';
 }
 
 // Path: casosPage
@@ -732,6 +734,17 @@ class _TranslationsAvalonInfoDetailsEs {
 	String get lead => 'TPA Líder en consejería médica integral internacional';
 }
 
+// Path: avalonInfo.intro
+class _TranslationsAvalonInfoIntroEs {
+	_TranslationsAvalonInfoIntroEs._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => '¡Estamos aquí para ayudarte!';
+	String get description => 'En Avalon Plus, nos comprometemos a ofrecerte el mejor soporte y asistencia en todos tus viajes y necesidades médicas. Si tienes alguna pregunta, solicitud o necesitas más información sobre nuestros servicios, no dudes en ponerte en contacto con nosotros. Nuestro equipo está disponible para guiarte, resolver tus dudas y asegurarse de que recibas la atención que mereces.';
+}
+
 // Path: citasPage.tiposCita
 class _TranslationsCitasPageTiposCitaEs {
 	_TranslationsCitasPageTiposCitaEs._(this._root);
@@ -923,6 +936,8 @@ class _TranslationsAvalonInfoEn implements _TranslationsAvalonInfoEs {
 	@override String get fax => 'Fax';
 	@override String get email => 'Email';
 	@override String get slogan => 'Your medical companion abroad';
+	@override late final _TranslationsAvalonInfoIntroEn intro = _TranslationsAvalonInfoIntroEn._(_root);
+	@override String get contactones_pregunta => 'How can we help you today?';
 }
 
 // Path: casosPage
@@ -1395,6 +1410,17 @@ class _TranslationsAvalonInfoDetailsEn implements _TranslationsAvalonInfoDetails
 	@override String get lead => 'TPA leader in international medical concierge services';
 }
 
+// Path: avalonInfo.intro
+class _TranslationsAvalonInfoIntroEn implements _TranslationsAvalonInfoIntroEs {
+	_TranslationsAvalonInfoIntroEn._(this._root);
+
+	@override final _TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'We are here to help you!';
+	@override String get description => 'At Avalon Plus, we are committed to providing you with the best support and assistance for all your travels and medical needs. If you have any questions, requests, or need more information about our services, do not hesitate to contact us. Our team is available to guide you, resolve your doubts, and ensure that you receive the care you deserve.';
+}
+
 // Path: citasPage.tiposCita
 class _TranslationsCitasPageTiposCitaEn implements _TranslationsCitasPageTiposCitaEs {
 	_TranslationsCitasPageTiposCitaEn._(this._root);
@@ -1551,6 +1577,9 @@ extension on Translations {
 			case 'avalonInfo.fax': return 'Fax';
 			case 'avalonInfo.email': return 'Email';
 			case 'avalonInfo.slogan': return 'Tu acompañante médico en el extranjero';
+			case 'avalonInfo.intro.title': return '¡Estamos aquí para ayudarte!';
+			case 'avalonInfo.intro.description': return 'En Avalon Plus, nos comprometemos a ofrecerte el mejor soporte y asistencia en todos tus viajes y necesidades médicas. Si tienes alguna pregunta, solicitud o necesitas más información sobre nuestros servicios, no dudes en ponerte en contacto con nosotros. Nuestro equipo está disponible para guiarte, resolver tus dudas y asegurarse de que recibas la atención que mereces.';
+			case 'avalonInfo.contactones_pregunta': return '¿Cómo podemos ayudarte hoy?';
 			case 'casosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
 				one: 'Caso',
 				other: 'Casos',
@@ -1976,6 +2005,9 @@ extension on _TranslationsEn {
 			case 'avalonInfo.fax': return 'Fax';
 			case 'avalonInfo.email': return 'Email';
 			case 'avalonInfo.slogan': return 'Your medical companion abroad';
+			case 'avalonInfo.intro.title': return 'We are here to help you!';
+			case 'avalonInfo.intro.description': return 'At Avalon Plus, we are committed to providing you with the best support and assistance for all your travels and medical needs. If you have any questions, requests, or need more information about our services, do not hesitate to contact us. Our team is available to guide you, resolve your doubts, and ensure that you receive the care you deserve.';
+			case 'avalonInfo.contactones_pregunta': return 'How can we help you today?';
 			case 'casosPage.title': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
 				one: 'Case',
 				other: 'Cases',

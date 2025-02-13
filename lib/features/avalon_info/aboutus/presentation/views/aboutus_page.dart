@@ -39,55 +39,69 @@ class AboutusPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FadeIn(
-              duration: const Duration(milliseconds: 1000),
-              child: Image.asset(
-                AppAssets.logotipo,
-                // height: 60,
+            Column(
+              children: [
+                ZoomIn(
+                  duration: const Duration(milliseconds: 1000),
+                  child: Image.asset(
+                    AppAssets.logotipo4,
+                  ),
+                ),
+                FadeIn(
+                  delay: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 2000),
+                  child: Text(
+                    apptexts.avalonInfo.slogan,
+                    style: Theme.of(context).textTheme.titleMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppLayoutConst.spaceXL),
+            const SizedBox(height: AppLayoutConst.spaceL),
+
+            FadeInLeft(
+              child: Text(
+                apptexts.avalonInfo.intro.title,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
+            FadeInUp(
+              from: 10,
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                  vertical: AppLayoutConst.marginS,
+                ),
+                height: 1,
+                color: AppColors.secondaryBlue.withOpacity(0.5),
+              ),
+            ),
+            const SizedBox(height: 3),
+            Text(apptexts.avalonInfo.intro.description),
+            const SizedBox(height: AppLayoutConst.spaceL),
+            // FadeInLeft(
+            //   child: Text(
+            //     apptexts.avalonInfo.services,
+            //     style: Theme.of(context).textTheme.titleMedium,
+            //   ),
+            // ),
+            // FadeInUp(
+            //   from: 10,
+            //   child: Container(
+            //     margin: const EdgeInsets.symmetric(
+            //       vertical: AppLayoutConst.marginS,
+            //     ),
+            //     height: 1,
+            //     color: AppColors.secondaryBlue.withOpacity(0.5),
+            //   ),
+            // ),
+            // const SizedBox(height: 3),
+            // Text(apptexts.avalonInfo.servicesDescription),
             const SizedBox(height: AppLayoutConst.spaceM),
             FadeInLeft(
               child: Text(
-                apptexts.avalonInfo.aboutUs,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            ),
-            FadeInUp(
-              from: 10,
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: AppLayoutConst.marginS,
-                ),
-                height: 1,
-                color: AppColors.secondaryBlue.withOpacity(0.5),
-              ),
-            ),
-            const SizedBox(height: 3),
-            Text(apptexts.avalonInfo.aboutDescription),
-            const SizedBox(height: AppLayoutConst.spaceXL),
-            FadeInLeft(
-              child: Text(
-                apptexts.avalonInfo.services,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-            ),
-            FadeInUp(
-              from: 10,
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  vertical: AppLayoutConst.marginS,
-                ),
-                height: 1,
-                color: AppColors.secondaryBlue.withOpacity(0.5),
-              ),
-            ),
-            const SizedBox(height: 3),
-            Text(apptexts.avalonInfo.servicesDescription),
-            const SizedBox(height: AppLayoutConst.spaceXL),
-            FadeInLeft(
-              child: Text(
-                'Contactanos',
+                apptexts.avalonInfo.contactones_pregunta,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
@@ -154,7 +168,7 @@ class AboutusPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: AppLayoutConst.spaceL),
+            const SizedBox(height: AppLayoutConst.spaceXL),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
