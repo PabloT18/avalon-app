@@ -40,7 +40,10 @@
     "detailHospital": "Hospital",
     "detailPreferenceDoctor": "Preferred Doctor",
     "detailPadecimientoo": "Condition",
-    "detailSintoma": "Symptom",
+    "detailSintoma": {
+        "one": "Symptom",
+        "other": "Symptoms"
+    },
     "detailPadecimientoDiagnostico": "Condition/Diagnosis",
     "detailAditionalInformation": "Additional Information",
     "detailAditionalRequaimentes": "Additional Requirements",

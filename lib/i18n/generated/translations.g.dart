@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 2
-/// Strings: 680 (340 per locale)
+/// Strings: 682 (341 per locale)
 ///
-/// Built on 2025-02-13 at 17:30 UTC
+/// Built on 2025-02-13 at 19:39 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -360,7 +360,10 @@ class _TranslationsCitasPageEs {
 	String get detailHospital => 'Hospital';
 	String get detailPreferenceDoctor => 'Doctor de preferencia';
 	String get detailPadecimientoo => 'Padecimiento';
-	String get detailSintoma => 'Síntoma';
+	String detailSintoma({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+		one: 'Síntoma',
+		other: 'Síntomas',
+	);
 	String get detailPadecimientoDiagnostico => 'Padecimiento/Diagnóstico';
 	String get detailAditionalInformation => 'Información adicional';
 	String get detailAditionalRequaimentes => 'Requerimientos adicionales';
@@ -1038,7 +1041,10 @@ class _TranslationsCitasPageEn implements _TranslationsCitasPageEs {
 	@override String get detailHospital => 'Hospital';
 	@override String get detailPreferenceDoctor => 'Preferred Doctor';
 	@override String get detailPadecimientoo => 'Condition';
-	@override String get detailSintoma => 'Symptom';
+	@override String detailSintoma({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+		one: 'Symptom',
+		other: 'Symptoms',
+	);
 	@override String get detailPadecimientoDiagnostico => 'Condition/Diagnosis';
 	@override String get detailAditionalInformation => 'Additional Information';
 	@override String get detailAditionalRequaimentes => 'Additional Requirements';
@@ -1660,7 +1666,10 @@ extension on Translations {
 			case 'citasPage.detailHospital': return 'Hospital';
 			case 'citasPage.detailPreferenceDoctor': return 'Doctor de preferencia';
 			case 'citasPage.detailPadecimientoo': return 'Padecimiento';
-			case 'citasPage.detailSintoma': return 'Síntoma';
+			case 'citasPage.detailSintoma': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('es'))(n,
+				one: 'Síntoma',
+				other: 'Síntomas',
+			);
 			case 'citasPage.detailPadecimientoDiagnostico': return 'Padecimiento/Diagnóstico';
 			case 'citasPage.detailAditionalInformation': return 'Información adicional';
 			case 'citasPage.detailAditionalRequaimentes': return 'Requerimientos adicionales';
@@ -2090,7 +2099,10 @@ extension on _TranslationsEn {
 			case 'citasPage.detailHospital': return 'Hospital';
 			case 'citasPage.detailPreferenceDoctor': return 'Preferred Doctor';
 			case 'citasPage.detailPadecimientoo': return 'Condition';
-			case 'citasPage.detailSintoma': return 'Symptom';
+			case 'citasPage.detailSintoma': return ({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(n,
+				one: 'Symptom',
+				other: 'Symptoms',
+			);
 			case 'citasPage.detailPadecimientoDiagnostico': return 'Condition/Diagnosis';
 			case 'citasPage.detailAditionalInformation': return 'Additional Information';
 			case 'citasPage.detailAditionalRequaimentes': return 'Additional Requirements';
