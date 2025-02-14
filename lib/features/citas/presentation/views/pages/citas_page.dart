@@ -34,6 +34,15 @@ class CitasPage extends StatelessWidget {
               apptexts.citasPage.title(n: 2),
             ),
             elevation: 6,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.info_outline),
+                onPressed: () {
+                  // context.goNamed(PAGES.settings.pageName);
+                  _showInfoStatesDialog(context);
+                },
+              ),
+            ],
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
@@ -56,6 +65,106 @@ class CitasPage extends StatelessWidget {
             create: (context) => CitasBloc(user),
             child: const CitasPanel(),
           ),
+        );
+      },
+    );
+  }
+
+  void _showInfoStatesDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(apptexts.citasPage.estados,
+              style: Theme.of(context).textTheme.titleSmall),
+          content: Padding(
+            padding: const EdgeInsets.all(AppLayoutConst.paddingM).copyWith(
+              bottom: 0,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: AppLayoutConst.spaceM),
+                Row(
+                  children: [
+                    Container(
+                      width: AppLayoutConst.dotSize, // Tamaño del círculo
+                      height: AppLayoutConst.dotSize,
+                      decoration: const BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(
+                        width: AppLayoutConst
+                            .spaceL), // Espacio entre el círculo y el texto
+                    Expanded(
+                      child: Text(
+                        apptexts.citasPage.estadoPorGestionar,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppLayoutConst.spaceM),
+                Row(
+                  children: [
+                    Container(
+                      width: AppLayoutConst.dotSize, // Tamaño del círculo
+                      height: AppLayoutConst.dotSize,
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(
+                        width: AppLayoutConst
+                            .spaceL), // Espacio entre el círculo y el texto
+                    Expanded(
+                      child: Text(
+                        apptexts.citasPage.estadoGestionando,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppLayoutConst.spaceM),
+                Row(
+                  children: [
+                    Container(
+                      width: AppLayoutConst.dotSize, // Tamaño del círculo
+                      height: AppLayoutConst.dotSize,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(
+                        width: AppLayoutConst
+                            .spaceL), // Espacio entre el círculo y el texto
+                    Expanded(
+                      child: Text(
+                        apptexts.citasPage.estadoCerrado,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text(apptexts.appOptions.close),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
         );
       },
     );

@@ -88,7 +88,7 @@ class EditAddressPageBody extends StatelessWidget {
                 color: AppColors.secondaryBlue.withOpacity(0.5),
               ),
               _buildEditableProfileInfoRow(
-                  apptexts.perfilPage.addressMain, editAddressBloc.addressMain),
+                  apptexts.perfilPage.address, editAddressBloc.addressMain),
               _buildEditableProfileInfoRow(apptexts.perfilPage.addressSecondary,
                   editAddressBloc.addressSecondary),
               _buildDropdownCountryField(editAddressBloc),

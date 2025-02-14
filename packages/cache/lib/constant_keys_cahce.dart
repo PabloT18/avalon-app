@@ -1,5 +1,5 @@
 class ConstHiveBox {
-  static const String kHiveBoxName = 'internalData';
+  static const String kHiveBoxName = 'newInternalData';
 
   /// [Settings App]
   static const kSettingsThemeData = 'kSettingsThemeData';

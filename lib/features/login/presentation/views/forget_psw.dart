@@ -58,7 +58,7 @@ class ForgotPassword extends StatelessWidget {
 
                     Navigator.of(context).pop();
                   },
-            child: Text(apptexts.appOptions.cancel),
+            child: Text(apptexts.appOptions.cancelar),
           );
         }),
         BlocBuilder<ResetPasswordCubit, ResetPasswordState>(

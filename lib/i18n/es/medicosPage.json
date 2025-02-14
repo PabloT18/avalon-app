@@ -10,7 +10,7 @@
     "medicoEmail": "Correo Electrónico",
     "medicoAddress": "Dirección",
     "medicoAddressDos": "Dirección 2",
-    "medicoAddressMain": "Nombre de la Calle",
+    "medicoAddressMainn": "Nombre de la Calle",
     "medicoAddressSecondary": "Apartamento, Piso, Edificio (opcional)",
     "medicoCity": "Ciudad",
     "medicoState": "Estado",

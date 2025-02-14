@@ -69,6 +69,7 @@ class CrearCitaView extends StatelessWidget {
           }
         },
         child: BlocBuilder<CitaNuevaBloc, CitaNuevaState>(
+          bloc: cerarCitaBloc,
           builder: (context, state) {
             return SmartRefrehsCustom(
                 key: const Key('__crear_cita_key__'),
@@ -207,6 +208,7 @@ class FormNewCita extends StatelessWidget {
           EditableTextDescription(
             apptexts.citasPage.detailPreferenceCity,
             cerarCitaBloc.detailPreferenceCity,
+            beNull: true,
           ),
           // EditableTextDescription(
           //   apptexts.citasPage.detailHospital,
@@ -225,6 +227,7 @@ class FormNewCita extends StatelessWidget {
           EditableTextAreaDescription(
             apptexts.citasPage.detailAditionalInformation,
             cerarCitaBloc.detailAditionalInformation,
+            beNull: true,
           ),
           const EditableRequisitosAdicionales(),
           EditableTextAreaDescription(
@@ -242,10 +245,12 @@ class FormNewCita extends StatelessWidget {
           EditableTextDescription(
             apptexts.perfilPage.city,
             cerarCitaBloc.detailCiudad,
+            beNull: true,
           ),
           EditableTextDescription(
-            apptexts.perfilPage.addressMain,
+            apptexts.perfilPage.address,
             cerarCitaBloc.detailDireccionUno,
+            beNull: true,
           ),
           EditableTextDescription(
             apptexts.perfilPage.addressSecondary,
@@ -277,14 +282,19 @@ class FormNewCita extends StatelessWidget {
             ],
           ),
           ElevatedButton(
-            onPressed: () {
-              if (cerarCitaBloc.formKey.currentState!.validate()) {
-                // Envía el evento al Bloc
-                context.read<CitaNuevaBloc>().add(const SubmitCitaEvent());
-              } else {
-                // Maneja la validación fallida
-              }
-            },
+            onPressed: cerarCitaBloc.state.isLoading == null ||
+                    cerarCitaBloc.state.isLoading!
+                ? () {
+                    if (cerarCitaBloc.formKey.currentState!.validate()) {
+                      // Envía el evento al Bloc
+                      context
+                          .read<CitaNuevaBloc>()
+                          .add(const SubmitCitaEvent());
+                    } else {
+                      // Maneja la validación fallida
+                    }
+                  }
+                : null,
             child: Text(apptexts.appOptions.crate),
           ),
           const SizedBox(height: AppLayoutConst.spaceXL),
@@ -297,9 +307,12 @@ class FormNewCita extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: BlocBuilder<CitaNuevaBloc, CitaNuevaState>(
-        buildWhen: (previous, current) =>
-            previous.paises != current.paises ||
-            previous.selectedCountryId != current.selectedCountryId,
+        bloc: bloc,
+        buildWhen: (previous, current) {
+          final cond = previous.paises != current.paises ||
+              previous.selectedCountryId != current.selectedCountryId;
+          return cond;
+        },
         builder: (context, state) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -336,12 +349,12 @@ class FormNewCita extends StatelessWidget {
                   }
                 },
                 isExpanded: false,
-                validator: (value) {
-                  if (value == null || value == 0) {
-                    return apptexts.appOptions.validators.requiredField;
-                  }
-                  return null;
-                },
+                // validator: (value) {
+                //   if (value == null || value == 0) {
+                //     return apptexts.appOptions.validators.requiredField;
+                //   }
+                //   return null;
+                // },
               ),
             ],
           );
@@ -393,12 +406,12 @@ class FormNewCita extends StatelessWidget {
                   }
                 },
                 isExpanded: false,
-                validator: (value) {
-                  if (value == null || value == 0) {
-                    return apptexts.appOptions.validators.requiredField;
-                  }
-                  return null;
-                },
+                // validator: (value) {
+                //   if (value == null || value == 0) {
+                //     return apptexts.appOptions.validators.requiredField;
+                //   }
+                //   return null;
+                // },
               ),
             ],
           );

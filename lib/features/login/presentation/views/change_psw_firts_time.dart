@@ -63,7 +63,7 @@ class AlertChangePassword extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(apptexts.appOptions.cancel),
+          child: Text(apptexts.appOptions.cancelar),
         ),
         TextButton(
           onPressed: () {

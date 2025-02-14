@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 682 (341 per locale)
 ///
-/// Built on 2025-02-13 at 19:39 UTC
+/// Built on 2025-02-14 at 14:23 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -213,7 +213,7 @@ class _TranslationsAppOptionsEs {
 	String get edit => 'Editar';
 	String get save => 'Guardar';
 	String get crate => 'Crear';
-	String get cancel => 'Cancelar';
+	String get close => 'Cerrar';
 	String get search => 'Buscar';
 	String get ingreseUsuario => 'Ingrese su usuario';
 	String get ingreseCorre => 'Ingrese su correo';
@@ -495,7 +495,7 @@ class _TranslationsMedicosPageEs {
 	String get medicoEmail => 'Correo Electrónico';
 	String get medicoAddress => 'Dirección';
 	String get medicoAddressDos => 'Dirección 2';
-	String get medicoAddressMain => 'Nombre de la Calle';
+	String get medicoAddressMainn => 'Nombre de la Calle';
 	String get medicoAddressSecondary => 'Apartamento, Piso, Edificio (opcional)';
 	String get medicoCity => 'Ciudad';
 	String get medicoState => 'Estado';
@@ -558,7 +558,7 @@ class _TranslationsPerfilPageEs {
 	String get completeInformation => 'Por favor, completa tu información personal';
 	String get address => 'Dirección';
 	String get addressDos => 'Dirección 2';
-	String get addressMain => 'Nombre de la calle';
+	String get addressMainn => 'Nombre de la calle';
 	String get addressSecondary => 'Departamento, piso, unidad, edificion (opcional)';
 	String get city => 'Ciudad';
 	String get state => 'Estado';
@@ -894,7 +894,7 @@ class _TranslationsAppOptionsEn implements _TranslationsAppOptionsEs {
 	@override String get edit => 'Edit';
 	@override String get save => 'Save';
 	@override String get crate => 'Create';
-	@override String get cancel => 'Cancel';
+	@override String get close => 'Close';
 	@override String get search => 'Search';
 	@override String get ingreseUsuario => 'Enter your username';
 	@override String get ingreseCorre => 'Enter your email';
@@ -1176,7 +1176,7 @@ class _TranslationsMedicosPageEn implements _TranslationsMedicosPageEs {
 	@override String get medicoEmail => 'Email';
 	@override String get medicoAddress => 'Address';
 	@override String get medicoAddressDos => 'Address 2';
-	@override String get medicoAddressMain => 'Street Name';
+	@override String get medicoAddressMainn => 'Street Name';
 	@override String get medicoAddressSecondary => 'Apartment, Floor, Building (optional)';
 	@override String get medicoCity => 'City';
 	@override String get medicoState => 'State';
@@ -1239,7 +1239,7 @@ class _TranslationsPerfilPageEn implements _TranslationsPerfilPageEs {
 	@override String get completeInformation => 'Please complete your personal information';
 	@override String get address => 'Address';
 	@override String get addressDos => 'Address 2';
-	@override String get addressMain => 'Street Name';
+	@override String get addressMainn => 'Street Name';
 	@override String get addressSecondary => 'Apartment, Floor, Building (optional)';
 	@override String get city => 'City';
 	@override String get state => 'State';
@@ -1532,7 +1532,7 @@ extension on Translations {
 			case 'appOptions.edit': return 'Editar';
 			case 'appOptions.save': return 'Guardar';
 			case 'appOptions.crate': return 'Crear';
-			case 'appOptions.cancel': return 'Cancelar';
+			case 'appOptions.close': return 'Cerrar';
 			case 'appOptions.search': return 'Buscar';
 			case 'appOptions.ingreseUsuario': return 'Ingrese su usuario';
 			case 'appOptions.ingreseCorre': return 'Ingrese su correo';
@@ -1762,7 +1762,7 @@ extension on Translations {
 			case 'medicosPage.medicoEmail': return 'Correo Electrónico';
 			case 'medicosPage.medicoAddress': return 'Dirección';
 			case 'medicosPage.medicoAddressDos': return 'Dirección 2';
-			case 'medicosPage.medicoAddressMain': return 'Nombre de la Calle';
+			case 'medicosPage.medicoAddressMainn': return 'Nombre de la Calle';
 			case 'medicosPage.medicoAddressSecondary': return 'Apartamento, Piso, Edificio (opcional)';
 			case 'medicosPage.medicoCity': return 'Ciudad';
 			case 'medicosPage.medicoState': return 'Estado';
@@ -1798,7 +1798,7 @@ extension on Translations {
 			case 'perfilPage.completeInformation': return 'Por favor, completa tu información personal';
 			case 'perfilPage.address': return 'Dirección';
 			case 'perfilPage.addressDos': return 'Dirección 2';
-			case 'perfilPage.addressMain': return 'Nombre de la calle';
+			case 'perfilPage.addressMainn': return 'Nombre de la calle';
 			case 'perfilPage.addressSecondary': return 'Departamento, piso, unidad, edificion (opcional)';
 			case 'perfilPage.city': return 'Ciudad';
 			case 'perfilPage.state': return 'Estado';
@@ -1965,7 +1965,7 @@ extension on _TranslationsEn {
 			case 'appOptions.edit': return 'Edit';
 			case 'appOptions.save': return 'Save';
 			case 'appOptions.crate': return 'Create';
-			case 'appOptions.cancel': return 'Cancel';
+			case 'appOptions.close': return 'Close';
 			case 'appOptions.search': return 'Search';
 			case 'appOptions.ingreseUsuario': return 'Enter your username';
 			case 'appOptions.ingreseCorre': return 'Enter your email';
@@ -2195,7 +2195,7 @@ extension on _TranslationsEn {
 			case 'medicosPage.medicoEmail': return 'Email';
 			case 'medicosPage.medicoAddress': return 'Address';
 			case 'medicosPage.medicoAddressDos': return 'Address 2';
-			case 'medicosPage.medicoAddressMain': return 'Street Name';
+			case 'medicosPage.medicoAddressMainn': return 'Street Name';
 			case 'medicosPage.medicoAddressSecondary': return 'Apartment, Floor, Building (optional)';
 			case 'medicosPage.medicoCity': return 'City';
 			case 'medicosPage.medicoState': return 'State';
@@ -2231,7 +2231,7 @@ extension on _TranslationsEn {
 			case 'perfilPage.completeInformation': return 'Please complete your personal information';
 			case 'perfilPage.address': return 'Address';
 			case 'perfilPage.addressDos': return 'Address 2';
-			case 'perfilPage.addressMain': return 'Street Name';
+			case 'perfilPage.addressMainn': return 'Street Name';
 			case 'perfilPage.addressSecondary': return 'Apartment, Floor, Building (optional)';
 			case 'perfilPage.city': return 'City';
 			case 'perfilPage.state': return 'State';

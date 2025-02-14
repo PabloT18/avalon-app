@@ -21,4 +21,7 @@ class Pais extends Equatable {
 
   @override
   List<Object?> get props => [id, nombre];
+
+  @override
+  toString() => '${nombre!}\n';
 }

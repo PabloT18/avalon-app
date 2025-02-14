@@ -37,6 +37,15 @@ class EmergenciasPage extends StatelessWidget {
         iconTheme: const IconThemeData(
           color: Colors.white, // Cambia el color del icono de hamburguesa
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              // context.goNamed(PAGES.settings.pageName);
+              _showInfoStatesDialog(context);
+            },
+          ),
+        ],
       ),
       // floatingActionButton: FloatingActionButton(
       // onPressed: () {
@@ -64,6 +73,106 @@ class EmergenciasPage extends StatelessWidget {
         create: (context) => EmergenciasBloc(user),
         child: const EmergenciaPanel(),
       ),
+    );
+  }
+
+  void _showInfoStatesDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(apptexts.emergenciasPage.estados,
+              style: Theme.of(context).textTheme.titleSmall),
+          content: Padding(
+            padding: const EdgeInsets.all(AppLayoutConst.paddingM).copyWith(
+              bottom: 0,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: AppLayoutConst.spaceM),
+                Row(
+                  children: [
+                    Container(
+                      width: AppLayoutConst.dotSize, // Tamaño del círculo
+                      height: AppLayoutConst.dotSize,
+                      decoration: const BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(
+                        width: AppLayoutConst
+                            .spaceL), // Espacio entre el círculo y el texto
+                    Expanded(
+                      child: Text(
+                        apptexts.emergenciasPage.estadoPorGestionar,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppLayoutConst.spaceM),
+                Row(
+                  children: [
+                    Container(
+                      width: AppLayoutConst.dotSize, // Tamaño del círculo
+                      height: AppLayoutConst.dotSize,
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(
+                        width: AppLayoutConst
+                            .spaceL), // Espacio entre el círculo y el texto
+                    Expanded(
+                      child: Text(
+                        apptexts.emergenciasPage.estadoGestionando,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppLayoutConst.spaceM),
+                Row(
+                  children: [
+                    Container(
+                      width: AppLayoutConst.dotSize, // Tamaño del círculo
+                      height: AppLayoutConst.dotSize,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(
+                        width: AppLayoutConst
+                            .spaceL), // Espacio entre el círculo y el texto
+                    Expanded(
+                      child: Text(
+                        apptexts.emergenciasPage.estadoCerrado,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              child: Text(apptexts.appOptions.close),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
     );
   }
 }

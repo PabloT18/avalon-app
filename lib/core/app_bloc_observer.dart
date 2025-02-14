@@ -8,7 +8,7 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc<dynamic, dynamic> bloc, Object? event) {
     super.onEvent(bloc, event);
-    log('onEvnet(${bloc.runtimeType}, $event)');
+    log(' onEvnet(${bloc.runtimeType} - ${bloc.hashCode}, $event)');
   }
 
   @override
@@ -21,7 +21,7 @@ class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     super.onChange(bloc, change);
-    log('onChange(${bloc.runtimeType}, $change)');
+    log('onChange(${bloc.runtimeType} - ${bloc.hashCode}, $change)');
   }
 
   @override

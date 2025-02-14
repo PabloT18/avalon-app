@@ -142,10 +142,10 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
 
     casosResponse.fold(
       (failure) {
-        emit(CitaNuevaState(message: failure.message));
+        emit(state.copyWith(message: failure.message));
       },
       (listadoCasos) {
-        emit(CitaNuevaState(casos: listadoCasos));
+        emit(state.copyWith(casos: listadoCasos));
       },
     );
   }
@@ -238,8 +238,12 @@ class CitaNuevaBloc extends Bloc<CitaNuevaEvent, CitaNuevaState> {
         direccionDos: detailDireccionDos.text,
         ciudad: detailCiudad.text,
         codigoPostal: detailCodigoPostal.text,
-        pais: state.paises.firstWhere((p) => p.id == state.selectedCountryId),
-        estado: state.estados.firstWhere((e) => e.id == state.selectedEstadoId),
+        pais: detailDireccionUno.text != ''
+            ? state.paises.firstWhere((p) => p.id == state.selectedCountryId)
+            : null,
+        estado: detailDireccionDos.text != ''
+            ? state.estados.firstWhere((e) => e.id == state.selectedEstadoId)
+            : null,
       ),
       // fechaTentativa:
       // ateTime.parse(birthDateController.text),

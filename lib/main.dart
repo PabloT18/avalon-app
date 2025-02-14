@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app/app.dart';
 import 'app/dependencies/app_dependencies.dart';
@@ -27,10 +26,10 @@ Future<void> main() async {
   await authenticationRepository.user.first;
 
   /// SharedPreferences Instance
-  await Hive.initFlutter();
+  // await Hive.initFlutter();
 
   ///
-  await Hive.openBox(ConstHiveBox.kHiveBoxName);
+  // await Hive.openBox(ConstHiveBox.kHiveBoxName);
   Bloc.observer = const AppBlocObserver();
 
   // / Inizializar [Firebase]

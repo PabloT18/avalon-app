@@ -203,7 +203,7 @@ class _LoginFormComponents extends StatelessWidget {
           ),
           actions: [
             TextButton(
-              child: Text(apptexts.appOptions.cancel),
+              child: Text(apptexts.appOptions.cancelar),
               onPressed: () => Navigator.of(context).pop(),
             ),
             TextButton(

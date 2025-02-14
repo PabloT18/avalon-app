@@ -221,7 +221,7 @@ class FormNewEmergencia extends StatelessWidget {
             emergenciaNuevabloc.detailCiudad,
           ),
           EditableTextDescription(
-            apptexts.perfilPage.addressMain,
+            apptexts.perfilPage.address,
             emergenciaNuevabloc.detailDireccionUno,
           ),
           EditableTextDescription(

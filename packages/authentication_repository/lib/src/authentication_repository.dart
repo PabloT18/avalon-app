@@ -11,7 +11,7 @@ import 'package:shared_models/shared_models.dart';
 /// Repository which manages user authentication.
 /// {@endtemplate}
 class AuthenticationRepository {
-  final _controller = StreamController<User>();
+  // final _controller = StreamController<User>();
 
   AuthenticationRepository({
     CacheClient? cache,
@@ -26,15 +26,13 @@ class AuthenticationRepository {
   Stream<User> get status async* {
     // await Future<void>.delayed(const Duration(seconds: 1));
     yield currentUser;
-    yield* _controller.stream;
+    yield* _userController.stream;
   }
 
-  void dispose() => _controller.close();
+  void dispose() => _userController.close();
 
   final StreamController<User> _userController =
       StreamController<User>.broadcast();
-
-  // Stream<User> get user2 => _userController.stream;
 
   Stream<User> get user {
     return Stream.value(User.empty);
@@ -167,23 +165,6 @@ class AuthenticationRepository {
         user = User.fromJson(cacheUser);
     }
     return user;
-  }
-
-  /// Creates a new user with the provided [email] and [password].
-  ///
-  /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs.
-  Future<void> signUp({required String email, required String password}) async {
-    try {
-      // await _firebaseAuth.createUserWithEmailAndPassword(
-      //   email: email,
-      //   password: password,
-      // );
-
-      // } on firebase_auth.FirebaseAuthException catch (e) {
-      //   throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
-    } catch (_) {
-      throw const SignUpWithEmailAndPasswordFailure();
-    }
   }
 
   final Dio dio = Dio(BaseOptions(
@@ -344,7 +325,7 @@ class AuthenticationRepository {
 
       //TODO: refat
       await _cache.write(key: userCacheKey, value: user.toJson());
-      _controller.add(user);
+      _userController.add(user);
     } catch (e) {
       throw const LogInWithEmailAndPasswordFailure(
           message: "Error al obtener datos del usuario");
@@ -468,7 +449,25 @@ class AuthenticationRepository {
   ///
   /// Throws a [LogOutFailure] if an exception occurs.
   Future<void> logOut() async {
-    _cache.clear();
-    _controller.add(User.empty);
+    await _cache.clear();
+    _userController.add(User.empty);
   }
 }
+
+
+//  /// Creates a new user with the provided [email] and [password].
+//   ///
+//   /// Throws a [SignUpWithEmailAndPasswordFailure] if an exception occurs.
+//   Future<void> signUp({required String email, required String password}) async {
+//     try {
+//       // await _firebaseAuth.createUserWithEmailAndPassword(
+//       //   email: email,
+//       //   password: password,
+//       // );
+
+//       // } on firebase_auth.FirebaseAuthException catch (e) {
+//       //   throw SignUpWithEmailAndPasswordFailure.fromCode(e.code);
+//     } catch (_) {
+//       throw const SignUpWithEmailAndPasswordFailure();
+//     }
+//   }
